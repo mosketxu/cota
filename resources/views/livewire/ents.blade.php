@@ -1,8 +1,8 @@
-<div class="p-2 mx-2">
+<div class="p-1 mx-2">
 
     <h1 class="text-2xl font-semibold text-gray-900">Entidades</h1>
 
-    <div class="py-4 space-y-4">
+    <div class="py-1 space-y-4">
         @if (session()->has('message'))
             <div id="alert" class="relative px-6 py-2 mb-2 text-white bg-red-200 border-red-500 rounded border-1">
                 <span class="inline-block mx-8 align-middle">
@@ -58,6 +58,7 @@
                             <x-table.cell class="text-right">
                                 <a href="#" wire:click="edit" class="text-xs text-gray-700 transition duration-150 ease-in-out focus:outline-none focus:text-gray-800 focus:underline">
                                     <span class="text-xs text-gray-200">{{ $entidad->id }}</span><span class="text-lg text-{{ $entidad->fav_color[0] }}-400"> &#{{ $entidad->fav_color[1] }};</span>
+                                    {{-- <span class="text-xs text-gray-200">{{ $entidad->id }}</span><span class="text-lg text-{{ $entidad->fav_color[0] }}-400"> &#{{ $entidad->fav_color[1] }};</span> --}}
                                 </a>
                             </x-table.cell>
                             <x-table.cell>

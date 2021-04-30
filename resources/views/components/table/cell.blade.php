@@ -9,6 +9,6 @@
 LA HE MODIFICADO
 --}}
 
-<td {{ $attributes->merge(['class' => 'px-1 py-2 whitespace-no-wrap text-sm leading-5 text-gray-900']) }}>
+<td {{ $attributes->merge(['class' => 'px-1 whitespace-no-wrap text-sm leading-5 text-gray-900']) }}>
     {{ $slot }}
 </td>

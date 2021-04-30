@@ -1,7 +1,7 @@
 <div>
     {{-- @include('entidad.menu') --}}
 
-    <h1 class="text-2xl font-semibold text-gray-900">Entidades</h1>
+    <h1 class="py-0 my-0 text-2xl font-semibold text-gray-900">Entidades</h1>
 
     @if (session()->has('message'))
         <div id="alert" class="relative px-6 py-2 mb-2 text-white bg-green-200 border-green-500 rounded border-1">
@@ -18,7 +18,7 @@
 
     <div class="flex-col space-y-4 text-gray-500">
         <form wire:submit.prevent="save" class="">
-            <div class="px-1 pt-1 mt-4 rounded-md bg-blue-50">
+            <div class="px-2 mx-2 my-1 rounded-md bg-blue-50">
                 <h3 class="font-semibold ">Datos generales</h3>
                 <x-jet-input  wire:model.defer="entidad.id" type="hidden"/>
                 <hr>
@@ -86,8 +86,6 @@
             <div class="flex flex-col mx-2 space-y-4 md:space-y-0 md:flex-row md:space-x-4">
                 <div class="w-full form-item">
                     <x-jet-label class="inline-flex items-center mt-3">
-                        {{-- <input wire:model.defer="entidad.favorito" type=
-                        "checkbox" class="w-4 h-4 text-green-600 form-checkbox" checked><span class="ml-2 text-gray-700">{{ __('Favorito') }}</span> --}}
                         <x-input.checkbox wire:model.defer="entidad.favorito" checked/><span class="ml-2 text-gray-700">{{ __('Favorito') }}</span>
                     </x-jet-label>
                     <x-jet-label class="inline-flex items-center mt-3">
@@ -98,39 +96,39 @@
                     </x-jet-label>
                 </div>
             </div>
-            <div class="px-1 pt-1 mt-4 rounded-md bg-blue-50">
+            <hr class="my-2">
+            <div class="px-2 mx-2 my-1 rounded-md bg-blue-50">
                 <h3 class="font-semibold ">Datos Bancarios</h3>
-                <hr>
             </div>
             <div class="flex flex-col mx-2 space-y-4 md:space-y-0 md:flex-row md:space-x-4">
-                    <div class="w-full form-item">
-                        <x-jet-label for="banco1" >{{ __('Banco 1') }}</x-jet-label>
-                        <x-jet-input  wire:model.defer="entidad.banco1" type="text" id="banco1" name="banco1" :value="old('banco1')" class="w-full"/>
-                    </div>
-                    <div class="w-full form-item">
-                        <x-jet-label for="iban1" >{{ __('Iban 1') }}</x-jet-label>
-                        <x-jet-input  wire:model.defer="entidad.iban1" type="text" id="iban1" name="iban1" :value="old('iban1')" class="w-full"/>
-                    </div>
-                    <div class="w-full form-item">
-                        <x-jet-label for="banco2" >{{ __('Banco 2') }}</x-jet-label>
-                        <x-jet-input  wire:model.defer="entidad.banco2" type="text" id="banco2" name="banco2" :value="old('banco2')" class="w-full"/>
-                    </div>
-                    <div class="w-full form-item">
-                        <x-jet-label for="iban2" >{{ __('Iban 2') }}</x-jet-label>
-                        <x-jet-input  wire:model.defer="entidad.iban2" type="text" id="iban2" name="iban2" :value="old('iban2')" class="w-full"/>
-                    </div>
-                    <div class="w-full form-item">
-                        <x-jet-label for="banco3" >{{ __('Banco 3') }}</x-jet-label>
-                        <x-jet-input  wire:model.defer="entidad.banco3" type="text" id="banco3" name="banco3" :value="old('banco3')" class="w-full"/>
-                    </div>
-                    <div class="w-full form-item">
-                        <x-jet-label for="iban3" >{{ __('Iban 3') }}</x-jet-label>
-                        <x-jet-input  wire:model.defer="entidad.iban3" type="text" id="iban3" name="iban3" :value="old('iban3')" class="w-full"/>
-                    </div>
+                <div class="w-full form-item">
+                    <x-jet-label for="banco1" >{{ __('Banco 1') }}</x-jet-label>
+                    <x-jet-input  wire:model.defer="entidad.banco1" type="text" id="banco1" name="banco1" :value="old('banco1')" class="w-full"/>
                 </div>
-            <div class="px-1 pt-1 mt-4 rounded-md bg-blue-50">
+                <div class="w-full form-item">
+                    <x-jet-label for="iban1" >{{ __('Iban 1') }}</x-jet-label>
+                    <x-jet-input  wire:model.defer="entidad.iban1" type="text" id="iban1" name="iban1" :value="old('iban1')" class="w-full"/>
+                </div>
+                <div class="w-full form-item">
+                    <x-jet-label for="banco2" >{{ __('Banco 2') }}</x-jet-label>
+                    <x-jet-input  wire:model.defer="entidad.banco2" type="text" id="banco2" name="banco2" :value="old('banco2')" class="w-full"/>
+                </div>
+                <div class="w-full form-item">
+                    <x-jet-label for="iban2" >{{ __('Iban 2') }}</x-jet-label>
+                    <x-jet-input  wire:model.defer="entidad.iban2" type="text" id="iban2" name="iban2" :value="old('iban2')" class="w-full"/>
+                </div>
+                <div class="w-full form-item">
+                    <x-jet-label for="banco3" >{{ __('Banco 3') }}</x-jet-label>
+                    <x-jet-input  wire:model.defer="entidad.banco3" type="text" id="banco3" name="banco3" :value="old('banco3')" class="w-full"/>
+                </div>
+                <div class="w-full form-item">
+                    <x-jet-label for="iban3" >{{ __('Iban 3') }}</x-jet-label>
+                    <x-jet-input  wire:model.defer="entidad.iban3" type="text" id="iban3" name="iban3" :value="old('iban3')" class="w-full"/>
+                </div>
+            </div>
+            <hr class="my-2">
+            <div class="px-2 mx-2 mt-2 mb-1 rounded-md bg-blue-50">
                 <h3 class="font-semibold ">Datos Facturación</h3>
-                <hr>
             </div>
             <div class="flex flex-col mx-2 space-y-4 md:space-y-0 md:flex-row md:space-x-4">
                 <div class="w-full form-item">
@@ -242,15 +240,17 @@
                 </div>
             </div>
 
-            <div class="w-full mt-3 bg-white">
-                <label for="observaciones" >{{ __('Observaciones') }}</label>
-                <textarea wire:model.defer="entidad.observaciones" class="w-full border-gray-300 rounded-sm" rows="3">{{ old('observaciones') }} </textarea>
-                <x-jet-input-error for="observaciones" class="mt-2" />
+            <div class="flex flex-col mx-2 space-y-4 md:space-y-0 md:flex-row md:space-x-4">
+                <div class="w-full form-item">
+                    <x-jet-label for="observaciones">{{ __('Observaciones') }}</x-jet-label>
+                    <textarea wire:model.defer="entidad.observaciones" class="w-full text-xs border-gray-300 rounded-md" rows="3">{{ old('observaciones') }} </textarea>
+                    <x-jet-input-error for="observaciones" class="mt-2" />
+                </div>
             </div>
 
-            <div class="flex mt-3 space-x-1">
+            <div class="flex mt-0 ml-2 space-x-4">
                 <div class="space-x-3">
-                    <x-jet-button>
+                    <x-jet-button class="bg-blue-600">
                         {{ __('Guardar') }}
                     </x-jet-button>
                     <span
@@ -263,7 +263,7 @@
                         "
                     x-show.transition.out.duration.1000ms="open"
                     style="display: none;"
-                    class="text-gray-500"
+                    class="p-2 m-2 text-gray-500 rounded-lg bg-green-50"
                     >Saved!</span>
                     {{-- @if(session()->has('notify-saved'))
                     <span
@@ -273,6 +273,7 @@
                         class="text-gray-500"
                         >Saved!</span>
                     @endif --}}
+                    <x-jet-secondary-button  onclick="location.href = '{{ route('entidades') }}'">{{ __('Volver') }}</x-jet-secondary-button>
                 </div>
             </div>
         </form>
