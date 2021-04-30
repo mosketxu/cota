@@ -83,4 +83,15 @@ class EntidadController extends Controller
     {
         //
     }
+
+    public function pus(Entidad $entidad)
+    {
+        return view('entidad.pus',compact('entidad'));
+    }
+
+    public function contactos(Entidad $entidad)
+    {
+        return view('entidad.contactos',compact('entidad'));
+    }
+
 }

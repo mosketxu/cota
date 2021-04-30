@@ -20,6 +20,11 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', function () {return view('entidades');})->name('entidades');
+
+    Route::get('/entidad/pu/{entidad}', [EntidadController::class, 'pus'])->name('entidad.pu');
+    Route::get('/entidad/contacto/{entidad}', [EntidadController::class, 'contactos'])->name('entidad.contacto');
     Route::resource('entidad', EntidadController::class);
+
+
     // Route::get('/entidades', function () {return view('entidades');})->name('entidades');
  });

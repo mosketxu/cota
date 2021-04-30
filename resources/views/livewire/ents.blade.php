@@ -35,7 +35,6 @@
                 </div>
             </div>
             <x-button.primary href="#" class="py-0 my-0"><x-icon.plus/> Nueva</x-button.primary>
-            {{-- <x-button.primary href="{{ route('entidad.create') }}" class="py-0 my-0"><x-icon.plus/> Nueva</x-button.primary> --}}
         </div>
         {{-- tabla entidades --}}
         <div class="flex-col space-y-4">
@@ -88,10 +87,9 @@
                             </x-table.cell>
                             <x-table.cell class="px-4">
                                 <div class="flex items-center justify-center space-x-3">
-                                    {{-- <x-icon.key href="{{ route('entidad.pus',$entidad) }}" class="text-yellow-500"/> --}}
-                                    <x-icon.key href="#" class="text-yellow-500"/>
+                                    <x-icon.key href="{{ route('entidad.pu',$entidad) }}" class="text-yellow-500"/>
+                                    <x-icon.usergroup href="{{ route('entidad.contacto',$entidad) }}" class="text-green-500-500"/>
                                     <x-icon.edit-a href="{{ route('entidad.edit',$entidad) }}"/>
-                                    {{-- <x-icon.edit-a href="#"/> --}}
                                     <x-icon.delete-a wire:click.prevent="delete({{ $entidad->id }})" onclick="confirm('¿Estás seguro?') || event.stopImmediatePropagation()" class="pl-1"/>
                                 </div>
                             </x-table.cell>
