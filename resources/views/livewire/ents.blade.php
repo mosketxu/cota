@@ -87,8 +87,8 @@
                             </x-table.cell>
                             <x-table.cell class="px-4">
                                 <div class="flex items-center justify-center space-x-3">
-                                    <x-icon.key href="{{ route('entidad.pu',$entidad) }}" class="text-yellow-500"/>
-                                    <x-icon.usergroup href="{{ route('entidad.contacto',$entidad) }}" class="text-green-500-500"/>
+                                    <x-icon.key href="{{ route('entidad.pu',$entidad) }}"/>
+                                    <x-icon.usergroup href="{{ route('entidad.contacto',$entidad) }}"/>
                                     <x-icon.edit-a href="{{ route('entidad.edit',$entidad) }}"/>
                                     <x-icon.delete-a wire:click.prevent="delete({{ $entidad->id }})" onclick="confirm('¿Estás seguro?') || event.stopImmediatePropagation()" class="pl-1"/>
                                 </div>
@@ -112,11 +112,6 @@
                 {{ $entidades->links() }}
             </div>
         </div>
-
     </div>
-
-
-
-
 </div>
 

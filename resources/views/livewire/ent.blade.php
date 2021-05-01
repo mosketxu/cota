@@ -273,7 +273,7 @@
                         class="text-gray-500"
                         >Saved!</span>
                     @endif --}}
-                    <x-jet-secondary-button  onclick="location.href = '{{ route('entidades') }}'">{{ __('Volver') }}</x-jet-secondary-button>
+                    <x-jet-secondary-button  onclick="location.href = '{{url()->previous()}}'">{{ __('Volver') }}</x-jet-secondary-button>
                 </div>
             </div>
         </form>

@@ -93,4 +93,9 @@ class Entidad extends Model
         return $this->belongsTo(EntidadTipo::class);
     }
 
+    public function contactos()
+    {
+        return $this->hasMany(ContactoEntidad::class);
+    }
+
 }

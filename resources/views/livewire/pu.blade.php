@@ -83,7 +83,7 @@
         </div>
         <div class="flex mt-0 ml-2 space-x-4">
             <div class="space-x-3">
-                <x-jet-secondary-button  onclick="location.href = '{{ route('entidades') }}'">{{ __('Volver') }}</x-jet-secondary-button>
+                <x-jet-secondary-button  onclick="location.href = '{{url()->previous()}}'">{{ __('Volvera') }}</x-jet-secondary-button>
             </div>
         </div>
         <x-notification/>
