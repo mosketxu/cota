@@ -47,7 +47,7 @@
                             </td>
                             <td class="pl-2 text-xs text-gray-800">
                                 <x-icon.save-a wire:click.prevent="saveContacto({{$index}})">
-                                    Guardars
+                                    Guardar
                                 </x-icon.save-a>
                             </td>
                         </x-table.row>
@@ -67,10 +67,17 @@
             </x-table>
         </div>
     </div>
+
+    {{-- @livewire('livewire.contacto-create',['entidad'=>$entidad],key($entidad->id)) --}}
+    @livewire('contacto-create',['entidad'=>$ent],key($ent->id))
+
     <div class="flex mt-2 ml-2 space-x-4">
         <div class="space-x-3">
             <x-jet-secondary-button  onclick="location.href = '{{url()->previous()}}'">{{ __('Volver') }}</x-jet-secondary-button>
         </div>
+        <x-jet-button wire:click="mensaje()" class="bg-blue-600">
+            {{ __('mensaje') }}
+        </x-jet-button>
     </div>
 
 </div>

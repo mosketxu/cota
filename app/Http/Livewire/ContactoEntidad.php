@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\ContactoEntidad as ModelContactoEntidad;
+use App\Models\Entidad;
 use Livewire\Component;
 
 
@@ -10,9 +11,14 @@ class ContactoEntidad extends Component
 {
     public $entidad;
     public $search='';
+    public $conts;
     public $editedContactoIndex = null;
     public $editedContactoField = null;
     public $contactos=[];
+
+    protected $listeners = [
+        'contactoupdate' => '$refresh',
+    ];
 
     public function mount()
     {
@@ -24,20 +30,21 @@ class ContactoEntidad extends Component
             ->toArray();
         }
 
-        public function render()
-        {
-            $ent=$this->entidad;
-            $this->contactos = ModelContactoEntidad::where('entidad_id',$this->entidad->id)
-            ->join('entidades','contacto_entidades.contacto_id','=','entidades.id')
-            ->select('contacto_entidades.*', 'entidades.entidad', 'entidades.nif', 'entidades.tfno','entidades.emailgral')
-            ->search('entidades.entidad',$this->search)
-            ->orderBy('entidades.entidad')
-            ->get()
-            ->toArray();
+    public function render()
+    {
+        $conts=Entidad::orderBy('entidad')->get();
+        $ent=$this->entidad;
+        $this->contactos = ModelContactoEntidad::where('entidad_id',$this->entidad->id)
+        ->join('entidades','contacto_entidades.contacto_id','=','entidades.id')
+        ->select('contacto_entidades.*', 'entidades.entidad', 'entidades.nif', 'entidades.tfno','entidades.emailgral')
+        ->search('entidades.entidad',$this->search)
+        ->orderBy('entidades.entidad')
+        ->get()
+        ->toArray();
 
-            $contactos=$this->contactos;
+        $contactos=$this->contactos;
 
-        return view('livewire.contacto-entidad',compact('ent','contactos'));
+        return view('livewire.contacto-entidad',compact('ent','contactos','conts'));
     }
 
     public function editContacto($contactoIndex)

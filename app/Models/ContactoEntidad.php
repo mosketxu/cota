@@ -11,7 +11,7 @@ class ContactoEntidad extends Model
 
     protected $table = 'contacto_entidades';
 
-    protected $fillable = ['departamento','observaciones'];
+    protected $fillable = ['entidad_id','contacto_id','departamento','comentarios'];
 
     public function entidades(){
         return $this->hasMany(Entidad::class,'contacto_id');
