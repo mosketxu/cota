@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\EntidadController;
+use App\Http\Controllers\{EntidadController,FacturacionController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +25,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/entidad/contacto/{entidad}', [EntidadController::class, 'contactos'])->name('entidad.contacto');
     Route::get('/entidad/nuevocontacto/{entidad}', [EntidadController::class, 'createcontacto'])->name('entidad.createcontacto');
     Route::resource('entidad', EntidadController::class);
+    Route::resource('facturacion', FacturacionController::class);
 
  });
 

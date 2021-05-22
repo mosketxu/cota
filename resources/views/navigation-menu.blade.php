@@ -18,6 +18,9 @@
                     <x-jet-nav-link href="{{ route('entidades') }}" :active="request()->routeIs('entidades')">
                         {{ __('Entidades') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('facturacion.index') }}" :active="request()->routeIs('facturacion.index')">
+                        {{ __('Facturación') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 
@@ -146,6 +149,9 @@
             </x-jet-responsive-nav-link> --}}
             <x-jet-responsive-nav-link href="{{ route('entidades') }}" :active="request()->routeIs('entidades')">
                 {{ __('Entidades') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('facturacion.index') }}" :active="request()->routeIs('facturacion.index')">
+                {{ __('Facturación') }}
             </x-jet-responsive-nav-link>
         </div>
 
