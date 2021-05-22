@@ -1,7 +1,14 @@
 <div>
     {{-- @include('entidad.menu') --}}
 
-    <h1 class="py-0 my-0 text-2xl font-semibold text-gray-900">Entidades</h1>
+    <div class="px-2 mx-2">
+        @if($contactoId)
+            <h1 class="py-0 my-0 text-2xl font-semibold text-gray-900" >Nueva Entidad para contacto {{ $contacto->entidad }}</h1>
+            <input type="hidden" wire:model="contactoId"/>
+        @else
+            <h1 class="py-0 my-0 text-2xl font-semibold text-gray-900">Nueva Entidad</h1>
+        @endif
+    </div>
 
     @if (session()->has('message'))
         <div id="alert" class="relative px-6 py-2 mb-2 text-white bg-green-200 border-green-500 rounded border-1">
@@ -21,6 +28,7 @@
             <div class="px-2 mx-2 my-1 rounded-md bg-blue-50">
                 <h3 class="font-semibold ">Datos generales</h3>
                 <x-jet-input  wire:model.defer="entidad.id" type="hidden"/>
+                <x-jet-input  wire:model.defer="contacto" type="hidden"/>
                 <hr>
             </div>
             <div class="flex flex-col mx-2 space-y-4 md:space-y-0 md:flex-row md:space-x-4">
@@ -246,7 +254,20 @@
                     <textarea wire:model.defer="entidad.observaciones" class="w-full text-xs border-gray-300 rounded-md" rows="3">{{ old('observaciones') }} </textarea>
                     <x-jet-input-error for="observaciones" class="mt-2" />
                 </div>
+                @if($contactoId)
+                    <div class="flex-col items-center w-6/12 ">
+                        <x-jet-label class="p-0 m-0 ">{{ __('Observaciones del contacto') }}</x-jet-label>
+                        <div class="mx-auto">
+                            <x-jet-input  wire:model.defer="departamento" type="text" id="departamento" name="departamento" :value="old('departamento')" class="w-full " placeholder="{{ __('Departamento') }}"/>
+                        </div>
+                        <div class="mx-auto">
+                            <x-jet-input  wire:model.defer="comentario" type="text" id="comentario" name="comentario" :value="old('comentario')" class="w-full" placeholder="{{ __('Comentarios') }}"/>
+                        </div>
+                    </div>
+                @endif
             </div>
+
+
 
             <div class="flex mt-0 ml-2 space-x-4">
                 <div class="space-x-3">
@@ -273,7 +294,7 @@
                         class="text-gray-500"
                         >Saved!</span>
                     @endif --}}
-                    <x-jet-secondary-button  onclick="location.href = '{{url()->previous()}}'">{{ __('Volver') }}</x-jet-secondary-button>
+                    <x-jet-secondary-button  onclick="location.href = '{{route('entidades')}}'">{{ __('Volver') }}</x-jet-secondary-button>
                 </div>
             </div>
         </form>

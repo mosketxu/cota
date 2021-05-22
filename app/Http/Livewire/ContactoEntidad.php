@@ -59,19 +59,28 @@ class ContactoEntidad extends Component
 
     public function saveContacto($contactoIndex)
     {
-        // $this->validate();
+        $this->validate();
 
         $contacto = $this->contactos[$contactoIndex] ?? NULL;
-        // dd($contacto);
         if (!is_null($contacto)) {
             $p=ModelContactoEntidad::find($contacto['id']);
-            // dd($p);
             $p->departamento=$contacto['departamento'];
             $p->comentarios=$contacto['comentarios'];
             $p->save();
-            // optional(ContactoEntidad::find($contacto['id']))->update($contacto);
         }
         $this->editedContactoIndex = null;
         $this->editedContactoField = null;
     }
+
+    public function delete($contactoId)
+    {
+        $contactoBorrar = ModelContactoEntidad::find($contactoId);
+        $e=Entidad::find($contactoBorrar->contacto_id);
+
+        if ($contactoBorrar) {
+            $contactoBorrar->delete();
+            $this->dispatchBrowserEvent('notify', 'El contacto '.$e->entidad.'ha sido eliminado!');
+        }
+    }
+
 }

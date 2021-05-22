@@ -16,6 +16,7 @@ class ContactoCreate extends Component
     public $departamento;
     public $comentario;
 
+
     protected $rules = [
         'entidad.id' => 'required',
     ];
@@ -31,6 +32,7 @@ class ContactoCreate extends Component
     public function savecontacto()
     {
         if($this->contacto){
+            $this->validate();
             ContactoEntidad::create([
                  'entidad_id'=>$this->entidad->id,
                  'contacto_id'=>$this->contacto,
@@ -42,13 +44,8 @@ class ContactoCreate extends Component
             $this->reset('contacto');
             $this->reset('departamento');
             $this->reset('comentario');
-
             $this->emit('contactoupdate');
-
-
         }
-
     }
-
 
 }

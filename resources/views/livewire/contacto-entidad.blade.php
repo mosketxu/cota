@@ -18,7 +18,7 @@
             <div class="flex w-2/4 space-x-2">
                 <input type="text" wire:model="search" class="py-1 border border-blue-100 rounded-lg" placeholder="Búsqueda..." autofocus/>
             </div>
-            <x-button.primary href="#" class="py-0 my-0"><x-icon.plus/> Nueva</x-button.primary>
+            {{-- <x-button.primary href="#" class="py-0 my-0"><x-icon.plus/> Nueva</x-button.primary> --}}
         </div>
         {{-- tabla contactos --}}
         <div class="flex-col space-y-4">
@@ -45,10 +45,9 @@
                             <td class="pl-2 text-xs text-gray-800">
                                 <x-input.text wire:model.defer="contactos.{{ $index }}.comentarios"/>
                             </td>
-                            <td class="pl-2 text-xs text-gray-800">
-                                <x-icon.save-a wire:click.prevent="saveContacto({{$index}})">
-                                    Guardar
-                                </x-icon.save-a>
+                            <td class="pl-2 text-xs">
+                                <x-icon.save-a wire:click.prevent="saveContacto({{$index}})" title="Actualizar contacto"/>
+                                <x-icon.delete-a wire:click.prevent="delete({{ $contacto['id'] }})" onclick="confirm('¿Estás seguro?') || event.stopImmediatePropagation()" class="pl-1"  title="Eliminar contacto"/>
                             </td>
                         </x-table.row>
                     @empty
@@ -75,9 +74,6 @@
         <div class="space-x-3">
             <x-jet-secondary-button  onclick="location.href = '{{url()->previous()}}'">{{ __('Volver') }}</x-jet-secondary-button>
         </div>
-        <x-jet-button wire:click="mensaje()" class="bg-blue-600">
-            {{ __('mensaje') }}
-        </x-jet-button>
     </div>
 
 </div>

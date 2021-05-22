@@ -23,8 +23,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/entidad/pu/{entidad}', [EntidadController::class, 'pus'])->name('entidad.pu');
     Route::get('/entidad/contacto/{entidad}', [EntidadController::class, 'contactos'])->name('entidad.contacto');
+    Route::get('/entidad/nuevocontacto/{entidad}', [EntidadController::class, 'createcontacto'])->name('entidad.createcontacto');
     Route::resource('entidad', EntidadController::class);
 
-
-    // Route::get('/entidades', function () {return view('entidades');})->name('entidades');
  });
+
+//  Route::any('{query}',function(){
+//      return redirect('/login');
+//     })
+//     ->where('query','.*');

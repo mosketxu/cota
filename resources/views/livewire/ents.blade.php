@@ -34,7 +34,7 @@
                     </select>
                 </div>
             </div>
-            <x-button.primary href="#" class="py-0 my-0"><x-icon.plus/> Nueva</x-button.primary>
+            <x-button.button  onclick="location.href = '{{ route('entidad.create') }}'" color="blue"><x-icon.plus/>{{ __('Nueva Entidad') }}</x-button.button>
         </div>
         {{-- tabla entidades --}}
         <div class="flex-col space-y-4">
@@ -57,7 +57,6 @@
                             <x-table.cell class="text-right">
                                 <a href="#" wire:click="edit" class="text-xs text-gray-700 transition duration-150 ease-in-out focus:outline-none focus:text-gray-800 focus:underline">
                                     <span class="text-xs text-gray-200">{{ $entidad->id }}</span><span class="text-lg text-{{ $entidad->fav_color[0] }}-400"> &#{{ $entidad->fav_color[1] }};</span>
-                                    {{-- <span class="text-xs text-gray-200">{{ $entidad->id }}</span><span class="text-lg text-{{ $entidad->fav_color[0] }}-400"> &#{{ $entidad->fav_color[1] }};</span> --}}
                                 </a>
                             </x-table.cell>
                             <x-table.cell>

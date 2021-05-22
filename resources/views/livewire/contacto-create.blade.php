@@ -1,7 +1,7 @@
 <div class="flex-col space-y-4 text-gray-500">
     <x-jet-validation-errors/>
     <div class="px-2 mx-2 my-1 rounded-md bg-blue-50">
-        <h3 class="font-semibold ">Selecciona contactos pulsa <a href="##">AQUÍ</a> aqui para crear uno nuevo.</h3>
+        <h3 class="font-semibold ">Selecciona un contacto o pulsa <a href="{{ route('entidad.createcontacto',$entidad->id) }}"><span class="text-blue-600 underline ">AQUÍ</span></a> aqui para crear uno nuevo.</h3>
         <x-jet-input  wire:model.defer="entidad.id" type="hidden"/>
         <hr>
     </div>

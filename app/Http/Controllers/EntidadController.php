@@ -15,7 +15,7 @@ class EntidadController extends Controller
      */
     public function index()
     {
-        //
+     //
     }
 
     /**
@@ -25,7 +25,7 @@ class EntidadController extends Controller
      */
     public function create()
     {
-        //
+        return view('entidad.create');
     }
 
     /**
@@ -93,5 +93,13 @@ class EntidadController extends Controller
     {
         return view('entidad.contactos',compact('entidad'));
     }
+
+    public function createcontacto($contactoId)
+    {
+        $contacto=Entidad::find($contactoId);
+        return view('entidad.createcontacto',compact('contacto'));
+    }
+
+
 
 }

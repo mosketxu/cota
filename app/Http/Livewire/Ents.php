@@ -17,21 +17,6 @@ class Ents extends Component
 
     public function render()
     {
-
-        // $pus=Pu::where('entidad_id',$this->entidad->id)
-        // ->when($this->search !='',function ($query) use($i){
-        //     $query->where(function($q) use ($i){pappser
-        //         $q->where('destino','like','%'.$this->search.'%')
-        //             ->orWhere('url','like','%'.$this->search.'%')
-        //             ->orWhere('us','like','%'.$this->search.'%')
-        //             ->orWhere('us2','like','%'.$this->search.'%')
-        //             ->orWhere('observaciones','like','%'.$this->search.'%');
-        //         });
-        //     })
-        // ->get();
-
-        // dd($this->filtroactivo);
-
         $entidades=Entidad::query()
             ->when($this->filtrocliente!='', function ($query){
                 $query->where('cliente',$this->filtrocliente);
