@@ -12,11 +12,16 @@ class Facturacion extends Model
     protected $table = 'facturacion';
 
     protected $fillable=['numfactura','entidad_id','fechafactura','fechavencimiento','metodopago_id','refcliente','mail',
-    'enviar','enviada','pagada','facturable','asiento','fechaasiento'];
+    'enviar','enviada','pagada','facturable','asiento','fechaasiento','observaciones','notas'];
 
     public function metodopago()
     {
         return $this->belongsTo(MetodoPago::class);
+    }
+
+    public function facturadetalles()
+    {
+        return $this->hasMany(FacturacionDetalle::class);
     }
 
     public function getEnviarEstAttribute()
@@ -59,7 +64,6 @@ class Facturacion extends Model
             return ['red','No'];
         }
     }
-
 
     public function getFacturadoAttribute()
     {

@@ -20,6 +20,17 @@ class ContactoEntidad extends Component
         'contactoupdate' => '$refresh',
     ];
 
+
+    protected $rules = [
+        'contactos.*.departamento' => ['max:100'],
+        'contactos.*.comentarios' => ['max:150'],
+    ];
+
+    protected $validationAttributes = [
+        'contactos.*.departamento' => 'Departamento',
+        'contactos.*.comentarios' => 'Comentario',
+    ];
+
     public function mount()
     {
         $this->contactos = ModelContactoEntidad::where('entidad_id',$this->entidad->id)
@@ -62,6 +73,7 @@ class ContactoEntidad extends Component
         $this->validate();
 
         $contacto = $this->contactos[$contactoIndex] ?? NULL;
+
         if (!is_null($contacto)) {
             $p=ModelContactoEntidad::find($contacto['id']);
             $p->departamento=$contacto['departamento'];

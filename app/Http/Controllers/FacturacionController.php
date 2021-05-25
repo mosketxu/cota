@@ -26,7 +26,7 @@ class FacturacionController extends Controller
      */
     public function create()
     {
-        //
+        return view('facturacion.create');
     }
 
     /**
@@ -57,9 +57,9 @@ class FacturacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Facturacion $facturacion)
     {
-        //
+        return view('facturacion.edit',compact('facturacion'));
     }
 
     /**

@@ -15,7 +15,14 @@ class Facturaciones extends Component
     public $filtrofacturado='';
     public $filtroenviada='';
     public $filtropagada='';
+    public $filtroanyo='';
+    public $filtromes='';
 
+
+    public function mount()
+    {
+        $this->filtroanyo=date('Y');
+    }
 
     public function render()
     {
@@ -39,6 +46,8 @@ class Facturaciones extends Component
                 $query->where('asiento','>','0');
             }
         })
+        ->searchYear('fechafactura',$this->filtroanyo)
+        ->searchMes('fechafactura',$this->filtromes)
         ->search('entidades.entidad',$this->search)
         ->orSearch('facturacion.numfactura',$this->search)
         ->orderBy('facturacion.numfactura','desc')
@@ -46,5 +55,15 @@ class Facturaciones extends Component
         ->paginate();
 
         return view('livewire.facturaciones',compact('facturaciones'));
+    }
+
+    public function delete($facturacionId)
+    {
+        $facturacion = Facturacion::find($facturacionId);
+        if ($facturacion) {
+            $facturacion->delete();
+            // session()->flash('message', $facturacion->entidad.' eliminado!');
+            $this->dispatchBrowserEvent('notify', 'La línea de facturación: '.$facturacion->id.'-'.$facturacion->numfactura.' ha sido eliminada!');
+        }
     }
 }

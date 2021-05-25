@@ -14,9 +14,18 @@
             </div>
         @endif
 
+        {{-- tabla filtros y boton --}}
         <div class="flex justify-between">
-            <div class="flex w-2/4 space-x-2">
-                <input type="text" wire:model="search" class="py-1 border border-blue-100 rounded-lg" placeholder="Búsqueda..." autofocus/>
+            <div class="flex w-3/4 space-x-2">
+                <input type="text" wire:model="search" class="py-1 placeholder-gray-300 border border-blue-100 rounded-lg" placeholder="Búsqueda fecha/factura" autofocus/>
+                <div class="px-1 text-xs">
+                    <label class="px-1 text-gray-600">Año</label>
+                    <input type="text" wire:model="filtroanyo" class="py-2 text-xs text-gray-600 placeholder-gray-300 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none" placeholder="Año"/>
+                </div>
+                <div class="px-1 text-xs">
+                    <label class="px-1 text-gray-600">Mes</label>
+                    <input type="text" wire:model="filtromes" class="py-2 text-xs text-gray-600 placeholder-gray-300 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none" placeholder="Mes (número)"/>
+                </div>
                 <div class="px-1 text-xs">
                     <label class="px-1 text-gray-600">Facturado</label>
                     <select wire:model="filtrofacturado" class="py-2 text-xs text-gray-600 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none">
@@ -51,6 +60,7 @@
                 </div>
             </div>
             <x-button.button  onclick="location.href = '{{ route('facturacion.create') }}'" color="blue"><x-icon.plus/>{{ __('Nueva Factura') }}</x-button.button>
+
         </div>
         {{-- tabla facturaciones --}}
         <div class="flex-col space-y-4">
@@ -133,13 +143,9 @@
                             </x-table.cell>
                             <x-table.cell class="">
                                 <div class="flex items-center justify-center">
-                                    <x-icon.edit-a />
+                                    <x-icon.edit-a href="{{ route('facturacion.edit',$facturacion) }}"/>
                                     &nbsp;&nbsp;&nbsp;
-                                    <x-icon.delete-a class="pl-1"/>
-                                    {{-- <x-icon.key href="{{ route('entidad.pu',$facturacion) }}"/>
-                                    <x-icon.usergroup href="{{ route('entidad.contacto',$facturacion) }}"/>
-                                    <x-icon.edit-a href="{{ route('entidad.edit',$facturacion) }}"/>
-                                    <x-icon.delete-a wire:click.prevent="delete({{ $facturacion->id }})" onclick="confirm('¿Estás seguro?') || event.stopImmediatePropagation()" class="pl-1"/> --}}
+                                    <x-icon.delete-a wire:click.prevent="delete({{ $facturacion->id }})" onclick="confirm('¿Estás seguro?') || event.stopImmediatePropagation()" class="pl-1 "/>
                                 </div>
                             </x-table.cell>
                         </x-table.row>
@@ -162,4 +168,5 @@
             </div>
         </div>
     </div>
+
 </div>

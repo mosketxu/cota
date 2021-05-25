@@ -16,7 +16,7 @@
             <div class="flex w-1/4 space-x-2">
                 <input type="text" wire:model="search" class="py-1 border border-blue-100 rounded-lg" placeholder="Búsqueda..." autofocus/>
             </div>
-            <x-button.primary wire:click="create"><x-icon.plus/> Nueva</x-button.primary>
+            <x-button.primary wire:click="create"><x-icon.plus/> Nueva Pu</x-button.primary>
 
             {{-- <x-button.primary href="{{ route('pu.create') }}" class="py-0 my-0"><x-icon.plus/> Nueva</x-button.primary> --}}
         </div>
@@ -83,7 +83,7 @@
         </div>
         <div class="flex mt-0 ml-2 space-x-4">
             <div class="space-x-3">
-                <x-jet-secondary-button  onclick="location.href = '{{url()->previous()}}'">{{ __('Volvera') }}</x-jet-secondary-button>
+                <x-jet-secondary-button  onclick="location.href = '{{url()->previous()}}'">{{ __('Volver') }}</x-jet-secondary-button>
             </div>
         </div>
         <x-notification/>
