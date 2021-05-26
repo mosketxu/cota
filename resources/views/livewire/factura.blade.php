@@ -147,7 +147,6 @@
                     style="display: none;"
                     class="p-2 m-2 text-gray-500 rounded-lg bg-green-50"
                     >Saved!</span>
-                    <x-jet-secondary-button  onclick="location.href = '{{route('facturacion.index')}}'">{{ __('Volver') }}</x-jet-secondary-button>
                 </div>
             </div>
         </form>
@@ -156,6 +155,15 @@
     <hr class="my-2">
 
     @livewire('detalle-factura',['facturacion'=>$factura],key($factura->id))
+    @if ($factura->id)
+        @livewire('factura-detalle-create',['facturacion'=>$factura],key($factura->id))
+    @endif
+
+    <div class="flex mt-0 ml-4 space-x-4">
+        <div class="space-x-3">
+            <x-jet-secondary-button  onclick="location.href = '{{route('facturacion.index')}}'">{{ __('Volver') }}</x-jet-secondary-button>
+        </div>
+    </div>
 
 </div>
 

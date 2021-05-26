@@ -236,14 +236,4 @@
             </x-table>
         </div>
     </div>
-
-    {{-- @livewire('contacto-create',['entidad'=>$ent],key($ent->id)) --}}
-
-    <div class="flex mt-2 ml-2 space-x-4">
-        <div class="space-x-3">
-            {{-- <x-jet-secondary-button  onclick="location.href = '{{route('entidades')}}'">{{ __('Volver') }}</x-jet-secondary-button> --}}
-            <x-jet-secondary-button  onclick="location.href = '#'">{{ __('Volver') }}</x-jet-secondary-button>
-        </div>
-    </div>
-
 </div>
