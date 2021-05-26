@@ -13,50 +13,65 @@ class DetalleFactura extends Component
     public $editedDetalleIndex = null;
     public $editedDetalleField = null;
     public $detalles=[];
+    public $iva;
+    public $total;
 
     protected $listeners = [
         'detalleupdate' => '$refresh',
     ];
 
-    public function mount()
-    {
+    protected $rules = [
+        'detalles.*.orden' => ['numeric'],
+        'detalles.*.tipo' => ['numeric'],
+        'detalles.*.concepto' => ['max:150'],
+        'detalles.*.unidades' => ['numeric'],
+        'detalles.*.coste' => ['numeric'],
+        'detalles.*.iva' => ['numeric'],
+        'detalles.*.subcuenta' => ['numeric'],
+        'detalles.*.pagadopor' => ['numeric'],
+    ];
+
+    public function mount(){
         $this->detalles = FacturacionDetalle::where('facturacion_id', $this->facturacion->id)
             ->orderBy('orden')
-            ->get();
-            // ->toArray();
+            ->get()
+            ->toArray();
+
 
     }
 
-    public function render()
-    {
+    public function render(){
         $factura=$this->facturacion;
         $this->detalles = FacturacionDetalle::where('facturacion_id', $this->facturacion->id)
             ->orderBy('orden')
-            ->get();
-            // ->toArray();
+            ->get()
+            ->toArray();
 
         return view('livewire.detalle-factura',compact('factura'));
     }
 
-    public function editDetalle($detalleIndex)
-    {
+    public function editDetalle($detalleIndex){
         $this->editedDetalleIndex = $detalleIndex;
     }
 
-    public function editDetalleField($detalleIndex, $fieldName)
-    {
+    public function editDetalleField($detalleIndex, $fieldName){
         $this->editedDetalleField = $detalleIndex . '.' . $fieldName;
     }
 
-    public function saveDetalle($DetalleIndex)
-    {
+    public function saveDetalle($detalleIndex){
         $this->validate();
 
         $detalle = $this->detalles[$detalleIndex] ?? NULL;
         if (!is_null($detalle)) {
-            $p=DetalleFactura::find($detalle['id']);
-            $p->departamento=$detalle['departamento'];
-            $p->comentarios=$detalle['comentarios'];
+            $p=FacturacionDetalle::find($detalle['id']);
+            $p->orden=$detalle['orden'];
+            $p->tipo=$detalle['tipo'];
+            $p->concepto=$detalle['concepto'];
+            $p->unidades=$detalle['unidades'];
+            $p->coste=$detalle['coste'];
+            $p->iva=$detalle['iva'];
+            $p->subcuenta=$detalle['subcuenta'];
+            $p->pagadopor=$detalle['pagadopor'];
             $p->save();
         }
         $this->editedDetalleIndex = null;

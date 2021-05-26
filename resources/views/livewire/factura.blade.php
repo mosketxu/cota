@@ -116,7 +116,7 @@
                             <input type="checkbox" wire:model.defer="factura.facturable" checked class="mx-auto"/>
                         </div>
                     </div>
-                    <div class="flex flex-col mx-2 space-y-4 md:space-y-0 md:flex-row md:space-x-1">
+                    <div class="flex flex-col mx-2 space-y-4 md:space-y-0 md:flex-row md:space-x-1 md:mt-3">
                         <div class="w-1/6 form-item">
                             <x-jet-label for="asiento">{{ __('Asiento') }}</x-jet-label>
                             <x-jet-input  wire:model.defer="factura.asiento" type="number"  id="asiento" name="asiento" :value="old('asiento') " class="w-full"/>
