@@ -7,7 +7,7 @@ use App\Models\{Facturacion,FacturacionDetalle};
 
 use Livewire\Component;
 
-class DetalleFactura extends Component
+class FacturaDetalle extends Component
 {
     public $facturacion;
     public $editedDetalleIndex = null;
@@ -47,7 +47,7 @@ class DetalleFactura extends Component
             ->get()
             ->toArray();
 
-        return view('livewire.detalle-factura',compact('factura'));
+        return view('livewire.factura-detalle',compact('factura'));
     }
 
     public function editDetalle($detalleIndex){

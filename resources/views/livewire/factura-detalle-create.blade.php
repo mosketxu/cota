@@ -54,7 +54,7 @@
             <div class="w-full form-item">
                 <x-jet-label for="subcuenta" >{{ __('subcuenta') }}</x-jet-label>
                 <x-select wire:model.defer="detalle.subcuenta"  selectname="subcuenta" class="w-full">
-                    <option value="">ND</option>
+                    <option value="0">ND</option>
                     <option value="705000">705000</option>
                     <option value="759000">759000</option>
                 </x-select>
@@ -63,7 +63,7 @@
             <div class="w-full form-item">
                 <x-jet-label for="pagadopor" >{{ __('pagadopor') }}</x-jet-label>
                 <x-select wire:model.defer="detalle.pagadopor"  selectname="pagadopor" class="w-full">
-                    <option value="">NP</option>
+                    <option value="0">NP</option>
                     <option value="0">Marta</option>
                     <option value="1">Susana</option>
                 </x-select>

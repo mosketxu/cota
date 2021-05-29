@@ -28,7 +28,7 @@
             <div class="flex py-2 mx-2 ">
                 <div class="flex-initial w-8/12 pb-2 mx-2 bg-white rounded-lg shadow-md">
                     <div class="px-2 mx-2 my-1 rounded-md bg-blue-50">
-                        <h3 class="font-semibold ">Datos Factura</h3>
+                        <h3 class="font-semibold ">Datos Factura<span class="text-xs text-gray-400">({{ $factura->id }})</h3></span>
                         <x-jet-input  wire:model.defer="factura.id" type="hidden"  id="id" name="id" :value="old('id')"/>
                     </div>
                     <div class="flex flex-col mx-2 space-y-4 md:space-y-0 md:flex-row md:space-x-1">
@@ -154,10 +154,10 @@
 
     <hr class="my-2">
 
-    @livewire('detalle-factura',['facturacion'=>$factura],key($factura->id))
-    @if ($factura->id)
+    @livewire('factura-detalle',['facturacion'=>$factura],key($factura->id))
+    {{-- @if ($factura->id)
         @livewire('factura-detalle-create',['facturacion'=>$factura],key($factura->id))
-    @endif
+    @endif --}}
 
     <div class="flex mt-0 ml-4 space-x-4">
         <div class="space-x-3">

@@ -16,7 +16,7 @@
         </div>
         {{-- tabla detalles --}}
         <div class="flex-col space-y-4">
-            <x-table>
+            <x-table2>
                 <x-slot name="head">
                     <x-table.head class="w-20 pl-2">{{ __('Orden') }}</x-table.head>
                     <x-table.head class="w-1/12 pl-2">{{ __('Tipo') }} </x-table.head>
@@ -233,7 +233,10 @@
                         </x-table.row>
                     @endforelse
                 </x-slot>
-            </x-table>
+                <x-slot name="footer">
+                    @livewire('factura-detalle-create',['facturacion'=>$factura],key($factura->id))
+                </x-slot>
+            </x-table2>
         </div>
     </div>
 </div>

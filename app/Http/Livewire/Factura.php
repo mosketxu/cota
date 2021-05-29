@@ -21,10 +21,11 @@ class Factura extends Component
             'factura.metodopago_id'=>'numeric|nullable',
             'factura.refcliente'=>'nullable',
             'factura.mail'=>'nullable',
-            'factura.enviar'=>'nullable',
-            'factura.enviada'=>'nullable',
-            'factura.pagada'=>'nullable',
-            'factura.facturable'=>'nullable',
+            'factura.enviar'=>'boolean|nullable',
+            'factura.enviada'=>'boolean|nullable',
+            'factura.pagada'=>'boolean|nullable',
+            'factura.facturable'=>'boolean|nullable',
+            'factura.facturada'=>'boolean|nullable',
             'factura.asiento'=>'numeric|nullable',
             'factura.fechaasiento'=>'date|nullable',
             'factura.observaciones'=>'nullable',
@@ -53,6 +54,7 @@ class Factura extends Component
 
     public function save()
     {
+        // dd($this->factura);
         $this->validate();
 
         if($this->factura->id){
@@ -85,9 +87,12 @@ class Factura extends Component
             ]
         );
 
+        $this->emitSelf('notify-saved');
+
         if(!$i){
             $this->factura->id=$fac->id;
+            $this->redirect( route('facturacion.edit',$fac) );
         }
-        $this->emitSelf('notify-saved');
+
     }
 }
