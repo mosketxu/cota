@@ -78,5 +78,14 @@ class FacturaDetalle extends Component
         $this->editedDetalleField = null;
     }
 
+    public function delete($facturadetalleId)
+    {
+        $facturadetalleBorrar = FacturacionDetalle::find($facturadetalleId);
+
+        if ($facturadetalleBorrar) {
+            $facturadetalleBorrar->delete();
+            $this->dispatchBrowserEvent('notify', 'Detalle de factura eliminado!');
+        }
+    }
 
 }

@@ -21,7 +21,7 @@
         </tbody>
 
         <tfoot class="bg-white divide-y divide-gray-200">
-            {{ $footer }}
+            {{ $foot }}
         </tfoot>
     </table>
 </div>

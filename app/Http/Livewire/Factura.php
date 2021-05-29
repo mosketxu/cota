@@ -49,12 +49,11 @@ class Factura extends Component
         $entidades=Entidad::where('estado','1')->orderBy('entidad')->get();
         $pagos=MetodoPago::all();
         // dd($entidades);
-        return view('livewire.factura',compact('entidades','pagos'));
+        return view('livewire.factura',compact('entidades','pagos','factura'));
     }
 
     public function save()
     {
-        // dd($this->factura);
         $this->validate();
 
         if($this->factura->id){
@@ -95,4 +94,15 @@ class Factura extends Component
         }
 
     }
+
+    public function delete($facturacionId)
+    {
+        $facturaBorrar = Facturacion::find($facturacionId);
+
+        if ($facturaBorrar) {
+            $facturaBorrar->delete();
+            $this->dispatchBrowserEvent('notify', 'La factura ha sido eliminado!');
+        }
+    }
+
 }

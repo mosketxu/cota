@@ -38,8 +38,6 @@ class FacturaDetalleCreate extends Component
         $this->detalle->subcuenta=0;
         $this->detalle->pagadopor=0;
         $facturacion=$this->facturacion->id;
-        // dd($facturacion);
-        // $this->facturacion=$facturacion;
     }
 
     public function render()
@@ -51,7 +49,9 @@ class FacturaDetalleCreate extends Component
 
     public function save()
     {
+        // dd($this->detalle);
         if($this->detalle){
+            // dd('l');
             $this->validate();
 
             FacturacionDetalle::create([
@@ -67,10 +67,21 @@ class FacturaDetalleCreate extends Component
                 ]);
                 $this->dispatchBrowserEvent('notify', 'Detalle añadido con éxito');
 
-            $this->reset('detalle');
             $this->emit('detalleupdate');
+            // $this->detalle=$detalle;
+            $this->detalle->facturacion_id=$this->facturacion->id;
+            $this->detalle->orden=0;
+            $this->detalle->concepto='';
+            $this->detalle->tipo=0;
+            $this->detalle->unidades=1;
+            $this->detalle->coste=0;
+            $this->detalle->iva=0;
+            $this->detalle->subcuenta=0;
+            $this->detalle->pagadopor=0;
+
         }
     }
+
 }
 
 

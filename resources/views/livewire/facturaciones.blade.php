@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        {{-- tabla filtros y boton --}}
+        {{-- filtros y boton --}}
         <div class="flex justify-between">
             <div class="flex w-3/4 space-x-2">
                 <input type="text" wire:model="search" class="py-1 placeholder-gray-300 border border-blue-100 rounded-lg" placeholder="Búsqueda fecha/factura" autofocus/>

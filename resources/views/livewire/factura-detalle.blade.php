@@ -233,7 +233,7 @@
                         </x-table.row>
                     @endforelse
                 </x-slot>
-                <x-slot name="footer">
+                <x-slot name="foot">
                     @livewire('factura-detalle-create',['facturacion'=>$factura],key($factura->id))
                 </x-slot>
             </x-table2>
