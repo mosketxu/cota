@@ -20,7 +20,7 @@
             {{ $body }}
         </tbody>
 
-        <tfoot class="bg-white divide-y divide-gray-200">
+        <tfoot class="bg-green-100 divide-y divide-gray-200">
             {{ $foot }}
         </tfoot>
     </table>

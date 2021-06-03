@@ -31,4 +31,17 @@ class FacturacionDetalle extends Model
         ][$this->tipo] ?? '0';
     }
 
+    public function getBaseAttribute(){
+        return round($this->unidades*$this->coste,2);
+    }
+
+    public function getTotalivaAttribute(){
+        return round($this->unidades*$this->coste*$this->iva,2);
+    }
+    public function getTotalAttribute(){
+        return round((1+$this->iva)*$this->unidades*$this->coste,2);
+        // return number_format(round((1+$this->iva)$this->unidades*$this->coste,2),2);
+    }
+
+
 }

@@ -1,16 +1,22 @@
 <div>
     {{-- @include('entidad.menu') --}}
 
-    <div class="px-2 mx-2">
-        {{-- @if($contactoId)
-            <h1 class="py-0 my-0 text-2xl font-semibold text-gray-900" >Nueva Entidad para contacto {{ $contacto->entidad }}</h1>
-            <input type="hidden" wire:model="contactoId"/>
-        @else --}}
-            <h1 class="py-0 my-0 text-2xl font-semibold text-gray-900">Nueva Factura</h1>
-        {{-- @endif --}}
+    <div class="flex justify-between mx-4">
+        <div class="flex w-3/4 space-x-2">
+            @if($factura->id)
+                @if($factura->numfactura!='')
+                    <h1 class="py-0 my-0 text-2xl font-semibold text-gray-900">Factura {{$factura->numfactura  }}</h1>
+                @else
+                    <h1 class="py-0 my-0 text-2xl font-semibold text-gray-900">Pre-Factura {{$factura->id  }}</h1>
+                @endif
+            @else
+                <h1 class="py-0 my-0 text-2xl font-semibold text-gray-900">Nueva Factura</h1>
+            @endif
+        </div>
+        <x-button.button  onclick="location.href = '{{ route('facturacion.create') }}'" color="blue"><x-icon.plus/>{{ __('Nueva Factura') }}</x-button.button>
     </div>
-
-    @if (session()->has('message'))
+    <div class="py-1 mx-4 space-y-4">
+    {{-- @if (session()->has('message'))
         <div id="alert" class="relative px-6 py-2 mb-2 text-white bg-green-200 border-green-500 rounded border-1">
             <span class="inline-block mx-8 align-middle">
                 {{ session('message') }}
@@ -19,16 +25,29 @@
                 <span>×</span>
             </button>
         </div>
+    @endif --}}
+    @if ($errors->any())
+        <div id="alert" class="relative px-6 py-2 mb-2 text-white bg-green-200 border-green-500 rounded border-1">
+            <x-jet-label class="text-red">Verifica los errores</x-jet-label>
+            <ul class="mt-3 text-sm text-red-600 list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            <button class="absolute top-0 right-0 mt-2 mr-6 text-2xl font-semibold leading-none bg-transparent outline-none focus:outline-none" onclick="document.getElementById('alert').remove();">
+                <span>×</span>
+            </button>
+        </div>
     @endif
 
-    <x-jet-validation-errors/>
-
+    {{-- <x-jet-validation-errors/> --}}
+    </div>
     <div class="flex-col space-y-4 text-gray-500">
         <form wire:submit.prevent="save" >
             <div class="flex py-2 mx-2 ">
                 <div class="flex-initial w-8/12 pb-2 mx-2 bg-white rounded-lg shadow-md">
                     <div class="px-2 mx-2 my-1 rounded-md bg-blue-50">
-                        <h3 class="font-semibold ">Datos Factura<span class="text-xs text-gray-400">({{ $factura->id }})</h3></span>
+                        <h3 class="font-semibold ">Datos Factura</h3>
                         <x-jet-input  wire:model.defer="factura.id" type="hidden"  id="id" name="id" :value="old('id')"/>
                     </div>
                     <div class="flex flex-col mx-2 space-y-4 md:space-y-0 md:flex-row md:space-x-1">
@@ -130,6 +149,7 @@
                     </div>
                 </div>
             </div>
+            {{ $factura->facturadetalle }}
             <div class="flex mt-0 ml-4 space-x-4">
                 <div class="space-x-3">
                     <x-jet-button class="bg-blue-600">

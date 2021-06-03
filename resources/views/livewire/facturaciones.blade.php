@@ -2,7 +2,7 @@
 
     <h1 class="text-2xl font-semibold text-gray-900">Facturaciones</h1>
 
-    <div class="py-1 space-y-4">
+    <div class="py-1 mx-4 space-y-4">
         @if (session()->has('message'))
             <div id="alert" class="relative px-6 py-2 mb-2 text-white bg-red-200 border-red-500 rounded border-1">
                 <span class="inline-block mx-8 align-middle">
@@ -71,6 +71,9 @@
                     <x-table.heading class="pl-4 text-left">{{ __('F.Factura') }}</x-table.heading>
                     <x-table.heading class="pl-4 text-left">{{ __('F.Vto') }}</x-table.heading>
                     <x-table.heading class="pl-4 text-left">{{ __('Entidad') }}</x-table.heading>
+                    <x-table.heading class="pl-4 text-left">{{ __('Base') }}</x-table.heading>
+                    <x-table.heading class="pl-4 text-left">{{ __('Iva') }}</x-table.heading>
+                    <x-table.heading class="pl-4 text-left">{{ __('Total') }}</x-table.heading>
                     <x-table.heading class="pl-4 text-left">{{ __('Pago') }} </x-table.heading>
                     <x-table.heading class="pl-4 text-left">{{ __('Email') }}</x-table.heading>
                     <x-table.heading class="pl-4 text-left">{{ __('Ref.Cli') }}</x-table.heading>
@@ -101,6 +104,16 @@
                             </x-table.cell>
                             <x-table.cell>
                                 <input type="text" value="{{ $facturacion->entidad }}" class="w-full text-sm font-thin text-gray-500 capitalize truncate border-0 rounded-md"  readonly/>
+                            </x-table.cell>
+                            <x-table.cell class="text-right">
+                                {{ number_format($facturacion->facturadetalles->sum('base'),2)}}
+                                {{-- // return number_format(round((1+$this->iva)$this->unidades*$this->coste,2),2); --}}
+                            </x-table.cell>
+                            <x-table.cell class="text-right">
+                                {{ number_format($facturacion->facturadetalles->sum('totaliva'),2)}}
+                            </x-table.cell>
+                            <x-table.cell class="text-right">
+                                {{ number_format($facturacion->facturadetalles->sum('total'),2) }}
                             </x-table.cell>
                             <x-table.cell class="text-center">
                                 <span class="text-sm text-gray-500 ">{{$facturacion->metodopago->metodopagocorto ?? '-'}}</span>

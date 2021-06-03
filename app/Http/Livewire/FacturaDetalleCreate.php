@@ -18,7 +18,7 @@ class FacturaDetalleCreate extends Component
         'detalle.facturacion_id'=>'numeric',
         'detalle.orden'=>'numeric|required',
         'detalle.tipo'=>'required|numeric',
-        'detalle.concepto'=>'nullable|max:250',
+        'detalle.concepto'=>'required|max:250',
         'detalle.unidades'=>'numeric|required',
         'detalle.coste'=>'numeric|required',
         'detalle.iva'=>'numeric|required',
@@ -42,18 +42,14 @@ class FacturaDetalleCreate extends Component
 
     public function render()
     {
-        $detalle=$this->detalle;
         $facturacion=$this->facturacion;
         return view('livewire.factura-detalle-create');
     }
 
     public function save()
     {
-        // dd($this->detalle);
         if($this->detalle){
-            // dd('l');
             $this->validate();
-
             FacturacionDetalle::create([
                 'facturacion_id'=>$this->detalle->facturacion_id,
                 'orden'=>$this->detalle->orden,
@@ -68,7 +64,6 @@ class FacturaDetalleCreate extends Component
                 $this->dispatchBrowserEvent('notify', 'Detalle añadido con éxito');
 
             $this->emit('detalleupdate');
-            // $this->detalle=$detalle;
             $this->detalle->facturacion_id=$this->facturacion->id;
             $this->detalle->orden=0;
             $this->detalle->concepto='';

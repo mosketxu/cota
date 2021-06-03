@@ -10,11 +10,12 @@ use Livewire\Component;
 class FacturaDetalle extends Component
 {
     public $facturacion;
+    public $base;
+    public $totaliva;
+    public $total;
     public $editedDetalleIndex = null;
     public $editedDetalleField = null;
     public $detalles=[];
-    public $iva;
-    public $total;
 
     protected $listeners = [
         'detalleupdate' => '$refresh',
@@ -29,6 +30,7 @@ class FacturaDetalle extends Component
         'detalles.*.iva' => ['numeric'],
         'detalles.*.subcuenta' => ['numeric'],
         'detalles.*.pagadopor' => ['numeric'],
+        'base'=>'nullable',
     ];
 
     public function mount(){
@@ -36,18 +38,21 @@ class FacturaDetalle extends Component
             ->orderBy('orden')
             ->get()
             ->toArray();
-
-
     }
 
     public function render(){
         $factura=$this->facturacion;
+        $this->base=$factura->facturadetalles->sum('base');
+        $this->totaliva=$factura->facturadetalles->sum('totaliva');
+        $this->total=$factura->facturadetalles->sum('total');
+        // $this->total=$this->base+$this->totaliva;
+
         $this->detalles = FacturacionDetalle::where('facturacion_id', $this->facturacion->id)
             ->orderBy('orden')
             ->get()
             ->toArray();
 
-        return view('livewire.factura-detalle',compact('factura'));
+        return view('livewire.factura-detalle',compact(['factura']));
     }
 
     public function editDetalle($detalleIndex){
@@ -76,6 +81,8 @@ class FacturaDetalle extends Component
         }
         $this->editedDetalleIndex = null;
         $this->editedDetalleField = null;
+
+        $this->emit('detalleupdate');
     }
 
     public function delete($facturadetalleId)

@@ -16,7 +16,7 @@ class Factura extends Component
             'factura.numfactura'=>'string|nullable',
             'factura.invento'=>'string|nullable',
             'factura.entidad_id'=>'required',
-            'factura.fechafactura'=>'date|nullable',
+            'factura.fechafactura'=>'date|required',
             'factura.fechavencimiento'=>'date|nullable',
             'factura.metodopago_id'=>'numeric|nullable',
             'factura.refcliente'=>'nullable',
@@ -48,7 +48,6 @@ class Factura extends Component
 
         $entidades=Entidad::where('estado','1')->orderBy('entidad')->get();
         $pagos=MetodoPago::all();
-        // dd($entidades);
         return view('livewire.factura',compact('entidades','pagos','factura'));
     }
 

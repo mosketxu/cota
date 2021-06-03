@@ -13,6 +13,7 @@
         @endif
         <div class="rounded-md bg-blue-50">
             <h3 class="ml-2 font-semibold ">Detalle Factura</h3>
+            {{ number_format($base,2,',','.') }}+{{ number_format($totaliva,2,',','.') }}+{{ number_format($total,2,',','.') }}
         </div>
         {{-- tabla detalles --}}
         <div class="flex-col space-y-4">
@@ -24,6 +25,7 @@
                     <x-table.head class="w-20 pr-2 text-right">{{ __('Uds.') }}</x-table.head>
                     <x-table.head class="pr-10 text-right w-28">{{ __('Importe') }}</x-table.head>
                     <x-table.head class="w-16 pl-10 text-left">{{ __('% IVA') }}</x-table.head>
+                    <x-table.head class="pr-10 text-right w-28">{{ __('Base (€)') }}</x-table.head>
                     <x-table.head class="pr-10 text-right w-28">{{ __('IVA (€)') }}</x-table.head>
                     <x-table.head class="pr-10 text-right w-28">{{ __('Total (€)') }}</x-table.head>
                     <x-table.head class="pl-2 text-left w-28">{{ __('Subcta') }}</x-table.head>
@@ -115,7 +117,7 @@
                             {{-- coste --}}
                             <x-table.cell class="">
                                 @if ($editedDetalleIndex === $index || $editedDetalleField === $index . '.coste')
-                                    <input type="number" step="2"
+                                    <input type="number" step="any"
                                            @click.away="$wire.editedDetalleField === '{{ $index }}.coste' ? $wire.saveDetalle({{ $index }}) : null"
                                            wire:model.defer="detalles.{{ $index }}.coste"
                                            class="w-full text-xs text-right p-2 border border-blue-300 transition rounded-lg duration-150 hover:border-blue-300 focus:border-blue-300  active:border-blue-300
@@ -135,7 +137,7 @@
                                     <x-select @click.away="$wire.editedDetalleField === '{{ $index }}.iva' ? $wire.saveDetalle({{ $index }}) : null"
                                         selectname="iva"
                                         wire:model.defer="detalles.{{ $index }}.iva"
-                                        class="w-full text-xs pl-10 text-left
+                                        class="w-full text-xs pl-12 text-left
                                         {{ $errors->has('detalles.' . $index . '.iva') ? 'border-red-500' : 'border-blue-300' }}">
                                         <option value="0">0%</option>
                                         <option value="0.04">4%</option>
@@ -151,14 +153,28 @@
                                 </div>
                                 @endif
                             </x-table.cell>
+
                             <x-table.cell>
-                                <div class="flex-1 p-2 pr-10 text-xs font-bold text-right text-gray-900 cursor-">
-                                    {{ number_format(round($detalle['iva']*$detalle['unidades']*$detalle['coste'], 2),2) }}
+                                <div class="flex-1 py-1 pr-10 text-sm font-bold text-right text-gray-900 rounded-lg bg-blue-50">
+                                    @if(is_numeric($detalle['unidades']) && is_numeric($detalle['coste']))
+                                    {{ number_format(round($detalle['unidades']*$detalle['coste'], 2),2,',','.') }}
+                                    @endif
                                 </div>
                             </x-table.cell>
+
                             <x-table.cell>
-                                <div class="flex-1 p-2 pr-10 text-xs font-bold text-right text-gray-900 cursor-">
-                                    {{ number_format(round((1+$detalle['iva'])*$detalle['unidades']*$detalle['coste'], 2),2) }}
+                                <div class="flex-1 py-1 pr-10 text-sm font-bold text-right text-gray-900 bg-blue-100 rounded-lg">
+                                    @if(is_numeric($detalle['iva']) && is_numeric($detalle['unidades']) && is_numeric($detalle['coste']))
+                                    {{ number_format(round($detalle['iva']*$detalle['unidades']*$detalle['coste'], 2),2,',','.') }}
+                                    @endif
+                                </div>
+                            </x-table.cell>
+
+                            <x-table.cell>
+                                <div class="flex-1 py-1 pr-10 text-sm font-bold text-right text-gray-900 bg-blue-200 rounded-lg">
+                                    @if(is_numeric($detalle['iva']) && is_numeric($detalle['unidades']) && is_numeric($detalle['coste']))
+                                    {{ number_format(round((1+$detalle['iva'])*$detalle['unidades']*$detalle['coste'], 2),2,',','.') }}
+                                    @endif
                                 </div>
                             </x-table.cell>
 
@@ -234,9 +250,12 @@
                     @endforelse
                 </x-slot>
                 <x-slot name="foot">
-                    @livewire('factura-detalle-create',['facturacion'=>$factura],key($factura->id))
+                    @if($factura->id)
+                        @livewire('factura-detalle-create',['facturacion'=>$factura],key($factura->id))
+                    @endif
                 </x-slot>
             </x-table2>
         </div>
     </div>
+
 </div>
