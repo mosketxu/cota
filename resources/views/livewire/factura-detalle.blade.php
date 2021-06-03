@@ -1,6 +1,6 @@
 <div class="p-1 mx-2">
 
-    <div class="py-1 space-y-4">
+    <div class="py-1 space-y-2">
         @if (session()->has('message'))
             <div id="alert" class="relative px-6 py-2 mb-2 text-white bg-red-200 border-red-500 rounded border-1">
                 <span class="inline-block mx-8 align-middle">
@@ -11,28 +11,30 @@
                 </button>
             </div>
         @endif
-        <div class="rounded-md bg-blue-50">
+        <div class="bg-blue-100 rounded-md">
             <h3 class="ml-2 font-semibold ">Detalle Factura</h3>
-            {{ number_format($base,2,',','.') }}+{{ number_format($totaliva,2,',','.') }}+{{ number_format($total,2,',','.') }}
         </div>
         {{-- tabla detalles --}}
-        <div class="flex-col space-y-4">
-            <x-table2>
-                <x-slot name="head">
-                    <x-table.head class="w-20 pl-2">{{ __('Orden') }}</x-table.head>
-                    <x-table.head class="w-1/12 pl-2">{{ __('Tipo') }} </x-table.head>
-                    <x-table.head class="w-3/12 pl-2">{{ __('Concepto') }}</x-table.head>
-                    <x-table.head class="w-20 pr-2 text-right">{{ __('Uds.') }}</x-table.head>
-                    <x-table.head class="pr-10 text-right w-28">{{ __('Importe') }}</x-table.head>
-                    <x-table.head class="w-16 pl-10 text-left">{{ __('% IVA') }}</x-table.head>
-                    <x-table.head class="pr-10 text-right w-28">{{ __('Base (€)') }}</x-table.head>
-                    <x-table.head class="pr-10 text-right w-28">{{ __('IVA (€)') }}</x-table.head>
-                    <x-table.head class="pr-10 text-right w-28">{{ __('Total (€)') }}</x-table.head>
-                    <x-table.head class="pl-2 text-left w-28">{{ __('Subcta') }}</x-table.head>
-                    <x-table.head class="pr-2 text-left w-28">{{ __('Pagado Por') }}</x-table.head>
-                    <x-table.head colspan="2" class="w-1/12"/>
-                </x-slot>
-                <x-slot name="body">
+
+        <div class="flex-col">
+            <table table class="min-w-full divide-y divide-gray-200">
+                <thead>
+                    <tr>
+                        <x-table.head class="w-20 pl-2">{{ __('Orden') }}</x-table.head>
+                        <x-table.head class="w-1/12 pl-2">{{ __('Tipo') }} </x-table.head>
+                        <x-table.head class="w-3/12 pl-2">{{ __('Concepto') }}</x-table.head>
+                        <x-table.head class="w-20 pr-2 text-right">{{ __('Uds.') }}</x-table.head>
+                        <x-table.head class="pr-10 text-right w-28">{{ __('Importe') }}</x-table.head>
+                        <x-table.head class="w-16 pl-10 text-left">{{ __('% IVA') }}</x-table.head>
+                        <x-table.head class="pr-10 text-right w-28">{{ __('Base (€)') }}</x-table.head>
+                        <x-table.head class="pr-10 text-right w-28">{{ __('IVA (€)') }}</x-table.head>
+                        <x-table.head class="pr-10 text-right w-28">{{ __('Total (€)') }}</x-table.head>
+                        <x-table.head class="pl-2 text-left w-28">{{ __('Subcta') }}</x-table.head>
+                        <x-table.head class="pr-2 text-left w-28">{{ __('Pagado Por') }}</x-table.head>
+                        <x-table.head colspan="2" class="w-1/12"/>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
                     @forelse ($detalles as $index=>$detalle)
                         <x-table.row wire:loading.class.delay="opacity-50">
                             {{-- orden --}}
@@ -248,14 +250,25 @@
                             </x-table.cell>
                         </x-table.row>
                     @endforelse
-                </x-slot>
-                <x-slot name="foot">
-                    @if($factura->id)
-                        @livewire('factura-detalle-create',['facturacion'=>$factura],key($factura->id))
-                    @endif
-                </x-slot>
-            </x-table2>
+                </tbody>
+                <tfoot class="font-bold divide-y divide-gray-200">
+                    <td class="w-20 pl-2"></td>
+                    <td class="w-1/12 pl-2"></td>
+                    <td class="w-3/12 pl-2"></td>
+                    <td class="w-20 pr-2 text-right"></td>
+                    <td class="pr-10 text-right w-28"></td>
+                    <td class="w-16 pl-10 text-left border">Total</td>
+                    <td class="pr-10 text-right border w-28">{{ number_format($base,2,',','.') }}</td>
+                    <td class="pr-10 text-right border w-28">{{ number_format($totaliva,2,',','.') }}</td>
+                    <td class="pr-10 text-right border w-28">{{ number_format($total,2,',','.') }}</td>
+                    <td class="pl-2 text-left w-28"></td>
+                    <td class="pr-2 text-left w-28"></td>
+                    <td colspan="2" class="w-1/12"/>
+                </tfoot>
+            </table>
         </div>
+        @if($factura->id)
+            @livewire('factura-detalle-create',['facturacion'=>$factura],key($factura->id))
+        @endif
     </div>
-
 </div>

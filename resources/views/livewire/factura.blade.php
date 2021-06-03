@@ -46,7 +46,7 @@
         <form wire:submit.prevent="save" >
             <div class="flex py-2 mx-2 ">
                 <div class="flex-initial w-8/12 pb-2 mx-2 bg-white rounded-lg shadow-md">
-                    <div class="px-2 mx-2 my-1 rounded-md bg-blue-50">
+                    <div class="px-2 mx-2 my-1 bg-blue-100 rounded-md">
                         <h3 class="font-semibold ">Datos Factura</h3>
                         <x-jet-input  wire:model.defer="factura.id" type="hidden"  id="id" name="id" :value="old('id')"/>
                     </div>
@@ -149,7 +149,6 @@
                     </div>
                 </div>
             </div>
-            {{ $factura->facturadetalle }}
             <div class="flex mt-0 ml-4 space-x-4">
                 <div class="space-x-3">
                     <x-jet-button class="bg-blue-600">
@@ -175,9 +174,6 @@
     <hr class="my-2">
 
     @livewire('factura-detalle',['facturacion'=>$factura],key($factura->id))
-    {{-- @if ($factura->id)
-        @livewire('factura-detalle-create',['facturacion'=>$factura],key($factura->id))
-    @endif --}}
 
     <div class="flex mt-0 ml-4 space-x-4">
         <div class="space-x-3">
