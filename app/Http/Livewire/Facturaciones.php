@@ -23,11 +23,11 @@ class Facturaciones extends Component
     public function mount()
     {
         $this->filtroanyo=date('Y');
+        $this->filtromes=intval(date('m'));
     }
 
     public function render()
     {
-
         $facturaciones = Facturacion::query()
         ->join('entidades','facturacion.entidad_id','=','entidades.id')
         ->select('facturacion.*', 'entidades.entidad', 'entidades.nif','entidades.emailadm')

@@ -16,7 +16,8 @@ class CreateFacturacionTable extends Migration
         Schema::create('facturacion', function (Blueprint $table) {
             $table->id();
             $table->foreignId('entidad_id')->constrained('entidades');
-            $table->string('numfactura',9)->index()->nullable();
+            $table->string('serie',2)->nullable();
+            $table->string('numfactura',9)->nullable();
             $table->date('fechafactura')->nullable();
             $table->date('fechavencimiento')->nullable();
             $table->integer('metodopago_id')->nullable();

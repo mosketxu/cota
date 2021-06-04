@@ -25,6 +25,12 @@ class Facturacion extends Model
     }
 
 
+    public function getAnyofacAttribute()
+    {
+        $y=substr(explode('-',$this->fechafactura)[0],2,2);
+        return $y;
+    }
+
     public function getEnviarEstAttribute()
     {
         return [

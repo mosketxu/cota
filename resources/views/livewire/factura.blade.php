@@ -4,14 +4,17 @@
     <div class="flex justify-between mx-4">
         <div class="flex w-3/4 space-x-2">
             @if($factura->id)
-                @if($factura->numfactura!='')
-                    <h1 class="py-0 my-0 text-2xl font-semibold text-gray-900">Factura {{$factura->numfactura  }}</h1>
-                @else
+                @if($nf!='')
+                    <h1 class="py-0 my-0 text-2xl font-semibold text-gray-900">Factura {{ $nf}}</h1>
+                    @else
                     <h1 class="py-0 my-0 text-2xl font-semibold text-gray-900">Pre-Factura {{$factura->id  }}</h1>
+                    <x-button.button  wire:click="creafactura({{ $factura }})" color="green">{{ __('Generar Factura') }}</x-button.button>
                 @endif
             @else
                 <h1 class="py-0 my-0 text-2xl font-semibold text-gray-900">Nueva Factura</h1>
             @endif
+
+
         </div>
         <x-button.button  onclick="location.href = '{{ route('facturacion.create') }}'" color="blue"><x-icon.plus/>{{ __('Nueva Factura') }}</x-button.button>
     </div>
@@ -63,7 +66,7 @@
 
                         <div class="form-item">
                             <x-jet-label for="numfactura">{{ __('Factura') }}</x-jet-label>
-                            <x-jet-input  wire:model.defer="factura.numfactura" type="text"  id="numfactura" name="numfactura" :value="old('numfactura') " readonly class="w-full bg-gray-100"/>
+                            <x-jet-input  wire:model.defer="nf" type="text"  id="numfactura" name="numfactura" :value="old('numfactura') " readonly class="w-full bg-gray-100"/>
                             <x-jet-input-error for="numfactura" class="mt-2" />
                         </div>
                         <div class="form-item">

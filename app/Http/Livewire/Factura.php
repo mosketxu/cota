@@ -4,16 +4,20 @@ namespace App\Http\Livewire;
 
 use App\Models\{Entidad, Facturacion, MetodoPago};
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
 
 class Factura extends Component
 {
 
     public $factura;
+    public $nf;
+
 
     protected function rules(){
         return [
             'factura.id'=>'nullable',
             'factura.numfactura'=>'string|nullable',
+            'factura.serie'=>'string|nullable',
             'factura.invento'=>'string|nullable',
             'factura.entidad_id'=>'required',
             'factura.fechafactura'=>'date|required',
@@ -40,6 +44,7 @@ class Factura extends Component
         $this->factura->enviada=0;
         $this->factura->pagada=0;
         $this->factura->facturable=1;
+        $this->nf=$this->factura->numfactura ? $this->factura->serie.'-'.$this->factura->numfactura :'';
     }
 
     public function render()
@@ -94,13 +99,30 @@ class Factura extends Component
 
     }
 
+    public function creafactura(Facturacion $factura)
+    {
+        $serie=substr(explode('-',$factura->fechafactura)[0],2,2);
+        $fac=Facturacion::where('serie',$serie)->max('numfactura') ;
+        if (!$fac){
+            $fac='00001';
+        }else{
+            $fac=substr($fac+100001,1,6);
+        }
+        $factura->serie=$serie;
+        $factura->numfactura=$fac;
+        $factura->save();
+        $this->nf=$serie.'-'.$fac;
+        $this->dispatchBrowserEvent('notify', 'La factura ha sido creda!');
+
+    }
+
     public function delete($facturacionId)
     {
         $facturaBorrar = Facturacion::find($facturacionId);
 
         if ($facturaBorrar) {
             $facturaBorrar->delete();
-            $this->dispatchBrowserEvent('notify', 'La factura ha sido eliminado!');
+            $this->dispatchBrowserEvent('notify', 'La factura ha sido eliminada!');
         }
     }
 
