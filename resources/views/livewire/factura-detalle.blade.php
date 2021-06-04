@@ -252,18 +252,20 @@
                     @endforelse
                 </tbody>
                 <tfoot class="font-bold divide-y divide-gray-200">
-                    <td class="w-20 pl-2"></td>
-                    <td class="w-1/12 pl-2"></td>
-                    <td class="w-3/12 pl-2"></td>
-                    <td class="w-20 pr-2 text-right"></td>
-                    <td class="pr-10 text-right w-28"></td>
-                    <td class="w-16 pl-10 text-left border">Total</td>
-                    <td class="pr-10 text-right border w-28">{{ number_format($base,2,',','.') }}</td>
-                    <td class="pr-10 text-right border w-28">{{ number_format($totaliva,2,',','.') }}</td>
-                    <td class="pr-10 text-right border w-28">{{ number_format($total,2,',','.') }}</td>
-                    <td class="pl-2 text-left w-28"></td>
-                    <td class="pr-2 text-left w-28"></td>
-                    <td colspan="2" class="w-1/12"/>
+                    <tr>
+                        <td class="w-20 pl-2"></td>
+                        <td class="w-1/12 pl-2"></td>
+                        <td class="w-3/12 pl-2"></td>
+                        <td class="w-20 pr-2 text-right"></td>
+                        <td class="pr-10 text-right w-28"></td>
+                        <td class="w-16 pl-10 text-left border">Total</td>
+                        <td class="pr-10 text-right border w-28">{{ number_format($base,2,',','.') }}</td>
+                        <td class="pr-10 text-right border w-28">{{ number_format($totaliva,2,',','.') }}</td>
+                        <td class="pr-10 text-right border w-28">{{ number_format($total,2,',','.') }}</td>
+                        <td class="pl-2 text-left w-28"></td>
+                        <td class="pr-2 text-left w-28"></td>
+                        <td colspan="2" class="w-1/12"></td>
+                    </tr>
                 </tfoot>
             </table>
         </div>

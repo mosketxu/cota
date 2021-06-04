@@ -24,6 +24,7 @@ class Facturacion extends Model
         return $this->hasMany(FacturacionDetalle::class);
     }
 
+
     public function getEnviarEstAttribute()
     {
         return [

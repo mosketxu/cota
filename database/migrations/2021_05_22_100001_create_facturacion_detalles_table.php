@@ -19,7 +19,7 @@ class CreateFacturacionDetallesTable extends Migration
             $table->integer('orden')->default(0);
             $table->integer('tipo')->default(0);
             $table->string('concepto')->nullable();
-            $table->string('unidades')->default(1);
+            $table->integer('unidades')->default(1);
             $table->float('coste',15,2)->default(0);
             $table->decimal('iva',15,2)->default(0);
             $table->integer('subcuenta')->default('705000');

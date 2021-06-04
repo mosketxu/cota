@@ -63,119 +63,143 @@
 
         </div>
         {{-- tabla facturaciones --}}
-        <div class="flex-col space-y-4">
-            <x-table>
-                <x-slot name="head">
-                    <x-table.heading class="text-center">#</x-table.heading>
-                    <x-table.heading class="pl-4 text-left">{{ __('Factura') }}</x-table.heading>
-                    <x-table.heading class="pl-4 text-left">{{ __('F.Factura') }}</x-table.heading>
-                    <x-table.heading class="pl-4 text-left">{{ __('F.Vto') }}</x-table.heading>
-                    <x-table.heading class="pl-4 text-left">{{ __('Entidad') }}</x-table.heading>
-                    <x-table.heading class="pl-4 text-left">{{ __('Base') }}</x-table.heading>
-                    <x-table.heading class="pl-4 text-left">{{ __('Iva') }}</x-table.heading>
-                    <x-table.heading class="pl-4 text-left">{{ __('Total') }}</x-table.heading>
-                    <x-table.heading class="pl-4 text-left">{{ __('Pago') }} </x-table.heading>
-                    <x-table.heading class="pl-4 text-left">{{ __('Email') }}</x-table.heading>
-                    <x-table.heading class="pl-4 text-left">{{ __('Ref.Cli') }}</x-table.heading>
-                    <x-table.heading class="pl-4 text-left">{{ __('Enviar') }}</x-table.heading>
-                    <x-table.heading class="pl-4 text-left">{{ __('Enviada') }}</x-table.heading>
-                    <x-table.heading class="pl-4 text-left">{{ __('Pagada') }}</x-table.heading>
-                    <x-table.heading class="pl-4 text-left">{{ __('Facturado') }}</x-table.heading>
-                    <x-table.heading class="pl-4 text-left">{{ __('Contabilizada') }}</x-table.heading>
-                    <x-table.heading class="pl-4 text-left">{{ __('Facturable') }}</x-table.heading>
-                    <x-table.heading colspan="2"/>
-                </x-slot>
-                <x-slot name="body">
+        <div class="flex-col space-y-2">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="text-sm leading-4 tracking-wider text-gray-500 bg-blue-50 ">
+                    <tr class="">
+                        <th class="py-3 text-center ">#</th>
+                        <th class="w-24 text-center">{{ __('Factura') }}</th>
+                        <th class="w-24 text-center">{{ __('F.Factura') }}</th>
+                        <th class="w-24 text-center">{{ __('F.Vto') }}</th>
+                        <th class="pl-4 text-left">{{ __('Entidad') }}</th>
+                        <th class="pl-4 text-left">{{ __('Pago') }} </th>
+                        <th class="pl-4 text-left">{{ __('Email') }}</th>
+                        <th class="w-24 pl-4 text-left">{{ __('Ref.Cli') }}</th>
+                        <th class="w-24 pr-4 text-right">{{ __('Base (€)') }}</th>
+                        <th class="w-24 pr-4 text-right">{{ __('Iva (€)') }}</th>
+                        <th class="w-24 pr-4 text-right">{{ __('Total (€)') }}</th>
+                        <th class="text-center">{{ __('Enviar') }}</th>
+                        <th class="text-center">{{ __('Enviada') }}</th>
+                        <th class="text-center">{{ __('Facturado') }}</th>
+                        <th class="text-center">{{ __('Pagada') }}</th>
+                        <th class="text-center">{{ __('Contab.') }}</th>
+                        <th class="text-center">{{ __('Facturable') }}</th>
+                        <th colspan="2"></th>
+                    </tr>
+                </thead>
+                <tbody class="text-xs bg-white divide-y divide-gray-200">
                     @forelse ($facturaciones as $facturacion)
-                        <x-table.row wire:loading.class.delay="opacity-50">
-                            <x-table.cell class="text-right">
-                                <a href="#" wire:click="edit" class="text-xs text-gray-700 transition duration-150 ease-in-out focus:outline-none focus:text-gray-800 focus:underline">
-                                    <span class="text-xs text-gray-200">{{ $facturacion->id }}</span>
+                        <tr wire:loading.class.delay="opacity-50">
+                            <td class="text-right">
+                                <a href="#" wire:click="edit" class="text-xs text-gray-200 transition duration-150 ease-in-out hover:outline-none hover:text-gray-800 hover:underline">
+                                    {{ $facturacion->id }}
                                 </a>
-                            </x-table.cell>
-                            <x-table.cell>
-                                <input type="text" value="{{ $facturacion->numfactura }}" class="w-full text-sm font-thin text-gray-500 capitalize truncate border-0 rounded-md"  readonly/>
-                            </x-table.cell>
-                            <x-table.cell>
-                                <input type="text" value="{{ $facturacion->fechafactura }}" class="w-full text-sm font-thin text-gray-500 capitalize truncate border-0 rounded-md"  readonly/>
-                            </x-table.cell>
-                            <x-table.cell>
-                                <input type="text" value="{{ $facturacion->fechavencimiento }}" class="w-full text-sm font-thin text-gray-500 capitalize truncate border-0 rounded-md"  readonly/>
-                            </x-table.cell>
-                            <x-table.cell>
-                                <input type="text" value="{{ $facturacion->entidad }}" class="w-full text-sm font-thin text-gray-500 capitalize truncate border-0 rounded-md"  readonly/>
-                            </x-table.cell>
-                            <x-table.cell class="text-right">
-                                {{ number_format($facturacion->facturadetalles->sum('base'),2)}}
-                                {{-- // return number_format(round((1+$this->iva)$this->unidades*$this->coste,2),2); --}}
-                            </x-table.cell>
-                            <x-table.cell class="text-right">
-                                {{ number_format($facturacion->facturadetalles->sum('totaliva'),2)}}
-                            </x-table.cell>
-                            <x-table.cell class="text-right">
-                                {{ number_format($facturacion->facturadetalles->sum('total'),2) }}
-                            </x-table.cell>
-                            <x-table.cell class="text-center">
+                            </td>
+                            <td class="text-right">
+                                <input type="text" value="{{ $facturacion->numfactura }}" class="w-full text-xs font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
+                            </td>
+                            <td>
+                                <input type="text" value="{{ $facturacion->fechafactura }}" class="w-full text-xs font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
+                            </td>
+                            <td>
+                                <input type="text" value="{{ $facturacion->fechavencimiento }}" class="w-full text-xs font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
+                            </td>
+                            <td>
+                                <input type="text" value="{{ $facturacion->entidad }}" class="w-full text-xs font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
+                            </td>
+                            <td class="text-center">
                                 <span class="text-sm text-gray-500 ">{{$facturacion->metodopago->metodopagocorto ?? '-'}}</span>
-                            </x-table.cell>
-                            <x-table.cell>
-                                <input type="text" value="{{ $facturacion->mail }}" class="w-full text-sm font-thin text-gray-500 capitalize truncate border-0 rounded-md"  readonly/>
-                            </x-table.cell>
-                            <x-table.cell>
-                                <input type="text" value="{{ $facturacion->refcliente }}" class="w-full text-sm font-thin text-gray-500 capitalize truncate border-0 rounded-md"  readonly/>
-                            </x-table.cell>
-                            <x-table.cell class="text-center">
+                            </td>
+                            <td>
+                                <input type="text" value="{{ $facturacion->mail }}" class="w-full text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
+                            </td>
+                            <td>
+                                <input type="text" value="{{ $facturacion->refcliente }}" class="w-full text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
+                            </td>
+                            <td class="text-right">
+                                <span class="pr-4 text-xs text-blue-500">{{ number_format(round($facturacion->facturadetalles->sum('base'),2),2)}}</span>
+                            </td>
+                            <td class="text-right">
+                                <span class="pr-4 text-xs text-blue-500">{{ number_format(round($facturacion->facturadetalles->sum('totaliva'),2),2)}}</span>
+                            </td>
+                            <td class="text-right">
+                                <span class="pr-4 text-xs text-blue-500">{{ number_format(round($facturacion->facturadetalles->sum('total'),2),2) }}</span>
+                            </td>
+                            <td class="text-center">
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs leading-4 bg-{{ $facturacion->enviar_est[0] }}-100 text-green-800">
                                     {{ $facturacion->enviar_est[1] }}
                                 </span>
-                            </x-table.cell>
-                            <x-table.cell class="text-center">
+                            </td>
+                            <td class="text-center">
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs leading-4 bg-{{ $facturacion->enviada_est[0] }}-100 text-green-800">
                                     {{ $facturacion->enviada_est[1] }}
                                 </span>
-                            </x-table.cell>
-                            <x-table.cell class="text-center">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs leading-4 bg-{{ $facturacion->pagada_est[0] }}-100 text-green-800">
-                                    {{ $facturacion->pagada_est[1] }}
-                                </span>
-                            </x-table.cell>
-                            <x-table.cell class="text-center">
+                            </td>
+                            <td class="text-center">
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs leading-4 bg-{{ $facturacion->facturado[0] }}-100 text-green-800">
                                     {{ $facturacion->facturado[1] }}
                                 </span>
-                            </x-table.cell>
-                            <x-table.cell class="text-center">
+                            </td>
+                            <td class="text-center">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs leading-4 bg-{{ $facturacion->pagada_est[0] }}-100 text-green-800">
+                                    {{ $facturacion->pagada_est[1] }}
+                                </span>
+                            </td>
+                            <td class="text-center">
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs leading-4 bg-{{ $facturacion->contabilizada[0] }}-100 text-green-800">
                                     {{ $facturacion->contabilizada[1] }}
                                 </span>
-                            </x-table.cell>
-                            <x-table.cell class="text-center">
+                            </td>
+                            <td class="text-center">
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs leading-4 bg-{{ $facturacion->facturable_est[0] }}-100 text-green-800">
                                     {{ $facturacion->facturable_est[1] }}
                                 </span>
-                            </x-table.cell>
-                            <x-table.cell class="">
+                            </td>
+                            <td class="">
                                 <div class="flex items-center justify-center">
                                     <x-icon.edit-a href="{{ route('facturacion.edit',$facturacion) }}"/>
                                     &nbsp;&nbsp;&nbsp;
                                     <x-icon.delete-a wire:click.prevent="delete({{ $facturacion->id }})" onclick="confirm('¿Estás seguro?') || event.stopImmediatePropagation()" class="pl-1 "/>
                                 </div>
-                            </x-table.cell>
-                        </x-table.row>
+                            </td>
+                        </tr>
                     @empty
-                        <x-table.row>
-                            <x-table.cell colspan="10">
+                        <tr>
+                            <td colspan="10">
                                 <div class="flex items-center justify-center">
                                     <x-icon.inbox class="w-8 h-8 text-gray-300"/>
                                     <span class="py-5 text-xl font-medium text-gray-500">
                                         No se han encontrado facturas...
                                     </span>
                                 </div>
-                            </x-table.cell>
-                        </x-table.row>
+                            </td>
+                        </tr>
                     @endforelse
-                </x-slot>
-            </x-table>
+                </tbody>
+                <tfoot class="font-bold divide-y divide-gray-200">
+                    <tr>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td class="pt-2 text-sm text-right text-gray-600">Total:</td>
+                        <td class="w-24 pt-2 pr-4 text-sm text-right text-gray-600">{{ number_format(round($totales->totalbase,2),2) }}</td>
+                        <td class="w-24 pt-2 pr-4 text-sm text-right text-gray-600">{{ number_format(round($totales->totaliva,2),2) }}</td>
+                        <td class="w-24 pt-2 pr-4 text-sm text-right text-gray-600">{{ number_format(round($totales->totales,2),2) }}</td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td ></td>
+                        <td colspan="2"></td>
+                    </tr>
+
+                </tfoot>
+            </table>
             <div>
                 {{ $facturaciones->links() }}
             </div>
