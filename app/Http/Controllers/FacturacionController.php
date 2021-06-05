@@ -84,4 +84,21 @@ class FacturacionController extends Controller
     {
         //
     }
+
+    public function pdf(Facturacion $factura)
+    {
+        $factura=Facturacion::with('entidad')
+        ->with('facturadetalles')
+        ->find($factura->id);
+
+        $base=$factura->facturadetalles->where('iva','!=','0')->sum('base');
+        $suplidos=$factura->facturadetalles->where('iva','0')->sum('base');
+        $totaliva=$factura->facturadetalles->sum('totaliva');
+        $total=$factura->facturadetalles->sum('total');
+
+        // dd($fact);
+
+        return view('facturacion.pdf',compact(['factura','base','suplidos','totaliva','total']));
+    }
+
 }

@@ -11,6 +11,8 @@ class Facturacion extends Model
 
     protected $table = 'facturacion';
 
+    protected $dates = ['fechafactura','fechavencimiento'];
+
     protected $fillable=['numfactura','entidad_id','fechafactura','fechavencimiento','metodopago_id','refcliente','mail',
     'enviar','enviada','pagada','facturable','asiento','fechaasiento','observaciones','notas'];
 
@@ -21,15 +23,20 @@ class Facturacion extends Model
 
     public function facturadetalles()
     {
-        return $this->hasMany(FacturacionDetalle::class);
+        return $this->hasMany(FacturacionDetalle::class)->orderBy('tipo')->orderBy('orden');
     }
 
-
-    public function getAnyofacAttribute()
+    public function entidad()
     {
-        $y=substr(explode('-',$this->fechafactura)[0],2,2);
-        return $y;
+        return $this->belongsTo(Entidad::class);
     }
+
+
+    // public function getAnyofacAttribute()
+    // {
+    //     $y=substr(explode('-',$this->fechafactura)[0],2,2);
+    //     return $y;
+    // }
 
     public function getEnviarEstAttribute()
     {
@@ -80,6 +87,5 @@ class Facturacion extends Model
             return ['red','No'];
         }
     }
-
 
 }

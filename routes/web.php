@@ -25,6 +25,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/entidad/contacto/{entidad}', [EntidadController::class, 'contactos'])->name('entidad.contacto');
     Route::get('/entidad/nuevocontacto/{entidad}', [EntidadController::class, 'createcontacto'])->name('entidad.createcontacto');
     Route::resource('entidad', EntidadController::class);
+    Route::get('facturacion/{factura}/pdf', [FacturacionController::class,'pdf'])->name('factura.pdf');
     Route::resource('facturacion', FacturacionController::class);
 
  });

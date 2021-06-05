@@ -6,11 +6,14 @@
             @if($factura->id)
                 @if($nf!='')
                     <h1 class="py-0 my-0 text-2xl font-semibold text-gray-900">Factura {{ $nf}}</h1>
+                    <x-button.button  wire:click="creafactura({{ $factura }})" color="green">{{ __('Generar Factura') }}</x-button.button>
+                    <x-icon.pdf-a href="{{route('factura.pdf',$factura) }}" class="pt-2" title="PDF"/>
                     @else
                     <h1 class="py-0 my-0 text-2xl font-semibold text-gray-900">Pre-Factura {{$factura->id  }}</h1>
                     <x-button.button  wire:click="creafactura({{ $factura }})" color="green">{{ __('Generar Factura') }}</x-button.button>
                 @endif
             @else
+
                 <h1 class="py-0 my-0 text-2xl font-semibold text-gray-900">Nueva Factura</h1>
             @endif
 

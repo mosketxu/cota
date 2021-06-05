@@ -1,0 +1,101 @@
+body {
+   font-family: DejaVu Sans, Arial, Helvetica Neue, Helvetica, sans-serif;;
+   font-size: xx-small;
+   text-align: center;
+}
+
+header {
+   position: fixed;
+   top: -60px;
+   left: 0px;
+   right: 0px;
+   height: 50px;
+
+   /** Extra personal styles **/
+   background-color: #03a9f4;
+   color: white;
+   text-align: center;
+   /* line-height: 35px; */
+}
+
+footer {
+   position: fixed; 
+   bottom: -60px; 
+   left: 0px; 
+   right: 0px;
+   height: 25px; 
+
+   /** Extra personal styles **/
+   background-color: #03a9f4;
+   color: white;
+   text-align: center;
+   /* line-height: 35px; */
+}
+
+.img{
+   max-width: 180px; 
+   height: 100px;
+}
+
+.celda{
+   font-family: DejaVu Sans, Arial, Helvetica Neue, Helvetica, sans-serif;;
+   border: rgb(0, 0, 0) 1px solid;
+   text-align: center;
+   font-size: 8px;
+}
+
+.etiquetas{
+   margin-top:10px;
+}
+.img-thumbnail {
+   padding: 0.25rem;
+   background-color: #ffffff;
+   border: 1px solid #dee2e6;
+   border-radius: 0.25rem;
+   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
+   max-width: 130px; 
+   height: 80px;
+   margin-bottom: 3px;
+ }
+
+ .platinum{
+   font-family: DejaVu Sans, Arial, Helvetica Neue, Helvetica, sans-serif;;
+   text-align: center; 
+   background-color: #E5E4E2; 
+   font-size:medium;
+ }
+ .gold{
+   font-family: DejaVu Sans, Arial, Helvetica Neue, Helvetica, sans-serif;;
+   text-align: center; 
+   background-color:#D4AF37; 
+   font-size:medium;
+ }
+ .outlet{
+   font-family: DejaVu Sans, Arial, Helvetica Neue, Helvetica, sans-serif;;
+   text-align: center; 
+   background-color:#DEA5A4; 
+   font-size:medium;
+ }
+ .silver{
+   font-family: DejaVu Sans, Arial, Helvetica Neue, Helvetica, sans-serif;;
+   text-align: center; 
+   background-color:#C0C0C0; 
+   font-size:medium;
+ }
+
+ .nohay{
+   font-family: DejaVu Sans, Arial, Helvetica Neue, Helvetica, sans-serif;;
+   text-align: center; 
+   background-color:#000000; 
+   color: #ffffff;
+   font-size:medium;
+ }
+
+ .idioma{
+   margin-top: 3px;
+   margin-bottom: 3px;
+   background-color: #8bd3f5;
+   font-family: DejaVu Sans, Arial, Helvetica Neue, Helvetica, sans-serif;;
+   text-align: center; 
+   font-size: large;
+ }
