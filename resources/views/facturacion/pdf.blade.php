@@ -89,8 +89,8 @@
                     <div>FECHA FACTURA: {{ $factura->fechafactura->format('d-m-Y') }}</div>
                     <div>FACTURA: {{ $factura->serie }}/{{ $factura->numfactura }}</div>
                 </div>
-                {{-- Detalles  --}}
                 @if(count($factura->facturadetalles)>0)
+                    {{-- Detalles  --}}
                     <div class="mt-10 ml-10">
                         @foreach($factura->facturadetalles as $detalle)
                             <div class="flex justify-end mx-20">
@@ -104,40 +104,39 @@
                             </div>
                         @endforeach
                     </div>
-                @endif
 
-                {{-- totales --}}
-                <div class="mt-10 ml-10 font-bold">
-                    <div class="flex justify-end mx-20 ">
-                        <div class="w-8/12 text-left">Base imponible:</div>
-                        <div class="w-4/12 text-right ">{{number_format($base,2,',','.')}} €</div>
-                    </div>
-                    @if($suplidos)
+                    {{-- totales --}}
+                    <div class="mt-10 ml-10 font-bold">
                         <div class="flex justify-end mx-20 ">
-                            <div class="w-8/12 text-left">Suplidos:</div>
-                            <div class="w-4/12 text-right ">{{number_format($suplidos,2,',','.')}} €</div>
+                            <div class="w-8/12 text-left">Base imponible:</div>
+                            <div class="w-4/12 text-right ">{{number_format($base,2,',','.')}} €</div>
                         </div>
-                    @endif
-                    <div class="flex justify-end mx-20 ">
-                        <div class="w-8/12 text-left">IVA 21%:</div>
-                        <div class="w-4/12 text-right ">{{number_format($totaliva,2,',','.')}} €</div>
+                        @if($suplidos)
+                            <div class="flex justify-end mx-20 ">
+                                <div class="w-8/12 text-left">Suplidos:</div>
+                                <div class="w-4/12 text-right ">{{number_format($suplidos,2,',','.')}} €</div>
+                            </div>
+                        @endif
+                        <div class="flex justify-end mx-20 ">
+                            <div class="w-8/12 text-left">IVA 21%:</div>
+                            <div class="w-4/12 text-right ">{{number_format($totaliva,2,',','.')}} €</div>
+                        </div>
+                        <div class="flex justify-end mx-20 mt-5">
+                            <div class="w-8/12 text-left">total:</div>
+                            <div class="w-4/12 text-right ">{{number_format($total,2,',','.')}} €</div>
+                        </div>
                     </div>
-                    <div class="flex justify-end mx-20 mt-5">
-                        <div class="w-8/12 text-left">total:</div>
-                        <div class="w-4/12 text-right ">{{number_format($total,2,',','.')}} €</div>
-                    </div>
-                </div>
 
-                {{-- Condiciones pago --}}
-                <div class="mt-10">
-                    <div class="flex ml-20 ">
-                        <div class="text-left">Condiciones de pago: {{ $factura->metodopago->metodopago }}</div>
+                    {{-- Condiciones pago --}}
+                    <div class="mt-10">
+                        <div class="flex ml-20 ">
+                            <div class="text-left">Condiciones de pago: {{ $factura->metodopago->metodopago }}</div>
+                        </div>
+                        <div class="flex ml-20 ">
+                            <div class="text-left">Vencimiento: {{ $factura->fechavencimiento->format('d-m-Y') }}</div>
+                        </div>
                     </div>
-                    <div class="flex ml-20 ">
-                        <div class="text-left">Vencimiento: {{ $factura->fechavencimiento->format('d-m-Y') }}</div>
-                    </div>
-                </div>
-
+                @endif
             </div>
 
         </div>

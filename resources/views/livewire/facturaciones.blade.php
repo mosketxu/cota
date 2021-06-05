@@ -96,7 +96,9 @@
                                 </a>
                             </td>
                             <td class="text-right">
-                                <input type="text" value="{{ $facturacion->numfactura }}" class="w-full text-xs font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
+                                @if($facturacion->numfactura)
+                                    <input type="text" value="{{ $facturacion->serie }}/{{ $facturacion->numfactura }}" class="w-full text-xs font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
+                                @endif
                             </td>
                             <td>
                                 <input type="text" value="{{ $facturacion->fechafactura }}" class="w-full text-xs font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
@@ -157,9 +159,14 @@
                             </td>
                             <td class="">
                                 <div class="flex items-center justify-center">
-                                    <x-icon.edit-a href="{{ route('facturacion.edit',$facturacion) }}"/>
+                                    <x-icon.edit-a href="{{ route('facturacion.edit',$facturacion) }}" title="Edit"/>
+                                    @if($facturacion->numfactura)
+                                        <x-icon.pdf-a href="{{route('factura.pdf',$facturacion) }}" title="PDF" disabled/>
+                                    @else
+                                        <x-icon.pdf-b title="PDF" disabled/>
+                                    @endif
                                     &nbsp;&nbsp;&nbsp;
-                                    <x-icon.delete-a wire:click.prevent="delete({{ $facturacion->id }})" onclick="confirm('¿Estás seguro?') || event.stopImmediatePropagation()" class="pl-1 "/>
+                                    <x-icon.delete-a wire:click.prevent="delete({{ $facturacion->id }})" onclick="confirm('¿Estás seguro?') || event.stopImmediatePropagation()" class="pl-1 " title="Borrar"/>
                                 </div>
                             </td>
                         </tr>
