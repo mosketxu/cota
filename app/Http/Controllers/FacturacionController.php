@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Facturacion;
 use Illuminate\Http\Request;
+use Barryvdh\Snappy\PDF;
+use Illuminate\Support\Facades\Storage;
+
+// use Barryvdh\DomPDF\PDF;
 
 class FacturacionController extends Controller
 {
@@ -98,7 +102,29 @@ class FacturacionController extends Controller
 
         // dd($fact);
 
-        return view('facturacion.pdf',compact(['factura','base','suplidos','totaliva','total']));
+        // return view('facturacion.pdf',compact(['factura','base','suplidos','totaliva','total']));
+        return view('facturacion.facturapdf',compact(['factura','base','suplidos','totaliva','total']));
+    }
+
+
+    public function downpdf(Facturacion $factura)
+    {
+        $factura=Facturacion::with('entidad')
+        ->with('facturadetalles')
+        ->find($factura->id);
+
+        $base=$factura->facturadetalles->where('iva', '!=', '0')->sum('base');
+        $suplidos=$factura->facturadetalles->where('iva', '0')->sum('base');
+        $totaliva=$factura->facturadetalles->sum('totaliva');
+        $total=$factura->facturadetalles->sum('total');
+
+        $fichero='Fra_Suma_'.$factura->serie.$factura->numfactura;
+        $ruta='21/06';
+
+        $pdf = \PDF::loadView('facturacion.facturapdf', compact(['factura','base','suplidos','totaliva','total']));
+
+        Storage::put('public/facturas/'.$ruta.'/'.$fichero.'.pdf', $pdf->output());
+
     }
 
 }
