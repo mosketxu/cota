@@ -15,65 +15,85 @@
                 </div>
             @endif
 
+            <x-jet-validation-errors/>
+
             {{-- filtros y boton --}}
             <div>
                 <div class="flex justify-between space-x-1">
-                    <div class="text-xs">
-                        <label class="px-1 text-gray-600">&nbsp;</label>
-                        <input type="text" wire:model="search" class="w-full py-2 text-xs text-gray-600 placeholder-gray-300 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none" placeholder="Búsqueda Entidad/Factura" autofocus/>
+                    <div class="inline-flex space-x-2">
+                        <div class="text-xs">
+                            <label class="px-1 text-gray-600">&nbsp;</label>
+                            <input type="text" wire:model="search" class="w-full py-2 text-xs text-gray-600 placeholder-gray-300 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none" placeholder="Búsqueda Entidad/Factura" autofocus/>
+                        </div>
+                        <div class="text-xs">
+                            <label class="px-1 text-gray-600">Año</label>
+                            <input type="text" wire:model="filtroanyo" class="w-full py-2 text-xs text-gray-600 placeholder-gray-300 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none" placeholder="Año"/>
+                        </div>
+                        <div class="text-xs">
+                            <label class="px-1 text-gray-600">Mes</label>
+                            <input type="text" wire:model="filtromes" class="w-full py-2 text-xs text-gray-600 placeholder-gray-300 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none" placeholder="Mes (número)"/>
+                        </div>
+                        <div class="text-xs">
+                            <label class="px-1 text-gray-600">Facturado</label>
+                            <select wire:model="filtrofacturado" class="w-full py-2 text-xs text-gray-600 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none">
+                                <option value="0">No</option>
+                                <option value="1">Sí</option>
+                                <option value="">Todos</option>
+                            </select>
+                        </div>
+                        <div class="text-xs">
+                            <label class="px-1 text-gray-600">Contabilizado</label>
+                            <select wire:model="filtrocontabilizado" class="w-full py-2 text-xs text-gray-600 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none">
+                                <option value="0">No</option>
+                                <option value="1">Sí</option>
+                                <option value="">Todos</option>
+                            </select>
+                        </div>
+                        <div class="text-xs">
+                            <label class="px-1 text-gray-600">Enviadas</label>
+                            <select wire:model="filtroenviada" class="w-full py-2 text-xs text-gray-600 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none">
+                                <option value="0">No</option>
+                                <option value="1">Sí</option>
+                                <option value="">Todos</option>
+                            </select>
+                        </div>
+                        <div class="inline-block text-xs form-group">
+                            <label class="px-1 text-gray-600">Pagadas</label>
+                            <select wire:model="filtropagada" class="w-full py-2 text-xs text-gray-600 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none">
+                                <option value="0">No</option>
+                                <option value="1">Sí</option>
+                                <option value="">Todos</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="text-xs">
-                        <label class="px-1 text-gray-600">Año</label>
-                        <input type="text" wire:model="filtroanyo" class="w-full py-2 text-xs text-gray-600 placeholder-gray-300 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none" placeholder="Año"/>
-                    </div>
-                    <div class="text-xs">
-                        <label class="px-1 text-gray-600">Mes</label>
-                        <input type="text" wire:model="filtromes" class="w-full py-2 text-xs text-gray-600 placeholder-gray-300 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none" placeholder="Mes (número)"/>
-                    </div>
-                    <div class="text-xs">
-                        <label class="px-1 text-gray-600">Facturado</label>
-                        <select wire:model="filtrofacturado" class="w-full py-2 text-xs text-gray-600 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none">
-                            <option value="0">No</option>
-                            <option value="1">Sí</option>
-                            <option value="">Todos</option>
-                        </select>
-                    </div>
-                    <div class="text-xs">
-                        <label class="px-1 text-gray-600">Contabilizado</label>
-                        <select wire:model="filtrocontabilizado" class="w-full py-2 text-xs text-gray-600 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none">
-                            <option value="0">No</option>
-                            <option value="1">Sí</option>
-                            <option value="">Todos</option>
-                        </select>
-                    </div>
-                    <div class="text-xs">
-                        <label class="px-1 text-gray-600">Enviadas</label>
-                        <select wire:model="filtroenviada" class="w-full py-2 text-xs text-gray-600 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none">
-                            <option value="0">No</option>
-                            <option value="1">Sí</option>
-                            <option value="">Todos</option>
-                        </select>
-                    </div>
-                    <div class="inline-block text-xs form-group">
-                        <label class="px-1 text-gray-600">Pagadas</label>
-                        <select wire:model="filtropagada" class="w-full py-2 text-xs text-gray-600 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none">
-                            <option value="0">No</option>
-                            <option value="1">Sí</option>
-                            <option value="">Todos</option>
-                        </select>
-                    </div>
-                    <div class="text-xs">
-                        <label class="px-1 text-gray-600">&nbsp;</label>
-                        <input type="button" onclick="location.href = '{{ route('facturacion.create') }}'" class="w-full px-2 py-2 text-xs text-white bg-blue-700 rounded-md shadow-sm hover:bg-blue-500 " value="{{ __('Nueva Factura') }}"/>
+                    <div class="inline-flex mt-3 space-x-2">
+                        <x-dropdown label="Actions">
+                            <x-dropdown.item type="button" wire:click="zipSelected" class="flex items-center space-x-2">
+                                <x-icon.csv class="text-green-400"></x-icon.csv> <span>Generar Zip </span>
+                            </x-dropdown.item>
+                            <x-dropdown.item type="button" wire:click="exportSelected" class="flex items-center space-x-2">
+                                <x-icon.download class="text-gray-400"></x-icon.download> <span>Export </span>
+                            </x-dropdown.item>
+                            {{-- <x-dropdown.item type="button" onclick="confirm('¿Estas seguro?') || event.stopImmediatePropagation()" wire:click="deleteSelected" class="flex items-center space-x-2"> --}}
+                            <x-dropdown.item type="button" wire:click="$toggle('showDeleteModal')" class="flex items-center space-x-2">
+                                <x-icon.trash class="text-red-400"></x-icon.trash> <span>Delete </span>
+                            </x-dropdown.item>
+                        </x-dropdown>
+
+                        <div class="text-xs">
+                            <x-button.button color="blue" onclick="location.href = '{{ route('facturacion.create') }}'">Nueva</x-button.button>
+                            {{-- <input type="button" onclick="location.href = '{{ route('facturacion.create') }}'" class="w-full px-2 py-2 text-xs text-white bg-blue-700 rounded-md shadow-sm hover:bg-blue-500 " value="{{ __('Nueva Factura') }}"/> --}}
+                        </div>
                     </div>
                 </div>
             </div>
             {{-- tabla facturaciones --}}
-            {{-- <div class="flex-col space-y-4"> --}}
+
             <div class="min-w-full overflow-hidden overflow-x-auto align-middle shadow sm:rounded-lg">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="text-xs leading-4 tracking-wider text-gray-500 bg-blue-50 ">
                         <tr class="">
+                            <th class="w-5 py-3 pl-2 font-medium text-center"><x-input.checkbox wire:model="selectPage"/></th>
                             <th class="py-3 font-medium text-center ">#</th>
                             <th class="w-24 font-medium text-center">{{ __('Factura') }}</th>
                             <th class="w-24 font-medium text-center">{{ __('F.Factura') }}</th>
@@ -95,8 +115,23 @@
                         </tr>
                     </thead>
                     <tbody class="text-xs bg-white divide-y divide-gray-200">
+                        @if($selectPage)
+                            <tr class="bg-gray-200" wire:key="row-message">
+                                <td  class="py-3 pl-2 font-medium" colspan="18">
+                                @unless($selectAll)
+                                    <span>Has seleccionado <strong>{{ $facturaciones->count() }}</strong> facturas, ¿quieres seleccionar el total: <strong>{{ $facturaciones->total() }}</strong> ?</span>
+                                    <x-button.link wire:click="selectAll" class="ml-1 text-blue-600">Select all</x-button.link>
+                                @else
+                                    <span>Has seleccionado <strong>todas</strong> las {{ $facturaciones->total() }} facturas</span>
+                                @endif
+                                </td>
+                            </tr>
+                        @endif
                         @forelse ($facturaciones as $facturacion)
-                            <tr wire:loading.class.delay="opacity-50">
+                            <tr wire:loading.class.delay="opacity-50" wire:key="fila-{{ $facturacion->id }}">
+                                <td  class="w-5 py-3 pl-2 font-medium text-center">
+                                    <x-input.checkbox wire:model="selected" value="{{ $facturacion->id }}"/>
+                                </td>
                                 <td class="text-right">
                                     <a href="#" wire:click="edit" class="text-xs text-gray-200 transition duration-150 ease-in-out hover:outline-none hover:text-gray-800 hover:underline">
                                         {{ $facturacion->id }}
@@ -220,4 +255,20 @@
         </div>
 
     </div>
+    <!-- Delete Transactions Modal -->
+    <form wire:submit.prevent="deleteSelected">
+        <x-modal.confirmation wire:model.defer="showDeleteModal">
+            <x-slot name="title">Borrar Factura</x-slot>
+
+            <x-slot name="content">
+                <div class="py-8 text-gray-700">¿Esás seguro? Esta acción es irreversible.</div>
+            </x-slot>
+
+            <x-slot name="footer">
+                <x-button.secondary wire:click="$set('showDeleteModal', false)">Cancel</x-button.secondary>
+
+                <x-button.primary type="submit">Delete</x-button.primary>
+            </x-slot>
+        </x-modal.confirmation>
+    </form>
 </div>

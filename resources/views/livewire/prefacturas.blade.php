@@ -22,26 +22,26 @@
             <div>
                 <div class="flex justify-between space-x-1">
                     <div class="inline-flex space-x-2">
-                    <div class="text-xs">
-                        <label class="px-1 text-gray-600">&nbsp;</label>
-                        <input type="text" wire:model="search" class="w-full py-2 text-xs text-gray-600 placeholder-gray-300 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none" placeholder="Búsqueda Entidad/Factura" autofocus/>
-                    </div>
-                    <div class="text-xs">
-                        <label class="px-1 text-gray-600">Año</label>
-                        <input type="text" wire:model="filtroanyo" class="w-full py-2 text-xs text-gray-600 placeholder-gray-300 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none" placeholder="Año"/>
-                    </div>
-                    <div class="text-xs">
-                        <label class="px-1 text-gray-600">Mes</label>
-                        <input type="text" wire:model="filtromes" class="w-full py-2 text-xs text-gray-600 placeholder-gray-300 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none" placeholder="Mes (número)"/>
-                    </div>
-                    <div class="text-xs">
-                        <label class="px-1 text-gray-600">Facturable</label>
-                        <select wire:model="filtrofacturable" class="w-full py-2 text-xs text-gray-600 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none">
-                            <option value="0">No</option>
-                            <option value="1">Sí</option>
-                            <option value="">Todos</option>
-                        </select>
-                    </div>
+                        <div class="text-xs">
+                            <label class="px-1 text-gray-600">&nbsp;</label>
+                            <input type="text" wire:model="search" class="w-full py-2 text-xs text-gray-600 placeholder-gray-300 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none" placeholder="Búsqueda Entidad/Factura" autofocus/>
+                        </div>
+                        <div class="text-xs">
+                            <label class="px-1 text-gray-600">Año</label>
+                            <input type="text" wire:model="filtroanyo" class="w-full py-2 text-xs text-gray-600 placeholder-gray-300 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none" placeholder="Año"/>
+                        </div>
+                        <div class="text-xs">
+                            <label class="px-1 text-gray-600">Mes</label>
+                            <input type="text" wire:model="filtromes" class="w-full py-2 text-xs text-gray-600 placeholder-gray-300 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none" placeholder="Mes (número)"/>
+                        </div>
+                        <div class="text-xs">
+                            <label class="px-1 text-gray-600">Facturable</label>
+                            <select wire:model="filtrofacturable" class="w-full py-2 text-xs text-gray-600 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none">
+                                <option value="0">No</option>
+                                <option value="1">Sí</option>
+                                <option value="">Todos</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="inline-flex mt-3 space-x-2">
                         @if($filtrofacturable=='1')
@@ -50,7 +50,7 @@
                                 <x-icon.invoice class="text-pink-400"></x-icon.invoice> <span>Generar Facturas </span>
                             </x-dropdown.item>
                             <x-dropdown.item type="button" wire:click="exportSelected" class="flex items-center space-x-2">
-                                <x-icon.download class="text-gray-400"></x-icon.download> <span>Export </span>
+                                <x-icon.csv class="text-green-400"></x-icon.csv> <span>Export </span>
                             </x-dropdown.item>
                             {{-- <x-dropdown.item type="button" onclick="confirm('¿Estas seguro?') || event.stopImmediatePropagation()" wire:click="deleteSelected" class="flex items-center space-x-2"> --}}
                             <x-dropdown.item type="button" wire:click="$toggle('showDeleteModal')" class="flex items-center space-x-2">

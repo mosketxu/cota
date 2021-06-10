@@ -22,15 +22,7 @@
                     <x-button.button  wire:click="creafactura({{ $factura }})" color="green">{{ __('Generar Factura') }}</x-button.button>
                 @endif
                 @if($factura->numfactura)
-                    {{-- <x-icon.pdf-a wire:click="imprimeFacturaLocal({{ $factura }})" class="pt-2" title="PDasasF"/> --}}
                     <x-icon.pdf-a href="{{route('facturacion.imprimirfactura',$factura) }}" class="pt-2 ml-2" title="PDF"/>
-                    {{-- <x-icon.pdf-a href="{{route('facturacion.downfacturas') }}" class="pt-2" title="PDF"/> --}}
-                    <x-icon.download href="{{route('facturacion.zip') }}" class="pt-2" title="Zip"/>
-                @else
-                    {{-- <x-button.button  color="gray">{{ __('Generar Factura') }}</x-button.button> --}}
-                    <x-icon.pdf-b href="#" class="pt-2" title="PDF"/>
-                    <x-icon.pdf-b href="#" class="pt-2" title="PDF"/>
-                    <x-icon.pdf-b href="#" class="pt-2" title="Zip"/>
                 @endif
             </div>
             <x-button.button  onclick="location.href = '{{ route('facturacion.create') }}'" color="blue"><x-icon.plus/>{{ __('Nueva Factura') }}</x-button.button>
@@ -139,33 +131,29 @@
                         <div class="px-2 mx-2 my-1 bg-red-100 rounded-md">
                             <h3 class="font-semibold ">Datos Control</h3>
                         </div>
-                        <div class="flex flex-col mx-2 space-y-4 md:space-y-0 md:flex-row md:space-x-1">
-                            <div class="w-full pb-3 form-item">
-                                <x-jet-label for="impresa">{{ __('Impresa') }}</x-jet-label>
-                                <input type="checkbox" wire:model.defer="factura.impresa" checked class="mx-auto"/>
-                            </div>
-                            <div class="w-full pb-3 form-item">
-                                <x-jet-label for="enviar">{{ __('Enviar') }}</x-jet-label>
+                        <div class="flex flex-col mx-4 space-y-4 md:space-y-0 md:flex-row md:space-x-2 ml-14">
+                            <div class="flex-auto pb-3 form-item">
+                                <label for="enviar" title="Enviar email"><x-icon.arroba/></label>
                                 <input type="checkbox" wire:model.defer="factura.enviar" checked class="mx-auto"/>
                             </div>
-                            <div class="w-full form-item">
-                                <x-jet-label for="enviada">{{ __('Enviada') }}</x-jet-label>
+                            <div class="flex-auto pb-3 form-item">
+                                <label for="enviada" title="Email enviado"><x-icon.plane/></label>
                                 <input type="checkbox" wire:model.defer="factura.enviada" checked class="mx-auto"/>
                             </div>
-                            <div class="w-full form-item">
-                                <x-jet-label for="facturada" title="Facturada">{{ __('€') }}</x-jet-label>
+                            <div class="flex-auto pb-3 form-item">
+                                <label for="facturada"  title="Facturada"><x-icon.invoice/></label>
                                 <input type="checkbox" wire:model.defer="factura.facturada" checked class="mx-auto" title="Facturada"/>
                             </div>
-                            <div class="w-full form-item">
-                                <x-jet-label class="text-center" for="pagada">{{ __('Pagada') }}</x-jet-label>
+                            <div class="flex-auto pb-3 form-item">
+                                <label for="pagada" title="Pagada"><x-icon.money/></label>
                                 <input type="checkbox" wire:model.defer="factura.pagada" checked class="mx-auto"/>
                             </div>
-                            <div class="w-full form-item">
-                                <x-jet-label for="contabilizada">{{ __('Contab.') }}</x-jet-label>
+                            <div class="flex-auto pb-3 form-item">
+                                <label for="contabilizada" title="Contabilizada"><x-icon.sage/></label>
                                 <input type="checkbox" {{ $factura->contabilizada[1]=="No" ? '' : 'checked' }} class="mx-auto"/>
                             </div>
-                            <div class="w-full form-item">
-                                <x-jet-label for="facturable">{{ __('Facturable') }}</x-jet-label>
+                            <div class="flex-auto pb-3 form-item">
+                                <label for="facturable" title="Facturable"><x-icon.euro/></label>
                                 <input type="checkbox" wire:model.defer="factura.facturable" checked class="mx-auto"/>
                             </div>
                         </div>
