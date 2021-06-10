@@ -6,19 +6,18 @@ use App\Models\{Facturacion,Entidad};
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
+use App\Http\Livewire\DataTable\WithBulkActions;
 
 class Prefacturas extends Component
 {
-    use WithPagination;
+    use WithPagination, WithBulkActions;
 
     public $entidad;
     public $search='';
     public $filtrofacturable='1';
     public $filtroanyo='';
     public $filtromes='';
-    public $selectPage=false;
-    public $selectAll=false;
-    public $selected=[];
+
     public $showDeleteModal=false;
 
     protected function rules(){
@@ -35,22 +34,7 @@ class Prefacturas extends Component
         $this->entidad=$entidad;
     }
 
-    public function updatedSelected(){
-        $this->selectAll=false;
-        $this->selectPage=false;
-    }
-
-    public function updatedSelectPage($value){
-        $this->selected= $value
-            ? $this->prefacturas->pluck('id')->map(fn($id)=>(string) $id)
-            : [];
-    }
-
-    public function selectAll(){
-        $this->selectAll=true;
-    }
-
-    public function getPrefacturasQueryProperty(){
+    public function getRowsQueryProperty(){
         return Facturacion::query()
             ->join('entidades','facturacion.entidad_id','=','entidades.id')
             ->select('facturacion.*', 'entidades.entidad', 'entidades.nif','entidades.emailadm')
@@ -71,22 +55,13 @@ class Prefacturas extends Component
             // ->paginate(5); solo contemplo la query, no el resultado. Luego pongo el resultado: get, paginate o lo que quiera
     }
 
-    public function getPrefacturasProperty(){
-        return $this->prefacturasQuery->paginate(5);
+    public function getRowsProperty(){
+        return $this->rowsQuery->paginate(100);
     }
 
-    public function render(){
 
-        if($this->selectAll){
-            $this->selected=$this->prefacturas->pluck('id')->map(fn($id)=>(string) $id);
-        }
-        $facturaciones = $this->prefacturas;
-
-        return view('livewire.prefacturas',compact('facturaciones'));
-    }
-
-    public function creafacturas(){
-        $prefacturas = $this->prefacturas;
+    public function generarSelected(){
+        $prefacturas = $this->selectedRowsQuery->get();
         $this->validate();
         $serie=substr($this->filtroanyo,2,2);
         $fac=Facturacion::where('serie',$serie)->max('numfactura') ;
@@ -97,33 +72,39 @@ class Prefacturas extends Component
             $prefactura->numfactura=$fac;
             $prefactura->save();
             $fac=$fac+1;
+            $prefactura->imprimirfactura();
             $this->dispatchBrowserEvent('notify', 'La factura' . $prefactura->id .'-'.$prefactura->numfactura. ' ha sido creada!');
         }
         // $this->nf=$serie.'-'.$fac;
     }
 
+
     public function exportSelected(){
         //toCsv es una macro a n AppServiceProvider
         return response()->streamDownload(function(){
-            echo (clone $this->prefacturasQuery)
-                ->unless($this->selectAll, fn($query)=> $query->whereKey($this->selected))
-                ->toCsv();
-            // echo Facturacion::whereKey($this->selected)->toCsv();
+            echo $this->selectedRowsQuery->toCsv();
         },'prefacturas.csv');
 
         $this->dispatchBrowserEvent('notify', 'CSV Prefacturas descargado!');
     }
 
+    public function render(){
+
+        if($this->selectAll) $this->selectPageRows();
+        $facturaciones = $this->rows;
+
+        return view('livewire.prefacturas',compact('facturaciones'));
+    }
+
+
     public function deleteSelected(){
         // $prefacturas=Facturacion::findMany($this->selected); funciona muy bien
 
-        (clone $this->prefacturasQuery)
-            ->unless($this->selectAll, fn($query)=> $query->whereKey($this->selected))
-            ->delete();
+        $deleteCount = $this->selectedRowsQuery->count();
+        $this->selectedRowsQuery->delete();
+        $this->showDeleteModal = false;
 
-        $this->showDeleteModal= false;
-
-        $this->dispatchBrowserEvent('notify', 'Prefacturas eliminadas!');
+        $this->dispatchBrowserEvent('notify', $deleteCount . ' Prefacturas eliminadas!');
     }
 
     public function delete($facturacionId){

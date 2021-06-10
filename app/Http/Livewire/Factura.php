@@ -10,15 +10,19 @@ class Factura extends Component
 {
 
     public $factura;
+    public $mostrarGenerar=0;
     public $nf;
 
+    protected $listeners = [
+        'facturaupdate' => '$refresh',
+    ];
 
     protected function rules(){
         return [
             'factura.id'=>'nullable',
-            'factura.numfactura'=>'string|nullable',
-            'factura.serie'=>'string|nullable',
-            'factura.invento'=>'string|nullable',
+            'factura.numfactura'=>'nullable',
+            'factura.serie'=>'nullable',
+            // 'factura.invento'=>'string|nullable',
             'factura.entidad_id'=>'required',
             'factura.fechafactura'=>'date|required',
             'factura.fechavencimiento'=>'date|nullable',
@@ -44,12 +48,20 @@ class Factura extends Component
         $this->factura->enviada=0;
         $this->factura->pagada=0;
         $this->factura->facturable=1;
-        $this->nf=$this->factura->numfactura ? $this->factura->serie.'-'.$this->factura->numfactura :'';
+        $this->nf=$this->factura->numfactura ? $this->factura->serie.'-'.substr($this->factura->numfactura,-5) :'';
+
     }
 
     public function render()
     {
         $factura=$this->factura;
+
+        // $this->mostrarGenerar=0;
+        if($factura->id){
+            if(!$factura->numfactura){
+                $this->mostrarGenerar=1;
+            }
+        }
 
         $entidades=Entidad::where('estado','1')->orderBy('entidad')->get();
         $pagos=MetodoPago::all();
@@ -58,8 +70,8 @@ class Factura extends Component
 
     public function save()
     {
-        $this->validate();
 
+        $this->validate();
         if($this->factura->id){
             $i=$this->factura->id;
             $mensaje="Factura actualizada satisfactoriamente";
@@ -73,6 +85,7 @@ class Factura extends Component
             ],
             [
                 'numfactura'=>$this->factura->numfactura,
+                'serie'=>$this->factura->serie,
                 'entidad_id'=>$this->factura->entidad_id,
                 'fechafactura'=>$this->factura->fechafactura,
                 'fechavencimiento'=>$this->factura->fechavencimiento,
@@ -101,19 +114,29 @@ class Factura extends Component
 
     public function creafactura(Facturacion $factura)
     {
-        $serie=substr(explode('-',$factura->fechafactura)[0],2,2);
-        $fac=Facturacion::where('serie',$serie)->max('numfactura') ;
-        if (!$fac){
-            $fac='00001';
-        }else{
-            $fac=substr($fac+100001,1,6);
-        }
-        $factura->serie=$serie;
+        $this->validate([
+            'factura.id'=>'required',
+            'factura.metodopago'=>'required',
+        ]);
+
+        if (!$factura->serie ) $factura->serie=substr(now()->format('Y'),-2);
+
+        $fac=Facturacion::where('serie',$factura->serie)->max('numfactura') ;
+        $fac= $fac ? $fac + 1 : ($factura->serie * 100000 +1) ;
+        // $factura->serie=$factura->serie;
         $factura->numfactura=$fac;
         $factura->save();
-        $this->nf=$serie.'-'.$fac;
-        $this->dispatchBrowserEvent('notify', 'La factura ha sido creda!');
+        $factura->imprimirfactura();
+        $this->nf=$factura->serie.'-'.substr($fac,-5);
+        $this->redirect( route('facturacion.edit',$factura) );
+        // $this->emit('facturaupdate');
+        $this->dispatchBrowserEvent('notify', 'La factura ha sido creada!');
 
+    }
+
+    public function imprimeFacturaLocal(Facturacion $factura)
+    {
+        $factura->imprimirFacturaLocal();
     }
 
     public function delete($facturacionId)

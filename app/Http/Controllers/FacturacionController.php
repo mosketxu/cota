@@ -109,30 +109,30 @@ class FacturacionController extends Controller
         $this->downloadZip();
     }
 
-    public function downfacturapdf(Facturacion $factura)
-    {
+    // public function downfacturapdf(Facturacion $factura)
+    // {
 
-        $factura=Facturacion::with('entidad')
-        ->with('facturadetalles')
-        ->find($factura->id);
+    //     $factura=Facturacion::with('entidad')
+    //     ->with('facturadetalles')
+    //     ->find($factura->id);
 
-        // dd($factura);
+    //     // dd($factura);
 
-        $base=$factura->facturadetalles->where('iva', '!=', '0')->sum('base');
-        $suplidos=$factura->facturadetalles->where('iva', '0')->sum('base');
-        $totaliva=$factura->facturadetalles->sum('totaliva');
-        $total=$factura->facturadetalles->sum('total');
+    //     $base=$factura->facturadetalles->where('iva', '!=', '0')->sum('base');
+    //     $suplidos=$factura->facturadetalles->where('iva', '0')->sum('base');
+    //     $totaliva=$factura->facturadetalles->sum('totaliva');
+    //     $total=$factura->facturadetalles->sum('total');
 
-        $fichero='Fra_Suma_'.$factura->serie.$factura->numfactura;
-        $ruta='21/06';
+    //     $fichero='Fra_Suma_'.$factura->serie.$factura->numfactura;
+    //     $ruta='21/06';
 
-        $pdf = \PDF::loadView('facturacion.facturapdf', compact(['factura','base','suplidos','totaliva','total']));
+    //     $pdf = \PDF::loadView('facturacion.facturapdf', compact(['factura','base','suplidos','totaliva','total']));
 
-        Storage::put('public/facturas/'.$ruta.'/'.$fichero.'.pdf', $pdf->output());
+    //     Storage::put('public/facturas/'.$ruta.'/'.$fichero.'.pdf', $pdf->output());
 
-        redirect()->back();
+    //     redirect()->back();
 
-    }
+    // }
 
     public function imprimirfactura(Facturacion $factura)
     {
@@ -147,7 +147,7 @@ class FacturacionController extends Controller
         $total=$factura->facturadetalles->sum('total');
 
         $fichero='Fra_Suma_'.$factura->serie.$factura->numfactura;
-        $ruta='21/06';
+        $ruta='21/12';
 
         $pdf = \PDF::loadView('facturacion.facturapdf', compact(['factura','base','suplidos','totaliva','total']));
 

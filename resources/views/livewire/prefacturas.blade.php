@@ -43,26 +43,24 @@
                         </select>
                     </div>
                     </div>
-                    <div class="inline-flex space-x-2">
-                    @if($filtrofacturable=='1')
-                        <x-dropdown label="Bulk Actions">
+                    <div class="inline-flex mt-3 space-x-2">
+                        @if($filtrofacturable=='1')
+                        <x-dropdown label="Actions">
+                            <x-dropdown.item type="button" wire:click="generarSelected" class="flex items-center space-x-2">
+                                <x-icon.invoice class="text-pink-400"></x-icon.invoice> <span>Generar Facturas </span>
+                            </x-dropdown.item>
                             <x-dropdown.item type="button" wire:click="exportSelected" class="flex items-center space-x-2">
                                 <x-icon.download class="text-gray-400"></x-icon.download> <span>Export </span>
                             </x-dropdown.item>
                             {{-- <x-dropdown.item type="button" onclick="confirm('¿Estas seguro?') || event.stopImmediatePropagation()" wire:click="deleteSelected" class="flex items-center space-x-2"> --}}
                             <x-dropdown.item type="button" wire:click="$toggle('showDeleteModal')" class="flex items-center space-x-2">
-                                <x-icon.trash class="text-gray-400"></x-icon.trash> <span>Delete </span>
+                                <x-icon.trash class="text-red-400"></x-icon.trash> <span>Delete </span>
                             </x-dropdown.item>
                         </x-dropdown>
+                        @endif
                         <div class="text-xs">
-                            <label class="px-1 text-gray-600">&nbsp;</label>
-                            <input type="button" wire:click="creafacturas()" class="w-full px-2 py-2 text-xs text-white bg-green-700 rounded-md shadow-sm hover:bg-green-500 " value="{{ __('Generar Facturas') }}"/>
+                            <x-button.button color="blue" onclick="location.href = '{{ route('facturacion.create') }}'">Nueva</x-button.button>
                         </div>
-                    @endif
-                    <div class="text-xs">
-                        <label class="px-1 text-gray-600">&nbsp;</label>
-                        <input type="button" onclick="location.href = '{{ route('facturacion.create') }}'" class="w-full px-2 py-2 text-xs text-white bg-blue-700 rounded-md shadow-sm hover:bg-blue-500 " value="{{ __('Nueva Pre-Factura') }}"/>
-                    </div>
                 </div>
                 </div>
             </div>

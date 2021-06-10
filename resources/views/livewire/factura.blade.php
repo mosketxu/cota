@@ -6,7 +6,6 @@
     {{-- @endif --}}
 
     <div class="p-1 mx-2">
-
         @if($factura->id)
             @if($nf!='')
                 <h1 class="text-2xl font-semibold text-gray-900">Factura {{ $nf}}</h1>
@@ -18,13 +17,17 @@
         @endif
         <div class="flex justify-between">
             <div class="flex w-2/4 space-x-2">
-                @if($factura->numfactura)
+
+                @if($mostrarGenerar)
                     <x-button.button  wire:click="creafactura({{ $factura }})" color="green">{{ __('Generar Factura') }}</x-button.button>
-                    <x-icon.pdf-a href="{{route('facturacion.downfactura',$factura) }}" class="pt-2" title="PDF"/>
-                    <x-icon.pdf-a href="{{route('facturacion.downfacturas') }}" class="pt-2" title="PDF"/>
-                    <x-icon.pdf-a href="{{route('facturacion.zip') }}" class="pt-2" title="Zip"/>
+                @endif
+                @if($factura->numfactura)
+                    {{-- <x-icon.pdf-a wire:click="imprimeFacturaLocal({{ $factura }})" class="pt-2" title="PDasasF"/> --}}
+                    <x-icon.pdf-a href="{{route('facturacion.imprimirfactura',$factura) }}" class="pt-2 ml-2" title="PDF"/>
+                    {{-- <x-icon.pdf-a href="{{route('facturacion.downfacturas') }}" class="pt-2" title="PDF"/> --}}
+                    <x-icon.download href="{{route('facturacion.zip') }}" class="pt-2" title="Zip"/>
                 @else
-                    <x-button.button  color="gray">{{ __('Generar Factura') }}</x-button.button>
+                    {{-- <x-button.button  color="gray">{{ __('Generar Factura') }}</x-button.button> --}}
                     <x-icon.pdf-b href="#" class="pt-2" title="PDF"/>
                     <x-icon.pdf-b href="#" class="pt-2" title="PDF"/>
                     <x-icon.pdf-b href="#" class="pt-2" title="Zip"/>
@@ -76,6 +79,17 @@
                                     @foreach ($entidades as $entidad)
                                         <option value="{{ $entidad->id }}">{{ $entidad->entidad }}</option>
                                     @endforeach
+                                </x-select>
+                            </div>
+                            <div class="form-item">
+                                <x-jet-label for="serie">{{ __('Serie') }}</x-jet-label>
+                                <x-select wire:model.defer="factura.serie" selectname="serie" class="w-full">
+                                    <option value="">--Serie--</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
                                 </x-select>
                             </div>
                             <div class="form-item">

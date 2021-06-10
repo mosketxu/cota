@@ -72,10 +72,10 @@
                 <aside style="float:left; margin-left: -20 px; padding-left: 0px;">
                     <img src="{{asset('img/Reg mercantilSUMAVER2.jpg')}}" width="55"/>
                 </aside>
-                <section style="float:right; text-align: left; margin-left: 0px">
+                <section style="float:right; text-align: left; margin-left: 100px">
                     <div style="margin-top:50px; ">
                     {{-- Fecha y Factura --}}
-                        <div>FECHA FACTURA: {{ $factura->fechafactura->format('d-m-Y') }}</div>
+                        <div>FECHA: {{ $factura->fechafactura->format('d-m-Y') }}</div>
                         <div>FACTURA: {{ $factura->serie }}/{{ $factura->numfactura }}</div>
                     </div>
                     <div style="margin-top:50px; ">
@@ -114,7 +114,7 @@
 
                             <div style="margin-top:40px">
                                 <div class="">Condiciones de pago: {{ $factura->metodopago->metodopago }}</div>
-                                <div class="">Vencimiento: {{ $factura->fechavencimiento->format('d-m-Y') }}</div>
+                                <div class="">Vencimiento: {{ $factura->fechavencimiento? $factura->fechavencimiento->format('d-m-Y') : 'A la vista'}}</div>
                             </div>
                         @endif
                     </div>
