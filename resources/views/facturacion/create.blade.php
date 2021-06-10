@@ -1,5 +1,9 @@
 <x-app-layout>
-    <div class="py-2 mx-auto max-w-screen">
-        @livewire('factura')
+    <div class="p-2">
+        <div class="max-w-full mx-auto">
+            <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
+                @livewire('factura')
+            </div>
+        </div>
     </div>
 </x-app-layout>

@@ -1,26 +1,34 @@
-<div>
-    {{-- @include('entidad.menu') --}}
+<div class="">
+    {{-- @if($entidad) --}}
+        @livewire('menu',['entidad'=>$entidad],key($entidad->id))
+    {{-- @else
+        @livewire('navigation-menu')
+    @endif --}}
 
-    <div class="px-2 mx-2">
+    <div class="p-1 mx-2">
         @if($contactoId)
-            <h1 class="py-0 my-0 text-2xl font-semibold text-gray-900" >Nueva Entidad para contacto {{ $contacto->entidad }}</h1>
-            <input type="hidden" wire:model="contactoId"/>
+        <h1 class="text-2xl font-semibold text-gray-900"> Nueva contacto para Entidad {{ $contacto->entidad }}</h1>
+        <input type="hidden" wire:model="contactoId"/>
         @else
-            <h1 class="py-0 my-0 text-2xl font-semibold text-gray-900">Nueva Entidad</h1>
+            @if($entidad)
+                <h1 class="text-2xl font-semibold text-gray-900">Entidad: {{ $entidad->entidad }} <span class="text-lg text-gray-500 "> ({{ $entidad->nif }})</span></h1>
+            @else
+            <h1 class="text-2xl font-semibold text-gray-900">Nueva Entidad</h1>
+            @endif
         @endif
     </div>
-
-    @if (session()->has('message'))
-        <div id="alert" class="relative px-6 py-2 mb-2 text-white bg-green-200 border-green-500 rounded border-1">
-            <span class="inline-block mx-8 align-middle">
-                {{ session('message') }}
-            </span>
-            <button class="absolute top-0 right-0 mt-2 mr-6 text-2xl font-semibold leading-none bg-transparent outline-none focus:outline-none" onclick="document.getElementById('alert').remove();">
-                <span>×</span>
-            </button>
-        </div>
-    @endif
-
+    <div class="py-1 space-y-4">
+        @if (session()->has('message'))
+            <div id="alert" class="relative px-6 py-2 mb-2 text-white bg-green-200 border-green-500 rounded border-1">
+                <span class="inline-block mx-8 align-middle">
+                    {{ session('message') }}
+                </span>
+                <button class="absolute top-0 right-0 mt-2 mr-6 text-2xl font-semibold leading-none bg-transparent outline-none focus:outline-none" onclick="document.getElementById('alert').remove();">
+                    <span>×</span>
+                </button>
+            </div>
+        @endif
+    </div>
     <x-jet-validation-errors/>
 
     <div class="flex-col space-y-4 text-gray-500">
@@ -267,9 +275,7 @@
                 @endif
             </div>
 
-
-
-            <div class="flex mt-0 ml-2 space-x-4">
+            <div class="flex mt-2 mb-2 ml-2 space-x-4">
                 <div class="space-x-3">
                     <x-jet-button class="bg-blue-600">
                         {{ __('Guardar') }}
@@ -300,4 +306,3 @@
         </form>
     </div>
 </div>
-

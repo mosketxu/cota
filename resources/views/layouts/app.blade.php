@@ -25,16 +25,7 @@
         <x-jet-banner />
 
         <div class="min-h-screen bg-gray-50">
-            @livewire('navigation-menu')
-
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-full px-4 py-2 mx-auto">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+            {{-- @livewire('navigation-menu') --}}
 
             <!-- Page Content -->
             <main>
@@ -44,9 +35,6 @@
         </div>
 
         @stack('modals')
-
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
         @livewireScripts
     </body>

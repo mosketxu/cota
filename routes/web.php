@@ -25,8 +25,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/entidad/contacto/{entidad}', [EntidadController::class, 'contactos'])->name('entidad.contacto');
     Route::get('/entidad/nuevocontacto/{entidad}', [EntidadController::class, 'createcontacto'])->name('entidad.createcontacto');
     Route::resource('entidad', EntidadController::class);
-    Route::get('facturacion/{factura}/pdf', [FacturacionController::class,'pdf'])->name('factura.pdf');
-    Route::get('facturacion/{factura}/downpdf', [FacturacionController::class,'downpdf'])->name('downfactura.pdf');
+    Route::get('facturacion/{factura}/imprimirfactura', [FacturacionController::class,'imprimirfactura'])->name('facturacion.imprimirfactura');
+    Route::get('facturacion/{factura}/downfacturapdf', [FacturacionController::class,'downfacturapdf'])->name('facturacion.downfactura');
+    Route::get('facturacion/downfacturas', [FacturacionController::class,'downfacturas'])->name('facturacion.downfacturas');
+    Route::get('facturacion/zip', [FacturacionController::class,'downloadZip'])->name('facturacion.zip');
+    Route::get('facturacion/prefacturas', [FacturacionController::class,'prefacturas'])->name('facturacion.prefacturas');
     Route::resource('facturacion', FacturacionController::class);
 
  });

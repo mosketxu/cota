@@ -13,10 +13,12 @@ class Ents extends Component
     public $search='';
     public $filtrocliente=1;
     public $filtroactivo=1;
+    public Entidad $entidad;
 
 
     public function render()
     {
+        $this->entidad= new Entidad;
         $entidades=Entidad::query()
             ->when($this->filtrocliente!='', function ($query){
                 $query->where('cliente',$this->filtrocliente);

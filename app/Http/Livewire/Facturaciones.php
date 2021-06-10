@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\{Facturacion};
+use App\Models\{Facturacion,Entidad};
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
@@ -12,18 +12,20 @@ class Facturaciones extends Component
     use WithPagination;
 
     public $search='';
-    public $filtrofacturable='1';
     public $filtrofacturado='';
+    public $filtrocontabilizado='';
     public $filtroenviada='';
     public $filtropagada='';
     public $filtroanyo='';
     public $filtromes='';
+    public $entidad;
 
 
-    public function mount()
+    public function mount(Entidad $entidad)
     {
         $this->filtroanyo=date('Y');
         $this->filtromes=intval(date('m'));
+        $this->entidad=$entidad;
     }
 
     public function render()
@@ -31,17 +33,18 @@ class Facturaciones extends Component
         $facturaciones = Facturacion::query()
         ->join('entidades','facturacion.entidad_id','=','entidades.id')
         ->select('facturacion.*', 'entidades.entidad', 'entidades.nif','entidades.emailadm')
-        ->when($this->filtrofacturable!='', function ($query){
-            $query->where('facturable',$this->filtrofacturable);
-            })
+        ->where('numfactura','<>','')
         ->when($this->filtroenviada!='', function ($query){
             $query->where('enviada',$this->filtroenviada);
             })
         ->when($this->filtropagada!='', function ($query){
             $query->where('pagada',$this->filtropagada);
             })
-        ->when($this->filtrofacturado!='', function ($query){
-            if($this->filtrofacturado=='0'){
+        ->when($this->entidad->id!='', function ($query){
+            $query->where('entidad_id',$this->entidad->id);
+            })
+        ->when($this->filtrocontabilizado!='', function ($query){
+            if($this->filtrocontabilizado=='0'){
                 $query->where('asiento','0');
             }else{
                 $query->where('asiento','>','0');
@@ -60,9 +63,7 @@ class Facturaciones extends Component
         ->join('entidades','facturacion.entidad_id','=','entidades.id')
         ->join('facturacion_detalles','facturacion.id','=','facturacion_detalles.facturacion_id')
         ->select('facturacion.*', 'entidades.entidad', 'entidades.nif','entidades.emailadm',DB::raw('sum(unidades * coste) as totalbase'),DB::raw('sum(unidades * coste * iva) as totaliva'),DB::raw('sum(unidades * coste * (1+ iva)) as totales'))
-        ->when($this->filtrofacturable!='', function ($query){
-            $query->where('facturable',$this->filtrofacturable);
-            })
+        ->where('numfactura','<>','')
         ->when($this->filtroenviada!='', function ($query){
             $query->where('enviada',$this->filtroenviada);
             })
@@ -82,11 +83,10 @@ class Facturaciones extends Component
         ->orSearch('facturacion.numfactura',$this->search)
         ->first();
 
-        // ,DB::raw('sum(unidades * coste) as totalbase'),DB::raw('sum(unidades * coste * iva) as totaliva'),DB::raw('sum(unidades * coste * (1+ iva)) as totales')
-        // $base=$facturaciones->facturadetalles->sum('base');
 
         return view('livewire.facturaciones',compact('facturaciones','totales'));
     }
+
 
     public function delete($facturacionId)
     {

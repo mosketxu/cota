@@ -1,5 +1,9 @@
 <x-app-layout>
-    <div class="mx-3 mt-1">
-        @livewire('factura',['facturacion'=>$facturacion],key($facturacion->id))
+    <div class="p-2">
+        <div class="max-w-full mx-auto">
+            <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
+                @livewire('factura',['facturacion'=>$facturacion],key($facturacion->id))
+            </div>
+        </div>
     </div>
 </x-app-layout>

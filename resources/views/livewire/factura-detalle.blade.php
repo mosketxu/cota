@@ -11,7 +11,7 @@
                 </button>
             </div>
         @endif
-        <div class="bg-blue-100 rounded-md">
+        <div class="bg-yellow-100 rounded-md">
             <h3 class="ml-2 font-semibold ">Detalle Factura</h3>
         </div>
         {{-- tabla detalles --}}
@@ -20,18 +20,18 @@
             <table table class="min-w-full divide-y divide-gray-200">
                 <thead>
                     <tr>
-                        <x-table.head class="w-20 pl-2">{{ __('Orden') }}</x-table.head>
-                        <x-table.head class="w-1/12 pl-2">{{ __('Tipo') }} </x-table.head>
-                        <x-table.head class="w-3/12 pl-2">{{ __('Concepto') }}</x-table.head>
-                        <x-table.head class="w-20 pr-2 text-right">{{ __('Uds.') }}</x-table.head>
-                        <x-table.head class="pr-10 text-right w-28">{{ __('Importe') }}</x-table.head>
-                        <x-table.head class="w-16 pl-10 text-left">{{ __('% IVA') }}</x-table.head>
-                        <x-table.head class="pr-10 text-right w-28">{{ __('Base (€)') }}</x-table.head>
-                        <x-table.head class="pr-10 text-right w-28">{{ __('IVA (€)') }}</x-table.head>
-                        <x-table.head class="pr-10 text-right w-28">{{ __('Total (€)') }}</x-table.head>
-                        <x-table.head class="pl-2 text-left w-28">{{ __('Subcta') }}</x-table.head>
-                        <x-table.head class="pr-2 text-left w-28">{{ __('Pagado Por') }}</x-table.head>
-                        <x-table.head colspan="2" class="w-1/12"/>
+                        <th class="w-20 py-3 pl-2 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 bg-yellow-50 ">{{ __('Orden') }}</th>
+                        <th class="w-1/12 py-3 pl-2 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 bg-yellow-50">{{ __('Tipo') }} </th>
+                        <th class="w-3/12 py-3 pl-2 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 bg-yellow-50">{{ __('Concepto') }}</th>
+                        <th class="w-20 py-3 pr-2 text-xs font-medium leading-4 tracking-wider text-right text-gray-500 bg-yellow-50">{{ __('Uds.') }}</th>
+                        <th class="py-3 pr-10 text-xs font-medium leading-4 tracking-wider text-right text-gray-500 bg-yellow-50 w-28">{{ __('Importe') }}</th>
+                        <th class="w-16 py-3 pl-10 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 bg-yellow-50">{{ __('% IVA') }}</th>
+                        <th class="py-3 pr-10 text-xs font-medium leading-4 tracking-wider text-right text-gray-500 bg-yellow-50 w-28">{{ __('Base (€)') }}</th>
+                        <th class="py-3 pr-10 text-xs font-medium leading-4 tracking-wider text-right text-gray-500 bg-yellow-50 w-28">{{ __('IVA (€)') }}</th>
+                        <th class="py-3 pr-10 text-xs font-medium leading-4 tracking-wider text-right text-gray-500 bg-yellow-50 w-28">{{ __('Total (€)') }}</th>
+                        <th class="py-3 pl-2 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 bg-yellow-50 w-28">{{ __('Subcta') }}</th>
+                        <th class="py-3 pr-2 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 bg-yellow-50 w-28">{{ __('Pagado Por') }}</th>
+                        <th colspan="2" class="w-1/12 py-3 pr-2 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 bg-yellow-50"> </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">

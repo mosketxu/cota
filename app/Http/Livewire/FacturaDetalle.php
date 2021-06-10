@@ -11,6 +11,7 @@ class FacturaDetalle extends Component
 {
     public $facturacion;
     public $base;
+    public $exenta;
     public $totaliva;
     public $total;
     public $editedDetalleIndex = null;
@@ -43,6 +44,7 @@ class FacturaDetalle extends Component
     public function render(){
         $factura=$this->facturacion;
         $this->base=$factura->facturadetalles->sum('base');
+        $this->exenta=$factura->facturadetalles->sum('exenta');
         $this->totaliva=$factura->facturadetalles->sum('totaliva');
         $this->total=$factura->facturadetalles->sum('total');
         // $this->total=$this->base+$this->totaliva;

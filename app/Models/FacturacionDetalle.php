@@ -32,7 +32,11 @@ class FacturacionDetalle extends Model
     }
 
     public function getBaseAttribute(){
-        return round($this->unidades*$this->coste,2);
+        return $this->iva!=0 ? round($this->unidades*$this->coste,2) : 0;
+    }
+
+    public function getExentaAttribute(){
+        return $this->iva==0 ? round($this->unidades*$this->coste,2) : 0;
     }
 
     public function getTotalivaAttribute(){

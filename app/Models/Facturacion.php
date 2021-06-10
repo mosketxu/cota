@@ -31,12 +31,19 @@ class Facturacion extends Model
         return $this->belongsTo(Entidad::class);
     }
 
+    public function getDateFraAttribute()
+    {
+        if ($this->fechafactura) {
+            return $this->fechafactura->format('d/m/Y');
+        }
+    }
 
-    // public function getAnyofacAttribute()
-    // {
-    //     $y=substr(explode('-',$this->fechafactura)[0],2,2);
-    //     return $y;
-    // }
+    public function getDateVtoAttribute()
+    {
+        if ($this->fechavencimiento) {
+            return $this->fechavencimiento->format('d/m/Y');
+        }
+    }
 
     public function getEnviarEstAttribute()
     {
