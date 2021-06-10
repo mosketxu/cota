@@ -16,6 +16,7 @@ class Prefacturas extends Component
     public $filtroanyo='';
     public $filtromes='';
     public $entidad;
+    public $selected=[];
 
     protected function rules()
     {
@@ -52,7 +53,7 @@ class Prefacturas extends Component
         ->searchMes('fechafactura',$this->filtromes)
         ->search('entidades.entidad',$this->search)
         ->orderBy('facturacion.id','desc')
-        ->paginate();
+        ->paginate(3);
 
         return view('livewire.prefacturas',compact('facturaciones'));
     }
@@ -94,10 +95,28 @@ class Prefacturas extends Component
             $fac=$fac+1;
             $this->dispatchBrowserEvent('notify', 'La factura' . $prefactura->id .'-'.$prefactura->numfactura. ' ha sido creada!');
         }
-
         // $this->nf=$serie.'-'.$fac;
-
     }
+
+    public function exportSelected()
+    {
+        //toCsv es una macro a n AppServiceProvider
+        return response()->streamDownload(function(){
+            echo Facturacion::whereKey($this->selected)->toCsv();
+
+        },'prefacturas.csv');
+
+        $this->dispatchBrowserEvent('notify', 'CSV Prefacturas descargado!');
+    }
+
+    public function deleteSelected()
+    {
+        // $prefacturas=Facturacion::findMany($this->selected); funciona muy bien
+        $prefacturas=Facturacion::whereKey($this->selected);
+        $prefacturas->delete();
+        $this->dispatchBrowserEvent('notify', 'Prefacturas eliminadas!');
+    }
+
     public function delete($facturacionId)
     {
         $facturacion = Facturacion::find($facturacionId);

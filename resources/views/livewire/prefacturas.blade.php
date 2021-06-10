@@ -45,6 +45,14 @@
                     </div>
                     <div class="inline-flex space-x-2">
                     @if($filtrofacturable=='1')
+                        <x-dropdown label="Bulk Actions">
+                            <x-dropdown.item type="button" wire:click="exportSelected" class="flex items-center space-x-2">
+                                <x-icon.download class="text-gray-400"></x-icon.download> <span>Export </span>
+                            </x-dropdown.item>
+                            <x-dropdown.item type="button" wire:click="deleteSelected" class="flex items-center space-x-2">
+                                <x-icon.trash class="text-gray-400"></x-icon.trash> <span>Delete </span>
+                            </x-dropdown.item>
+                        </x-dropdown>
                         <div class="text-xs">
                             <label class="px-1 text-gray-600">&nbsp;</label>
                             <input type="button" wire:click="creafacturas()" class="w-full px-2 py-2 text-xs text-white bg-green-700 rounded-md shadow-sm hover:bg-green-500 " value="{{ __('Generar Facturas') }}"/>
@@ -58,11 +66,13 @@
                 </div>
             </div>
             {{-- tabla pre-facturas --}}
+            @json($selected)
 
             <div class="min-w-full overflow-hidden overflow-x-auto align-middle shadow sm:rounded-lg">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="text-xs leading-4 tracking-wider text-gray-500 bg-blue-50 ">
                         <tr class="">
+                            <th class="w-5 py-3 pl-2 font-medium text-center"><x-input.checkbox/></th>
                             <th class="py-3 font-medium text-center ">#</th>
                             <th class="font-medium text-center w-28">{{ __('F.Factura') }}</th>
                             <th class="font-medium text-center w-28">{{ __('F.Vto') }}</th>
@@ -81,7 +91,10 @@
                     </thead>
                     <tbody class="text-xs bg-white divide-y divide-gray-200">
                         @forelse ($facturaciones as $facturacion)
-                            <tr wire:loading.class.delay="opacity-50">
+                            <tr wire:loading.class.delay="opacity-50" wire:key="fila-{{ $facturacion->id }}">
+                                <td  class="w-5 py-3 pl-2 font-medium text-center">
+                                    <x-input.checkbox wire:model="selected" value="{{ $facturacion->id }}"/>
+                                </td>
                                 <td class="text-right">
                                     <a href="#" wire:click="edit" class="text-xs text-gray-200 transition duration-150 ease-in-out hover:outline-none hover:text-gray-800 hover:underline">
                                         {{ $facturacion->id }}
