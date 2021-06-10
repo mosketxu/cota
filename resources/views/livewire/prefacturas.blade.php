@@ -49,7 +49,8 @@
                             <x-dropdown.item type="button" wire:click="exportSelected" class="flex items-center space-x-2">
                                 <x-icon.download class="text-gray-400"></x-icon.download> <span>Export </span>
                             </x-dropdown.item>
-                            <x-dropdown.item type="button" wire:click="deleteSelected" class="flex items-center space-x-2">
+                            {{-- <x-dropdown.item type="button" onclick="confirm('¿Estas seguro?') || event.stopImmediatePropagation()" wire:click="deleteSelected" class="flex items-center space-x-2"> --}}
+                            <x-dropdown.item type="button" wire:click="$toggle('showDeleteModal')" class="flex items-center space-x-2">
                                 <x-icon.trash class="text-gray-400"></x-icon.trash> <span>Delete </span>
                             </x-dropdown.item>
                         </x-dropdown>
@@ -66,13 +67,12 @@
                 </div>
             </div>
             {{-- tabla pre-facturas --}}
-            @json($selected)
 
             <div class="min-w-full overflow-hidden overflow-x-auto align-middle shadow sm:rounded-lg">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="text-xs leading-4 tracking-wider text-gray-500 bg-blue-50 ">
                         <tr class="">
-                            <th class="w-5 py-3 pl-2 font-medium text-center"><x-input.checkbox/></th>
+                            <th class="w-5 py-3 pl-2 font-medium text-center"><x-input.checkbox wire:model="selectPage"/></th>
                             <th class="py-3 font-medium text-center ">#</th>
                             <th class="font-medium text-center w-28">{{ __('F.Factura') }}</th>
                             <th class="font-medium text-center w-28">{{ __('F.Vto') }}</th>
@@ -90,6 +90,18 @@
                         </tr>
                     </thead>
                     <tbody class="text-xs bg-white divide-y divide-gray-200">
+                        @if($selectPage)
+                            <tr class="bg-gray-200" wire:key="row-message">
+                                <td  class="py-3 pl-2 font-medium" colspan="16">
+                                @unless($selectAll)
+                                    <span>Has seleccionado <strong>{{ $facturaciones->count() }}</strong> prefacturas, ¿quieres seleccionar el total: <strong>{{ $facturaciones->total() }}</strong> ?</span>
+                                    <x-button.link wire:click="selectAll" class="ml-1 text-blue-600">Select all</x-button.link>
+                                @else
+                                    <span>Has seleccionado <strong>todas</strong> las {{ $facturaciones->total() }} prefacturas</span>
+                                @endif
+                                </td>
+                            </tr>
+                        @endif
                         @forelse ($facturaciones as $facturacion)
                             <tr wire:loading.class.delay="opacity-50" wire:key="fila-{{ $facturacion->id }}">
                                 <td  class="w-5 py-3 pl-2 font-medium text-center">
@@ -166,6 +178,22 @@
                 </div>
             </div>
         </div>
-
     </div>
+
+    <!-- Delete Transactions Modal -->
+    <form wire:submit.prevent="deleteSelected">
+        <x-modal.confirmation wire:model.defer="showDeleteModal">
+            <x-slot name="title">Borrar Prefactura</x-slot>
+
+            <x-slot name="content">
+                <div class="py-8 text-gray-700">¿Esás seguro? Esta acción es irreversible.</div>
+            </x-slot>
+
+            <x-slot name="footer">
+                <x-button.secondary wire:click="$set('showDeleteModal', false)">Cancel</x-button.secondary>
+
+                <x-button.primary type="submit">Delete</x-button.primary>
+            </x-slot>
+        </x-modal.confirmation>
+    </form>
 </div>
