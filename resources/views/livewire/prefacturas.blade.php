@@ -101,7 +101,7 @@
                             </tr>
                         @endif
                         @forelse ($facturaciones as $facturacion)
-                            <tr wire:loading.class.delay="opacity-50" wire:key="fila-{{ $facturacion->id }}">
+                            <tr wire:loading.class.delay="opacity-10" wire:key="fila-{{ $facturacion->id }}">
                                 <td  class="w-5 py-3 pl-2 font-medium text-center">
                                     <x-input.checkbox wire:model="selected" value="{{ $facturacion->id }}"/>
                                 </td>

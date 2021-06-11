@@ -5,26 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use ZipArchive;
-use File;
+
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Facturacion extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $table = 'facturacion';
 
+    protected $dates = ['deleted_at'];
+
     // protected $dates = ['fechafactura','fechavencimiento'];
+    protected $casts = [
+        'fechafactura' => 'date:Y-m-d',
+        'fechavencimiento' => 'date:Y-m-d',
+    ];
 
     protected $fillable=['numfactura','serie','entidad_id','fechafactura','fechavencimiento','metodopago_id','refcliente','mail',
     'enviar','enviada','pagada','facturable','asiento','fechaasiento','observaciones','notas'];
 
 
-    protected $casts = [
-        'fechafactura' => 'date:Y-m-d',
-        'fechavencimiento' => 'date:Y-m-d',
-
-    ];
 
     public function metodopago()
     {
