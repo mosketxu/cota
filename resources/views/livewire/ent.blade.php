@@ -11,7 +11,9 @@
         <input type="hidden" wire:model="contactoId"/>
         @else
             @if($entidad)
-                <h1 class="text-2xl font-semibold text-gray-900">Entidad: {{ $entidad->entidad }} <span class="text-lg text-gray-500 "> ({{ $entidad->nif }})</span></h1>
+                <h1 class="text-2xl font-semibold text-gray-900">Entidad: {{ $entidad->entidad }}
+                    @if($entidad->nif) <span class="text-lg text-gray-500 "> ({{  $entidad->nif }})</span> @endif
+                </h1>
             @else
             <h1 class="text-2xl font-semibold text-gray-900">Nueva Entidad</h1>
             @endif
@@ -102,13 +104,13 @@
             <div class="flex flex-col mx-2 space-y-4 md:space-y-0 md:flex-row md:space-x-4">
                 <div class="w-full form-item">
                     <x-jet-label class="inline-flex items-center mt-3">
-                        <x-input.checkbox wire:model.defer="entidad.favorito" checked/><span class="ml-2 text-gray-700">{{ __('Favorito') }}</span>
+                        <x-input.checkbox wire:model.defer="entidad.favorito" class="w-4 h-4 text-yellow-500 form-checkbox"/><span class="ml-2 text-gray-700">{{ __('Favorito') }}</span>
                     </x-jet-label>
                     <x-jet-label class="inline-flex items-center mt-3">
-                        <input wire:model.defer="entidad.estado" type="checkbox" class="w-4 h-4 text-green-600 form-checkbox" checked><span class="ml-2 text-gray-700">{{ __('Activo') }}</span>
+                        <input wire:model.defer="entidad.estado" type="checkbox" ><span class="ml-2 text-gray-700">{{ __('Activo') }}</span>
                     </x-jet-label>
                     <x-jet-label class="inline-flex items-center mt-3">
-                        <input wire:model.defer="entidad.cliente" type="checkbox" class="w-4 h-4 text-green-600 form-checkbox" checked><span class="ml-2 text-gray-700">{{ __('Cliente') }}</span>
+                        <input wire:model.defer="entidad.cliente" type="checkbox" class="w-4 h-4 text-green-600 form-checkbox" ><span class="ml-2 text-gray-700">{{ __('Cliente') }}</span>
                     </x-jet-label>
                 </div>
             </div>

@@ -34,6 +34,14 @@ class Prefacturas extends Component
         $this->entidad=$entidad;
     }
 
+    public function render(){
+
+        if($this->selectAll) $this->selectPageRows();
+        $facturaciones = $this->rows;
+
+        return view('livewire.prefacturas',compact('facturaciones'));
+    }
+
     public function getRowsQueryProperty(){
         return Facturacion::query()
             ->join('entidades','facturacion.entidad_id','=','entidades.id')
@@ -93,13 +101,6 @@ class Prefacturas extends Component
         $this->dispatchBrowserEvent('notify', 'CSV Prefacturas descargado!');
     }
 
-    public function render(){
-
-        if($this->selectAll) $this->selectPageRows();
-        $facturaciones = $this->rows;
-
-        return view('livewire.prefacturas',compact('facturaciones'));
-    }
 
 
     public function deleteSelected(){

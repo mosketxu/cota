@@ -59,8 +59,15 @@
                         @forelse ($entidades as $entidad)
                             <x-table.row wire:loading.class.delay="opacity-50">
                                 <x-table.cell class="text-right">
-                                    <a href="#" wire:click="edit" class="text-xs text-gray-700 transition duration-150 ease-in-out focus:outline-none focus:text-gray-800 focus:underline">
-                                        <span class="text-xs text-gray-200">{{ $entidad->id }}</span><span class="text-lg text-{{ $entidad->fav_color[0] }}-400"> &#{{ $entidad->fav_color[1] }};</span>
+                                    <a href="{{ route('entidad.edit',$entidad) }}" wire:click="edit" class="text-xs text-gray-700 transition duration-150 ease-in-out focus:outline-none focus:text-gray-800 focus:underline">
+                                        <span class="inline-flex text-gray-200 align-baseline">
+                                            {{ $entidad->id }} &nbsp;
+                                            @if ($entidad->favorito)
+                                                <x-icon.star-solid class="text-yellow-500"></x-icon.star-solid>
+                                            @else
+                                                <x-icon.star class="text-gray-500 "></x-icon.star>
+                                            @endif
+                                        </span>
                                     </a>
                                 </x-table.cell>
                                 <x-table.cell>

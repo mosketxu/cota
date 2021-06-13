@@ -69,12 +69,15 @@ class Ent extends Component
     {
         $this->entidad=$entidad;
         $this->contacto=$contacto;
+
         // $this->contactoId=$contacto->id;
     }
 
 
     public function render()
     {
+        if (!$this->entidad->cliente) $this->entidad->cliente=true;
+        if (!$this->entidad->estado) $this->entidad->estado=true;
         $entidad=$this->entidad;
         $contacto=$this->contacto;
         $this->contactoId=$contacto->id;
