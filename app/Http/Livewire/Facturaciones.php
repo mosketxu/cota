@@ -133,26 +133,33 @@ class Facturaciones extends Component
     }
 
     public function mailSelected(){
-        $conproblemas=0;
+        $conproblemas=[];
         $sinproblemas=0;
-        $facturas = $this->rows;
+        $facturas = $this->selectedRowsQuery->get();
+
 
         foreach ($facturas as $factura) {
 
             $fileName='storage/'.$factura->rutafichero;
 
             if (!file_exists($fileName) || !$factura->mail) {
-                $conproblemas++;
+                array_push($conproblemas,$factura->factura5);
             }else{
                 $sinproblemas++;
                 Mail::to($factura->mail)
-                    ->bcc('alex.arregui@hotmail.es')
-                    ->send(new MailFactura($factura));
-                    // ->queue(new MailFactura($factura);
+                ->bcc('alex.arregui@hotmail.es')
+                ->send(new MailFactura($factura));
+                // ->queue(new MailFactura($factura);
+                $factura->enviada=true;
+                $factura->save();
             }
         }
+        $conproblema=$conproblemas ? json_encode($conproblemas): 0;
 
-        $message='Mails enviados correctamente: '. $sinproblemas. ', Con problemas:'. $conproblemas;
+        // dd($conproblemas);
+
+        session()->flash('message', 'Mails enviados correctamente: '. $sinproblemas. ', Con problemas: '. $conproblema);
+        return redirect(route('facturacion.index'));
         // $this->dispatchBrowserEvent('notify', 'Mails enviados correctamente: '. $sinproblemas. ', Con problemas:'. $conproblemas);
     }
 
