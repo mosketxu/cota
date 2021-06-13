@@ -59,25 +59,30 @@ class Prefacturas extends Component
         return $this->rowsQuery->paginate(100);
     }
 
+    //  GENERO LAS PREFACTURAS SELECCIONADAS
 
     public function generarSelected(){
         $prefacturas = $this->selectedRowsQuery->get();
         $this->validate();
-        $serie=substr($this->filtroanyo,2,2);
-        $fac=Facturacion::where('serie',$serie)->max('numfactura') ;
-        $fac= $fac ? $fac + 1 : ($serie * 100000 +1) ;
 
         foreach ($prefacturas as $prefactura) {
-            $prefactura->serie=$serie;
+            $serie= !$prefactura->serie ? substr($prefactura->fechafactura->format('Y'),-2) : $prefactura->serie;
+            $fac=Facturacion::where('serie',$serie)->max('numfactura') ;
+            $fac= $fac ? $fac + 1 : ($serie * 100000 +1) ;
             $prefactura->numfactura=$fac;
-            $prefactura->save();
-            $fac=$fac+1;
-            $prefactura->imprimirfactura();
-            $this->dispatchBrowserEvent('notify', 'La factura' . $prefactura->id .'-'.$prefactura->numfactura. ' ha sido creada!');
-        }
-        // $this->nf=$serie.'-'.$fac;
-    }
 
+            $prefactura->metodopago_id= !$prefactura->metodopago_id ? '1' : $prefactura->metodopago_id;
+            $prefactura->serie=$serie;
+            $prefactura->facturada=true;
+
+            $prefactura->ruta='facturas/'.$prefactura->serie.'/'.$prefactura->fechafactura->format('m');
+            $prefactura->fichero=(trim('Fra_Suma_'.$prefactura->serie.'_'.substr ( $fac ,-5 ).'_'.substr ( $prefactura->entidad ,0,6 ),' ').'.pdf');
+            $prefactura->save();
+            // genero la factura y la guardo en su carpeta de storage
+            $prefactura->imprimirfactura();
+            $this->dispatchBrowserEvent('notify', 'La factura ' . $prefactura->factura5 . ' ha sido creada!');
+        }
+    }
 
     public function exportSelected(){
         //toCsv es una macro a n AppServiceProvider

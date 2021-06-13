@@ -71,6 +71,9 @@
                             <x-dropdown.item type="button" wire:click="zipSelected" class="flex items-center space-x-2">
                                 <x-icon.csv class="text-green-400"></x-icon.csv> <span>Generar Zip </span>
                             </x-dropdown.item>
+                            <x-dropdown.item type="button" wire:click="mailSelected" class="flex items-center space-x-2">
+                                <x-icon.arroba class="text-gray-400"></x-icon.arroba> <span>Enviar Mail </span>
+                            </x-dropdown.item>
                             <x-dropdown.item type="button" wire:click="exportSelected" class="flex items-center space-x-2">
                                 <x-icon.download class="text-gray-400"></x-icon.download> <span>Export </span>
                             </x-dropdown.item>

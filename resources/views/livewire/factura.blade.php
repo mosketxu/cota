@@ -17,30 +17,32 @@
         @endif
         <div class="flex justify-between">
             <div class="flex w-2/4 space-x-2">
-
-                @if($mostrarGenerar)
+                @if($showgenerar && !$factura->numfactura)
                     <x-button.button  wire:click="creafactura({{ $factura }})" color="green">{{ __('Generar Factura') }}</x-button.button>
                 @endif
-                @if($factura->numfactura)
-                    <x-icon.pdf-a href="{{route('facturacion.imprimirfactura',$factura) }}" class="pt-2 ml-2" title="PDF"/>
+                @if($showgenerar && $factura->numfactura)
+                    <x-button.button  wire:click="creafactura({{ $factura }})" color="green">{{ __('Actualiza Factura') }}</x-button.button>
+                @endif
+                @if(!$showgenerar)
+                    <x-icon.pdf-a wire:click="presentaPDF({{ $factura }})" class="pt-2 ml-2" title="PDF"/>
                 @endif
             </div>
             <x-button.button  onclick="location.href = '{{ route('facturacion.create') }}'" color="blue"><x-icon.plus/>{{ __('Nueva Factura') }}</x-button.button>
         </div>
 
         <div class="py-1 mx-4 space-y-4">
-            {{-- @if (session()->has('message'))
-                <div id="alert" class="relative px-6 py-2 mb-2 text-white bg-green-200 border-green-500 rounded border-1">
+            @if ($message)
+                <div id="alert" class="relative px-6 py-2 mb-2 text-white bg-red-200 border-red-500 rounded border-1">
                     <span class="inline-block mx-8 align-middle">
-                        {{ session('message') }}
+                        {{ $message }}
                     </span>
                     <button class="absolute top-0 right-0 mt-2 mr-6 text-2xl font-semibold leading-none bg-transparent outline-none focus:outline-none" onclick="document.getElementById('alert').remove();">
                         <span>×</span>
                     </button>
                 </div>
-            @endif --}}
+            @endif
             @if ($errors->any())
-                <div id="alert" class="relative px-6 py-2 mb-2 text-white bg-green-200 border-green-500 rounded border-1">
+                <div id="alert" class="relative px-6 py-2 mb-2 text-white bg-red-200 border-red-500 rounded border-1">
                     <x-jet-label class="text-red">Verifica los errores</x-jet-label>
                     <ul class="mt-3 text-sm text-red-600 list-disc list-inside">
                         @foreach ($errors->all() as $error)
@@ -142,7 +144,8 @@
                             </div>
                             <div class="flex-auto pb-3 form-item">
                                 <label for="facturada"  title="Facturada"><x-icon.invoice/></label>
-                                <input type="checkbox" wire:model.defer="factura.facturada" checked class="mx-auto" title="Facturada"/>
+                                {{-- <input type="checkbox" wire:model="factura.facturada" checked class="mx-auto" title="Facturada"/> --}}
+                                <input type="checkbox" wire:model="facturada" checked class="mx-auto" title="Facturada"/>
                             </div>
                             <div class="flex-auto pb-3 form-item">
                                 <label for="pagada" title="Pagada"><x-icon.money/></label>
@@ -172,30 +175,32 @@
                     </div>
                 </div>
                 <div class="flex mt-2 ml-4 space-x-4">
-                    <div class="space-x-3">
-                        <x-jet-button class="bg-blue-600">
-                            {{ __('Guardar') }}
-                        </x-jet-button>
-                        <span
-                            x-data="{ open: false }"
-                            x-init="
-                                @this.on('notify-saved', () => {
-                                    if (open === false) setTimeout(() => { open = false }, 2500);
-                                    open = true;
-                                })
-                            "
-                        x-show.transition.out.duration.1000ms="open"
-                        style="display: none;"
-                        class="p-2 m-2 text-gray-500 rounded-lg bg-green-50"
-                        >Saved!</span>
-                    </div>
+                    @if($showgenerar)
+                        <div class="space-x-3">
+                            <x-jet-button class="bg-blue-600">{{ __('Guardar') }}</x-jet-button>
+                            <span
+                                x-data="{ open: false }"
+                                x-init="
+                                    @this.on('notify-saved', () => {
+                                        if (open === false) setTimeout(() => { open = false }, 2500);
+                                        open = true;
+                                    })
+                                "
+                            x-show.transition.out.duration.1000ms="open"
+                            style="display: none;"
+                            class="p-2 m-2 text-gray-500 rounded-lg bg-green-50"
+                            >Saved!</span>
+                        </div>
+                    @endif
                 </div>
             </form>
         </div>
 
         <hr class="my-2">
 
-        @livewire('factura-detalle',['facturacion'=>$factura],key($factura->id))
+        {{-- @if($showgenerar) --}}
+            @livewire('factura-detalle',['facturacion'=>$factura,'showcrear'=>$factura->facturada],key($factura->id))
+        {{-- @endif --}}
 
         <div class="flex mt-0 ml-4 space-x-4">
             <div class="space-x-3">

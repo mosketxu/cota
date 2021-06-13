@@ -2,8 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\{Facturacion, FacturacionDetalle};
-use Illuminate\Validation\Rule;
+use App\Models\{ FacturacionDetalle};
 
 
 use Livewire\Component;
@@ -63,7 +62,7 @@ class FacturaDetalleCreate extends Component
                 ]);
                 $this->dispatchBrowserEvent('notify', 'Detalle añadido con éxito');
 
-            $this->emit('detalleupdate');
+            $this->emit('detallerefresh');
             $this->detalle->facturacion_id=$this->facturacion->id;
             $this->detalle->orden=0;
             $this->detalle->concepto='';

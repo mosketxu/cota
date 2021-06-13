@@ -17,10 +17,16 @@ class FacturaDetalle extends Component
     public $editedDetalleIndex = null;
     public $editedDetalleField = null;
     public $detalles=[];
+    public $showcrear=false;
 
-    protected $listeners = [
-        'detalleupdate' => '$refresh',
-    ];
+    protected $listeners = [ 'funshow'=>'funshowdetalle','detallerefresh' => '$refresh'];
+
+    public function funshowdetalle()
+    {
+        $this->showcrear=true;
+        $this->emit('detallerefresh');
+    }
+
 
     protected $rules = [
         'detalles.*.orden' => ['numeric'],
@@ -39,10 +45,12 @@ class FacturaDetalle extends Component
             ->orderBy('orden')
             ->get()
             ->toArray();
-    }
+            }
 
     public function render(){
+
         $factura=$this->facturacion;
+        $this->showcrear=$this->facturacion->facturada? false : true;
         $this->base=$factura->facturadetalles->sum('base');
         $this->exenta=$factura->facturadetalles->sum('exenta');
         $this->totaliva=$factura->facturadetalles->sum('totaliva');
@@ -54,7 +62,10 @@ class FacturaDetalle extends Component
             ->get()
             ->toArray();
 
-        return view('livewire.factura-detalle',compact(['factura']));
+        if(!$this->showcrear)
+            return view('livewire.factura-detalle-blocked',compact(['factura']));
+        else
+            return view('livewire.factura-detalle',compact(['factura']));
     }
 
     public function editDetalle($detalleIndex){
@@ -84,7 +95,6 @@ class FacturaDetalle extends Component
         $this->editedDetalleIndex = null;
         $this->editedDetalleField = null;
 
-        $this->emit('detalleupdate');
     }
 
     public function delete($facturadetalleId)

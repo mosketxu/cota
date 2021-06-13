@@ -7,9 +7,10 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use App\Http\Livewire\DataTable\WithBulkActions;
+use App\Mail\MailFactura;
 use ZipArchive;
 use File;
-
+use Illuminate\Support\Facades\Mail;
 
 
 class Facturaciones extends Component
@@ -77,11 +78,8 @@ class Facturaciones extends Component
 
     public function zipSelected(){
         $this->validate();
-
         $zip = new ZipArchive;
-
         $fileName = 'myNewFile.zip';
-
         $ruta='storage/facturas/'.substr($this->filtroanyo, -2).'/'.substr($this->filtromes+100, -2).'/';
 
         if (!file_exists($ruta)) {
@@ -101,6 +99,33 @@ class Facturaciones extends Component
             return response()->download(public_path($fileName));
         }
     }
+
+    public function mailSelected(){
+        $conproblemas=0;
+        $facturas = $this->rows;
+        $a=substr($this->filtroanyo, -2);
+        $m=substr($this->filtromes+100, -2);
+        $ruta='storage/facturas/'.$a.'/'.$m.'/';
+        if (!file_exists($ruta)) {
+            $message="La ruta no existe";
+            session()->flash('message', 'No existe este directorio.');
+        }
+
+        foreach ($facturas as $factura) {
+            $fileName=$ruta.'Fra_Suma_'.$factura->serie.'_'.substr ( $factura->numfactura ,-5 ).'_'.substr ( $factura->entidad ,0,10 ).'.pdf' ;
+
+            if (!file_exists($fileName) || !$factura->mail) {
+                $conproblemas++;
+            }else{
+                Mail::to($factura->mail)
+                    ->bcc('alex.arregui@hotmail.es')
+                    ->send(new MailFactura($factura));
+                    // ->queue(new MailFactura($factura);
+            }
+        }
+        $this->dispatchBrowserEvent('notify', 'Mails enviados!. Con problemas:'. $conproblemas);
+    }
+
 
     public function exportSelected(){
         //toCsv es una macro a n AppServiceProvider

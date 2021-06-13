@@ -86,10 +86,10 @@
                             <x-table.cell class="">
                                 @if ($editedDetalleIndex === $index || $editedDetalleField === $index . '.concepto')
                                     <input type="text"
-                                           @click.away="$wire.editedDetalleField === '{{ $index }}.concepto' ? $wire.saveDetalle({{ $index }}) : null"
-                                           wire:model.defer="detalles.{{ $index }}.concepto"
-                                           class="w-full text-xs p-2 border border-blue-300 transition rounded-lg duration-150 hover:border-blue-300 focus:border-blue-300  active:border-blue-300
-                                           {{ $errors->has('detalles.' . $index . '.concepto') ? 'border-red-500' : 'border-blue-300' }}"/>
+                                        @click.away="$wire.editedDetalleField === '{{ $index }}.concepto' ? $wire.saveDetalle({{ $index }}) : null"
+                                        wire:model.defer="detalles.{{ $index }}.concepto"
+                                        class="w-full text-xs p-2 border border-blue-300 transition rounded-lg duration-150 hover:border-blue-300 focus:border-blue-300  active:border-blue-300
+                                        {{ $errors->has('detalles.' . $index . '.concepto') ? 'border-red-500' : 'border-blue-300' }}"/>
                                     @if ($errors->has('detalles.' . $index . '.concepto'))
                                         <div class="text-red-500">{{ $errors->first('detalles.' . $index . '.concepto') }}</div>
                                     @endif
@@ -103,10 +103,10 @@
                             <x-table.cell class="">
                                 @if ($editedDetalleIndex === $index || $editedDetalleField === $index . '.unidades')
                                     <input type="number"
-                                           @click.away="$wire.editedDetalleField === '{{ $index }}.unidades' ? $wire.saveDetalle({{ $index }}) : null"
-                                           wire:model.defer="detalles.{{ $index }}.unidades"
-                                           class="w-full text-xs text-right p-2 border border-blue-300 transition rounded-lg duration-150 hover:border-blue-300 focus:border-blue-300  active:border-blue-300
-                                           {{ $errors->has('detalles.' . $index . '.unidades') ? 'border-red-500' : 'border-blue-300' }}"/>
+                                        @click.away="$wire.editedDetalleField === '{{ $index }}.unidades' ? $wire.saveDetalle({{ $index }}) : null"
+                                        wire:model.defer="detalles.{{ $index }}.unidades"
+                                        class="w-full text-xs text-right p-2 border border-blue-300 transition rounded-lg duration-150 hover:border-blue-300 focus:border-blue-300  active:border-blue-300
+                                        {{ $errors->has('detalles.' . $index . '.unidades') ? 'border-red-500' : 'border-blue-300' }}"/>
                                     @if ($errors->has('detalles.' . $index . '.unidades'))
                                         <div class="text-red-500">{{ $errors->first('detalles.' . $index . '.unidades') }}</div>
                                     @endif
@@ -120,10 +120,10 @@
                             <x-table.cell class="">
                                 @if ($editedDetalleIndex === $index || $editedDetalleField === $index . '.coste')
                                     <input type="number" step="any"
-                                           @click.away="$wire.editedDetalleField === '{{ $index }}.coste' ? $wire.saveDetalle({{ $index }}) : null"
-                                           wire:model.defer="detalles.{{ $index }}.coste"
-                                           class="w-full text-xs text-right p-2 border border-blue-300 transition rounded-lg duration-150 hover:border-blue-300 focus:border-blue-300  active:border-blue-300
-                                           {{ $errors->has('detalles.' . $index . '.coste') ? 'border-red-500' : 'border-blue-300' }}"/>
+                                        @click.away="$wire.editedDetalleField === '{{ $index }}.coste' ? $wire.saveDetalle({{ $index }}) : null"
+                                        wire:model.defer="detalles.{{ $index }}.coste"
+                                        class="w-full text-xs text-right p-2 border border-blue-300 transition rounded-lg duration-150 hover:border-blue-300 focus:border-blue-300  active:border-blue-300
+                                        {{ $errors->has('detalles.' . $index . '.coste') ? 'border-red-500' : 'border-blue-300' }}"/>
                                     @if ($errors->has('detalles.' . $index . '.coste'))
                                         <div class="text-red-500">{{ $errors->first('detalles.' . $index . '.coste') }}</div>
                                     @endif
@@ -269,7 +269,8 @@
                 </tfoot>
             </table>
         </div>
-        @if($factura->id)
+
+        @if($showcrear)
             @livewire('factura-detalle-create',['facturacion'=>$factura],key($factura->id))
         @endif
     </div>
