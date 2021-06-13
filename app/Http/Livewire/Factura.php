@@ -61,19 +61,6 @@ class Factura extends Component
 
     }
 
-    public function updatedFacturada(){
-        if($this->facturada){
-            $this->message="Debes pulsar Generar para aplicar los cambios a la factura";
-            $this->facturada=false;
-        }else{
-            $f=Facturacion::find($this->factura->id);
-            $f->facturada=false;
-            $f->save();
-            $this->redirect( route('facturacion.edit',$f) );
-        }
-    }
-
-
     public function render()
     {
         $factura=$this->factura;
@@ -87,6 +74,20 @@ class Factura extends Component
         $pagos=MetodoPago::all();
         return view('livewire.factura',compact('entidades','pagos','factura'));
     }
+
+
+    public function updatedFacturada(){
+        if($this->facturada){
+            $this->message="Debes pulsar Generar para aplicar los cambios a la factura";
+            $this->facturada=false;
+        }else{
+            $f=Facturacion::find($this->factura->id);
+            $f->facturada=false;
+            $f->save();
+            $this->redirect( route('facturacion.edit',$f) );
+        }
+    }
+
 
     public function save(){
         $this->validate();
@@ -126,15 +127,7 @@ class Factura extends Component
                     'notas'=>$this->factura->notas,
                 ]
             );
-
-            // if($fac->numfactura) $factura->imprimirfactura();
-
             $this->emitSelf('notify-saved');
-
-            // if(!$i){
-            //     $this->factura->id=$fac->id;
-            //     $this->redirect( route('facturacion.edit',$fac) );
-            // }
         }
     }
 
@@ -179,6 +172,7 @@ class Factura extends Component
     // {
     //     $factura->imprimirFacturaLocal();
     // }
+
 
     public function delete($facturacionId)
     {

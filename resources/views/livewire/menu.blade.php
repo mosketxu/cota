@@ -21,11 +21,14 @@
                     <x-jet-nav-link href="{{ route('facturacion.index') }}" :active="request()->routeIs('facturacion.index')">
                         {{ __('Facturación') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('facturacion.prefacturas') }}" :active="request()->routeIs('facturacion.prefacturas')">
+                        {{ __('Pre-Facturación') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-                @if(request()->routeIs('facturacion.index') || request()->routeIs('facturacion.prefacturas') )
+                {{-- @if(request()->routeIs('facturacion.index') || request()->routeIs('facturacion.prefacturas') )
                     <div class="hidden p-2 space-x-8 bg-gray-100 rounded-lg sm:-my-px sm:ml-10 sm:flex">
                         <x-jet-nav-link href="{{ route('facturacion.index') }}" :active="request()->routeIs('facturacion.index')">
                             {{ __('Facturas') }}
@@ -34,7 +37,7 @@
                             {{ __('Pre Facturas') }}
                         </x-jet-nav-link>
                     </div>
-                @endif
+                @endif --}}
                 @if($entmenu->id)
                     <div class="hidden p-2 space-x-8 bg-gray-100 rounded-lg sm:-my-px sm:ml-10 sm:flex">
                         <x-jet-nav-link href="{{ route('entidad.pu',$entmenu) }}" :active="request()->routeIs('entidad.pu')">
