@@ -69,13 +69,13 @@
                     <div class="inline-flex mt-3 space-x-2">
                         <x-dropdown label="Actions">
                             <x-dropdown.item type="button" wire:click="zipSelected" class="flex items-center space-x-2">
-                                <x-icon.csv class="text-green-400"></x-icon.csv> <span>Generar Zip </span>
+                                <x-icon.download class="text-gray-400"></x-icon.download> <span>Generar Zip </span>
                             </x-dropdown.item>
                             <x-dropdown.item type="button" wire:click="mailSelected" class="flex items-center space-x-2">
                                 <x-icon.arroba class="text-gray-400"></x-icon.arroba> <span>Enviar Mail </span>
                             </x-dropdown.item>
                             <x-dropdown.item type="button" wire:click="exportSelected" class="flex items-center space-x-2">
-                                <x-icon.download class="text-gray-400"></x-icon.download> <span>Export </span>
+                                <x-icon.csv class="text-green-400"></x-icon.csv><span>Export </span>
                             </x-dropdown.item>
                             {{-- <x-dropdown.item type="button" onclick="confirm('¿Estas seguro?') || event.stopImmediatePropagation()" wire:click="deleteSelected" class="flex items-center space-x-2"> --}}
                             <x-dropdown.item type="button" wire:click="$toggle('showDeleteModal')" class="flex items-center space-x-2">
