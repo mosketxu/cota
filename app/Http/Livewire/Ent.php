@@ -26,7 +26,7 @@ class Ent extends Component
             'contacto.entidad'=>'nullable',
             'entidad.id'=>'nullable',
             'entidad.entidad'=>'required',
-            'entidad.nif'=>'max:12',
+            'entidad.nif'=>'nullable|max:12',
             'entidad.direccion'=>'nullable',
             'entidad.codpostal'=>'max:10|nullable',
             'entidad.localidad'=>'nullable',
@@ -91,14 +91,14 @@ class Ent extends Component
 
     public function save()
     {
-        $this->validate();
+        // $this->validate();
         if($this->entidad->id){
             $i=$this->entidad->id;
             $this->validate([
                 'entidad.entidad'=>[
                     'required',
                     Rule::unique('entidades','entidad')->ignore($this->entidad->id)],
-                'entidad.nif'=>[
+                'entidad.nif'=>['nullable',
                     'max:12',
                     Rule::unique('entidades','nif')->ignore($this->entidad->id)],
                 ]
