@@ -84,12 +84,14 @@
                                     @endif
                                 </x-table.cell>
                                 <x-table.cell class="w-1/12 pr-2 text-right">
-                                    @if($editedContactoIndex === $index || (isset($editedContactoField) && (int)(explode('.',$editedContactoField)[0])===$index))
+                                    <div class="flex">
+                                        @if($editedContactoIndex === $index || (isset($editedContactoField) && (int)(explode('.',$editedContactoField)[0])===$index))
                                         <x-icon.save-a wire:click.prevent="saveContacto({{$index}})" title="Actualizar contacto"/>
-                                    @else
+                                        @else
                                         <x-icon.edit-a wire:click.prevent="editContacto({{$index}})" title="editar contacto"/>
-                                    @endif
-                                    <x-icon.delete-a wire:click.prevent="delete({{ $contacto['id'] }})" onclick="confirm('¿Estás seguro?') || event.stopImmediatePropagation()" class="pl-1"  title="Eliminar contacto"/>
+                                        @endif
+                                        <x-icon.delete-a wire:click.prevent="delete({{ $contacto['id'] }})" onclick="confirm('¿Estás seguro?') || event.stopImmediatePropagation()" class="pl-1"  title="Eliminar contacto"/>
+                                    </div>
                                 </x-table.cell>
                             </x-table.row>
                         @empty
