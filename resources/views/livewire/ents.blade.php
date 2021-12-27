@@ -46,9 +46,9 @@
                     <x-slot name="head">
                         {{-- <x-table.heading class="p-0 m-0 text-right w-min">{{ __('#') }}</x-table.heading> --}}
                         <x-table.heading class="text-center">{{ __('Fav') }} </x-table.heading>
-                        <x-table.heading class="w-6/12 pl-4 text-left">{{ __('Entidad') }}</x-table.heading>
-                        <x-table.heading class="w-4/12 pl-4 text-left">{{ __('Nif') }} </x-table.heading>
-                        <x-table.heading class="w-4/12 pl-4 text-left">{{ __('Mail') }} </x-table.heading>
+                        <x-table.heading class="pl-4 text-left">{{ __('Entidad') }}</x-table.heading>
+                        <x-table.heading class="pl-4 text-left">{{ __('Nif') }} </x-table.heading>
+                        <x-table.heading class="pl-4 text-left">{{ __('Mail') }} </x-table.heading>
                         <x-table.heading class="pl-4 text-center">{{ __('Cliente') }}</x-table.heading>
                         <x-table.heading class="pl-4 text-center">{{ __('Tipo') }}</x-table.heading>
                         <x-table.heading class="pl-4 text-center">{{ __('Impuestos') }}</x-table.heading>
