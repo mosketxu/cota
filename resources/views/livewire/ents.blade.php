@@ -60,7 +60,7 @@
                         @forelse ($entidades as $entidad)
                             <x-table.row wire:loading.class.delay="opacity-50">
                                 <x-table.cell class="text-right">
-                                    <a href="{{ route('entidad.edit',$entidad) }}" wire:click="edit" class="text-xs text-gray-700 transition duration-150 ease-in-out focus:outline-none focus:text-gray-800 focus:underline">
+                                    {{-- <a href="{{ route('entidad.edit',$entidad) }}" wire:click="edit" class="text-xs text-gray-700 transition duration-150 ease-in-out focus:outline-none focus:text-gray-800 focus:underline"> --}}
                                         <span class="inline-flex text-gray-200 align-baseline">
                                             {{ $entidad->id }} &nbsp;
                                             @if ($entidad->favorito)
@@ -69,7 +69,7 @@
                                                 <x-icon.star class="text-gray-500 "></x-icon.star>
                                             @endif
                                         </span>
-                                    </a>
+                                    {{-- </a> --}}
                                 </x-table.cell>
                                 <x-table.cell>
                                     <input type="text" value="{{ $entidad->entidad }}" class="w-full text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>

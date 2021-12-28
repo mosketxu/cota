@@ -16,12 +16,12 @@ class Pu extends Component
     public function rules() {
         return [
             'editing.entidad_id' => 'numeric',
-            'editing.destino' => 'string',
-            'editing.url' => 'string',
-            'editing.us' => 'string',
-            'editing.us2' => 'string',
-            'editing.ps' => 'string',
-            'editing.observaciones' => 'string',
+            'editing.destino' => 'nullable',
+            'editing.url' => 'nullable',
+            'editing.us' => 'nullable',
+            'editing.us2' => 'nullable',
+            'editing.ps' => 'nullable',
+            'editing.observaciones' => 'nullable',
         ];
     }
 
