@@ -39,57 +39,26 @@
                         @forelse ($contactos as $index=>$contacto)
                             <x-table.row wire:loading.class.delay="opacity-50">
                                 <x-table.cell class="w-2/12">
-                                    <input type="text" value="{{ $contacto['entidad'] }}" class="w-full text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
+                                    <input type="text" value="{{ $contacto->entidad }}" class="w-full py-0 my-0 text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
                                 </x-table.cell>
                                 <x-table.cell class="w-1/12">
-                                    <input type="text" value="{{ $contacto['nif'] }}" class="w-full text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
+                                    <input type="text" value="{{ $contacto->nif }}" class="w-full py-0 my-0 text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
                                 </x-table.cell>
                                 <x-table.cell  class="w-1/12">
-                                    <input type="text" value="{{ $contacto['tfno'] }}" class="w-full text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
+                                    <input type="text" value="{{ $contacto->tfno }}" class="w-full py-0 my-0 text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
                                 </x-table.cell>
                                 <x-table.cell class="w-2/12">
-                                    <input type="text" value="{{ $contacto['emailgral'] }}" class="w-full text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
+                                    <input type="text" value="{{ $contacto->emailgral }}" class="w-full py-0 my-0 text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
                                 </x-table.cell>
                                 <x-table.cell class="w-2/12">
-                                    @if ($editedContactoIndex === $index || $editedContactoField === $index . '.departamento')
-                                        <input type="text"
-                                            @click.away="$wire.editedContactoField === '{{ $index }}.departamento' ? $wire.saveContacto({{ $index }}) : null"
-                                            wire:model.defer="contactos.{{ $index }}.departamento"
-                                            class="text-sm sm:text-base pl-2 pr-4 rounded-lg border w-full focus:outline-none focus:border-blue-400 {{ $errors->has('contactos.' . $index . '.departamento') ? 'border-red-500' : 'border-gray-400' }}"
-                                        />
-                                        @if ($errors->has('contactos.' . $index . '.departamento'))
-                                            <div class="text-red-500">{{ $errors->first('contactos.' . $index . '.departamento') }}</div>
-                                        @endif
-                                    @else
-                                        <div class="cursor-pointer" wire:click="editContactoField({{ $index }}, 'departamento')">
-                                            {{ $contacto['departamento'] }}
-                                        </div>
-                                    @endif
+                                    <input type="text"value="{{ $contacto->departamento }}" class="w-full py-0 my-0 text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
                                 </x-table.cell>
-
                                 <x-table.cell class="w-3/12">
-                                    @if ($editedContactoIndex === $index || $editedContactoField === $index . '.comentarios')
-                                        <input type="text"
-                                            @click.away="$wire.editedContactoField === '{{ $index }}.comentarios' ? $wire.saveContacto({{ $index }}) : null"
-                                            wire:model.defer="contactos.{{ $index }}.comentarios"
-                                            class="text-sm sm:text-base pl-2 pr-4 rounded-lg border w-full focus:outline-none focus:border-blue-400 {{ $errors->has('contactos.' . $index . '.comentarios') ? 'border-red-500' : 'border-gray-400' }}"
-                                        />
-                                        @if ($errors->has('contactos.' . $index . '.comentarios'))
-                                            <div class="text-red-500">{{ $errors->first('contactos.' . $index . '.comentarios') }}</div>
-                                        @endif
-                                    @else
-                                        <div class="cursor-pointer" wire:click="editContactoField({{ $index }}, 'comentarios')">
-                                            {{ $contacto['comentarios'] }}
-                                        </div>
-                                    @endif
+                                    <input type="text"value="{{ $contacto->comentarios }}" class="w-full py-0 my-0 text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
                                 </x-table.cell>
                                 <x-table.cell class="w-1/12 pr-2 text-right">
                                     <div class="flex">
-                                        @if($editedContactoIndex === $index || (isset($editedContactoField) && (int)(explode('.',$editedContactoField)[0])===$index))
-                                        <x-icon.save-a wire:click.prevent="saveContacto({{$index}})" title="Actualizar contacto"/>
-                                        @else
-                                        <x-icon.edit-a wire:click.prevent="editContacto({{$index}})" title="editar contacto"/>
-                                        @endif
+                                        <x-icon.edit-a href="{{ route('entidad.edit',$contacto) }}"  title="Editar"/>
                                         <x-icon.delete-a wire:click.prevent="delete({{ $contacto['id'] }})" onclick="confirm('¿Estás seguro?') || event.stopImmediatePropagation()" class="pl-1"  title="Eliminar contacto"/>
                                     </div>
                                 </x-table.cell>
@@ -108,10 +77,14 @@
                         @endforelse
                     </x-slot>
                 </x-table>
+                <div>
+                    {{ $contactos->links() }}
+                </div>
             </div>
         </div>
-
-        @livewire('contacto-create',['entidad'=>$ent],key($ent->id))
+        <div class="flex">
+            @livewire('contacto-create',['entidad'=>$ent],key($ent->id))
+        </div>
 
         <div class="flex mt-2 ml-2 space-x-4">
             <div class="space-x-3">
