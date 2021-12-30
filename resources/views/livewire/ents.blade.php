@@ -72,13 +72,13 @@
                                     {{-- </a> --}}
                                 </x-table.cell>
                                 <x-table.cell>
-                                    <input type="text" value="{{ $entidad->entidad }}" class="w-full text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
+                                    <input type="text" value="{{ $entidad->entidad }}" class="w-full py-1 text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
                                 </x-table.cell>
                                 <x-table.cell>
-                                    <input type="text" value="{{ $entidad->nif }}" class="w-full text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
+                                    <input type="text" value="{{ $entidad->nif }}" class="w-full py-1 text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
                                 </x-table.cell>
                                 <x-table.cell>
-                                    <input type="text" value="{{ $entidad->emailgral }}" class="w-full text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
+                                    <input type="text" value="{{ $entidad->emailgral }}" class="w-full py-1 text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
                                 </x-table.cell>
                                 <x-table.cell class="text-center">
                                     @if($entidad->cliente=="1")

@@ -11,8 +11,8 @@ class Ents extends Component
     use WithPagination;
 
     public $search='';
-    public $filtrocliente=1;
-    public $filtroactivo=1;
+    public $filtrocliente='';
+    public $filtroactivo='';
     public Entidad $entidad;
 
 
@@ -20,6 +20,7 @@ class Ents extends Component
     {
         $this->entidad= new Entidad;
         $entidades=Entidad::query()
+            ->with('entidadtipo')
             ->when($this->filtrocliente!='', function ($query){
                 $query->where('cliente',$this->filtrocliente);
                 })
@@ -30,7 +31,7 @@ class Ents extends Component
             ->orSearch('nif',$this->search)
             ->orderBy('favorito','desc')
             ->orderBy('entidad','asc')
-            ->paginate(10);
+            ->paginate(15);
 
         return view('livewire.ents',compact('entidades'));
     }

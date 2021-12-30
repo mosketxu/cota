@@ -13,21 +13,48 @@ class ContactoEntidad extends Component
     use WithPagination;
 
     public $entidad;
+    public $contacto;
+    public $departamento;
+    public $comentario;
     public $search='';
     public $conts;
 
+    // protected $rules = [
+    //     'ent.id' => 'required',
+    // ];
+
     public function render()
     {
-        $conts=Entidad::orderBy('entidad')->get();
         $ent=$this->entidad;
         $contactos = ModelContactoEntidad::where('entidad_id',$this->entidad->id)
         ->join('entidades','contacto_entidades.contacto_id','=','entidades.id')
         ->select('contacto_entidades.*', 'entidades.entidad', 'entidades.nif', 'entidades.tfno','entidades.emailgral')
         ->search('entidades.entidad',$this->search)
         ->orderBy('entidades.entidad')
-        ->paginate(15);
+        ->get();
 
-        return view('livewire.contacto-entidad',compact('ent','contactos','conts'));
+        $excludedContactos = ModelContactoEntidad::where('entidad_id',$this->entidad->id)->pluck('contacto_id');
+        $entidades=Entidad::whereNotIn('id',$excludedContactos)->orderBy('entidad')->get();
+
+        return view('livewire.contacto-entidad',compact(['ent','contactos','entidades']));
+
+    }
+
+    public function savecontacto()
+    {
+        if($this->contacto){
+            ModelContactoEntidad::create([
+                'entidad_id'=>$this->entidad->id,
+                'contacto_id'=>$this->contacto,
+                'departamento'=>$this->departamento,
+                'comentarios'=>$this->comentario,
+            ]);
+            $this->dispatchBrowserEvent('notify', 'Contacto añadido con éxito');
+
+            $this->reset('contacto');
+            $this->reset('departamento');
+            $this->reset('comentario');
+        }
     }
 
     public function delete($contactoId)
