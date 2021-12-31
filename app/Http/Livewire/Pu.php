@@ -15,7 +15,7 @@ class Pu extends Component
 
     public function rules() {
         return [
-            'editing.entidad_id' => 'numeric',
+            'editing.entidad_id' => 'nullable|numeric',
             'editing.destino' => 'nullable',
             'editing.url' => 'nullable',
             'editing.us' => 'nullable',
@@ -27,6 +27,25 @@ class Pu extends Component
 
     public function mount() {
         $this->editing = $this->makeBlankPu();
+    }
+
+
+    public function render(){
+        $ent=$this->entidad;
+        $i=$this->search;
+        $pus=ModelPu::where('entidad_id',$this->entidad->id)
+            ->when($this->search !='',function ($query) use($i){
+                $query->where(function($q) use ($i){
+                    $q->where('destino','like','%'.$this->search.'%')
+                        ->orWhere('url','like','%'.$this->search.'%')
+                        ->orWhere('us','like','%'.$this->search.'%')
+                        ->orWhere('us2','like','%'.$this->search.'%')
+                        ->orWhere('observaciones','like','%'.$this->search.'%');
+                    });
+                })
+            ->orderBy('destino')
+            ->paginate();
+        return view('livewire.pu',compact('ent','pus'));
     }
 
     public function makeBlankPu(){
@@ -51,8 +70,8 @@ class Pu extends Component
     }
 
     public function save(){
-        $this->validate();
         // dd('lego');
+        $this->validate();
         $this->editing->entidad_id=$this->entidad->id;
         $this->editing->save();
         $this->showEditModal = false;
@@ -68,20 +87,4 @@ class Pu extends Component
         }
     }
 
-    public function render(){
-        $ent=$this->entidad;
-        $i=$this->search;
-        $pus=ModelPu::where('entidad_id',$this->entidad->id)
-        ->when($this->search !='',function ($query) use($i){
-            $query->where(function($q) use ($i){
-                $q->where('destino','like','%'.$this->search.'%')
-                    ->orWhere('url','like','%'.$this->search.'%')
-                    ->orWhere('us','like','%'.$this->search.'%')
-                    ->orWhere('us2','like','%'.$this->search.'%')
-                    ->orWhere('observaciones','like','%'.$this->search.'%');
-                });
-            })
-        ->paginate();
-        return view('livewire.pu',compact('ent','pus'));
-    }
 }
