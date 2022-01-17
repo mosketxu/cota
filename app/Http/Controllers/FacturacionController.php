@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Livewire\Facturaciones;
+use App\Imports\FacturacionImport;
 use App\Models\{Facturacion, Entidad};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use ZipArchive;
 use File;
+use Excel;
 
 // use Barryvdh\DomPDF\PDF;
 
@@ -103,6 +105,12 @@ class FacturacionController extends Controller
         return response()->download(public_path($fileName));
     }
 
+    public function import()
+    {
 
+        Excel::import(new FacturacionImport, 'Facturas.xlsx');
+
+        return redirect('/')->with('success', 'All good!');
+    }
 
 }

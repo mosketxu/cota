@@ -44,6 +44,7 @@ class Prefacturas extends Component
 
     public function getRowsQueryProperty(){
         return Facturacion::query()
+            ->with('metodopago')
             ->join('entidades','facturacion.entidad_id','=','entidades.id')
             ->select('facturacion.*', 'entidades.entidad', 'entidades.nif','entidades.emailadm')
             ->where(function ($query){

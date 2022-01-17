@@ -23,15 +23,15 @@
                     <div class="inline-flex space-x-2">
                         <div class="text-xs">
                             <label class="px-1 text-gray-600">&nbsp;</label>
-                            <input type="text" wire:model="search" class="w-full py-2 text-xs text-gray-600 placeholder-gray-300 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none" placeholder="Búsqueda Entidad/Factura" autofocus/>
+                            <input type="search" wire:model.lazy="search" class="w-full py-2 text-xs text-gray-600 placeholder-gray-300 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none" placeholder="Búsqueda Entidad/Factura" autofocus/>
                         </div>
                         <div class="text-xs">
                             <label class="px-1 text-gray-600">Año</label>
-                            <input type="text" wire:model="filtroanyo" class="w-full py-2 text-xs text-gray-600 placeholder-gray-300 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none" placeholder="Año"/>
+                            <input type="search" wire:model.lazy="filtroanyo" class="w-full py-2 text-xs text-gray-600 placeholder-gray-300 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none" placeholder="Año"/>
                         </div>
                         <div class="text-xs">
                             <label class="px-1 text-gray-600">Mes</label>
-                            <input type="text" wire:model="filtromes" class="w-full py-2 text-xs text-gray-600 placeholder-gray-300 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none" placeholder="Mes (número)"/>
+                            <input type="search" wire:model.lazy="filtromes" class="w-full py-2 text-xs text-gray-600 placeholder-gray-300 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none" placeholder="Mes (número)"/>
                         </div>
                         <div class="text-xs">
                             <label class="px-1 text-gray-600">Facturado</label>
@@ -90,6 +90,9 @@
                     </div>
                 </div>
             </div>
+            <x-jet-nav-link href="{{ route('facturacion.import') }}" >
+                {{ __('Importfac') }}
+            </x-jet-nav-link>
             {{-- tabla facturaciones --}}
 
             <div class="min-w-full overflow-hidden overflow-x-auto align-middle shadow sm:rounded-lg">
@@ -98,12 +101,12 @@
                         <tr class="">
                             <th class="w-5 py-3 pl-2 font-medium text-center"><x-input.checkbox wire:model="selectPage"/></th>
                             <th class="py-3 font-medium text-center ">#</th>
-                            <th class="w-24 font-medium text-center">{{ __('Factura') }}</th>
-                            <th class="w-24 font-medium text-center">{{ __('F.Factura') }}</th>
-                            <th class="w-24 font-medium text-center">{{ __('F.Vto') }}</th>
+                            <th class="font-medium text-left">{{ __('Factura') }}</th>
+                            <th class="font-medium text-left  pl-4 ">{{ __('F.Factura') }}</th>
+                            <th class="font-medium text-left pl-4">{{ __('F.Vto') }}</th>
                             <th class="pl-4 font-medium text-left">{{ __('Entidad') }}</th>
                             <th class="pl-4 font-medium text-left">{{ __('Pago') }} </th>
-                            <th class="pl-4 font-medium text-left">{{ __('Email') }}</th>
+                            {{-- <th class="pl-4 font-medium text-left">{{ __('Email') }}</th> --}}
                             <th class="w-24 pl-4 font-medium text-left">{{ __('Ref.Cli') }}</th>
                             <th class="w-24 pr-4 font-medium text-right">{{ __('Base (€)') }}</th>
                             <th class="w-24 pr-4 font-medium text-right">{{ __('Exenta (€)') }}</th>
@@ -142,14 +145,14 @@
                                 </td>
                                 <td class="text-right">
                                     @if($facturacion->numfactura)
-                                        <input type="text" value="{{ $facturacion->serie }}/{{ $facturacion->numfactura }}" class="w-full text-xs font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
+                                        <input type="text" value="{{ $facturacion->numfactura }}" class="w-full text-left text-xs font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
                                     @endif
                                 </td>
                                 <td>
-                                    <input type="text" value="{{ $facturacion->fechafactura }}" class="w-full text-xs font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
+                                    <input type="text" value="{{ $facturacion->fechafactura->format('d-m-Y') }}" class="w-full text-left text-xs font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
                                 </td>
                                 <td>
-                                    <input type="text" value="{{ $facturacion->fechavencimiento }}" class="w-full text-xs font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
+                                    <input type="text" value="{{ $facturacion->fechavencimiento->format('d-m-Y') }}" class="w-full text-left text-xs font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
                                 </td>
                                 <td>
                                     <input type="text" value="{{ $facturacion->entidad }}" class="w-full text-xs font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
@@ -157,9 +160,9 @@
                                 <td class="text-center">
                                     <span class="text-sm text-gray-500 ">{{$facturacion->metodopago->metodopagocorto ?? '-'}}</span>
                                 </td>
-                                <td>
+                                {{-- <td>
                                     <input type="text" value="{{ $facturacion->mail }}" class="w-full text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
-                                </td>
+                                </td> --}}
                                 <td>
                                     <input type="text" value="{{ $facturacion->refcliente }}" class="w-full text-sm font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
                                 </td>
