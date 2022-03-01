@@ -15,7 +15,7 @@ class CreateFacturacionTable extends Migration
     {
         Schema::create('facturacion', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('entidad_id');
+            $table->foreignId('entidad_id')->constrained('entidades');
             $table->string('serie', 2)->nullable();
             $table->integer('numfactura')->nullable();
             $table->date('fechafactura')->nullable();
@@ -36,7 +36,6 @@ class CreateFacturacionTable extends Migration
             $table->string('fichero', 50)->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
-            $table->foreign('entidad_id', 'facturacion_entidad_id_foreign')->references('id')->on('entidades');
         });
     }
 

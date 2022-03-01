@@ -15,7 +15,7 @@ class CreateFacturacionDetallesTable extends Migration
     {
         Schema::create('facturacion_detalles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('facturacion_id');
+            $table->foreignId('facturacion_id')->constrained('facturacion');
             $table->integer('orden')->default(0);
             $table->integer('tipo')->default(0);
             $table->string('concepto')->nullable();
@@ -25,7 +25,6 @@ class CreateFacturacionDetallesTable extends Migration
             $table->integer('subcuenta')->default(705000);
             $table->integer('pagadopor')->default(0);
             $table->timestamps();
-            $table->foreign('facturacion_id', 'facturacion_detalles_facturacion_id_foreign')->references('id')->on('facturacion')->onDelete('cascade');
         });
     }
 
