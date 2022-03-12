@@ -60,7 +60,8 @@ class Prefacturas extends Component
             ->searchYear('fechafactura',$this->filtroanyo)
             ->searchMes('fechafactura',$this->filtromes)
             ->search('entidades.entidad',$this->search)
-            ->orderBy('facturacion.id','desc');
+            ->orderBy('facturacion.fechafactura')
+            ->orderBy('entidades.entidad');
             // ->paginate(5); solo contemplo la query, no el resultado. Luego pongo el resultado: get, paginate o lo que quiera
     }
 
@@ -85,7 +86,9 @@ class Prefacturas extends Component
             $prefactura->facturada=true;
 
             $prefactura->ruta='facturas/'.$prefactura->serie.'/'.$prefactura->fechafactura->format('m');
+            // $prefactura->fichero=(trim('Fra_Suma_'.$prefactura->serie.'_'.substr ( $fac ,-5 ).'_'.substr ( $prefactura->entidad ,0,strlen($prefactura->entidad) ),' ').'.pdf');
             $prefactura->fichero=(trim('Fra_Suma_'.$prefactura->serie.'_'.substr ( $fac ,-5 ).'_'.substr ( $prefactura->entidad ,0,6 ),' ').'.pdf');
+
             $prefactura->save();
             // genero la factura y la guardo en su carpeta de storage
             $prefactura->imprimirfactura();
