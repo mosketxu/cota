@@ -76,7 +76,8 @@ class FacturacionController extends Controller
 
         Storage::put('public/facturas/'.$ruta.'/'.$fichero.'.pdf', $pdf->output());
 
-        return $pdf->download($fichero.'.pdf');
+        return $pdf->stream($fichero.'.pdf');
+        // return $pdf->download($fichero.'.pdf');
 
         // redirect()->back();
 

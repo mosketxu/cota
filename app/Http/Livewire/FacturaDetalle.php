@@ -87,8 +87,14 @@ class FacturaDetalle extends Component
             $p->concepto=$detalle['concepto'];
             $p->unidades=$detalle['unidades'];
             $p->coste=$detalle['coste'];
-            $p->iva=$detalle['iva'];
-            $p->subcuenta=$detalle['subcuenta'];
+            if($p->tipo=='1')
+                $p->iva='0';
+            else
+                $p->iva=$detalle['iva'];
+            if($p->tipo=='2')
+                $p->subcuenta='759000';
+            else
+                $p->subcuenta=$detalle['subcuenta'];
             $p->pagadopor=$detalle['pagadopor'];
             $p->save();
         }

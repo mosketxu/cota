@@ -6,7 +6,8 @@
 body {
     font-family: DejaVu Sans, Arial, Helvetica Neue, Helvetica, sans-serif;
     /* font-family: Arial, Helvetica Neue, Helvetica, sans-serif; */
-    font-size: x-small;
+    /* font-size: x-small; */
+    font-size: 0.85rem;
     /* text-align: center; */
  }
 
@@ -26,7 +27,7 @@ header {
 
 footer {
    position: fixed;
-   bottom: 60px;
+   bottom: -30px;
    left: 0px;
    right: 0px;
    /* height: 25px; */

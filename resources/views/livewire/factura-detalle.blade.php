@@ -41,10 +41,10 @@
                             <x-table.cell>
                                 @if ($editedDetalleIndex === $index || $editedDetalleField === $index . '.orden')
                                     <input type="number"
-                                           @click.away="$wire.editedDetalleField === '{{ $index }}.orden' ? $wire.saveDetalle({{ $index }}) : null"
-                                           wire:model.defer="detalles.{{ $index }}.orden"
-                                           class="w-16 text-xs p-2 border border-blue-300 transition rounded-lg duration-150 hover:border-blue-300 focus:border-blue-300  active:border-blue-300
-                                           {{ $errors->has('detalles.' . $index . '.orden') ? 'border-red-500' : 'border-blue-300' }}"/>
+                                        @click.away="$wire.editedDetalleField === '{{ $index }}.orden' ? $wire.saveDetalle({{ $index }}) : null"
+                                        wire:model.defer="detalles.{{ $index }}.orden"
+                                        class="w-16 text-xs p-2 border border-blue-300 transition rounded-lg duration-150 hover:border-blue-300 focus:border-blue-300  active:border-blue-300
+                                        {{ $errors->has('detalles.' . $index . '.orden') ? 'border-red-500' : 'border-blue-300' }}"/>
                                     @if ($errors->has('detalles.' . $index . '.orden'))
                                         <div class="text-red-500">{{ $errors->first('detalles.' . $index . '.orden') }}</div>
                                     @endif

@@ -5,19 +5,19 @@
 
     <table table class="min-w-full divide-y divide-gray-200">
         <thead>
-            <tr>
-                <x-table.headgreen class="w-20 pl-2">{{ __('Orden') }}</x-table.headgreen>
-                <x-table.headgreen class="w-1/12 pl-2">{{ __('Tipo') }} </x-table.headgreen>
-                <x-table.headgreen class="w-3/12 pl-2">{{ __('Concepto') }}</x-table.headgreen>
-                <x-table.headgreen class="w-20 pr-2 text-right">{{ __('Uds.') }}</x-table.headgreen>
-                <x-table.headgreen class="pr-10 text-right w-28">{{ __('Importe') }}</x-table.headgreen>
-                <x-table.headgreen class="w-16 pl-10 text-left">{{ __('% IVA') }}</x-table.headgreen>
-                <x-table.headgreen class="pr-10 text-right w-28">{{ __('Base (€)') }}</x-table.headgreen>
-                <x-table.headgreen class="pr-10 text-right w-28">{{ __('IVA (€)') }}</x-table.headgreen>
-                <x-table.headgreen class="pr-10 text-right w-28">{{ __('Total (€)') }}</x-table.headgreen>
-                <x-table.headgreen class="pl-2 text-left w-28">{{ __('Subcta') }}</x-table.headgreen>
-                <x-table.headgreen class="pr-2 text-left w-28">{{ __('Pagado Por') }}</x-table.headgreen>
-                <x-table.headgreen colspan="2" class="w-1/12"/>
+            <tr class="py-0 my-0">
+                <x-table.headgreen class="w-20 py-0 pl-2 my-0 ">{{ __('Orden') }}</x-table.headgreen>
+                <x-table.headgreen class="w-1/12 py-0 pl-2 my-0 ">{{ __('Tipo') }} </x-table.headgreen>
+                <x-table.headgreen class="w-3/12 py-0 pl-2 my-0 ">{{ __('Concepto') }}</x-table.headgreen>
+                <x-table.headgreen class="w-20 py-0 pr-2 my-0 text-right ">{{ __('Uds.') }}</x-table.headgreen>
+                <x-table.headgreen class="py-0 pr-10 my-0 text-right w-28 ">{{ __('Importe') }}</x-table.headgreen>
+                <x-table.headgreen class="w-16 py-0 pl-10 my-0 text-left ">{{ __('IVA') }}</x-table.headgreen>
+                <x-table.headgreen class="py-0 pr-10 my-0 text-right w-28 ">{{ __('Base (€)') }}</x-table.headgreen>
+                <x-table.headgreen class="py-0 pr-10 my-0 text-right w-28 ">{{ __('IVA (€)') }}</x-table.headgreen>
+                <x-table.headgreen class="py-0 pr-10 my-0 text-right w-28 ">{{ __('Total (€)') }}</x-table.headgreen>
+                <x-table.headgreen class="py-0 pl-2 my-0 text-left w-28 ">{{ __('Subcta') }}</x-table.headgreen>
+                <x-table.headgreen class="py-0 pr-2 my-0 text-left w-28 ">{{ __('Pagado Por') }}</x-table.headgreen>
+                <x-table.headgreen colspan="2" class="w-1/12 py-0 my-0 "/>
             </tr>
         </thead>
         <tbody>
@@ -107,7 +107,7 @@
 
                     <td>
                         <x-jet-button class="w-full text-center bg-blue-600">
-                            {{ __('Añadir detalle') }}
+                            {{ __('Añadir') }}
                         </x-jet-button>
                     </td>
                 </form>

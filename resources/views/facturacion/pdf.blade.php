@@ -54,7 +54,7 @@
 
         <footer>
             <div class="flex justify-center">
-                <img src="{{asset('img/PieSUMA.jpg')}}" width="500"/>
+                <img src="{{asset('img/PieSuma.png')}}" width="500"/>
             </div>
         </footer>
 
