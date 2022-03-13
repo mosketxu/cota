@@ -110,6 +110,8 @@ class Facturaciones extends Component
     }
 
     public function zipSelected(){
+
+
         $this->validate();
         $zip = new ZipArchive;
         $fileName = 'myNewFile.zip';
@@ -119,7 +121,8 @@ class Facturaciones extends Component
             $message="La ruta no existe";
             session()->flash('message', 'No existe este directorio.');
         } else {
-            if ($zip->open(public_path($fileName), ZipArchive::CREATE) === true) {
+            $zip->open($fileName, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
+            // if ($zip->open(public_path($fileName), ZipArchive::CREATE) === true) {
                 $files = File::files(public_path($ruta));
 
                 foreach ($files as $key => $value) {
@@ -128,8 +131,11 @@ class Facturaciones extends Component
                 }
 
                 $zip->close();
-            }
-            return response()->download(public_path($fileName));
+            // }
+            return response()->download(public_path($fileName))->deleteFileAfterSend();
+
+
+
         }
     }
 
