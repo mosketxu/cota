@@ -19,7 +19,6 @@ class CiclosTableSeeder extends Seeder
         \DB::table('ciclos')->delete();
 
         \DB::table('ciclos')->insert([
-             ['id'=>'0','ciclo'=>'No def'],
              ['id'=>'1','ciclo'=>'Mensual'],
              ['id'=>'3','ciclo'=>'Trimestral'],
              ['id'=>'12','ciclo'=>'Anual'],
