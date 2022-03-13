@@ -21,10 +21,14 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', function () {return view('entidades');})->name('entidades');
 
+    // entidades
+    Route::get('/entidad/facturacionconceptos/{entidad}', [EntidadController::class, 'facturacionconceptos'])->name('entidad.facturacionconceptos');
     Route::get('/entidad/pu/{entidad}', [EntidadController::class, 'pus'])->name('entidad.pu');
     Route::get('/entidad/contacto/{entidad}', [EntidadController::class, 'contactos'])->name('entidad.contacto');
     Route::get('/entidad/nuevocontacto/{entidad}', [EntidadController::class, 'createcontacto'])->name('entidad.createcontacto');
-    Route::resource('entidad', EntidadController::class);
+    Route::resource('entidad', EntidadController::class)->only('edit','create');
+
+    //Facturacion
     Route::get('facturacion/import', [FacturacionController::class,'import'])->name('facturacion.import');
     Route::get('facturacion/{factura}/imprimirfactura', [FacturacionController::class,'imprimirfactura'])->name('facturacion.imprimirfactura');
     Route::get('facturacion/{factura}/downfacturapdf', [FacturacionController::class,'downfacturapdf'])->name('facturacion.downfactura');

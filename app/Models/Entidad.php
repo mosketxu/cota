@@ -98,4 +98,9 @@ class Entidad extends Model
     {
         return $this->hasMany(ContactoEntidad::class);
     }
+
+    public function conceptos()
+    {
+        return $this->hasMany(FacturacionConcepto::class);
+    }
 }

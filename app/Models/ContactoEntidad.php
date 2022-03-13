@@ -13,4 +13,9 @@ class ContactoEntidad extends Model
 
     protected $fillable = ['entidad_id','contacto_id','departamento','comentarios'];
 
+    public function entidad()
+    {
+        return $this->belongsTo(Entidad::class);
+    }
+
 }

@@ -14,8 +14,8 @@ class CreateCiclosTable extends Migration
     public function up()
     {
         Schema::create('ciclos', function (Blueprint $table) {
-            $table->integer('id')->unsigned();
-            $table->string('ciclo', 50);
+            $table->id();
+    $table->string('ciclo');
         });
     }
 

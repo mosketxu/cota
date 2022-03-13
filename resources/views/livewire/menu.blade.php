@@ -52,6 +52,9 @@
                         <x-jet-nav-link href="{{ route('facturacion.show',$entmenu)}}" :active="request()->routeIs('facturacion.show')">
                             {{ __('Facturas') }}
                         </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('entidad.facturacionconceptos',$entmenu)}}" :active="request()->routeIs('entidad.facturacionconceptos')">
+                            {{ __('Fac.Conceptos') }}
+                        </x-jet-nav-link>
                     </div>
                 @endif
                 <!-- Settings Dropdown -->

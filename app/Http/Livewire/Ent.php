@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\{Entidad,MetodoPago,Pais,Provincia,Suma, ContactoEntidad};
+use App\Models\{Ciclo, Entidad,MetodoPago,Pais,Provincia,Suma, ContactoEntidad, FacturacionConcepto};
 use Livewire\Component;
 use Illuminate\Validation\Rule;
 
@@ -76,6 +76,7 @@ class Ent extends Component
 
     public function render()
     {
+
         if (!$this->entidad->cliente) $this->entidad->cliente=true;
         if (!$this->entidad->estado) $this->entidad->estado=true;
         $entidad=$this->entidad;
