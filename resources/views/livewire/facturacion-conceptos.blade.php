@@ -123,7 +123,7 @@
                         <label for="ciclocorrespondiente" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
                             Ciclo Correspondiente
                         </label>
-                        <div class="mt-1 sm:mt-0 sm:col-span-2 rounded-md shadow-sm">es {{ $editing->ciclocorrespondiente =='-2' ? 'true' : 'false' . $editing->ciclocorrespondiente }}
+                        <div class="mt-1 sm:mt-0 sm:col-span-2 rounded-md shadow-sm">
                             <select wire:model.defer="editing.ciclocorrespondiente"
                                 class="p-2 form-input border border-blue-300 block w-full transition rounded-lg duration-150 hover:border-blue-300 focus:border-blue-300  active:border-blue-300'" >
                                 <option value="1"  {{ $editing->ciclocorrespondiente=='1' ? 'selected' : '' }}  >Anterior</option>

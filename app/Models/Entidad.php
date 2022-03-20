@@ -21,8 +21,6 @@ class Entidad extends Model
                         'banco3','iban3',
                         'periodoimpuesto_id','metodopago_id','ciclofacturacion_id','cicloimpuesto_id',
                         'diafactura','diavencimiento','referenciacliente',
-                        'conceptofacturacionprincipal','importefacturacionprincipal',
-                        'conceptofacturacionsecundario','importefacturacionsecundario',
                         'tipoiva','porcentajemarta','porcentajesusana',
                         'cuentacontable','observaciones',
                         'suma_id','suma_id','cliente',

@@ -107,10 +107,12 @@
                         <x-input.checkbox wire:model.defer="entidad.favorito" class="w-4 h-4 text-yellow-500 form-checkbox"/><span class="ml-2 text-gray-700">{{ __('Favorito') }}</span>
                     </x-jet-label>
                     <x-jet-label class="inline-flex items-center mt-3">
-                        <input wire:model.defer="entidad.estado" type="checkbox" ><span class="ml-2 text-gray-700">{{ __('Activo') }}</span>
+                        <x-input.checkbox wire:model.defer="entidad.estado" class="w-4 h-4 text-blue-500 form-checkbox"/><span class="ml-2 text-gray-700">{{ __('Activo') }}</span>
+                        {{-- <input wire:model.defer="entidad.estado" type="checkbox" ><span class="ml-2 text-gray-700">{{ __('Activo') }}</span> --}}
                     </x-jet-label>
                     <x-jet-label class="inline-flex items-center mt-3">
-                        <input wire:model.defer="entidad.cliente" type="checkbox" class="w-4 h-4 text-green-600 form-checkbox" ><span class="ml-2 text-gray-700">{{ __('Cliente') }}</span>
+                        <x-input.checkbox wire:model.defer="entidad.cliente" class="w-4 h-4 text-green-500 form-checkbox"/><span class="ml-2 text-gray-700">{{ __('Cliente') }}</span>
+                        {{-- <input wire:model.defer="entidad.cliente" type="checkbox" class="w-4 h-4 text-green-600 form-checkbox" ><span class="ml-2 text-gray-700">{{ __('Cliente') }}</span> --}}
                     </x-jet-label>
                 </div>
             </div>
@@ -235,26 +237,6 @@
                     <x-jet-label for="diavencimiento" >{{ __('Dia Vencimiento') }}</x-jet-label>
                     <x-jet-input  wire:model.defer="entidad.diavencimiento" type="number" id="diavencimiento" name="diavencimiento" :value="old('diavencimiento')" class="w-full"/>
                     <x-jet-input-error for="diavencimiento" class="mt-2" />
-                </div>
-                <div class="w-full form-item">
-                    <x-jet-label for="conceptofacturaprincipal" >{{ __('Concepto Ppal.') }}</x-jet-label>
-                    <x-jet-input  wire:model.defer="entidad.conceptofacturacionprincipal" type="text" id="conceptofacturacionprincipal" name="conceptofacturacionprincipal" :value="old('conceptofacturacionprincipal')" class="w-full"/>
-                    <x-jet-input-error for="conceptofacturacionprincipal" class="mt-2" />
-                </div>
-                <div class="w-full form-item">
-                    <x-jet-label for="importefacturacionprincipal" >{{ __('Importe Ppal.') }}</x-jet-label>
-                    <x-jet-input  wire:model.defer="entidad.importefacturacionprincipal" type="number" step="any" id="importefacturacionprincipal" name="importefacturacionprincipal" :value="old('importefacturacionprincipal')" class="w-full"/>
-                    <x-jet-input-error for="importefacturacionprincipal" class="mt-2" />
-                </div>
-                <div class="w-full form-item">
-                    <x-jet-label for="conceptofacturacionsecundario" >{{ __('Concepto Secund.') }}</x-jet-label>
-                    <x-jet-input  wire:model.defer="entidad.conceptofacturacionsecundario" type="text" id="conceptofacturacionsecundario" name="conceptofacturacionsecundario" :value="old('conceptofacturacionsecundario')" class="w-full"/>
-                    <x-jet-input-error for="conceptofacturacionsecundario" class="mt-2" />
-                </div>
-                <div class="w-full form-item">
-                    <x-jet-label for="importefacturacionsecundario" >{{ __('Importe Secund.') }}</x-jet-label>
-                    <x-jet-input  wire:model.defer="entidad.importefacturacionsecundario" type="number" step="any" id="importefacturacionsecundario" name="importefacturacionsecundario" :value="old('importefacturacionsecundario')" class="w-full"/>
-                    <x-jet-input-error for="importefacturacionsecundario" class="mt-2" />
                 </div>
             </div>
 

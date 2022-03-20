@@ -56,6 +56,7 @@ class FacturacionConceptos extends Component
     }
 
     public function save(){
+        if(!$this->editing->ciclocorrespondiente) $this->editing->ciclocorrespondiente=0;
         $this->editing->entidad_id=$this->entidad->id;
         $this->validate();
         $this->editing->entidad_id=$this->entidad->id;

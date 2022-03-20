@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\{Ciclo, Entidad,MetodoPago,Pais,Provincia,Suma, ContactoEntidad, FacturacionConcepto};
+use App\Models\{Entidad,MetodoPago,Pais,Provincia,Suma, ContactoEntidad, };
 use Livewire\Component;
 use Illuminate\Validation\Rule;
 
@@ -51,10 +51,6 @@ class Ent extends Component
             'entidad.diafactura'=>'numeric|nullable',
             'entidad.diavencimiento'=>'numeric|nullable',
             'entidad.referenciacliente'=>'nullable',
-            'entidad.conceptofacturacionprincipal'=>'nullable',
-            'entidad.importefacturacionprincipal'=>'numeric|nullable',
-            'entidad.conceptofacturacionsecundario'=>'nullable',
-            'entidad.importefacturacionsecundario'=>'numeric|nullable',
             'entidad.tipoiva'=>'numeric|nullable',
             'entidad.suma_id'=>'nullable',
             'entidad.porcentajemarta'=>'numeric|nullable',
@@ -76,9 +72,6 @@ class Ent extends Component
 
     public function render()
     {
-
-        if (!$this->entidad->cliente) $this->entidad->cliente=true;
-        if (!$this->entidad->estado) $this->entidad->estado=true;
         $entidad=$this->entidad;
         $contacto=$this->contacto;
         $this->contactoId=$contacto->id;
@@ -92,7 +85,6 @@ class Ent extends Component
 
     public function save()
     {
-        // $this->validate();
         if($this->entidad->id){
             $i=$this->entidad->id;
             $this->validate([
@@ -106,18 +98,16 @@ class Ent extends Component
             );
             $mensaje=$this->entidad->entidad . " actualizada satisfactoriamente";
         }else{
-
             $this->validate([
                 'entidad.entidad'=>'required|unique:entidades,entidad',
                 'entidad.nif'=>'max:12|unique:entidades,entidad',
                 ]
             );
-
-
             $i=$this->entidad->id;
             $mensaje=$this->entidad->entidad . " creada satisfactoriamente";
         }
 
+        // dd($this->entidad->estado);
         $ent=Entidad::updateOrCreate([
             'id'=>$i
             ],
@@ -148,10 +138,6 @@ class Ent extends Component
             'diafactura'=>$this->entidad->diafactura,
             'diavencimiento'=>$this->entidad->diavencimiento,
             'referenciacliente'=>$this->entidad->referenciacliente,
-            'conceptofacturacionprincipal'=>$this->entidad->conceptofacturacionprincipal,
-            'importefacturacionprincipal'=>$this->entidad->importefacturacionprincipal,
-            'conceptofacturacionsecundario'=>$this->entidad->conceptofacturacionsecundario,
-            'importefacturacionsecundario'=>$this->entidad->importefacturacionsecundario,
             'tipoiva'=>$this->entidad->tipoiva,
             'suma_id'=>$this->entidad->suma_id,
             'porcentajemarta'=>$this->entidad->porcentajemarta,
@@ -173,19 +159,8 @@ class Ent extends Component
                  'comentarios'=>$this->comentario,
             ]);
             $this->dispatchBrowserEvent('notify', 'Contacto añadido con éxito');
-            // $this->reset('contacto');
-            // $this->reset('departamento');
-            // $this->reset('comentario');
-            // $this->emit('contactoupdate');
         }
-        // else
-        //     dd('no hay contacto');
-
-
-        // session()->flash('message', $mensaje);
-        // session()->flash('notify-saved');
         $this->emitSelf('notify-saved');
-
     }
 
 

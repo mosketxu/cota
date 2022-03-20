@@ -72,7 +72,6 @@ class FacturaDetalleCreate extends Component
             $this->detalle->iva=0;
             $this->detalle->subcuenta=0;
             $this->detalle->pagadopor=0;
-
         }
     }
 

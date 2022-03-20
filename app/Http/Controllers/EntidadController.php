@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entidad;
+use App\Models\FacturacionConcepto;
 use Illuminate\Http\Request;
 
 
@@ -39,6 +40,17 @@ class EntidadController extends Controller
 
     public function facturacionconceptos(Entidad $entidad)
     {
+        return view('entidad.facturacionconceptos',compact('entidad'));
+    }
+
+    public function generarfacturacion(Entidad $entidad)
+    {
+        $conceptos=FacturacionConcepto::find($entidad->id);
+        dd($conceptos);
+        foreach ($conceptos as $concepto){
+            dd('sd');
+        }
+
         return view('entidad.facturacionconceptos',compact('entidad'));
     }
 

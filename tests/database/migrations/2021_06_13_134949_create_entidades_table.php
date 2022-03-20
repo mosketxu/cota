@@ -44,10 +44,6 @@ class CreateEntidadesTable extends Migration
             $table->integer('diafactura')->nullable()->default(1);
             $table->integer('diavencimiento')->nullable()->default(10);
             $table->string('referenciacliente', 30)->nullable();
-            $table->string('conceptofacturacionprincipal', 200)->nullable();
-            $table->double('importefacturacionprincipal', 8, 2)->nullable()->default(0.00);
-            $table->string('conceptofacturacionsecundario', 200)->nullable();
-            $table->double('importefacturacionsecundario', 8, 2)->nullable()->default(0.00);
             $table->double('tipoiva', 8, 2)->nullable()->default(0.00);
             $table->double('porcentajemarta', 8, 2)->nullable()->default(0.00);
             $table->double('porcentajesusana', 8, 2)->nullable()->default(0.00);

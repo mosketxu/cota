@@ -51,7 +51,10 @@ class Facturaciones extends Component
         $totales= Facturacion::query()
         ->join('entidades','facturacion.entidad_id','=','entidades.id')
         ->join('facturacion_detalles','facturacion.id','=','facturacion_detalles.facturacion_id')
-        ->select('facturacion.*', 'entidades.entidad', 'entidades.nif','entidades.emailadm',DB::raw('sum(unidades * coste) as totalbase'),DB::raw('sum(unidades * coste * iva) as totaliva'),DB::raw('sum(unidades * coste * (1+ iva)) as totales'))
+        ->select('facturacion.*', 'entidades.entidad', 'entidades.nif','entidades.emailadm',
+            DB::raw('sum(unidades * coste) as totalbase'),
+            DB::raw('sum(unidades * coste * iva) as totaliva'),
+            DB::raw('sum(unidades * coste * (1+ iva)) as totales'))
         ->where('numfactura','<>','')
         ->when($this->filtroenviada!='', function ($query){
             $query->where('enviada',$this->filtroenviada);

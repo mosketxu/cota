@@ -56,7 +56,7 @@
     <div class="flex-col mx-5 mt-2 text-gray-500 rounded-lg">
         <form wire:submit.prevent="save" >
             <div class="flex">
-                <div class="flex-initial w-8/12 py-2 mr-1 bg-white rounded-lg shadow-md">
+                <div class="flex-initial w-7/12 py-2 mr-1 bg-white rounded-lg shadow-md">
                     <div class="px-2 mx-2 my-1 bg-blue-100 rounded-md">
                         <h3 class="font-semibold ">Datos Factura</h3>
                         <x-jet-input  wire:model.defer="factura.id" type="hidden"  id="id" name="id" :value="old('id')"/>
@@ -64,7 +64,7 @@
                     <div class="flex flex-col mx-2 space-y-4 md:space-y-0 md:flex-row md:space-x-1">
                         <div class="form-item">
                             <x-jet-label for="entidad_id">{{ __('Entidad') }}</x-jet-label>
-                            <x-select wire:model.defer="factura.entidad_id" selectname="entidad_id" class="w-full">
+                            <x-select wire:model.lazy="factura.entidad_id" selectname="entidad_id" class="w-full">
                                 <option value="">-- choose --</option>
                                 @foreach ($entidades as $entidad)
                                     <option value="{{ $entidad->id }}">{{ $entidad->entidad }}</option>
@@ -125,7 +125,33 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex-initial w-4/12 py-2 bg-white rounded-lg shadow-md">
+                <div class="flex-initial w-3/12 py-2 mr-1 bg-white rounded-lg shadow-md">
+                    <div class="px-2 mx-2 my-1 bg-yellow-100 rounded-md">
+                        <h3 class="font-semibold ">Conceptos habituales</h3>
+                    </div>
+                    <div class="mx-2 space-y-4 md:space-y-0 md:flex-row md:space-x-1">
+                        <div class="flex">
+                            <x-jet-label class="m-0 w-3/12 pl-2" >{{ __('Ciclo') }}</x-jet-label>
+                            <x-jet-label class="m-0 w-6/12 pl-2" >{{ __('Concepto') }}</x-jet-label>
+                            <x-jet-label class="m-0 w-2/12  text-right" >{{ __('€') }}</x-jet-label>
+                            <x-jet-label class="m-0 w-1/12 pl-2 text-right" >{{ __('') }}</x-jet-label>
+                            <x-jet-label class="m-0 w-1/12  text-right" >{{ __(' ') }}</x-jet-label>
+                        </div>
+                        @forelse ($conceptos as $concepto )
+                            <div class="flex">
+                                <x-jet-input  type="text" id="ciclo_id" name="ciclo_id" :value="$concepto->ciclo->ciclo" class=" m-0 py-0 pl-1 w-3/12" readonly/>
+                                <x-jet-input  type="text" id="concepto" name="concepto" :value="$concepto->concepto" class=" m-0 py-0 px-1 w-6/12" readonly/>
+                                <x-jet-input  type="text" id="importe" name="importe" :value="$concepto->importe" class=" py-0 px-1 w-2/12 text-right" readonly/>
+                                <x-jet-input  type="text" id="ciclocorrespondiente" name="ciclocorrespondiente" :value="$concepto->corresponde" class=" m-0 py-0 px-1 w-1/12" readonly/>
+                                <x-icon.plus wire:click="agregarconcepto({{ $concepto }})" onclick="confirm('¿Estás seguro de querer ñadir una linea?') || event.stopImmediatePropagation()" class="text-purple-500" title="Generar concepto" />
+                            </div>
+                        @empty
+                            <div class="w-3/6 form-item">
+                            </div>
+                        @endforelse
+                    </div>
+                </div>
+                <div class="flex-initial w-2/12 py-2 mr-1 bg-white rounded-lg shadow-md">
                     <div class="px-2 mx-2 my-1 bg-red-100 rounded-md">
                         <h3 class="font-semibold ">Datos Control</h3>
                     </div>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\{Entidad, Facturacion, MetodoPago};
+use App\Models\{Entidad, Facturacion,FacturacionDetalle, FacturacionConcepto, MetodoPago};
 use Illuminate\Support\Facades\Response;
 use Livewire\Component;
 // use Illuminate\Support\Facades\DB;
@@ -12,6 +12,7 @@ class Factura extends Component
 {
 
     public $factura;
+    public $conceptos;
     public $facturada;
     public $mostrarGenerar=0;
     public $message;
@@ -58,7 +59,7 @@ class Factura extends Component
         $this->showgenerar = $facturacion->facturada ? false : true;
         // $this->showgenerar = $this->factura->facturada ? false : true;
         $this->nf=$this->factura->numfactura ? $this->factura->serie.'-'.substr($this->factura->numfactura,-5) :'';
-
+        $this->conceptos=FacturacionConcepto::where('entidad_id',$facturacion->entidad_id)->get();
     }
 
     public function render()
@@ -70,11 +71,16 @@ class Factura extends Component
             }
         }
 
+
         $entidades=Entidad::where('estado','1')->orderBy('entidad')->get();
         $pagos=MetodoPago::all();
         return view('livewire.factura',compact('entidades','pagos','factura'));
     }
 
+    public function updatedFacturaEntidadId()
+    {
+        $this->conceptos=FacturacionConcepto::where('entidad_id',$this->factura->entidad_id)->get();
+    }
 
     public function updatedFacturada(){
         if($this->facturada){
@@ -131,8 +137,29 @@ class Factura extends Component
         }
     }
 
+    public function agregarconcepto(FacturacionConcepto $concepto){
+        if($this->factura->id){
+            $sumaId=!$this->factura->entidad->suma_id ? '1' :$this->factura->entidad->suma_id;
+            FacturacionDetalle::create([
+                'facturacion_id'=>$this->factura->id,
+                'orden'=>'0',
+                'tipo'=>'0',
+                'concepto'=>$concepto->concepto,
+                'unidades'=>'1',
+                'coste'=>$concepto->importe,
+                'iva'=>$this->factura->entidad->tipoiva,
+                'subcuenta'=>'705000',
+                'pagadopor'=>$sumaId,
+                ]);
+            $this->dispatchBrowserEvent('notify', 'Detalle añadido con éxito');
+
+            $this->emit('detallerefresh');
+        }else{
+            $this->dispatchBrowserEvent('notifyred', 'Debes crear la Pre-factura primero');
+        }
+    }
+
     public function presentaPDF(Facturacion $factura){
-        // dd($factura->rutafichero);
         return Response::download('storage/'.$factura->rutafichero);
     }
 

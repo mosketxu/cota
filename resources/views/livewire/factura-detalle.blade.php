@@ -218,12 +218,12 @@
                                     @endif
                                 @else
                                     <div class="flex-1 p-2 text-xs text-left text-gray-600 cursor-pointer" wire:click="editDetalleField({{ $index }}, 'pagadopor')">
-                                        @if($detalle['subcuenta']=='0')
-                                            NP
-                                        @elseif ($detalle['subcuenta']=='1')
-                                            Marta
-                                        @else
+                                        @if($detalle['pagadopor']=='1')
+                                            Marta-
+                                        @elseif ($detalle['pagadopor']=='2')
                                             Susana
+                                        @else
+                                            NP
                                         @endif
                                     </div>
                                 @endif

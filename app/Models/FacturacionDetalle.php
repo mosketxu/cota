@@ -39,6 +39,15 @@ class FacturacionDetalle extends Model
         return $this->iva==0 ? round($this->unidades*$this->coste,2) : 0;
     }
 
+    public function getPorAttribute(){
+        if($this->pagadopor=='1')
+            return 'Marta';
+        elseif($this->pagadopor=='2')
+            return 'Susana';
+        else
+            return 'NP';
+    }
+
     public function getTotalivaAttribute(){
         return round($this->unidades*$this->coste*$this->iva,2);
     }
