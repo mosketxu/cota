@@ -104,13 +104,13 @@
                         <x-input.text wire:model="editing.importe" id="importe" />
                     </x-input.group>
 
-                    <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200  sm:py-5">
+                    <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:py-5">
                         <label for="ciclo_id" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
                             Ciclo
                         </label>
-                        <div class="mt-1 sm:mt-0 sm:col-span-2 rounded-md shadow-sm">
+                        <div class="mt-1 rounded-md shadow-sm sm:mt-0 sm:col-span-2">
                             <select wire:model.defer="editing.ciclo_id"
-                                class="p-2 form-input border border-blue-300 block w-full transition rounded-lg duration-150 hover:border-blue-300 focus:border-blue-300  active:border-blue-300'" >
+                                class="block w-full p-2 transition duration-150 border border-blue-300 rounded-lg form-input hover:border-blue-300 focus:border-blue-300 active:border-blue-300'" >
                                 <option value="">-- choose --</option>
                                 @foreach ($ciclos as $ciclo)
                                     <option value="{{ $ciclo->id }}">{{ $ciclo->ciclo }}</option>
@@ -119,13 +119,13 @@
                             @error('editing.ciclo_id') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
                     </div>
-                    <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200  sm:py-5">
+                    <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:py-5">
                         <label for="ciclocorrespondiente" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
                             Ciclo Correspondiente
                         </label>
-                        <div class="mt-1 sm:mt-0 sm:col-span-2 rounded-md shadow-sm">
+                        <div class="mt-1 rounded-md shadow-sm sm:mt-0 sm:col-span-2">
                             <select wire:model.defer="editing.ciclocorrespondiente"
-                                class="p-2 form-input border border-blue-300 block w-full transition rounded-lg duration-150 hover:border-blue-300 focus:border-blue-300  active:border-blue-300'" >
+                                class="block w-full p-2 transition duration-150 border border-blue-300 rounded-lg form-input hover:border-blue-300 focus:border-blue-300 active:border-blue-300'" >
                                 <option value="1"  {{ $editing->ciclocorrespondiente=='1' ? 'selected' : '' }}  >Anterior</option>
                                 <option value="0" {{ $editing->ciclocorrespondiente=='0' ? 'selected' : '' }} >Corriente</option>
                             </select>

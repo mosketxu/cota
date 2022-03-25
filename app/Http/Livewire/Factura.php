@@ -2,11 +2,16 @@
 
 namespace App\Http\Livewire;
 
+// use App\Actions\MonthQuarterAction;
+
+use App\Actions\FacturaConceptoStoreAction;
 use App\Models\{Entidad, Facturacion,FacturacionDetalle, FacturacionConcepto, MetodoPago};
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Response;
 use Livewire\Component;
-// use Illuminate\Support\Facades\DB;
 
+
+// use Illuminate\Support\Facades\DB;
 
 class Factura extends Component
 {
@@ -71,8 +76,7 @@ class Factura extends Component
             }
         }
 
-
-        $entidades=Entidad::where('estado','1')->orderBy('entidad')->get();
+        $entidades=Entidad::where('estado','1')->where('cliente','1')->orderBy('entidad')->get();
         $pagos=MetodoPago::all();
         return view('livewire.factura',compact('entidades','pagos','factura'));
     }
@@ -80,6 +84,14 @@ class Factura extends Component
     public function updatedFacturaEntidadId()
     {
         $this->conceptos=FacturacionConcepto::where('entidad_id',$this->factura->entidad_id)->get();
+        $DateEntero = strtotime(date("d-m-Y"));
+        $mes = date("m", $DateEntero);
+        $anyo = date("Y", $DateEntero);
+        if(!$this->factura->fechafactura){
+            $entidad=Entidad::find($this->factura->entidad_id);
+            $this->factura->fechafactura=$entidad->diafactura.'-'.$mes.'-'.$anyo;
+            $this->factura->fechavencimiento=$entidad->diavencimiento.'-'.$mes.'-'.$anyo;
+        }
     }
 
     public function updatedFacturada(){
@@ -93,7 +105,6 @@ class Factura extends Component
             $this->redirect( route('facturacion.edit',$f) );
         }
     }
-
 
     public function save(){
         $this->validate();
@@ -139,20 +150,7 @@ class Factura extends Component
 
     public function agregarconcepto(FacturacionConcepto $concepto){
         if($this->factura->id){
-            $sumaId=!$this->factura->entidad->suma_id ? '1' :$this->factura->entidad->suma_id;
-            FacturacionDetalle::create([
-                'facturacion_id'=>$this->factura->id,
-                'orden'=>'0',
-                'tipo'=>'0',
-                'concepto'=>$concepto->concepto,
-                'unidades'=>'1',
-                'coste'=>$concepto->importe,
-                'iva'=>$this->factura->entidad->tipoiva,
-                'subcuenta'=>'705000',
-                'pagadopor'=>$sumaId,
-                ]);
-            $this->dispatchBrowserEvent('notify', 'Detalle añadido con éxito');
-
+            $c=FacturaConceptoStoreAction::execute($this->factura,$concepto);
             $this->emit('detallerefresh');
         }else{
             $this->dispatchBrowserEvent('notifyred', 'Debes crear la Pre-factura primero');
