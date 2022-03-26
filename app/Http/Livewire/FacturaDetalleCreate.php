@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\{ FacturacionDetalle};
+use App\Models\{Facturacion, FacturacionDetalle};
 
 
 use Livewire\Component;
@@ -33,8 +33,8 @@ class FacturaDetalleCreate extends Component
         $this->detalle->tipo=0;
         $this->detalle->unidades=1;
         $this->detalle->coste=0;
-        $this->detalle->iva=0;
-        $this->detalle->subcuenta=0;
+        $this->detalle->iva='0.21';
+        $this->detalle->subcuenta='705000';
         $this->detalle->pagadopor=0;
         $facturacion=$this->facturacion->id;
     }
@@ -43,6 +43,28 @@ class FacturaDetalleCreate extends Component
     {
         $facturacion=$this->facturacion;
         return view('livewire.factura-detalle-create');
+    }
+
+    public function updatedDetalleTipo()
+    {
+        switch ($this->detalle->tipo) {
+            case '0':
+                $this->detalle->iva='0.21';
+                $this->detalle->subcuenta='705000';
+                break;
+            case '1':
+                $this->detalle->iva='0.00';
+                $this->detalle->subcuenta='759000';
+                break;
+            case '2':
+                $this->detalle->iva='0.21';
+                $this->detalle->subcuenta='759000';
+                break;
+            default:
+            $this->detalle->iva='0.21';
+            $this->detalle->subcuenta='705000';
+            break;
+        }
     }
 
     public function save()
@@ -73,7 +95,11 @@ class FacturaDetalleCreate extends Component
             $this->detalle->subcuenta=0;
             $this->detalle->pagadopor=0;
         }
+
+        $f=Facturacion::find($this->detalle->facturacion_id);
+        if($f) $f->imprimirfactura();
     }
+
 
 }
 

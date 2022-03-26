@@ -1,6 +1,8 @@
-@props(['disabled' => false,'selectname'])
+@props(['disabled' => '','selectname'])
 
-<select name= {{$selectname}} {{$attributes->merge(['class'=>"text-xs border-gray-300 rounded-md shadow-sm text-gray-600 bg-white hover:border-gray-400 focus:outline-none appearance-none"]) }}>
+<select name= {{$selectname}}
+    {{$attributes->merge(['class'=>"text-xs border-gray-300 rounded-md shadow-sm text-gray-600 bg-white hover:border-gray-400 focus:outline-none appearance-none"]) }}
+    {{ $disabled }}>
     {{ $slot }}
 </select>
 

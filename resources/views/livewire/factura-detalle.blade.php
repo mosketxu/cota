@@ -251,17 +251,31 @@
                         </x-table.row>
                     @endforelse
                 </tbody>
-                <tfoot class="font-bold divide-y divide-gray-200">
+                <tfoot class="font-bold ">
                     <tr>
                         <td class="w-20 pl-2"></td>
                         <td class="w-1/12 pl-2"></td>
                         <td class="w-3/12 pl-2"></td>
                         <td class="w-20 pr-2 text-right"></td>
-                        <td class="pr-10 text-right w-28"></td>
+                        <td class="w-16 pl-10 text-left border"></td>
+                        <td class="text-center border w-28">Base</td>
+                        <td class="text-center border w-28">Exenta/Sup.</td>
+                        <td class="text-center border w-28">I.V.A.</td>
+                        <td class="text-center border w-28">Total</td>
+                        <td class="pl-2 text-left w-28"></td>
+                        <td class="pr-2 text-left w-28"></td>
+                        <td colspan="2" class="w-1/12"></td>
+                    </tr>
+                    <tr>
+                        <td class="w-20 pl-2"></td>
+                        <td class="w-1/12 pl-2"></td>
+                        <td class="w-3/12 pl-2"></td>
+                        <td class="w-20 pr-2 text-right"></td>
                         <td class="w-16 pl-10 text-left border">Total</td>
-                        <td class="pr-10 text-right border w-28">{{ number_format($base,2,',','.') }}</td>
-                        <td class="pr-10 text-right border w-28">{{ number_format($totaliva,2,',','.') }}</td>
-                        <td class="pr-10 text-right border w-28">{{ number_format($total,2,',','.') }}</td>
+                        <td class="text-center border w-28">{{ number_format($base,2,',','.') }}</td>
+                        <td class="text-center border w-28">{{ number_format($exenta,2,',','.') }}</td>
+                        <td class="text-center border w-28">{{ number_format($totaliva,2,',','.') }}</td>
+                        <td class="text-center border w-28">{{ number_format($total,2,',','.') }}</td>
                         <td class="pl-2 text-left w-28"></td>
                         <td class="pr-2 text-left w-28"></td>
                         <td colspan="2" class="w-1/12"></td>

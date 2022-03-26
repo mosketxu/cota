@@ -126,21 +126,21 @@ class Facturacion extends Model
         return $this->serie.'_'.substr($this->numfactura,-5);
     }
 
-    public function scopeImprimirfactura()
-    {
-        $factura=Facturacion::with('entidad')
-        ->with('facturadetalles')
-        ->find($this->id);
+    // public function scopeImprimirfactura()
+    // {
+    //     $factura=Facturacion::with('entidad')
+    //     ->with('facturadetalles')
+    //     ->find($this->id);
 
-        $base=$factura->facturadetalles->where('iva', '!=', '0')->sum('base');
-        $suplidos=$factura->facturadetalles->where('iva', '0')->sum('base');
-        $totaliva=$factura->facturadetalles->sum('totaliva');
-        $total=$factura->facturadetalles->sum('total');
+    //     $base=$factura->facturadetalles->where('iva', '!=', '0')->sum('base');
+    //     $suplidos=$factura->facturadetalles->where('iva', '0')->sum('base');
+    //     $totaliva=$factura->facturadetalles->sum('totaliva');
+    //     $total=$factura->facturadetalles->sum('total');
 
-        $pdf = \PDF::loadView('facturacion.facturapdf', compact(['factura','base','suplidos','totaliva','total']));
+    //     $pdf = \PDF::loadView('facturacion.facturapdf', compact(['factura','base','suplidos','totaliva','total']));
 
-        Storage::put('public/'.$factura->ruta.'/'.$factura->fichero, $pdf->output());
+    //     Storage::put('public/'.$factura->ruta.'/'.$factura->fichero, $pdf->output());
 
-        return $pdf->download($factura->fichero);
-    }
+    //     return $pdf->download($factura->fichero);
+    // }
 }

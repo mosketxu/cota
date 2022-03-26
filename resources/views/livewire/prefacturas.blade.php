@@ -3,7 +3,6 @@
 
     <div class="p-1 mx-2">
         <h1 class="text-2xl font-semibold text-gray-900">Pre-Facturación {{ $entidad->id? 'de '. $entidad->entidad  :'' }} </h1>
-
         <div class="py-1 space-y-4">
             @if (session()->has('message'))
                 <div id="alert" class="relative px-6 py-2 mb-2 text-white bg-red-200 border-red-500 rounded border-1">
@@ -152,7 +151,7 @@
                                 </td>
                                 <td class="">
                                     <div class="flex items-center justify-center">
-                                        <x-icon.invoice-a href="{{ route('facturacion.edit',$facturacion) }}" title="Pre-Factura"/>
+                                        <x-icon.invoice-a href="{{ route('facturacion.editprefactura',$facturacion) }}" title="Pre-Factura"/>
                                         <x-icon.delete-a wire:click.prevent="delete({{ $facturacion->id }})" onclick="confirm('¿Estás seguro?') || event.stopImmediatePropagation()" class="pl-1 " title="Borrar"/>
                                     </div>
                                 </td>

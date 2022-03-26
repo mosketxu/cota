@@ -81,7 +81,10 @@
                         @foreach($factura->facturadetalles as $detalle)
                         <tr>
                             <td width="70%" >{{ $detalle->tipo=='1' ? 'Suplidos:' :'' }} {{$detalle->concepto}}</td>
-                            <td width="25%" style="text-align: right">{{number_format($detalle->base,2,',','.')}} <span style="font-family: Arial">€</span> </td>
+                            <td width="25%" style="text-align: right">
+                                {{ $detalle->tipo=='1' ? number_format($detalle->exenta,2,',','.') : number_format($detalle->base,2,',','.') }}
+                                <span style="font-family: Arial">€</span>
+                            </td>
                         </tr>
                         @endforeach
                     </table>

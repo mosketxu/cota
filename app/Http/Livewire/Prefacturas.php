@@ -38,7 +38,6 @@ class Prefacturas extends Component
 
         if($this->selectAll) $this->selectPageRows();
         $facturaciones = $this->rows;
-
         return view('livewire.prefacturas',compact('facturaciones'));
     }
 

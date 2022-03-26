@@ -34,10 +34,17 @@ class FacturacionController extends Controller
         return view('facturacion.entidad',compact(['entidad']));
     }
 
+    public function editprefactura($facturacionId)
+    {
+        $facturacion=Facturacion::find($facturacionId);
+        return view('facturacion.editprefactura',compact('facturacion'));
+    }
+
     public function edit(Facturacion $facturacion)
     {
         return view('facturacion.edit',compact('facturacion'));
     }
+
 
 
     public function prefacturas(){
@@ -57,31 +64,30 @@ class FacturacionController extends Controller
     }
 
 
-    public function imprimirfactura(Facturacion $factura)
-    {
+    // public function imprimirfactura(Facturacion $factura)
+    // {
 
-        $factura=Facturacion::with('entidad')
-        ->with('facturadetalles')
-        ->find($factura->id);
+    //     $factura=Facturacion::with('entidad')
+    //     ->with('facturadetalles')
+    //     ->find($factura->id);
 
-        $base=$factura->facturadetalles->where('iva', '!=', '0')->sum('base');
-        $suplidos=$factura->facturadetalles->where('iva', '0')->sum('base');
-        $totaliva=$factura->facturadetalles->sum('totaliva');
-        $total=$factura->facturadetalles->sum('total');
+    //     $base=$factura->facturadetalles->where('iva', '!=', '0')->sum('base');
+    //     $suplidos=$factura->facturadetalles->where('iva', '0')->sum('exenta');
+    //     $totaliva=$factura->facturadetalles->sum('totaliva');
+    //     $total=$factura->facturadetalles->sum('total');
 
-        $ruta=$factura->serie.'/'.$factura->fechafactura->format('m');
-        $fichero='Fra_Suma_'.$factura->serie.'_'.substr ( $factura->numfactura ,-5 ).'_'.substr ( $factura->entidad->entidad ,0,10 ) ;
+    //     $ruta=$factura->serie.'/'.$factura->fechafactura->format('m');
+    //     $fichero='Fra_Suma_'.$factura->serie.'_'.substr ( $factura->numfactura ,-5 ).'_'.substr ( $factura->entidad->entidad ,0,10 ) ;
 
-        $pdf = \PDF::loadView('facturacion.facturapdf', compact(['factura','base','suplidos','totaliva','total']));
+    //     $pdf = \PDF::loadView('facturacion.facturapdf', compact(['factura','base','suplidos','totaliva','total']));
 
-        Storage::put('public/facturas/'.$ruta.'/'.$fichero.'.pdf', $pdf->output());
+    //     return view('facturacion.edit',compact('facturacion'));
 
-        return $pdf->stream($fichero.'.pdf');
-        // return $pdf->download($fichero.'.pdf');
+    //     Storage::put('public/facturas/'.$ruta.'/'.$fichero.'.pdf', $pdf->output());
 
-        // redirect()->back();
+    //     return $pdf->stream($fichero.'.pdf');
 
-    }
+    // }
 
     public function downloadZip()
     {

@@ -9,24 +9,12 @@ use Livewire\Component;
 
 class FacturaDetalle extends Component
 {
-    public $facturacion;
-    public $base;
-    public $exenta;
-    public $totaliva;
-    public $total;
+    public $facturacion, $base, $exenta, $totaliva, $total;
     public $editedDetalleIndex = null;
     public $editedDetalleField = null;
     public $detalles=[];
     public $showcrear=false;
-
     protected $listeners = [ 'funshow'=>'funshowdetalle','detallerefresh' => '$refresh'];
-
-    public function funshowdetalle()
-    {
-        $this->showcrear=true;
-        $this->emit('detallerefresh');
-    }
-
 
     protected $rules = [
         'detalles.*.orden' => ['numeric'],
@@ -45,7 +33,7 @@ class FacturaDetalle extends Component
             ->orderBy('orden')
             ->get()
             ->toArray();
-            }
+    }
 
     public function render(){
 
@@ -55,7 +43,6 @@ class FacturaDetalle extends Component
         $this->exenta=$factura->facturadetalles->sum('exenta');
         $this->totaliva=$factura->facturadetalles->sum('totaliva');
         $this->total=$factura->facturadetalles->sum('total');
-        // $this->total=$this->base+$this->totaliva;
 
         $this->detalles = FacturacionDetalle::where('facturacion_id', $this->facturacion->id)
             ->orderBy('orden')
@@ -66,6 +53,11 @@ class FacturaDetalle extends Component
             return view('livewire.factura-detalle-blocked',compact(['factura']));
         else
             return view('livewire.factura-detalle',compact(['factura']));
+    }
+
+    public function funshowdetalle(){
+        $this->showcrear=true;
+        $this->emit('detallerefresh');
     }
 
     public function editDetalle($detalleIndex){
@@ -100,7 +92,9 @@ class FacturaDetalle extends Component
         }
         $this->editedDetalleIndex = null;
         $this->editedDetalleField = null;
-
+        $f=Facturacion::find($p->facturacion_id);
+$f->imprimirfactura();
+        $this->emit('detallerefresh');
     }
 
     public function delete($facturadetalleId)
@@ -109,6 +103,9 @@ class FacturaDetalle extends Component
 
         if ($facturadetalleBorrar) {
             $facturadetalleBorrar->delete();
+            $f=Facturacion::find($facturadetalleBorrar->facturacion_id);
+            if($f) $f->imprimirfactura();
+
             $this->dispatchBrowserEvent('notify', 'Detalle de factura eliminado!');
         }
     }

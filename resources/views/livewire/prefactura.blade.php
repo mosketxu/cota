@@ -2,10 +2,25 @@
     @livewire('navigation-menu')
     <div class="flex justify-between mx-5 mt-2">
         <div class="">
-            <h1 class="text-2xl font-semibold text-gray-900">Factura  {{ $nf }}</h1>
+            @if($pre=='no')
+                <h1 class="text-2xl font-semibold text-gray-900">{{ $titulo }} {{ $factura->id  }}</h1>
+            @else
+                <h1 class="text-2xl font-semibold text-gray-900">Nueva Prefactura</h1>
+            @endif
         </div>
         <div class="">
-            <x-icon.pdf-a onclick="location.href = '{{asset('storage/'.$factura->rutafichero)}}'" class="pt-2 ml-2" title="PDF"/>
+            @if($showgenerar && !$factura->numfactura)
+                <x-button.button  wire:click="creafactura({{ $factura }})" color="green">{{ __('Generar Factura') }}</x-button.button>
+            @endif
+            @if($showgenerar && $factura->numfactura)
+                <x-button.button  wire:click="creafactura({{ $factura }})" color="green">{{ __('Actualiza Factura') }}</x-button.button>
+            @endif
+            @if(!$showgenerar)
+                <x-icon.pdf-a wire:click="presentaPDF({{ $factura }})" class="pt-2 ml-2" title="PDF"/>
+            @endif
+            @if($pre=='pre')
+                <x-button.button  onclick="location.href = '{{ route('facturacion.create') }}'" color="blue">{{ __('Nueva Prefactura') }}</x-button.button>
+            @endif
         </div>
     </div>
 
@@ -46,8 +61,8 @@
                     </div>
                     <div class="flex flex-col mx-2 space-y-4 md:space-y-0 md:flex-row md:space-x-1">
                         <div class="form-item">
-                            <x-jet-label for="entidad_id">{{ __('Entidad') }} </x-jet-label>
-                            <x-select wire:model.lazy="factura.entidad_id" selectname="entidad_id" class="w-full" disabled="{{ $bloqueado }}">
+                            <x-jet-label for="entidad_id">{{ __('Entidad') }}</x-jet-label>
+                            <x-select wire:model.lazy="factura.entidad_id" selectname="entidad_id" class="w-full">
                                 <option value="">-- choose --</option>
                                 @foreach ($entidades as $entidad)
                                     <option value="{{ $entidad->id }}">{{ $entidad->entidad }}</option>
@@ -56,7 +71,7 @@
                         </div>
                         <div class="form-item">
                             <x-jet-label for="serie">{{ __('Serie') }}</x-jet-label>
-                            <x-select wire:model.defer="factura.serie" selectname="serie" class="w-full"  disabled="{{ $bloqueado }}">
+                            <x-select wire:model.defer="factura.serie" selectname="serie" class="w-full">
                                 <option value="">--Serie--</option>
                                 <option value="21">21</option>
                                 <option value="22">22</option>
@@ -67,22 +82,22 @@
                         </div>
                         <div class="form-item">
                             <x-jet-label for="numfactura">{{ __('Factura') }}</x-jet-label>
-                            <x-jet-input  wire:model.defer="nf" type="text"  id="numfactura" name="numfactura" :value="old('numfactura') " class="w-full bg-gray-100" readonly/>
+                            <x-jet-input  wire:model.defer="nf" type="text"  id="numfactura" name="numfactura" :value="old('numfactura') " readonly class="w-full bg-gray-100"/>
                             <x-jet-input-error for="numfactura" class="mt-2" />
                         </div>
                         <div class="form-item">
                             <x-jet-label for="fechafactura">{{ __('F.Factura') }}</x-jet-label>
-                            <x-jet-input  wire:model.defer="factura.fechafactura" type="date"  id="fechafactura" name="fechafactura" :value="old('fechafactura') " class="w-full"  disabled="{{ $bloqueado }}"/>
+                            <x-jet-input  wire:model.defer="factura.fechafactura" type="date"  id="fechafactura" name="fechafactura" :value="old('fechafactura') "  class="w-full"/>
                             <x-jet-input-error for="fechafactura" class="mt-2" />
                         </div>
                         <div class="form-item">
                             <x-jet-label for="fechavencimiento">{{ __('F.Vto.') }}</x-jet-label>
-                            <x-jet-input  wire:model.defer="factura.fechavencimiento" type="date"  id="fechavencimiento" name="fechavencimiento" :value="old('fechavencimiento')" class="w-full"  disabled="{{ $bloqueado }}"/>
+                            <x-jet-input  wire:model.defer="factura.fechavencimiento" type="date"  id="fechavencimiento" name="fechavencimiento" :value="old('fechavencimiento') "  class="w-full"/>
                             <x-jet-input-error for="fechavencimiento" class="mt-2" />
                         </div>
                         <div class="form-item">
                             <x-jet-label for="metodopago_id">{{ __('M.Pago') }}</x-jet-label>
-                            <x-select wire:model.defer="factura.metodopago_id" selectname="metodopago_id" class="w-full" disabled="{{ $bloqueado }}">
+                            <x-select wire:model.defer="factura.metodopago_id" selectname="metodopago_id" class="w-full">
                                 <option value="">-- choose --</option>
                                 @foreach ($pagos as $pago)
                                     <option value="{{ $pago->id }}">{{ $pago->metodopagocorto }}</option>
@@ -93,17 +108,17 @@
                     <div class="flex flex-col mx-2 space-y-4 md:space-y-0 md:flex-row md:space-x-1">
                         <div class="w-3/6 form-item">
                             <x-jet-label for="mail">{{ __('Mail') }}</x-jet-label>
-                            <x-jet-input  wire:model.defer="factura.mail" type="text"  id="mail" name="mail" :value="old('mail') " class="w-full" disabled="{{ $bloqueado }}"/>
+                            <x-jet-input  wire:model.defer="factura.mail" type="text"  id="mail" name="mail" :value="old('mail') " class="w-full"/>
                             <x-jet-input-error for="mail" class="mt-2" />
                         </div>
                         <div class="w-1/6 form-item">
                             <x-jet-label for="refcliente">{{ __('Ref.Cliente') }}</x-jet-label>
-                            <x-jet-input  wire:model.defer="factura.refcliente" type="text"  id="refcliente" name="refcliente" :value="old('refcliente') " class="w-full" disabled="{{ $bloqueado }}"/>
+                            <x-jet-input  wire:model.defer="factura.refcliente" type="text"  id="refcliente" name="refcliente" :value="old('refcliente') "  class="w-full"/>
                             <x-jet-input-error for="refcliente" class="mt-2" />
                         </div>
                         <div class="w-2/6 form-item">
                             <x-jet-label for="observaciones">{{ __('Observaciones') }}</x-jet-label>
-                            <x-jet-input  wire:model.defer="factura.observaciones" type="text"  id="observaciones" name="observaciones" :value="old('observaciones') " class="w-full" disabled="{{ $bloqueado }}"/>
+                            <x-jet-input  wire:model.defer="factura.observaciones" type="text"  id="observaciones" name="observaciones" :value="old('observaciones') " class="w-full"/>
                             <x-jet-input-error for="observaciones" class="mt-2" />
                         </div>
                     </div>
@@ -126,9 +141,7 @@
                                 <x-jet-input  type="text" id="concepto" name="concepto" :value="$concepto->concepto" class="w-6/12 px-1 py-0 m-0 " readonly/>
                                 <x-jet-input  type="text" id="importe" name="importe" :value="$concepto->importe" class="w-2/12 px-1 py-0 text-right " readonly/>
                                 <x-jet-input  type="text" id="ciclocorrespondiente" name="ciclocorrespondiente" :value="$concepto->corresponde" class="w-1/12 px-1 py-0 m-0 " readonly/>
-                                @if($factura->facturada==false)
-                                    <x-icon.plus wire:click="agregarconcepto({{ $concepto }})" onclick="confirm('¿Estás seguro de querer ñadir una linea?') || event.stopImmediatePropagation()" class="text-purple-500" title="Generar concepto" />
-                                @endif
+                                <x-icon.plus wire:click="agregarconcepto({{ $concepto }})" onclick="confirm('¿Estás seguro de querer ñadir una linea?') || event.stopImmediatePropagation()" class="text-purple-500" title="Generar concepto" />
                             </div>
                         @empty
                             <div class="w-3/6 form-item">
@@ -151,7 +164,8 @@
                         </div>
                         <div class="flex-auto pb-3 form-item">
                             <label for="facturada"  title="Facturada"><x-icon.invoice/></label>
-                            <input type="checkbox" wire:model="factura.facturada" checked class="mx-auto" title="Facturada"/>
+                            {{-- <input type="checkbox" wire:model="factura.facturada" checked class="mx-auto" title="Facturada"/> --}}
+                            <input type="checkbox" wire:model="facturada" checked class="mx-auto" title="Facturada"/>
                         </div>
                         <div class="flex-auto pb-3 form-item">
                             <label for="pagada" title="Pagada"><x-icon.money/></label>
@@ -181,24 +195,30 @@
                 </div>
             </div>
             <div class="flex mt-2 ml-4 space-x-4">
-                @if($factura->facturada==False)
+                @if($showgenerar)
                     <div class="space-x-3">
                         <x-jet-button class="bg-blue-600">{{ __('Guardar') }}</x-jet-button>
                         <span
                             x-data="{ open: false }"
-                            x-init="@this.on('notify-saved', () => {
+                            x-init="
+                                @this.on('notify-saved', () => {
                                     if (open === false) setTimeout(() => { open = false }, 2500);
-                                    open = true;})"
-                            x-show.transition.out.duration.1000ms="open"
-                            style="display: none;"
-                            class="p-2 m-2 text-gray-500 rounded-lg bg-green-50">
-                            Saved!
-                        </span>
+                                    open = true;
+                                })
+                            "
+                        x-show.transition.out.duration.1000ms="open"
+                        style="display: none;"
+                        class="p-2 m-2 text-gray-500 rounded-lg bg-green-50"
+                        >Saved!</span>
                     </div>
                 @endif
-                <div class="space-x-3">
-                    <x-jet-secondary-button  onclick="location.href = '{{route('facturacion.index')}}'">{{ __('Volver') }}</x-jet-secondary-button>
-                </div>
+                    <div class="space-x-3">
+                        <x-jet-secondary-button  onclick="location.href = '{{route('facturacion.index')}}'">{{ __('Volver') }}</x-jet-secondary-button>
+                    </div>
+                    <div class="">
+                        pre es {{ $pre }}
+                    </div>
+
             </div>
         </form>
     </div>
