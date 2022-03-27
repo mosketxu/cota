@@ -5,7 +5,7 @@
             <h1 class="text-2xl font-semibold text-gray-900">Factura  {{ $nf }}</h1>
         </div>
         <div class="">
-            <x-icon.pdf-a onclick="location.href = '{{asset('storage/'.$factura->rutafichero)}}'" class="pt-2 ml-2" title="PDF"/>
+            <a href = '{{asset('storage/'.$factura->rutafichero)}}'  target='_blank'  class="pt-2 ml-2" title="PDF"><x-icon.pdf class="text-gray-400"></x-icon.pdf></a>
         </div>
     </div>
 

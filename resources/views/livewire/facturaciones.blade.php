@@ -77,7 +77,6 @@
                             <x-dropdown.item type="button" wire:click="exportSelected" class="flex items-center space-x-2">
                                 <x-icon.csv class="text-green-400"></x-icon.csv><span>Export </span>
                             </x-dropdown.item>
-                            {{-- <x-dropdown.item type="button" onclick="confirm('¿Estas seguro?') || event.stopImmediatePropagation()" wire:click="deleteSelected" class="flex items-center space-x-2"> --}}
                             <x-dropdown.item type="button" wire:click="$toggle('showDeleteModal')" class="flex items-center space-x-2">
                                 <x-icon.trash class="text-red-400"></x-icon.trash> <span>Delete </span>
                             </x-dropdown.item>
@@ -206,11 +205,7 @@
                                 <td class="">
                                     <div class="flex items-center justify-center">
                                         <x-icon.invoice-a href="{{ route('facturacion.edit',$facturacion) }}" title="Factura"/>
-                                        @if($facturacion->numfactura)
-                                            <x-icon.pdf-a href="{{route('facturacion.imprimirfactura',$facturacion) }}" title="PDF"/>
-                                        @else
-                                            <x-icon.pdf-b title="PDF" disabled/>
-                                        @endif
+                                            <a href = '{{asset('storage/'.$facturacion->rutafichero)}}'  target='_blank'  class="pt-2 ml-2" title="PDF"><x-icon.pdf class="mb-2"></x-icon.pdf></a>
                                         &nbsp;&nbsp;&nbsp;
                                         <x-icon.delete-a wire:click.prevent="delete({{ $facturacion->id }})" onclick="confirm('¿Estás seguro?') || event.stopImmediatePropagation()" class="pl-1 " title="Borrar"/>
                                     </div>
