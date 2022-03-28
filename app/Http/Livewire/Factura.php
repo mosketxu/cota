@@ -7,6 +7,7 @@ namespace App\Http\Livewire;
 use App\Actions\FacturaConceptoStoreAction;
 use App\Actions\FacturaCreateAction;
 use App\Actions\FacturaImprimirAction;
+use App\Actions\FacturaReplicarAction;
 use App\Models\{Entidad, Facturacion, FacturacionConcepto, MetodoPago};
 use Illuminate\Support\Facades\Response;
 use Livewire\Component;
@@ -15,7 +16,6 @@ use Livewire\Component;
 
 class Factura extends Component
 {
-
     public $factura, $conceptos, $facturada, $message, $showgenerar, $nf,$pre,$titulo;
     public $bloqueado=false;
 
@@ -48,7 +48,7 @@ class Factura extends Component
         ];
     }
 
-    public function mount(Facturacion $facturacion,$pre)
+    public function mount(Facturacion $facturacion)
     {
         $this->factura=$facturacion;
         $this->showgenerar = $facturacion->facturada ? false : true;
@@ -103,13 +103,15 @@ class Factura extends Component
             'notas'=>$this->factura->notas,
         ]);
         $f->save();
-        FacturaImprimirAction::execute($f);
+        $fac=new FacturaImprimirAction;
+        $fac->execute($f);
         $this->emitSelf('notify-saved');
     }
 
     public function agregarconcepto(FacturacionConcepto $concepto){
         if($this->factura->id){
-            $c=FacturaConceptoStoreAction::execute($this->factura,$concepto);
+            $fac= new FacturaConceptoStoreAction;
+            $fac->execute($this->factura,$concepto);
             $this->emit('detallerefresh');
         }else{
             $this->dispatchBrowserEvent('notifyred', 'Debes crear la Pre-factura primero');
@@ -126,12 +128,13 @@ class Factura extends Component
             'factura.fechafactura'=>'required',
             'factura.metodopago_id'=>'required',
         ]);
-
-        $fac=FacturaCreateAction::execute($factura);
-        $factura->imprimirfactura();
-        // $this->nf=$factura->serie.'-'.substr($fac,-5);
+        $fac=new FacturaCreateAction;
+        $fac->execute($factura);
+        $fac=new FacturaImprimirAction;
+        $fac->execute($factura);
         $this->redirect( route('facturacion.edit',$factura) );
     }
+
 
     public function delete($facturacionId){
         $facturaBorrar = Facturacion::find($facturacionId);

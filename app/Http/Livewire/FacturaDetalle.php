@@ -93,7 +93,7 @@ class FacturaDetalle extends Component
         $this->editedDetalleIndex = null;
         $this->editedDetalleField = null;
         $f=Facturacion::find($p->facturacion_id);
-$f->imprimirfactura();
+        if($f->numerofactura) $f->imprimirfactura();
         $this->emit('detallerefresh');
     }
 
@@ -104,7 +104,7 @@ $f->imprimirfactura();
         if ($facturadetalleBorrar) {
             $facturadetalleBorrar->delete();
             $f=Facturacion::find($facturadetalleBorrar->facturacion_id);
-            if($f) $f->imprimirfactura();
+            if($f->numfactura) $f->imprimirfactura();
 
             $this->dispatchBrowserEvent('notify', 'Detalle de factura eliminado!');
         }

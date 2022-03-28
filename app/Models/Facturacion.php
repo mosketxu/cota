@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -25,8 +26,6 @@ class Facturacion extends Model
 
     protected $fillable=['numfactura','serie','entidad_id','fechafactura','fechavencimiento','metodopago_id','refcliente','mail',
     'facturada','enviar','enviada','pagada','facturable','asiento','fechaasiento','observaciones','notas','ruta','fichero'];
-
-
 
     public function metodopago()
     {
@@ -126,21 +125,31 @@ class Facturacion extends Model
         return $this->serie.'_'.substr($this->numfactura,-5);
     }
 
-    // public function scopeImprimirfactura()
-    // {
-    //     $factura=Facturacion::with('entidad')
-    //     ->with('facturadetalles')
-    //     ->find($this->id);
-
-    //     $base=$factura->facturadetalles->where('iva', '!=', '0')->sum('base');
-    //     $suplidos=$factura->facturadetalles->where('iva', '0')->sum('base');
-    //     $totaliva=$factura->facturadetalles->sum('totaliva');
-    //     $total=$factura->facturadetalles->sum('total');
-
-    //     $pdf = \PDF::loadView('facturacion.facturapdf', compact(['factura','base','suplidos','totaliva','total']));
-
-    //     Storage::put('public/'.$factura->ruta.'/'.$factura->fichero, $pdf->output());
-
-    //     return $pdf->download($factura->fichero);
-    // }
+    public function scopeFacturas(Builder $query, $filtroenviada, $filtropagada, $filtrofacturado,$filtroanyo,$filtromes ,$search) : Builder
+    {
+        return $query->join('entidades','facturacion.entidad_id','=','entidades.id')
+            ->join('facturacion_detalles','facturacion.id','=','facturacion_detalles.facturacion_id')
+            ->select('facturacion.*', 'entidades.entidad', 'entidades.nif','entidades.emailadm',
+                DB::raw('sum(unidades * coste) as totalbase'),
+                DB::raw('sum(unidades * coste * iva) as totaliva'),
+                DB::raw('sum(unidades * coste * (1+ iva)) as totales'))
+            ->where('numfactura','<>','')
+            ->when($this->filtroenviada!='', function ($query){
+                $query->where('enviada',$this->filtroenviada);
+                })
+            ->when($this->filtropagada!='', function ($query){
+                $query->where('pagada',$this->filtropagada);
+                })
+            ->when($this->filtrofacturado!='', function ($query){
+                if($this->filtrofacturado=='0'){
+                    $query->where('asiento','0');
+                }else{
+                    $query->where('asiento','>','0');
+                }
+            })
+            ->searchYear('fechafactura',$this->filtroanyo)
+            ->searchMes('fechafactura',$this->filtromes)
+            ->search('entidades.entidad',$this->search)
+            ->orSearch('facturacion.numfactura',$this->search);
+    }
 }

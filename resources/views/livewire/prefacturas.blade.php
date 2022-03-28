@@ -58,7 +58,7 @@
                         </x-dropdown>
                         @endif
                         <div class="text-xs">
-                            <x-button.button color="blue" onclick="location.href = '{{ route('facturacion.create') }}'">Nueva</x-button.button>
+                            <x-button.button color="blue" onclick="location.href = '{{ route('facturacion.createprefactura') }}'">Nueva</x-button.button>
                         </div>
                 </div>
                 </div>

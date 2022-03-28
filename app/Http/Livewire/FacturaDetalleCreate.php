@@ -97,7 +97,7 @@ class FacturaDetalleCreate extends Component
         }
 
         $f=Facturacion::find($this->detalle->facturacion_id);
-        if($f) $f->imprimirfactura();
+        if($f->numfactura) $f->imprimirfactura();
     }
 
 

@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire;
 
+use App\Actions\FacturaCreateAction;
+use App\Actions\FacturaImprimirAction;
 use App\Models\{Facturacion,Entidad};
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Support\Facades\DB;
+
 use App\Http\Livewire\DataTable\WithBulkActions;
 
 class Prefacturas extends Component
@@ -70,29 +72,23 @@ class Prefacturas extends Component
 
     //  GENERO LAS PREFACTURAS SELECCIONADAS
 
+    // public function creafactura(Facturacion $factura)
+    // {
+
+    //     $fac=new FacturaCreateAction;$f=$fac->execute($factura);
+    //     $fac=new FacturaImprimirAction;$fac->execute($f);
+    //     return redirect( route('facturacion.edit',$f) );
+    // }
+
+
     public function generarSelected(){
         $prefacturas = $this->selectedRowsQuery->get();
         $this->validate();
-
         foreach ($prefacturas as $prefactura) {
-            $serie= !$prefactura->serie ? substr($prefactura->fechafactura->format('Y'),-2) : $prefactura->serie;
-            $fac=Facturacion::where('serie',$serie)->max('numfactura') ;
-            $fac= $fac ? $fac + 1 : ($serie * 100000 +1) ;
-            $prefactura->numfactura=$fac;
-
-            $prefactura->metodopago_id= !$prefactura->metodopago_id ? '1' : $prefactura->metodopago_id;
-            $prefactura->serie=$serie;
-            $prefactura->facturada=true;
-
-            $prefactura->ruta='facturas/'.$prefactura->serie.'/'.$prefactura->fechafactura->format('m');
-            // $prefactura->fichero=(trim('Fra_Suma_'.$prefactura->serie.'_'.substr ( $fac ,-5 ).'_'.substr ( $prefactura->entidad ,0,strlen($prefactura->entidad) ),' ').'.pdf');
-            $prefactura->fichero=(trim('Fra_Suma_'.$prefactura->serie.'_'.substr ( $fac ,-5 ).'_'.substr ( $prefactura->entidad ,0,6 ),' ').'.pdf');
-
-            $prefactura->save();
-            // genero la factura y la guardo en su carpeta de storage
-            $prefactura->imprimirfactura();
-            $this->dispatchBrowserEvent('notify', 'La factura ' . $prefactura->factura5 . ' ha sido creada!');
+            $fac=new FacturaCreateAction;$f=$fac->execute($prefactura);
+            $fac=new FacturaImprimirAction;$fac->execute($f);
         }
+        return redirect()->route('facturacion.index');
     }
 
     public function exportSelected(){
@@ -103,8 +99,6 @@ class Prefacturas extends Component
 
         $this->dispatchBrowserEvent('notify', 'CSV Prefacturas descargado!');
     }
-
-
 
     public function deleteSelected(){
         // $prefacturas=Facturacion::findMany($this->selected); funciona muy bien

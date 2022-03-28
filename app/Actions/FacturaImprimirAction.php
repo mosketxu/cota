@@ -5,8 +5,11 @@ namespace App\Actions;
 use App\Models\Facturacion;
 use Illuminate\Support\Facades\Storage;
 
+use Barryvdh\DomPDF\PDF;
+
 class FacturaImprimirAction
 {
+
     public function execute($facturacion)
     {
         $factura=Facturacion::with('entidad')
@@ -19,10 +22,10 @@ class FacturaImprimirAction
         $total=$factura->facturadetalles->sum('total');
 
         $pdf = \PDF::loadView('facturacion.facturapdf', compact(['factura','base','suplidos','totaliva','total']));
-
         Storage::put('public/'.$factura->ruta.'/'.$factura->fichero, $pdf->output());
 
-    //     return $pdf->download($factura->fichero);
-    // return $f;
+        //     return $pdf->download($factura->fichero);
+
+        // return $f;
     }
 }

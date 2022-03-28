@@ -1,7 +1,7 @@
 <div class="">
-        @livewire('menu',['entidad'=>$entidad],key($entidad->id))
+    @livewire('menu',['entidad'=>$entidad],key($entidad->id))
     <div class="p-1 mx-2">
-        <h1 class="text-2xl font-semibold text-gray-900">Facturación {{ $entidad->id? 'de '. $entidad->entidad  :'' }} </h1>
+        <h1 class="text-2xl font-semibold text-gray-900">Facturación  {{ $entidad->id? 'de '. $entidad->entidad  :'' }} </h1>
 
         <div class="py-1 space-y-4">
             @if (session()->has('message'))
@@ -148,10 +148,10 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <input type="text" value="{{ $facturacion->fechafactura->format('d-m-Y') }}" class="w-full text-xs font-thin text-left text-gray-500 truncate border-0 rounded-md"  readonly/>
+                                    <input type="text" value="{{ $facturacion->dateFra }}" class="w-full text-xs font-thin text-left text-gray-500 truncate border-0 rounded-md"  readonly/>
                                 </td>
                                 <td>
-                                    <input type="text" value="{{ $facturacion->fechavencimiento->format('d-m-Y') }}" class="w-full text-xs font-thin text-left text-gray-500 truncate border-0 rounded-md"  readonly/>
+                                    <input type="text" value="{{ $facturacion->dateVto }}" class="w-full text-xs font-thin text-left text-gray-500 truncate border-0 rounded-md"  readonly/>
                                 </td>
                                 <td>
                                     <input type="text" value="{{ $facturacion->entidad }}" class="w-full text-xs font-thin text-gray-500 truncate border-0 rounded-md"  readonly/>
@@ -205,7 +205,10 @@
                                 <td class="">
                                     <div class="flex items-center justify-center">
                                         <x-icon.invoice-a href="{{ route('facturacion.edit',$facturacion) }}" title="Factura"/>
-                                            <a href = '{{asset('storage/'.$facturacion->rutafichero)}}'  target='_blank'  class="pt-2 ml-2" title="PDF"><x-icon.pdf class="mb-2"></x-icon.pdf></a>
+                                        <a href = '{{asset('storage/'.$facturacion->rutafichero)}}'  target='_blank'  class="pt-2 ml-2" title="PDF">
+                                            <x-icon.pdf class="mb-2"></x-icon.pdf>
+                                        </a>
+                                        <x-icon.copy-a wire:click="replicateFactura({{ $facturacion->id }})" onclick="confirm('¿Estás seguro de querer copiar la factura?') || event.stopImmediatePropagation()" class="text-purple-500" title="Copiar Factura" />
                                         &nbsp;&nbsp;&nbsp;
                                         <x-icon.delete-a wire:click.prevent="delete({{ $facturacion->id }})" onclick="confirm('¿Estás seguro?') || event.stopImmediatePropagation()" class="pl-1 " title="Borrar"/>
                                     </div>

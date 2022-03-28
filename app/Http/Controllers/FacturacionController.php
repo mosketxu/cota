@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Livewire\Facturaciones;
 use App\Imports\FacturacionImport;
 use App\Models\{Facturacion, Entidad};
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use ZipArchive;
 use File;
 use Excel;
@@ -24,6 +21,11 @@ class FacturacionController extends Controller
     public function create()
     {
         return view('facturacion.create');
+    }
+
+    public function createprefactura()
+    {
+        return view('facturacion.createprefactura');
     }
 
 
@@ -64,51 +66,20 @@ class FacturacionController extends Controller
     }
 
 
-    // public function imprimirfactura(Facturacion $factura)
-    // {
-
-    //     $factura=Facturacion::with('entidad')
-    //     ->with('facturadetalles')
-    //     ->find($factura->id);
-
-    //     $base=$factura->facturadetalles->where('iva', '!=', '0')->sum('base');
-    //     $suplidos=$factura->facturadetalles->where('iva', '0')->sum('exenta');
-    //     $totaliva=$factura->facturadetalles->sum('totaliva');
-    //     $total=$factura->facturadetalles->sum('total');
-
-    //     $ruta=$factura->serie.'/'.$factura->fechafactura->format('m');
-    //     $fichero='Fra_Suma_'.$factura->serie.'_'.substr ( $factura->numfactura ,-5 ).'_'.substr ( $factura->entidad->entidad ,0,10 ) ;
-
-    //     $pdf = \PDF::loadView('facturacion.facturapdf', compact(['factura','base','suplidos','totaliva','total']));
-
-    //     return view('facturacion.edit',compact('facturacion'));
-
-    //     Storage::put('public/facturas/'.$ruta.'/'.$fichero.'.pdf', $pdf->output());
-
-    //     return $pdf->stream($fichero.'.pdf');
-
-    // }
-
     public function downloadZip()
     {
         $zip = new ZipArchive;
-
         $fileName = 'myNewFile.zip';
         $ruta='storage/facturas/21/06/';
-        // dd($fileName .'-'.$ruta);
-
         if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE)
         {
             $files = File::files(public_path($ruta));
-
             foreach ($files as $key => $value) {
                 $relativeNameInZipFile = basename($value);
                 $zip->addFile($value, $relativeNameInZipFile);
             }
-
             $zip->close();
         }
-
         return response()->download(public_path($fileName));
     }
 
