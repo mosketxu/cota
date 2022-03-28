@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\PlanFacturacionAction;
 use App\Models\Entidad;
 use App\Models\FacturacionConcepto;
 use Illuminate\Http\Request;
@@ -43,12 +44,12 @@ class EntidadController extends Controller
         return view('entidad.facturacionconceptos',compact('entidad'));
     }
 
-    public function generarfacturacion(Entidad $entidad)
+    public function planfacturacion(Entidad $entidad)
     {
-        $conceptos=FacturacionConcepto::find($entidad->id);
-        dd($conceptos);
+        $conceptos=FacturacionConcepto::where('entidad_id',$entidad->id)->get();
         foreach ($conceptos as $concepto){
-            dd('sd');
+            $p= new PlanFacturacionAction;
+            $p->execute($entidad,$concepto);
         }
 
         return view('entidad.facturacionconceptos',compact('entidad'));

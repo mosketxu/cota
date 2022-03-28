@@ -70,17 +70,6 @@ class Prefacturas extends Component
         return $this->rowsQuery->paginate(100);
     }
 
-    //  GENERO LAS PREFACTURAS SELECCIONADAS
-
-    // public function creafactura(Facturacion $factura)
-    // {
-
-    //     $fac=new FacturaCreateAction;$f=$fac->execute($factura);
-    //     $fac=new FacturaImprimirAction;$fac->execute($f);
-    //     return redirect( route('facturacion.edit',$f) );
-    // }
-
-
     public function generarSelected(){
         $prefacturas = $this->selectedRowsQuery->get();
         $this->validate();

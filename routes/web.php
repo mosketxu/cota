@@ -22,11 +22,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', function () {return view('entidades');})->name('entidades');
 
     // entidades
-    Route::get('/entidad/generarfacturacion/{entidad}', [EntidadController::class, 'generarfacturacion'])->name('entidad.generarfacturacion');
     Route::get('/entidad/facturacionconceptos/{entidad}', [EntidadController::class, 'facturacionconceptos'])->name('entidad.facturacionconceptos');
     Route::get('/entidad/pu/{entidad}', [EntidadController::class, 'pus'])->name('entidad.pu');
     Route::get('/entidad/contacto/{entidad}', [EntidadController::class, 'contactos'])->name('entidad.contacto');
     Route::get('/entidad/nuevocontacto/{entidad}', [EntidadController::class, 'createcontacto'])->name('entidad.createcontacto');
+    Route::get('/entidad/planfacturacion/{entidad}', [EntidadController::class, 'planfacturacion'])->name('entidad.planfacturacion');
     Route::resource('entidad', EntidadController::class)->only('edit','create');
 
     //Facturacion
@@ -38,6 +38,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('facturacion/downfacturas', [FacturacionController::class,'downfacturas'])->name('facturacion.downfacturas');
     Route::get('facturacion/zip', [FacturacionController::class,'downloadZip'])->name('facturacion.zip');
     Route::get('facturacion/prefacturas', [FacturacionController::class,'prefacturas'])->name('facturacion.prefacturas');
+    Route::get('facturacion/prefacturas/{entidad}/entidad', [FacturacionController::class,'prefacturasentidad'])->name('facturacion.prefacturasentidad');
     Route::resource('facturacion', FacturacionController::class);
 
  });

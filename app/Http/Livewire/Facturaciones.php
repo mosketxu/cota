@@ -19,6 +19,7 @@ class Facturaciones extends Component
 
     public $search='';
     public $filtrofacturado='';
+    public $filtrofacturacionPrefacturacion='1';
     public $filtrocontabilizado='';
     public $filtroenviada='';
     public $filtropagada='';

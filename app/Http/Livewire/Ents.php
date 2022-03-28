@@ -15,7 +15,6 @@ class Ents extends Component
     public $filtroactivo='';
     public Entidad $entidad;
 
-
     public function render()
     {
         $this->entidad= new Entidad;

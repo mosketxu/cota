@@ -15,6 +15,9 @@ class Ent extends Component
     public $departamento;
     public $comentario;
 
+    public $showPlanModal=false;
+
+
     protected function rules()
     {
         return [
