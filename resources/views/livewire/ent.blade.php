@@ -108,11 +108,12 @@
                     </x-jet-label>
                     <x-jet-label class="inline-flex items-center mt-3">
                         <x-input.checkbox wire:model.defer="entidad.estado" class="w-4 h-4 text-blue-500 form-checkbox"/><span class="ml-2 text-gray-700">{{ __('Activo') }}</span>
-                        {{-- <input wire:model.defer="entidad.estado" type="checkbox" ><span class="ml-2 text-gray-700">{{ __('Activo') }}</span> --}}
                     </x-jet-label>
                     <x-jet-label class="inline-flex items-center mt-3">
                         <x-input.checkbox wire:model.defer="entidad.cliente" class="w-4 h-4 text-green-500 form-checkbox"/><span class="ml-2 text-gray-700">{{ __('Cliente') }}</span>
-                        {{-- <input wire:model.defer="entidad.cliente" type="checkbox" class="w-4 h-4 text-green-600 form-checkbox" ><span class="ml-2 text-gray-700">{{ __('Cliente') }}</span> --}}
+                    </x-jet-label>
+                    <x-jet-label class="inline-flex items-center mt-3">
+                        <x-input.checkbox wire:model.defer="entidad.enviar" class="w-4 h-4 text-red-400 -500 form-checkbox"/><span class="ml-2 text-gray-700">{{ __('Enviar') }}</span>
                     </x-jet-label>
                 </div>
             </div>

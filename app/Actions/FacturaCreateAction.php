@@ -9,7 +9,7 @@ class FacturaCreateAction
 {
     public function execute(Facturacion $factura)
     {
-$serie= !$factura->serie ? substr($factura->fechafactura->format('Y'), -2) : $factura->serie;
+        $serie= !$factura->serie ? substr($factura->fechafactura->format('Y'), -2) : $factura->serie;
         $factura->metodopago_id= !$factura->metodopago_id ? '1' : $factura->metodopago_id;
 
         if (!$factura->numfactura){

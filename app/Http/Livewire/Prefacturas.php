@@ -4,7 +4,8 @@ namespace App\Http\Livewire;
 
 use App\Actions\FacturaCreateAction;
 use App\Actions\FacturaImprimirAction;
-use App\Models\{Facturacion,Entidad};
+use App\Actions\PrefacturaCreateAction;
+use App\Models\{Facturacion,Entidad, FacturacionConcepto};
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -20,7 +21,10 @@ class Prefacturas extends Component
     public $filtroanyo='';
     public $filtromes='';
 
+    public $anyoplan='';
+
     public $showDeleteModal=false;
+    public $showPlanModal='0';
 
     protected function rules(){
         return [
@@ -37,7 +41,6 @@ class Prefacturas extends Component
     }
 
     public function render(){
-
         if($this->selectAll) $this->selectPageRows();
         $facturaciones = $this->rows;
         return view('livewire.prefacturas',compact('facturaciones'));
@@ -78,6 +81,20 @@ class Prefacturas extends Component
             $fac=new FacturaImprimirAction;$fac->execute($f);
         }
         return redirect()->route('facturacion.index');
+    }
+
+    public function generarplan()
+    {
+        $this->validate([
+            'anyoplan'=>'required|digits:4|integer|min:1900|max:'.(date('Y')+1),
+        ]);
+        $conceptos=FacturacionConcepto::where('entidad_id',$this->entidad->id)->get();
+        foreach ($conceptos as $concepto) {
+            $prefac=new PrefacturaCreateAction; $p=$prefac->execute($concepto,$this->entidad,$this->anyoplan);
+        }
+        $this->anyoplan='';
+        $this->showPlanModal=false;
+        $this->dispatchBrowserEvent('notify', 'Vale');
     }
 
     public function exportSelected(){

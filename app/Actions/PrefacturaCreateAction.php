@@ -2,50 +2,37 @@
 
 namespace App\Actions;
 
-use App\Models\Facturacion;
-
+use App\Models\{Entidad, Facturacion,FacturacionConcepto};
 
 class PrefacturaCreateAction
 {
-    public function execute(Facturacion $factura)
+    public function execute(FacturacionConcepto $concepto, Entidad $entidad, $anyoplan)
     {
-
-        $this->conceptos=FacturacionConcepto::where('entidad_id',$this->factura->entidad_id)->get();
-        $entidad=Entidad::find($this->factura->entidad_id);
-        $mes = date("m", strtotime(date("d-m-Y")));
-        $anyo = date("Y", strtotime(date("d-m-Y")));
-        if(!$this->factura->fechafactura){
-            $this->factura->fechafactura=$entidad->diafactura.'-'.$mes.'-'.$anyo;
-            $this->factura->fechavencimiento=$entidad->diavencimiento.'-'.$mes.'-'.$anyo;
+        $ciclos=$concepto->ciclo->ciclos;
+        for ($i=0; $i < $ciclos ; $i++) {
+            $ffra=$anyoplan.'-'.($i+1).'-'.$entidad->diafactura;
+            $fvto=$anyoplan.'-'.($i+1).'-'.$entidad->diavencimiento;
+            $fac=Facturacion::create([
+                'entidad_id'=>$concepto->entidad_id,
+                'fechafactura'=>$ffra,
+                'fechavencimiento'=>$fvto,
+                'metodopago_id'=>$entidad->metodopago_id,
+                'refcliente'=>$entidad->refcliente,
+                'mail'=>$entidad->emailadm,
+                'enviar'=>$entidad->enviar,
+                'enviada'=>'0',
+                'pagada'=>'0',
+                'facturada'=>'0',
+                'facturable'=>'1',
+                'asiento'=>'0',
+                // 'fechaasiento'=>$entidad->fechaasiento,
+                'observaciones'=>$entidad->observaciones,
+                'notas'=>$entidad->notas,
+            ]);
+            $fc=new FacturaConceptoStoreAction;
+            $fc->execute($fac,$concepto);
         }
-        if(!$this->factura->metodopago_id)
-            $this->factura->metodopago_id=$entidad->metodopago_id;
-        if(!$this->factura->refcliente)
-            $this->factura->refcliente=$entidad->refcliente;
-        if(!$this->factura->enviar)
-            $this->factura->enviar=$entidad->enviar;
-
-
-
-
-
-$serie= !$factura->serie ? substr($factura->fechafactura->format('Y'), -2) : $factura->serie;
-        $factura->metodopago_id= !$factura->metodopago_id ? '1' : $factura->metodopago_id;
-
-        if (!$factura->numfactura){
-            $fac=Facturacion::where('serie', $serie)->max('numfactura') ;
-            $fac= $fac ? $fac + 1 : ($serie * 100000 +1) ;
-        }else{
-            $fac=$factura->numfactura;
-        }
-        $factura->ruta='facturas/'.$serie.'/'.$factura->fechafactura->format('m');
-        $caracteresmalos=['.',',',"'"];
-        $ent=str_replace($caracteresmalos,"",$factura->entidad);
-        $factura->fichero=(trim('Fra_Suma_'.$factura->serie.'_'.substr ( $fac ,-5 ).'_'.$ent,' ').'.pdf');
-        $factura->serie=$serie;
-        $factura->numfactura=$fac;
-        $factura->facturada=true;
-        $factura->save();
-        return $factura;
+    $mensaje='Exito';
+        return $mensaje;
     }
 }

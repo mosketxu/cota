@@ -44,6 +44,7 @@ class Ent extends Component
             'entidad.ciclofacturacion_id'=>'nullable',
             'entidad.metodopago_id'=>'nullable',
             'entidad.estado'=>'nullable',
+            'entidad.enviar'=>'nullable',
             'entidad.idioma'=>'nullable',
             'entidad.banco1'=>'nullable',
             'entidad.banco2'=>'nullable',
@@ -110,7 +111,6 @@ class Ent extends Component
             $mensaje=$this->entidad->entidad . " creada satisfactoriamente";
         }
 
-        // dd($this->entidad->estado);
         $ent=Entidad::updateOrCreate([
             'id'=>$i
             ],
@@ -131,6 +131,7 @@ class Ent extends Component
             'ciclofacturacion_id'=>$this->entidad->ciclofacturacion_id,
             'metodopago_id'=>$this->entidad->metodopago_id,
             'estado'=>$this->entidad->estado,
+            'enviar'=>$this->entidad->enviar,
             'idioma'=>$this->entidad->idioma,
             'banco1'=>$this->entidad->banco1,
             'banco2'=>$this->entidad->banco2,

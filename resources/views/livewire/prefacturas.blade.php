@@ -43,30 +43,30 @@
                         </div>
                     </div>
                     <div class="inline-flex mt-3 space-x-2">
-                        @if($filtrofacturable=='1')
                         <x-dropdown label="Actions">
                             <x-dropdown.item type="button" wire:click="generarSelected" class="flex items-center space-x-2">
                                 <x-icon.invoice class="text-pink-400"></x-icon.invoice> <span>Generar Facturas </span>
                             </x-dropdown.item>
+                            @if ($entidad->id)
+                            <x-dropdown.item type="button" wire:click="$toggle('showPlanModal')" class="flex items-center space-x-2">
+                                <x-icon.invoice class="text-pink-400"></x-icon.invoice> <span>Plan de Facturación </span>
+                            </x-dropdown.item>
+
+                            @endif
                             <x-dropdown.item type="button" wire:click="exportSelected" class="flex items-center space-x-2">
                                 <x-icon.csv class="text-green-400"></x-icon.csv> <span>Export </span>
                             </x-dropdown.item>
-                            {{-- <x-dropdown.item type="button" onclick="confirm('¿Estas seguro?') || event.stopImmediatePropagation()" wire:click="deleteSelected" class="flex items-center space-x-2"> --}}
                             <x-dropdown.item type="button" wire:click="$toggle('showDeleteModal')" class="flex items-center space-x-2">
                                 <x-icon.trash class="text-red-400"></x-icon.trash> <span>Delete </span>
                             </x-dropdown.item>
                         </x-dropdown>
-                        @endif
-                        <div class="text-xs">
-                            <x-button.button color="blue" onclick="location.href = '{{ route('facturacion.createprefactura') }}'">Nueva</x-button.button>
-                        </div>
-                </div>
+                    </div>
                 </div>
             </div>
             {{-- tabla pre-facturas --}}
 
-            <div class="min-w-full overflow-hidden overflow-x-auto align-middle shadow sm:rounded-lg">
-                <table class="min-w-full divide-y divide-gray-200">
+            <table class="min-w-full divide-y divide-gray-200">
+                    <div class="min-w-full overflow-hidden overflow-x-auto align-middle shadow min-vh-100 sm:rounded-lg">
                     <thead class="text-xs leading-4 tracking-wider text-gray-500 bg-blue-50 ">
                         <tr class="">
                             <th class="w-5 py-3 pl-2 font-medium text-center"><x-input.checkbox wire:model="selectPage"/></th>
@@ -175,22 +175,41 @@
                 </div>
             </div>
         </div>
+
+        <!-- Plan facturacion Modal -->
+        @if($showPlanModal=='1')
+            <form wire:submit.prevent="generarplan">
+                <x-modal.confirmation wire:model.defer="showPlanModal">
+                    <x-slot name="title">Plan de facturacion de la empresa: {{ $entidad->id? $entidad->entidad  :'' }}</x-slot>
+                    <x-slot name="content">
+                        <x-jet-label for="anyoplan" value="{{ __('Introduce el Año del plan') }}" />
+                        <x-jet-input  wire:model.defer="anyoplan" type="text"/>
+                        @error('anyoplan') <span class="text-red-500">{{ $message }}</span>@enderror
+                    </x-slot>
+                    <x-slot name="footer">
+                        <x-button.secondary wire:click="$set('showPlanModal', false)">Cancel</x-button.secondary>
+                        <x-button.primary type="submit">Generar Plan</x-button.primary>
+                    </x-slot>
+                </x-modal.confirmation>
+        </form>
+        @endif
+        <!-- Delete Transactions Modal -->
+        @if($showDeleteModal)
+        <form wire:submit.prevent="deleteSelected">
+            <x-modal.confirmation wire:model.defer="showDeleteModal">
+                <x-slot name="title">Borrar Prefactura</x-slot>
+
+                <x-slot name="content">
+                    <div class="py-8 text-gray-700">¿Esás seguro? Esta acción es irreversible.</div>
+                </x-slot>
+
+                <x-slot name="footer">
+                    <x-button.secondary wire:click="$set('showDeleteModal', false)">Cancel</x-button.secondary>
+
+                    <x-button.primary type="submit">Delete</x-button.primary>
+                </x-slot>
+            </x-modal.confirmation>
+        </form>
+        @endif
     </div>
-
-    <!-- Delete Transactions Modal -->
-    <form wire:submit.prevent="deleteSelected">
-        <x-modal.confirmation wire:model.defer="showDeleteModal">
-            <x-slot name="title">Borrar Prefactura</x-slot>
-
-            <x-slot name="content">
-                <div class="py-8 text-gray-700">¿Esás seguro? Esta acción es irreversible.</div>
-            </x-slot>
-
-            <x-slot name="footer">
-                <x-button.secondary wire:click="$set('showDeleteModal', false)">Cancel</x-button.secondary>
-
-                <x-button.primary type="submit">Delete</x-button.primary>
-            </x-slot>
-        </x-modal.confirmation>
-    </form>
 </div>

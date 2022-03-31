@@ -24,7 +24,7 @@ class Entidad extends Model
                         'tipoiva','porcentajemarta','porcentajesusana',
                         'cuentacontable','observaciones',
                         'suma_id','suma_id','cliente',
-                        'estado','created_at'];
+                        'estado','enviar','created_at'];
 
     const STATUSES =[
         '0'=>'Baja',
