@@ -7,21 +7,16 @@ namespace App\Http\Livewire;
 use App\Actions\FacturaConceptoStoreAction;
 use App\Actions\FacturaCreateAction;
 use App\Actions\FacturaImprimirAction;
-use App\Actions\FacturaReplicarAction;
 use App\Models\{Entidad, Facturacion, FacturacionConcepto, MetodoPago};
-use Illuminate\Support\Facades\Response;
 use Livewire\Component;
-
-// use Illuminate\Support\Facades\DB;
 
 class Prefactura extends Component
 {
     public $factura, $conceptos, $facturada, $message, $titulo;
     public $bloqueado=false;
-    // $mostrarGenerar=1, $showgenerar, $nf,$pre,
-    protected $listeners = [
-        'facturaupdate' => '$refresh',
-    ];
+    // protected $listeners = [
+    //     'facturaupdate' => '$refresh',
+    // ];
 
     protected function rules(){
         return [
@@ -58,10 +53,12 @@ class Prefactura extends Component
         $this->factura->facturada= false;
         $this->conceptos=FacturacionConcepto::where('entidad_id',$facturacion->entidad_id)->get();
         $this->titulo= 'Prefactura ' . $this->factura->id;
+        // if($facturacion) $this->factura->entidad_id=$facturacion->entidad_id;
     }
 
     public function render(){
-        $entidades=Entidad::where('estado','1')->where('cliente','1')->orderBy('entidad')->get();
+        $entidades=Entidad::where('estado','1')->where('cliente','1')->where('facturar','1')->orderBy('entidad')->get();
+        // dd($entidades);
         $pagos=MetodoPago::all();
         return view('livewire.prefactura',compact('entidades','pagos',));
     }
@@ -115,7 +112,8 @@ class Prefactura extends Component
 
     public function agregarconcepto(FacturacionConcepto $concepto){
         if($this->factura->id){
-            $c=FacturaConceptoStoreAction::execute($this->factura,$concepto);
+            $con=new FacturaConceptoStoreAction;
+            $c=$con->execute($this->factura,$concepto);
             $this->emit('detallerefresh');
         }else{
             $this->dispatchBrowserEvent('notifyred', 'Debes crear la Pre-factura primero');

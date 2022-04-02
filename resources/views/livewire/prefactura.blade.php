@@ -51,8 +51,8 @@
                     </div>
                     <div class="flex flex-col mx-2 space-y-4 md:space-y-0 md:flex-row md:space-x-1">
                         <div class="form-item">
-                            <x-jet-label for="entidad_id">{{ __('Entidad') }}</x-jet-label>
-                            <x-select wire:model.lazy="factura.entidad_id" selectname="entidad_id" class="w-full">
+                            <x-jet-label for="entidad_id">{{ __('Entidad') }} </x-jet-label>
+                            <x-select wire:model.lazy="factura.entidad_id" selectname="entidad_id" class="w-full" disabled="{{ $bloqueado }}">
                                 <option value="">-- choose --</option>
                                 @foreach ($entidades as $entidad)
                                     <option value="{{ $entidad->id }}">{{ $entidad->entidad }}</option>

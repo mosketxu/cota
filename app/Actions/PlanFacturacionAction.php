@@ -3,7 +3,6 @@
 namespace App\Actions;
 
 use App\Models\Facturacion;
-Pre
 
 class PlanFacturacionAction
 {

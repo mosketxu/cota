@@ -48,10 +48,9 @@
                                 <x-icon.invoice class="text-pink-400"></x-icon.invoice> <span>Generar Facturas </span>
                             </x-dropdown.item>
                             @if ($entidad->id)
-                            <x-dropdown.item type="button" wire:click="$toggle('showPlanModal')" class="flex items-center space-x-2">
-                                <x-icon.invoice class="text-pink-400"></x-icon.invoice> <span>Plan de Facturación </span>
-                            </x-dropdown.item>
-
+                                <x-dropdown.item type="button" wire:click="$toggle('showPlanModal')" class="flex items-center space-x-2">
+                                    <x-icon.invoice class="text-yellow-400"></x-icon.invoice> <span>Plan de Facturación </span>
+                                </x-dropdown.item>
                             @endif
                             <x-dropdown.item type="button" wire:click="exportSelected" class="flex items-center space-x-2">
                                 <x-icon.csv class="text-green-400"></x-icon.csv> <span>Export </span>
@@ -64,7 +63,6 @@
                 </div>
             </div>
             {{-- tabla pre-facturas --}}
-
             <table class="min-w-full divide-y divide-gray-200">
                     <div class="min-w-full overflow-hidden overflow-x-auto align-middle shadow min-vh-100 sm:rounded-lg">
                     <thead class="text-xs leading-4 tracking-wider text-gray-500 bg-blue-50 ">

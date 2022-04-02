@@ -13,6 +13,7 @@ class Ents extends Component
     public $search='';
     public $filtrocliente='';
     public $filtroactivo='';
+    public $filtrofacturar='';
     public Entidad $entidad;
 
     public function render()
@@ -20,11 +21,16 @@ class Ents extends Component
         $this->entidad= new Entidad;
         $entidades=Entidad::query()
             ->with('entidadtipo')
+            ->with('cicloimp')
+            ->with('ciclofac')
             ->when($this->filtrocliente!='', function ($query){
                 $query->where('cliente',$this->filtrocliente);
                 })
             ->when($this->filtroactivo!='', function ($query){
                 $query->where('estado',$this->filtroactivo);
+                })
+            ->when($this->filtrofacturar!='', function ($query){
+                $query->where('facturar',$this->filtrofacturar);
                 })
             ->search('entidad',$this->search)
             ->orSearch('nif',$this->search)

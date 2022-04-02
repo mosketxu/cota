@@ -12973,43 +12973,53 @@ select {
 }
 
 .text-sm {
-  font-size: .875rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .text-base {
   font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 .text-lg {
   font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 .text-xl {
   font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .text-2xl {
   font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .text-3xl {
   font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .text-4xl {
   font-size: 2.25rem;
+  line-height: 2.5rem;
 }
 
 .text-5xl {
   font-size: 3rem;
+  line-height: 1;
 }
 
 .text-6xl {
-  font-size: 4rem;
+  font-size: 3.75rem;
+  line-height: 1;
 }
 
 .text-7xl {
-  font-size: 5rem;
+  font-size: 4.5rem;
+  line-height: 1;
 }
 
 .text-8xl {
@@ -13020,14 +13030,6 @@ select {
 .text-9xl {
   font-size: 8rem;
   line-height: 1;
-}
-
-.text-xxs {
-  font-size: .25rem;
-}
-
-.text-tiny {
-  font-size: .875rem;
 }
 
 .leading-3 {
@@ -20013,6 +20015,7 @@ select {
 }
 
 .sticky {
+  position: -webkit-sticky;
   position: sticky;
 }
 
@@ -45597,43 +45600,53 @@ select {
   }
 
   .sm\:text-sm {
-    font-size: .875rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 
   .sm\:text-base {
     font-size: 1rem;
+    line-height: 1.5rem;
   }
 
   .sm\:text-lg {
     font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 
   .sm\:text-xl {
     font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 
   .sm\:text-2xl {
     font-size: 1.5rem;
+    line-height: 2rem;
   }
 
   .sm\:text-3xl {
     font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 
   .sm\:text-4xl {
     font-size: 2.25rem;
+    line-height: 2.5rem;
   }
 
   .sm\:text-5xl {
     font-size: 3rem;
+    line-height: 1;
   }
 
   .sm\:text-6xl {
-    font-size: 4rem;
+    font-size: 3.75rem;
+    line-height: 1;
   }
 
   .sm\:text-7xl {
-    font-size: 5rem;
+    font-size: 4.5rem;
+    line-height: 1;
   }
 
   .sm\:text-8xl {
@@ -45644,14 +45657,6 @@ select {
   .sm\:text-9xl {
     font-size: 8rem;
     line-height: 1;
-  }
-
-  .sm\:text-xxs {
-    font-size: .25rem;
-  }
-
-  .sm\:text-tiny {
-    font-size: .875rem;
   }
 
   .sm\:leading-3 {
@@ -52637,6 +52642,7 @@ select {
   }
 
   .sm\:sticky {
+    position: -webkit-sticky;
     position: sticky;
   }
 
@@ -78051,43 +78057,53 @@ select {
   }
 
   .md\:text-sm {
-    font-size: .875rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 
   .md\:text-base {
     font-size: 1rem;
+    line-height: 1.5rem;
   }
 
   .md\:text-lg {
     font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 
   .md\:text-xl {
     font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 
   .md\:text-2xl {
     font-size: 1.5rem;
+    line-height: 2rem;
   }
 
   .md\:text-3xl {
     font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 
   .md\:text-4xl {
     font-size: 2.25rem;
+    line-height: 2.5rem;
   }
 
   .md\:text-5xl {
     font-size: 3rem;
+    line-height: 1;
   }
 
   .md\:text-6xl {
-    font-size: 4rem;
+    font-size: 3.75rem;
+    line-height: 1;
   }
 
   .md\:text-7xl {
-    font-size: 5rem;
+    font-size: 4.5rem;
+    line-height: 1;
   }
 
   .md\:text-8xl {
@@ -78098,14 +78114,6 @@ select {
   .md\:text-9xl {
     font-size: 8rem;
     line-height: 1;
-  }
-
-  .md\:text-xxs {
-    font-size: .25rem;
-  }
-
-  .md\:text-tiny {
-    font-size: .875rem;
   }
 
   .md\:leading-3 {
@@ -85091,6 +85099,7 @@ select {
   }
 
   .md\:sticky {
+    position: -webkit-sticky;
     position: sticky;
   }
 
@@ -110505,43 +110514,53 @@ select {
   }
 
   .lg\:text-sm {
-    font-size: .875rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 
   .lg\:text-base {
     font-size: 1rem;
+    line-height: 1.5rem;
   }
 
   .lg\:text-lg {
     font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 
   .lg\:text-xl {
     font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 
   .lg\:text-2xl {
     font-size: 1.5rem;
+    line-height: 2rem;
   }
 
   .lg\:text-3xl {
     font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 
   .lg\:text-4xl {
     font-size: 2.25rem;
+    line-height: 2.5rem;
   }
 
   .lg\:text-5xl {
     font-size: 3rem;
+    line-height: 1;
   }
 
   .lg\:text-6xl {
-    font-size: 4rem;
+    font-size: 3.75rem;
+    line-height: 1;
   }
 
   .lg\:text-7xl {
-    font-size: 5rem;
+    font-size: 4.5rem;
+    line-height: 1;
   }
 
   .lg\:text-8xl {
@@ -110552,14 +110571,6 @@ select {
   .lg\:text-9xl {
     font-size: 8rem;
     line-height: 1;
-  }
-
-  .lg\:text-xxs {
-    font-size: .25rem;
-  }
-
-  .lg\:text-tiny {
-    font-size: .875rem;
   }
 
   .lg\:leading-3 {
@@ -117545,6 +117556,7 @@ select {
   }
 
   .lg\:sticky {
+    position: -webkit-sticky;
     position: sticky;
   }
 
@@ -142959,43 +142971,53 @@ select {
   }
 
   .xl\:text-sm {
-    font-size: .875rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 
   .xl\:text-base {
     font-size: 1rem;
+    line-height: 1.5rem;
   }
 
   .xl\:text-lg {
     font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 
   .xl\:text-xl {
     font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 
   .xl\:text-2xl {
     font-size: 1.5rem;
+    line-height: 2rem;
   }
 
   .xl\:text-3xl {
     font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 
   .xl\:text-4xl {
     font-size: 2.25rem;
+    line-height: 2.5rem;
   }
 
   .xl\:text-5xl {
     font-size: 3rem;
+    line-height: 1;
   }
 
   .xl\:text-6xl {
-    font-size: 4rem;
+    font-size: 3.75rem;
+    line-height: 1;
   }
 
   .xl\:text-7xl {
-    font-size: 5rem;
+    font-size: 4.5rem;
+    line-height: 1;
   }
 
   .xl\:text-8xl {
@@ -143006,14 +143028,6 @@ select {
   .xl\:text-9xl {
     font-size: 8rem;
     line-height: 1;
-  }
-
-  .xl\:text-xxs {
-    font-size: .25rem;
-  }
-
-  .xl\:text-tiny {
-    font-size: .875rem;
   }
 
   .xl\:leading-3 {
@@ -149999,6 +150013,7 @@ select {
   }
 
   .xl\:sticky {
+    position: -webkit-sticky;
     position: sticky;
   }
 
@@ -175413,43 +175428,53 @@ select {
   }
 
   .\32xl\:text-sm {
-    font-size: .875rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 
   .\32xl\:text-base {
     font-size: 1rem;
+    line-height: 1.5rem;
   }
 
   .\32xl\:text-lg {
     font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 
   .\32xl\:text-xl {
     font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 
   .\32xl\:text-2xl {
     font-size: 1.5rem;
+    line-height: 2rem;
   }
 
   .\32xl\:text-3xl {
     font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 
   .\32xl\:text-4xl {
     font-size: 2.25rem;
+    line-height: 2.5rem;
   }
 
   .\32xl\:text-5xl {
     font-size: 3rem;
+    line-height: 1;
   }
 
   .\32xl\:text-6xl {
-    font-size: 4rem;
+    font-size: 3.75rem;
+    line-height: 1;
   }
 
   .\32xl\:text-7xl {
-    font-size: 5rem;
+    font-size: 4.5rem;
+    line-height: 1;
   }
 
   .\32xl\:text-8xl {
@@ -175460,14 +175485,6 @@ select {
   .\32xl\:text-9xl {
     font-size: 8rem;
     line-height: 1;
-  }
-
-  .\32xl\:text-xxs {
-    font-size: .25rem;
-  }
-
-  .\32xl\:text-tiny {
-    font-size: .875rem;
   }
 
   .\32xl\:leading-3 {
@@ -182453,6 +182470,7 @@ select {
   }
 
   .\32xl\:sticky {
+    position: -webkit-sticky;
     position: sticky;
   }
 

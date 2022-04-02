@@ -94,7 +94,6 @@ class Prefacturas extends Component
         }
         $this->anyoplan='';
         $this->showPlanModal=false;
-        $this->dispatchBrowserEvent('notify', 'Vale');
     }
 
     public function exportSelected(){

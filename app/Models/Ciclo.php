@@ -18,4 +18,9 @@ class Ciclo extends Model
         return $this->hasMany(FacturacionConcepto::class,'id','ciclo_id');
     }
 
+    public function entidadesimpuesto()
+    {
+        return $this->hasMany(Entidad::class,'id','cicloimpuesto_id');
+    }
+
 }

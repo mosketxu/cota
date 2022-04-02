@@ -7,12 +7,8 @@ namespace App\Http\Livewire;
 use App\Actions\FacturaConceptoStoreAction;
 use App\Actions\FacturaCreateAction;
 use App\Actions\FacturaImprimirAction;
-use App\Actions\FacturaReplicarAction;
 use App\Models\{Entidad, Facturacion, FacturacionConcepto, MetodoPago};
-use Illuminate\Support\Facades\Response;
 use Livewire\Component;
-
-// use Illuminate\Support\Facades\DB;
 
 class Factura extends Component
 {
@@ -59,7 +55,7 @@ class Factura extends Component
     }
 
     public function render(){
-        $entidades=Entidad::where('estado','1')->where('cliente','1')->orderBy('entidad')->get();
+        $entidades=Entidad::where('estado','1')->where('cliente','1')->where('facturar','1')->orderBy('entidad')->get();
         $pagos=MetodoPago::all();
         return view('livewire.factura',compact('entidades','pagos',));
     }

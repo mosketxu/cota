@@ -24,7 +24,7 @@ class Entidad extends Model
                         'tipoiva','porcentajemarta','porcentajesusana',
                         'cuentacontable','observaciones',
                         'suma_id','suma_id','cliente',
-                        'estado','enviar','created_at'];
+                        'estado','facturar','enviar','created_at'];
 
     const STATUSES =[
         '0'=>'Baja',
@@ -50,6 +50,13 @@ class Entidad extends Model
         ][$this->estado] ?? ['gray',''];
     }
 
+    public function getFacColorAttribute()
+    {
+        return [
+            '0'=>['red','Baja'],
+            '1'=>['green','Activo']
+        ][$this->facturar] ?? ['gray',''];
+    }
 
     public function getFavColorAttribute()
     {
@@ -95,6 +102,16 @@ class Entidad extends Model
     public function contactos()
     {
         return $this->hasMany(ContactoEntidad::class);
+    }
+
+    public function cicloimp()
+    {
+        return $this->belongsTo(Ciclo::class, 'cicloimpuesto_id','id');
+    }
+
+    public function ciclofac()
+    {
+        return $this->belongsTo(Ciclo::class, 'ciclofacturacion_id','id');
     }
 
     public function conceptos()

@@ -37,6 +37,14 @@
                             <option value="">Todos</option>
                         </select>
                     </div>
+                    <div class="px-1 text-xs">
+                        <label class="px-1 text-gray-600">Facturar</label>
+                        <select wire:model="filtrofacturar" class="py-2 text-xs text-gray-600 bg-white border-blue-300 rounded-md shadow-sm appearance-none hover:border-gray-400 focus:outline-none">
+                            <option value="0">No</option>
+                            <option value="1">Sí</option>
+                            <option value="">Todos</option>
+                        </select>
+                    </div>
                 </div>
                 <x-button.button  onclick="location.href = '{{ route('entidad.create') }}'" color="blue"><x-icon.plus/>{{ __('Nueva Entidad') }}</x-button.button>
             </div>
@@ -51,8 +59,9 @@
                         <x-table.heading class="pl-4 text-left">{{ __('Mail') }} </x-table.heading>
                         <x-table.heading class="pl-4 text-center">{{ __('Cliente') }}</x-table.heading>
                         <x-table.heading class="pl-4 text-center">{{ __('Tipo') }}</x-table.heading>
-                        <x-table.heading class="pl-4 text-center">{{ __('Impuestos') }}</x-table.heading>
-                        <x-table.heading class="pl-4 text-center">{{ __('Fact.') }}</x-table.heading>
+                        <x-table.heading class="pl-4 text-center">{{ __('Facturar') }}</x-table.heading>
+                        <x-table.heading class="pl-4 text-center">{{ __('C.Impuestos') }}</x-table.heading>
+                        <x-table.heading class="pl-4 text-center">{{ __('C.Fact.') }}</x-table.heading>
                         <x-table.heading class="pl-4 text-center">{{ __('Estado') }}</x-table.heading>
                         <x-table.heading colspan="2"/>
                     </x-slot>
@@ -89,10 +98,15 @@
                                     <span class="text-sm text-gray-500 ">{{$entidad->entidadtipo->entidadtipo ?? '-'}}</span>
                                 </x-table.cell>
                                 <x-table.cell class="text-center">
-                                    <span class="text-sm text-gray-500 ">{{$entidad->cicloimpuesto->cicloimpuesto ?? '-'}}</span>
+                                    @if($entidad->facturar=="1")
+                                        <span class="px-2.5 py-0.5 font-bold text-green-400">&#10003;</span>
+                                    @endif
                                 </x-table.cell>
                                 <x-table.cell class="text-center">
-                                    <span class="text-sm text-gray-500 ">{{$entidad->ciclofacturacion->ciclo ?? '-'}}</span>
+                                    <span class="text-sm text-gray-500 ">{{$entidad->cicloimp->ciclo ?? '-'}}</span>
+                                </x-table.cell>
+                                <x-table.cell class="text-center">
+                                    <span class="text-sm text-gray-500 ">{{$entidad->ciclofac->ciclo ?? '-'}}</span>
                                 </x-table.cell>
                                 <x-table.cell class="text-center">
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs leading-4 bg-{{ $entidad->status_color[0] }}-100 text-green-800">

@@ -110,6 +110,9 @@
                         <x-input.checkbox wire:model.defer="entidad.estado" class="w-4 h-4 text-blue-500 form-checkbox"/><span class="ml-2 text-gray-700">{{ __('Activo') }}</span>
                     </x-jet-label>
                     <x-jet-label class="inline-flex items-center mt-3">
+                        <x-input.checkbox wire:model.defer="entidad.facturar" class="w-4 h-4 text-pink-500 form-checkbox"/><span class="ml-2 text-gray-700">{{ __('Facturar') }}</span>
+                    </x-jet-label>
+                    <x-jet-label class="inline-flex items-center mt-3">
                         <x-input.checkbox wire:model.defer="entidad.cliente" class="w-4 h-4 text-green-500 form-checkbox"/><span class="ml-2 text-gray-700">{{ __('Cliente') }}</span>
                     </x-jet-label>
                     <x-jet-label class="inline-flex items-center mt-3">
