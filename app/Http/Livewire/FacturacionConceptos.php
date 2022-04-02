@@ -11,7 +11,7 @@ class FacturacionConceptos extends Component
     public $showEditModal = false;
     public $showDeleteModal = false;
     public FacturacionConcepto $editing;
-
+    public $ruta='entidad.facturacionconceptos';
 
     public function rules() {
         return [

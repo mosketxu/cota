@@ -1,5 +1,5 @@
 <div class="">
-    @livewire('menu',['entidad'=>$entidad],key($entidad->id))
+    @livewire('menu',['entidad'=>$entidad,'ruta'=>$ruta],key($entidad->id))
     <div class="p-1 mx-2">
         <h1 class="text-2xl font-semibold text-gray-900">Facturación  {{ $entidad->id? 'de '. $entidad->entidad  :'' }} </h1>
 

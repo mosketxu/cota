@@ -12,9 +12,6 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    {{-- <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-jet-nav-link> --}}
                     <x-jet-nav-link href="{{ route('entidades') }}" :active="request()->routeIs('entidades')">
                         {{ __('Entidades') }}
                     </x-jet-nav-link>
@@ -46,18 +43,16 @@
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-                {{-- @if(request()->routeIs('facturacion.index') || request()->routeIs('facturacion.prefacturas') )
-                    <div class="hidden p-2 space-x-8 bg-gray-100 rounded-lg sm:-my-px sm:ml-10 sm:flex">
-                        <x-jet-nav-link href="{{ route('facturacion.index') }}" :active="request()->routeIs('facturacion.index')">
-                            {{ __('Facturas') }}
-                        </x-jet-nav-link>
-                        <x-jet-nav-link href="{{ route('facturacion.prefacturas') }}" :active="request()->routeIs('facturacion.prefacturas')">
-                            {{ __('Pre Facturas') }}
-                        </x-jet-nav-link>
-                    </div>
-                @endif --}}
                 @if($entmenu->id)
                     <div class="hidden p-2 space-x-8 bg-gray-100 rounded-lg sm:-my-px sm:ml-10 sm:flex">
+                        <div class="">
+                            <x-select wire:model.lazy="filtroentidad"  selectname="entidad_id" class="w-full">
+                                <option value="">-- Elige una entidad --</option>
+                                @foreach ($entidades as $entidad)
+                                <option value="{{ $entidad->id }}">{{ $entidad->entidad }}</option>
+                                @endforeach
+                            </x-select>
+                        </div>
                         <x-jet-nav-link href="{{ route('entidad.pu',$entmenu) }}" :active="request()->routeIs('entidad.pu')">
                             {{ __('Pus') }}
                         </x-jet-nav-link>

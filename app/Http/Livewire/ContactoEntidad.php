@@ -18,6 +18,8 @@ class ContactoEntidad extends Component
     public $comentario;
     public $search='';
     public $conts;
+    public $ruta='entidad.contacto';
+
 
     // protected $rules = [
     //     'ent.id' => 'required',

@@ -8,9 +8,11 @@ use Livewire\Component;
 class Pu extends Component
 {
     public $entidad;
+    public $filtroentidad;
     public $search='';
     public $showEditModal = false;
     public $showDeleteModal = false;
+    public $ruta='entidad.pu';
     public ModelPu $editing;
 
     public function rules() {
@@ -47,6 +49,7 @@ class Pu extends Component
             ->paginate();
         return view('livewire.pu',compact('ent','pus'));
     }
+
 
     public function makeBlankPu(){
         return ModelPu::make([

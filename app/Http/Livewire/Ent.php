@@ -14,6 +14,7 @@ class Ent extends Component
     public $contactoId;
     public $departamento;
     public $comentario;
+    public $ruta="entidad.edit";
 
     public $showPlanModal=false;
 

@@ -20,6 +20,7 @@ class Prefacturas extends Component
     public $filtrofacturable='1';
     public $filtroanyo='';
     public $filtromes='';
+    public $ruta='facturacion.prefacturas';
 
     public $anyoplan='';
 

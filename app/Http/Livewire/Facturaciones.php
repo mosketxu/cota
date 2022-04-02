@@ -27,7 +27,7 @@ class Facturaciones extends Component
     public $filtromes='';
     public $entidad;
     public $message;
-
+    public $ruta='facturacion.show';
     public $showDeleteModal=false;
 
     protected function rules(){
