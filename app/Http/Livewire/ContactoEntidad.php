@@ -44,12 +44,13 @@ class ContactoEntidad extends Component
 
     public function savecontacto()
     {
-        if($this->contacto){
+if($this->contacto){
             ModelContactoEntidad::create([
                 'entidad_id'=>$this->entidad->id,
                 'contacto_id'=>$this->contacto,
                 'departamento'=>$this->departamento,
                 'comentarios'=>$this->comentario,
+                // ''
             ]);
             $this->dispatchBrowserEvent('notify', 'Contacto añadido con éxito');
 

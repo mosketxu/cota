@@ -91,6 +91,8 @@ class Ent extends Component
 
     public function save()
     {
+        if(!$this->entidad->facturar) $this->entidad->facturar=false;
+        if(!$this->entidad->enviar) $this->entidad->enviar=false;
         if($this->entidad->id){
             $i=$this->entidad->id;
             $this->validate([
