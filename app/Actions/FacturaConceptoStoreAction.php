@@ -10,10 +10,13 @@ class FacturaConceptoStoreAction
     public function execute($factura,$concepto)
     {
         $sumaId=!$factura->entidad->suma_id ? '1' :$factura->entidad->suma_id;
-        if ($concepto->ciclo_id==1) {
-            $per=mes($factura->fechafactura,$concepto->ciclocorrespondiente,'ES');
-        }else{
-            $per=trimestre($factura->fechafactura,$concepto->ciclocorrespondiente,'ES');
+        if($concepto->ciclocorrespondiente!='2')
+        {
+            if ($concepto->ciclo_id==1) {
+                $per=mes($factura->fechafactura,$concepto->ciclocorrespondiente,$factura->entidad->idioma);
+            }else{
+                $per=trimestre($factura->fechafactura,$concepto->ciclocorrespondiente,$factura->entidad->idioma);
+            }
         }
         $f=FacturacionDetalle::create([
             'facturacion_id'=>$factura->id,
