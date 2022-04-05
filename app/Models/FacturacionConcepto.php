@@ -25,6 +25,11 @@ class FacturacionConcepto extends Model
 
     public function getCorrespondeAttribute()
     {
-        return $this->ciclocorrespondiente=='1' ? 'Ant' : 'Cor';
+        if($this->ciclocorrespondiente=='1')
+            return 'Ant';
+        elseif($this->ciclocorrespondiente=='0')
+            return 'Cor';
+        else
+            return 'Ning';
     }
 }
