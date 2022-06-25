@@ -9,9 +9,11 @@ class PrefacturaCreateAction
     public function execute(FacturacionConcepto $concepto, Entidad $entidad, $anyoplan)
     {
         $ciclos=$concepto->ciclo->ciclos;
+
         for ($i=0; $i < $ciclos ; $i++) {
-            $ffra=$anyoplan.'-'.($i+1).'-'.$entidad->diafactura;
-            $fvto=$anyoplan.'-'.($i+1).'-'.$entidad->diavencimiento;
+            $mes=$concepto->ciclo_id!='3' ? $i : $i*3;
+            $ffra=$anyoplan.'-'.($mes+1).'-'.$entidad->diafactura;
+            $fvto=$anyoplan.'-'.($mes+1).'-'.$entidad->diavencimiento;
             $fac=Facturacion::create([
                 'entidad_id'=>$concepto->entidad_id,
                 'fechafactura'=>$ffra,
@@ -35,4 +37,6 @@ class PrefacturaCreateAction
     $mensaje='Exito';
         return $mensaje;
     }
+
+
 }

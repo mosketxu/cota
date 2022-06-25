@@ -11,8 +11,7 @@ class PlanFacturacionAction
         for ($i=0; $i <$concepto->ciclo->ciclos ; $i++) {
             $p=new PrefacturaCreateAction;
             $prefactura=$p->execute();
-            // $fecha=$entida
-        }
+}
         // if($ciclo_id)
         dd($concepto);
         $sumaId=!$factura->entidad->suma_id ? '1' :$factura->entidad->suma_id;
