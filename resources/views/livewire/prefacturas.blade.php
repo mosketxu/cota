@@ -43,6 +43,9 @@
                         </div>
                     </div>
                     <div class="inline-flex mt-3 space-x-2">
+                        {{-- <x-button.button color="blue" onclick="location.href = '{{ route('facturacion.createprefactura',$entidad) }}'">Nueva</x-button.button> --}}
+                        <x-button.button color="blue" onclick="location.href = '{{ route('facturacion.createprefactura',$entidad) }}'">Nueva</x-button.button>
+
                         <x-dropdown label="Actions">
                             <x-dropdown.item type="button" wire:click="generarSelected" class="flex items-center space-x-2">
                                 <x-icon.invoice class="text-pink-400"></x-icon.invoice> <span>Generar Facturas </span>
