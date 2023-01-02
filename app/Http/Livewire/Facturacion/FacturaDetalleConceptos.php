@@ -46,8 +46,9 @@ class FacturaDetalleConceptos extends Component
     }
 
     public function calculo(){
+        $this->piva=trim($this->piva);
         $this->piva=$this->tipo=='1' ? '0.00' : $this->piva;
-        $this->iva=round($this->uds*$this->importe*$this->piva,2);
+        $this->iva=round($this->uds * $this->importe * $this->piva,2);
         $this->total=round($this->uds*$this->importe*(1+$this->piva),2);
         $this->base=$this->piva!='0.00' ? round($this->uds*$this->importe,2) : '0.00';
         $this->exenta=$this->piva=='0.00' ? round($this->uds*$this->importe,2) : '0.00';
