@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Facturacion;
 
 use App\Actions\FacturaReplicarAction;
+use App\Exports\RemesaExport;
 use App\Models\{Facturacion,Entidad};
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -12,6 +13,7 @@ use App\Mail\MailFactura;
 use ZipArchive;
 use File;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Facturaciones extends Component
 {
@@ -29,7 +31,6 @@ class Facturaciones extends Component
     public $entidad;
     public $message;
     public $ruta='facturacion.show';
-    public $showDeleteModal=false;
 
     protected function rules(){
         return[
@@ -45,20 +46,16 @@ class Facturaciones extends Component
         $this->entidad=$entidad;
     }
 
-    public function render()
-    {
+    public function render(){
         if($this->selectAll) $this->selectPageRows();
         $facturaciones = $this->rows;
-
-
         $totales= Facturacion::query()
         ->facturas($this->filtroenviada, $this->filtropagada, $this->filtrofacturado,$this->filtroanyo,$this->filtromes ,$this->search)
         ->first();
         return view('livewire.facturacion.facturaciones',compact('facturaciones','totales'));
     }
 
-    public function replicateFactura($facturaId)
-    {
+    public function replicateFactura($facturaId){
         $factura=Facturacion::find($facturaId);
         $fac=new FacturaReplicarAction;
         $f=$fac->execute($factura);
@@ -101,8 +98,6 @@ class Facturaciones extends Component
     }
 
     public function zipSelected(){
-
-
         $this->validate();
         $zip = new ZipArchive;
         $fileName = 'myNewFile.zip';
@@ -169,24 +164,31 @@ class Facturaciones extends Component
         ->join('entidades','facturacion.entidad_id','=','entidades.id')
         ->join('facturacion_detalles','facturacion_detalles.facturacion_id','=','facturacion.id')
         ->join('facturacion_detalle_conceptos','facturacion_detalle_conceptos.facturaciondetalle_id','=','facturacion_detalles.id')
-        ->select('entidades.entidad as empresa','entidades.iban1 as iban','entidades.id as mandato',DB::raw('sum(facturacion_detalle_conceptos.total) as importe'),'facturacion.fechafactura','facturacion.numfactura','facturacion.fechavencimiento as fv','facturacion.numfactura as IdfFactura')
+        ->select('entidades.entidad as empresa','entidades.iban1 as iban','entidades.id as mandato','facturacion.fechafactura',DB::raw('sum(facturacion_detalle_conceptos.total) as importe'),
+            'facturacion.numfactura','facturacion.fechavencimiento as fv','facturacion.numfactura as IdfFactura','facturacion.metodopago_id')
         ->groupBy('facturacion.id')
         ->where('fechavencimiento',$this->filtroremesa)
-        ->where('metodopago_id','2');
+        ->where('facturacion.metodopago_id','2')
+        ->orderBy('entidades.entidad')
+        ->get();
+
+        return Excel::download(new RemesaExport (
+            $remesa,
+        ), 'remesa.xlsx');
 
 
-        return response()->streamDownload(function(){
-            echo Facturacion::query()
-            ->join('entidades','facturacion.entidad_id','=','entidades.id')
-            ->join('facturacion_detalles','facturacion_detalles.facturacion_id','=','facturacion.id')
-            ->join('facturacion_detalle_conceptos','facturacion_detalle_conceptos.facturaciondetalle_id','=','facturacion_detalles.id')
-            ->select('entidades.entidad as empresa','entidades.iban1 as iban','entidades.id as mandato',DB::raw('sum(facturacion_detalle_conceptos.total) as importe'),
-                'facturacion.fechafactura','facturacion.numfactura','facturacion.fechavencimiento as fv','facturacion.numfactura as IdfFactura','facturacion.metodopago_id')
-            ->groupBy('facturacion.id')
-            ->where('fechavencimiento',$this->filtroremesa)
-            ->where('facturacion.metodopago_id','2')
-            ->toCsv();
-        },'remesa.csv');
+        // return response()->streamDownload(function(){
+        //     echo Facturacion::query()
+        //     ->join('entidades','facturacion.entidad_id','=','entidades.id')
+        //     ->join('facturacion_detalles','facturacion_detalles.facturacion_id','=','facturacion.id')
+        //     ->join('facturacion_detalle_conceptos','facturacion_detalle_conceptos.facturaciondetalle_id','=','facturacion_detalles.id')
+            // ->select('entidades.entidad as empresa','entidades.iban1 as iban','entidades.id as mandato','facturacion.fechafactura',DB::raw('sum(facturacion_detalle_conceptos.total) as importe'),
+            //     'facturacion.numfactura','facturacion.fechavencimiento as fv','facturacion.numfactura as IdfFactura','facturacion.metodopago_id')
+            // ->groupBy('facturacion.id')
+            // ->where('fechavencimiento',$this->filtroremesa)
+            // ->where('facturacion.metodopago_id','2')
+        //     ->toCsv();
+        // },'remesa.csv');
 
     }
 
