@@ -85,7 +85,7 @@ class Prefacturas extends Component
     }
 
     public function getRowsProperty(){
-        return $this->rowsQuery->paginate(100);
+        return $this->rowsQuery->paginate(60);
     }
 
     public function generarSelected(){
