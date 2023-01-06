@@ -108,8 +108,8 @@ class Prefacturas extends Component
             'anyoplan.integer'=>'El año debe ser numérico y tener 4 dígitos',
             'anyoplan.digits'=>'El año debe ser numérico y tener 4 dígitos',
         ]);
+
         $agrupacion=FacturacionConcepto::where('entidad_id',$this->entidad->id)->groupBy('concepto')->get();
-        // dd($agrupacion);
         $conceptos=FacturacionConcepto::where('entidad_id',$this->entidad->id)->get();
         foreach ($conceptos as $concepto) {
             $prefac=new PrefacturaCreateAction; $p=$prefac->execute($concepto,$this->entidad,$this->anyoplan);

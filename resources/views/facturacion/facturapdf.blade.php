@@ -2,124 +2,157 @@
     <html lang="es">
 
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Factura {{$factura->serie}}/{{ $factura->numfactura }}</title>
-        <link rel="stylesheet" href="{{ asset('css/pdf.css')}}">
+        <meta charset="UTF-8">
+        {{-- <title>Nº Oferta: {{ $oferta->id }}</title> --}}
+        <title>Factura </title>
+        <link rel="stylesheet" href="{{ asset('css/app.css')}}">
+
+
+        {{-- sobreescribo margenes de app.css --}}
+        <style>
+            @page {margin: 0px 0px 0px 0px;}
+            .page-break {page-break-after: always;}
+        </style>
 
     </head>
-    <body class="text-sm">
+    <body>
         <!-- Define header and footer blocks before your content -->
-        <header>
-            {{-- cabecera del formulario --}}
-            <div>
-                <table width="60%" style="margin:0 auto" cellspacing="0">
-                    <tbody>
-                        <tr>
-                            <td width="24%"></td>
-                            <td width="30%"><img src="{{asset('img/LOGOSUMA_2.jpg')}}"  width="200"></td>
-                            <td width="36%"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <header >
+            <table width="90%" style="margin-top:40px; " class="mx-auto">
+                <tr>
+                    <td class="" style="text-align: left"  width=50%>
+                        <img src="{{asset('img/logo.png')}}" class="mt-2 ml-4" width="120px">
+                    </td>
+                    <td style="text-align: right; padding-right:40px; font-size: 2em; color: red" width=50%>
+                        FACTURA
+                    </td>
+                </tr>
+            </table>
+            <div style="margin:0 auto; width: 650px; border-top: 1px solid gray;"></div>
         </header>
-
-        <footer>
+        <footer style="position:fixed;left:0px;bottom:0px;height:80px;width:100%">
             <div>
-                <table width="60%" style="margin:0 auto " cellspacing="0">
-                    <tbody>
-                        <tr>
-                            <td width="10%"></td>
-                            <td width="30%"><img src="{{asset('img/PieSuma.png')}}" width="400"/></td>
-                            <td width="36%"></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="margin:0 auto;font-size: 0.7rem;text-align: center;">
+                        <p>Cota 2 tècnics, S.L.P // B67358606</p>
+                </div>
+                <div style="margin:0 auto; width: 650px; border-top: 1px solid gray;"></div>
+                <div class="margin:0 auto; text-center " style="font-size: 0.7rem">
+                    <p>Carrer de Sant Joan de la Salle, 42, MF3.11</p>
+                    <p>Barcelona (08022), Barcelonawww.c2tecnics.com | +34 936068528 | info@c2tecnics.com</p>
+                </div>
             </div>
         </footer>
 
     <!-- Wrap the content of your PDF inside a main tag -->
-        <main style="margin-top:140px;">
-            {{-- datos cliente  --}}
-            <table width="100%" style="text-align:left;margin-left:00px" cellspacing="0">
-                <tbody>
-                    <tr>
-                        <td width="49%"></td>
-                        <td width="49%">{{ $factura->entidad->entidad  }}</td>
-                    </tr>
-                    <tr>
-                        <td width="49%"></td>
-                        <td width="49%">{{ $factura->entidad->direccion  }}</td>
-                    </tr>
-                    <tr>
-                        <td width="49%"></td>
-                        <td width="49%">{{ $factura->entidad->codpostal }} {{ $factura->entidad->localidad }}</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><br></td>
-                    </tr>
-                    <tr>
-                        <td width="49%"></td>
-                        <td width="49%">{{ $factura->entidad->nif  }}</td>
-                    </tr>
-                </tbody>
-            </table>
-            {{-- detalle de la factura --}}
-            <aside style="float:left; margin-left: -20 px; padding-left: 0px;">
-                <img src="{{asset('img/Reg mercantilSUMAVER2.jpg')}}" width="55"/>
-            </aside>
-            {{-- Fecha y Factura --}}
-            <div style="margin-top:50px; margin-left:60px ; ">
-                <div>Fecha Factura: {{ $factura->fechafactura->format('d/m/Y') }}</div>
-                <div>Nº Factura: {{ $factura->serie }}/{{ substr($factura->numfactura,-5) }}</div>
-                @if($factura->refcliente)
-                <div>Ref.Cliente: {{ $factura->refcliente }}</div>
-                @endif
-            </div>
-            <div style="margin-top:40px;  margin-left:100px  ">
-                @if(count($facturadetalles)>0)
-                    {{-- Detalles  --}}
-                    <table style="margin-top: 20px;" width="90%">
-                        @foreach($facturadetalles as $detalle)
+        <main style="margin-top:10px; width:100%">
+            <div class="">
+                <div class="flex py-0 space-y-2">
+                     <table width=80% class="mx-auto mt-1 text-sm " style="color:rgb(30, 27, 27);">
                         <tr>
-                            <td width="70%" >{{ $detalle->tipo=='1' ? 'Suplidos:' :'' }} {{$detalle->concepto}}</td>
-                            <td width="25%" style="text-align: right">
-                                {{ $detalle->tipo=='1' ? number_format($detalle->exenta,2,',','.') : number_format($detalle->base,2,',','.') }}
-                                <span style="font-family: Arial">€</span>
+                            <td width=18% >
+                                <p style="border-bottom: 0.1px"> Número: {{ $factura->numfactura }} </p>
+                                <p style="border-bottom: 0.1px"> Data: {{ $factura->datefra }} </p>
+                            </td>
+                            <td width=82% style="text-align: right; ">
+                                <span style="font-weight: bold"> Client </span> <br>
+                                {{ $factura->entidad->entidad }} <br>
+                                {{ $factura->entidad->nif }} <br>
+                                {{ $factura->entidad->direccion }} <br>
+                                {{ $factura->entidad->localidad }} ({{ $factura->entidad->codpostal }}) {{ $factura->entidad->provincia->provincia }}
                             </td>
                         </tr>
-                        @endforeach
-                    </table>
-                    {{-- totales --}}
-                    <table style="margin-top: 20px;" width="90%">
-                        <tr>
-                            <td width="69%"  style="padding-left: 30px">Base imponible:</td>
-                            <td width="29%" style="text-align: right; " width="50%">{{number_format($base,2,',','.')}} <span style="font-family: Arial">€</span> </td>
-                        </tr>
-                        @if($suplidos)
-                        <tr>
-                            <td width="69%" style="padding-left: 30px">Suplidos:</td>
-                            <td width="29%" style="text-align: right" width="50%">{{number_format($suplidos,2,',','.')}} <span style="font-family: Arial">€</span></td>
-                        </tr>
+                     </table>
+
+                     <div style="margin-top:60px;  ">
+                        @if(count($facturadetalles)>0)
+                            {{-- Detalles  --}}
+                            <table style="font-size: 0.7em; margin:0 auto;" width="80%">
+                                <tr style="border-bottom: 0.1px;">
+                                    <td width="40%" style="text-align: left; font-weight: bold">CONCEPTE</td>
+                                    <td width="20%" style="text-align: right; font-weight: bold">PREU</td>
+                                    <td width="20%" style="text-align: right; font-weight: bold">UNITATS</td>
+                                    <td width="20%" style="text-align: right; font-weight: bold">SUBTOTAL</td>
+                                </tr>
+                                @foreach($facturadetalles as $detalle)
+                                <tr>
+                                    <td width="70%" >{{ $detalle->tipo=='1' ? 'Suplidos:' :'' }} {{$detalle->concepto}}</td>
+                                    <td width="10%" style="text-align: right">{{ number_format($detalle->importe,2,',','.') }} <span style="font-family: Arial">€</span></td>
+                                    <td width="10%" style="text-align: right">{{ number_format($detalle->unidades,0,',','.') }}</td>
+                                    <td width="10%" style="text-align: right">
+                                        {{ $detalle->tipo=='1' ? number_format($detalle->exenta,2,',','.') : number_format($detalle->base,2,',','.') }}
+                                        <span style="font-family: Arial">€</span>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </table>
+                            {{-- totales --}}
+                            <table style="font-size: 0.7em; margin:20 auto;" width="80%">
+                                <tr style="border-bottom: 0.1px;">
+                                    <td width="90%"  style="text-align: right;">BASE IMPOSABLE</td>
+                                    <td width="10%" style="text-align: right; ">{{number_format($base,2,',','.')}} <span style="font-family: Arial">€</span> </td>
+                                </tr>
+                                @if($suplidos)
+                                <tr style="border-bottom: 0.1px;">
+                                    <td width="90%"  style="text-align: right;">SUPLIDOS</td>
+                                    <td width="10%" style="text-align: right; ">{{number_format($suplidos,2,',','.')}} <span style="font-family: Arial">€</span> </td>
+                                </tr>
+                                @endif
+                                <tr style="border-bottom: 0.1px;">
+                                    <td width="90%"  style="text-align: right;">IVA 21%:</td>
+                                    <td width="10%" style="text-align: right; ">{{number_format($totaliva,2,',','.')}} <span style="font-family: Arial">€</span></td>
+                                </tr>
+                                <tr style="border-bottom: 0.1px;">
+                                    <td width="90%"  style="text-align: right;">Total:</td>
+                                    <td width="10%" style="text-align: right; ">{{number_format($total,2,',','.')}} <span style="font-family: Arial">€</span></td>
+                                </tr>
+                            </table>
+                            {{-- resumeN --}}
+                            <table style="font-size: 0.8em; border-collapse: separate; border-spacing: 0 12px; margin:20 auto;" width="80%">
+                                <tr style="margin-top: 20px;">
+                                    <td width="20%"  style="text-align: left;">RÈFERENCIA:</td>
+                                    <td width="80%" style="text-align: left; ">{{$factura->refcliente}} </td>
+                                </tr>
+                                @if($suplidos)
+                                <tr style="margin-top: 20px;">
+                                    <td width="20%"  style="text-align: left;">IMPORT:</td>
+                                    <td width="80%" style="text-align: left; ">{{number_format($total,2,',','.')}} <span style="font-family: Arial">€</span> </td>
+                                </tr>
+                                @endif
+                                <tr style="margin-top: 20px;">
+                                    <td width="20%"  style="text-align: left;">PAGAMENT:</td>
+                                    <td width="80%" style="text-align: left; ">{{ $factura->metodopago->metodopago }}</td>
+                                </tr>
+                                <tr style="margin-top: 20px;">
+                                    <td width="20%"  style="text-align: left;">CONCEPTE:</td>
+                                    <td width="80%" style="text-align: left; ">{{ $factura->numfactura}}</td>
+                                </tr>
+                            </table>
+
                         @endif
-                        <tr>
-                            <td width="69%" style="padding-left: 30px">IVA 21%:</td>
-                            <td width="29%" style="text-align: right" width="50%">{{number_format($totaliva,2,',','.')}} <span style="font-family: Arial">€</span></td>
-                        </tr>
-                        <tr>
-                            <td width="69%" style="padding-left: 30px">Total:</td>
-                            <td width="29%" style="text-align: right" width="50%">{{number_format($total,2,',','.')}} <span style="font-family: Arial">€</span></td>
-                        </tr>
-                    </table>
-                @endif
-            </div>
-            <div style="margin-top:80px; margin-left:100px;">
-                <div class="">Condiciones de pago: {{ $factura->metodopago->metodopago }}</div>
-                <div class="">Vencimiento: {{ $factura->fechavencimiento? $factura->fechavencimiento->format('d-m-Y') : 'A la vista'}}</div>
+                    </div>
+
+
+                    {{-- <div class="py-0 space-y-2">
+                        <table width="90%" style="margin-top:30px; " cellspacing="0" cellpadding="0" class="mx-auto text-sm">
+                            <tr>
+                                <td width=51% class="pl-2 font-bold " style="border-style: solid;border-width: .6;border-color: gray" colspan="2">Opciones</td>
+                                <td width=17% class="pr-2 font-bold text-right " style="border-style: solid;border-width: .6;border-color: gray">Cantidad</td>
+                                <td width=17% class="pr-2 font-bold text-right" style="border-style: solid;border-width: .6;border-color: gray">Precio unitario</td>
+                                <td width=17% class="pr-2 font-bold text-right" style="border-style: solid;border-width: .6;border-color: gray">Precio total</td>
+                            </tr>
+                            @foreach($oferta->ofertadetalles as $odetalle)
+                            <tr>
+                                <td width=51% class="pl-2" style="border-style: solid;border-width: .6;border-color: gray" colspan="2"><span class="font-bold">{{ $odetalle->titulo }}</span> {{ $odetalle->concepto }}</td>
+                                <td width=17% class="pr-2 text-right" style="border-style: solid;border-width: .6;border-color: gray">{{ $odetalle->cantidad }}</td>
+                                <td width=17% class="pr-2 text-right" style="border-style: solid;border-width: .6;border-color: gray">{{ $odetalle->importe }}</td>
+                                <td width=17% class="pr-2 text-right" style="border-style: solid;border-width: .6;border-color: gray">{{ $odetalle->total }}</td>
+                            </tr>
+                            @endforeach
+                        </table>
+                    </div> --}}
+                </div>
             </div>
         </main>
-
     </body>
 </html>
 
