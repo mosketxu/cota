@@ -76,11 +76,9 @@
                                 @foreach($facturadetalles as $detalle)
                                 <tr>
                                     <td width="70%" >{{ $detalle->tipo=='1' ? 'Suplidos:' :'' }} {{$detalle->concepto}}</td>
-                                    <td width="10%" style="text-align: right">{{ number_format($detalle->importe,2,',','.') }} <span style="font-family: Arial">€</span></td>
+                                    <td width="10%" style="text-align: right">{{ number_format($detalle->importe,2,',','.') }} <img src="{{asset('img/euro.png')}}" class="mt-1" width="8px"></td>
                                     <td width="10%" style="text-align: right">{{ number_format($detalle->unidades,0,',','.') }}</td>
-                                    <td width="10%" style="text-align: right">
-                                        {{ $detalle->tipo=='1' ? number_format($detalle->exenta,2,',','.') : number_format($detalle->base,2,',','.') }}
-                                        <span style="font-family: Arial">€</span>
+                                    <td width="10%" style="text-align: right">{{ $detalle->tipo=='1' ? number_format($detalle->exenta,2,',','.') : number_format($detalle->base,2,',','.') }}<img src="{{asset('img/euro.png')}}" class="mt-1 ml-1 " width="8px">
                                     </td>
                                 </tr>
                                 @endforeach
@@ -89,21 +87,21 @@
                             <table style="font-size: 0.7em; margin:20 auto;" width="80%">
                                 <tr style="border-bottom: 0.1px;">
                                     <td width="90%"  style="text-align: right;">BASE IMPOSABLE</td>
-                                    <td width="10%" style="text-align: right; ">{{number_format($base,2,',','.')}} <span style="font-family: Arial">€</span> </td>
+                                    <td width="10%" style="text-align: right; ">{{number_format($base,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"> </td>
                                 </tr>
                                 @if($suplidos)
                                 <tr style="border-bottom: 0.1px;">
                                     <td width="90%"  style="text-align: right;">SUPLIDOS</td>
-                                    <td width="10%" style="text-align: right; ">{{number_format($suplidos,2,',','.')}} <span style="font-family: Arial">€</span> </td>
+                                    <td width="10%" style="text-align: right; ">{{number_format($suplidos,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"> </td>
                                 </tr>
                                 @endif
                                 <tr style="border-bottom: 0.1px;">
                                     <td width="90%"  style="text-align: right;">IVA 21%:</td>
-                                    <td width="10%" style="text-align: right; ">{{number_format($totaliva,2,',','.')}} <span style="font-family: Arial">€</span></td>
+                                    <td width="10%" style="text-align: right; ">{{number_format($totaliva,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"></td>
                                 </tr>
                                 <tr style="border-bottom: 0.1px;">
                                     <td width="90%"  style="text-align: right;">Total:</td>
-                                    <td width="10%" style="text-align: right; ">{{number_format($total,2,',','.')}} <span style="font-family: Arial">€</span></td>
+                                    <td width="10%" style="text-align: right; ">{{number_format($total,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"></td>
                                 </tr>
                             </table>
                             {{-- resumeN --}}
@@ -115,7 +113,7 @@
                                 @if($suplidos)
                                 <tr style="margin-top: 20px;">
                                     <td width="20%"  style="text-align: left;">IMPORT:</td>
-                                    <td width="80%" style="text-align: left; ">{{number_format($total,2,',','.')}} <span style="font-family: Arial">€</span> </td>
+                                    <td width="80%" style="text-align: left; ">{{number_format($total,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"></td>
                                 </tr>
                                 @endif
                                 <tr style="margin-top: 20px;">
