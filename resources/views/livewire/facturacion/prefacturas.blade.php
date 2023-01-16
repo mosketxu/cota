@@ -33,28 +33,31 @@
                             </select>
                         </div>
                     </div>
-                    <div class="inline-flex mt-3 space-x-2">
-                        <x-button.button color="blue" onclick="location.href = '{{ route('facturacion.createprefactura',$entidad) }}'">Nueva</x-button.button>
-
-                        <x-dropdown label="Actions">
-                            @if ($entidad->id)
-                                <x-dropdown.item type="button" wire:click="$toggle('showPlanModal')" class="flex items-center space-x-2">
-                                    <x-icon.invoice class="text-yellow-400"></x-icon.invoice> <span>Plan de Facturación </span>
+                    <div class="inline-flex space-x-1">
+                        <div class="py-0 my-0">
+                            <x-button.button class="py-0 my-0" color="blue" onclick="location.href = '{{ route('facturacion.createprefactura',$entidad) }}'">Nueva</x-button.button>
+                        </div>
+                        <div class="py-0 my-0">
+                            <x-dropdown label="Actions">
+                                @if ($entidad->id)
+                                    <x-dropdown.item type="button" wire:click="$toggle('showPlanModal')" class="flex items-center py-0 my-0 space-x-2">
+                                        <x-icon.invoice class="py-0 my-0 text-yellow-400 "></x-icon.invoice> <span>Plan de Facturación </span>
+                                    </x-dropdown.item>
+                                @endif
+                                <x-dropdown.item type="button" wire:click="generarSelected" class="flex items-center py-0 my-0 space-x-2">
+                                    <x-icon.invoice class="py-0 my-0 text-pink-400 "></x-icon.invoice> <span>Generar Facturas </span>
                                 </x-dropdown.item>
-                            @endif
-                            <x-dropdown.item type="button" wire:click="generarSelected" class="flex items-center space-x-2">
-                                <x-icon.invoice class="text-pink-400"></x-icon.invoice> <span>Generar Facturas </span>
-                            </x-dropdown.item>
-                            <x-dropdown.item type="button" wire:click="exportXls"  class="flex items-center space-x-2">
-                                <x-icon.xls class="text-green-800"></x-icon.xls> <span>Previsión XLS</span>
-                            </x-dropdown.item>
-                            <x-dropdown.item type="button" wire:click="exportSelected" class="flex items-center space-x-2">
-                                <x-icon.csv class="text-green-400"></x-icon.csv> <span>Export Csv</span>
-                            </x-dropdown.item>
-                            <x-dropdown.item type="button" wire:click="$toggle('showDeleteModal')" class="flex items-center space-x-2">
-                                <x-icon.trash class="text-red-400"></x-icon.trash> <span>Delete </span>
-                            </x-dropdown.item>
-                        </x-dropdown>
+                                <x-dropdown.item type="button" wire:click="exportXls"  class="flex items-center py-0 my-0 space-x-2">
+                                    <x-icon.xls class="w-4 py-0 my-0 text-green-800 "></x-icon.xls> <span>Previsión XLS</span>
+                                </x-dropdown.item>
+                                {{-- <x-dropdown.item type="button" wire:click="exportSelected" class="flex items-center py-0 my-0 space-x-2">
+                                    <x-icon.csv class="text-green-400"></x-icon.csv> <span>Export Csv</span>
+                                </x-dropdown.item> --}}
+                                <x-dropdown.item type="button" wire:click="$toggle('showDeleteModal')" class="flex items-center py-0 my-0 space-x-2">
+                                    <x-icon.trash class="py-0 my-0 text-red-400 "></x-icon.trash> <span>Delete </span>
+                                </x-dropdown.item>
+                            </x-dropdown>
+                        </div>
                     </div>
                 </div>
             </div>

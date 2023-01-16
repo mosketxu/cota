@@ -91,6 +91,7 @@ class Prefacturas extends Component
     public function generarSelected(){
         $prefacturas = $this->selectedRowsQuery->get();
         $this->validate();
+
         foreach ($prefacturas as $prefactura) {
             $fac=new FacturaCreateAction;$f=$fac->execute($prefactura);
             $f->pdffactura($f);
@@ -109,6 +110,7 @@ class Prefacturas extends Component
             'anyoplan.integer'=>'El año debe ser numérico y tener 4 dígitos',
             'anyoplan.digits'=>'El año debe ser numérico y tener 4 dígitos',
         ]);
+
         $agrupacion=FacturacionConcepto::where('entidad_id',$this->entidad->id)->groupBy('concepto')->get();
         // dd($agrupacion);
         $conceptos=FacturacionConcepto::where('entidad_id',$this->entidad->id)->get();

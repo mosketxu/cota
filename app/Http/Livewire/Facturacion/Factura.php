@@ -106,18 +106,18 @@ class Factura extends Component
         $i=$this->factura->id? $this->factura->id : '0';
         $detalles=FacturacionDetalle::where('facturacion_id',$i)->count();
         if($i!='0' && $detalles>0)
-            $this->factura->facturada='1';
+        $this->factura->facturada='1';
         else
-            $this->factura->facturada='0';
+        $this->factura->facturada='0';
 
         $f=Facturacion::updateOrCreate([
             'id'=>$i
             ],
             [
-            'numfactura'=>$this->factura->numfactura,
-            'serie'=>$this->factura->serie,
-            'entidad_id'=>$this->factura->entidad_id,
-            'fechafactura'=>$this->factura->fechafactura,
+                'numfactura'=>$this->factura->numfactura,
+                'serie'=>$this->factura->serie,
+                'entidad_id'=>$this->factura->entidad_id,
+                'fechafactura'=>$this->factura->fechafactura,
             'fechavencimiento'=>$this->factura->fechavencimiento,
             'metodopago_id'=>$this->factura->metodopago_id,
             'refcliente'=>$this->factura->refcliente,
@@ -138,6 +138,7 @@ class Factura extends Component
         $fac->execute($f);
 
         $f->pdffactura($f);
+
 
         return redirect()->route('facturacion.edit',$f);
     }

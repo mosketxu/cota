@@ -29,6 +29,7 @@ class FacturaImprimirAction
         $total=$factura->totales['t'][1];
 
         // dd($facturacion);
+        // dd('sdfaaaaaaaa');
 
 
         $pdf = new Dompdf();
