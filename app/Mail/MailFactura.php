@@ -39,7 +39,7 @@ class MailFactura extends Mailable
         $r='storage/'.$this->factura->rutafichero;
 
         return $this->view('facturacion.mail')
-            ->subject('Factura Suma Apoyo Empresarial:' . $this->factura->factura5)
+            ->subject('Factura Cota 2:' . $this->factura->factura5)
             ->attach($r);
     }
 }

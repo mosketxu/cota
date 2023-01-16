@@ -72,6 +72,7 @@
                                     <td width="20%" style="text-align: right; font-weight: bold">PREU</td>
                                     <td width="20%" style="text-align: right; font-weight: bold">UNITATS</td>
                                     <td width="20%" style="text-align: right; font-weight: bold">SUBTOTAL</td>
+                                    <td width="20%" style="text-align: right; font-weight: bold">SUBTOTAL</td>
                                 </tr>
                                 @foreach($facturadetalles as $detalle)
                                 <tr>

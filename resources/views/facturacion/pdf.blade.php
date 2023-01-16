@@ -48,13 +48,13 @@
         <header>
             {{-- cabecera del formulario --}}
             <div class="flex justify-center mt-10">
-                <img src="{{asset('img/LOGOSUMA_2.jpg')}}" width="200"/>
+                {{-- <img src="{{asset('img/LOGOSUMA_2.jpg')}}" width="200"/> --}}
             </div>
         </header>
 
         <footer>
             <div class="flex justify-center">
-                <img src="{{asset('img/PieSuma.png')}}" width="500"/>
+                {{-- <img src="{{asset('img/PieSuma.png')}}" width="500"/> --}}
             </div>
         </footer>
 
@@ -81,7 +81,7 @@
 
         <div class="flex">
             <div class="flex-initial pl-5">
-                <img src="{{asset('img/Reg mercantilSUMAVER2.jpg')}}" width="85"/>
+                {{-- <img src="{{asset('img/Reg mercantilSUMAVER2.jpg')}}" width="85"/> --}}
             </div>
             <div  class="">
                 {{-- Fecha y Factura --}}

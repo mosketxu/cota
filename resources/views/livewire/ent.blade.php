@@ -179,7 +179,7 @@
                         @endforeach
                     </x-select>
                 </div>
-                <div class="w-full form-item">
+                {{-- <div class="w-full form-item">
                     <x-jet-label for="suma_id">{{ __('Rpble.Suma') }}</x-jet-label>
                     <x-select wire:model.defer="entidad.suma_id" class="w-full" selectname="suma_id">
                         <option value="">-- choose --</option>
@@ -187,7 +187,7 @@
                         <option value="{{ $suma->id }}">{{ $suma->nombre }}</option>
                         @endforeach
                     </x-select>
-                </div>
+                </div> --}}
                 <div class="w-full form-item">
                     <x-jet-label for="idioma">{{ __('Idioma') }}</x-jet-label>
                     <x-select wire:model.defer="entidad.idioma" class="w-full" selectname="idioma">
@@ -197,7 +197,7 @@
                         <option value="EN">Inglés</option>
                     </x-select>
                 </div>
-                <div class="w-full form-item">
+                {{-- <div class="w-full form-item">
                     <x-jet-label for="porcentajemarta">{{ __('% Marta') }}</x-jet-label>
                     <x-jet-input  wire:model.defer="entidad.porcentajemarta" type="number" step="any" id="porcentajemarta" name="porcentajemarta" :value="old('porcentajemarta')" class="w-full"/>
                     <x-jet-input-error for="porcentajemarta" class="mt-2" />
@@ -206,7 +206,7 @@
                     <x-jet-label for="porcentajesusana">{{ __('% Susana') }}</x-jet-label>
                     <x-jet-input  wire:model.defer="entidad.porcentajesusana" type="number"  step="any" id="porcentajesusana" name="porcentajesusana" :value="old('porcentajesusana')" class="w-full"/>
                     <x-jet-input-error for="porcentajesusana" class="mt-2" />
-                </div>
+                </div> --}}
             </div>
             <div class="flex flex-col mx-2 space-y-4 md:space-y-0 md:flex-row md:space-x-4">
                 <div class="w-full form-item">

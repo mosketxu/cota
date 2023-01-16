@@ -18,7 +18,7 @@
     <p>Suma Apoyo Empresarial, S.L. </p>
 
     <div  style="width: 200px">
-		<img src="{{ $message->embed(asset('img/LOGOSUMA_mail.jpg')) }}" width="20px">
+		{{-- <img src="{{ $message->embed(asset('img/LOGOSUMA_mail.jpg')) }}" width="20px"> --}}
     </div>
 </body>
 </html>
