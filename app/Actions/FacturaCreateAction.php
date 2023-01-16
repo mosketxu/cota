@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use App\Models\Entidad;
 use App\Models\Facturacion;
 use App\Models\FacturacionDetalle;
 
@@ -23,7 +24,9 @@ class FacturaCreateAction
         $ruta='facturas/'.$serie.'/'.$factura->fechafactura->format('m');
         $factura->ruta=$ruta;
         $caracteresmalos=['.',',',"'"];
-        $ent=str_replace($caracteresmalos,"",$factura->entidad->entidad);
+        $enti=Entidad::find($factura->entidad_id)->entidad;
+        $ent=str_replace($caracteresmalos,"",$enti);
+
         $fichero=(trim('Fra_Cota_'.$factura->serie.'_'.substr ( $fac ,-5 ).'_'.$ent,' ').'.pdf');
         $factura->fichero=substr($fichero, 0, 40);
         $factura->serie=$serie;
