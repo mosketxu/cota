@@ -105,7 +105,7 @@ class Prefacturas extends Component
 
     public function generarplan(){
         $this->validate([
-            'anyoplan'=>'required|digits:4|integer|min:2022|max:'.(date('Y')+1),
+            'anyoplan'=>'required|digits:4|integer|gt:2022|max:'.(date('Y')+1),
         ],[
             'anyoplan.required'=>'Es necesario el año del plan a generar',
             'anyoplan.max'=>'Solo se puede generar el plan del año próximo o actual',
@@ -113,6 +113,7 @@ class Prefacturas extends Component
             'anyoplan.integer'=>'El año debe ser numérico y tener 4 dígitos',
             'anyoplan.digits'=>'El año debe ser numérico y tener 4 dígitos',
         ]);
+
 
         $agrupacion=FacturacionConcepto::where('entidad_id',$this->entidad->id)->groupBy('concepto')->get();
         // dd($agrupacion);

@@ -184,7 +184,7 @@
                     <x-slot name="title">Plan de facturacion de la empresa: {{ $entidad->id? $entidad->entidad  :'' }}</x-slot>
                     <x-slot name="content">
                         <x-jet-label for="anyoplan" value="{{ __('Introduce el Año del plan') }}" />
-                        <x-jet-input  wire:model.defer="anyoplan" type="text"/>
+                        <x-jet-input  wire:model.lazy="anyoplan" type="text"/>
                         @error('anyoplan') <span class="text-red-500">{{ $message }}</span>@enderror
                     </x-slot>
                     <x-slot name="footer">
