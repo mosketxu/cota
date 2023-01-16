@@ -64,13 +64,14 @@ class FacturaDetalleConceptos extends Component
 
     public function save(){
         $this->calculo();
+        // dd($this->uds);
         $fdc=FacturacionDetalleConcepto::create([
             'facturaciondetalle_id'=>$this->detalleid,
             'orden'=>$this->orden=='' ? '0' : $this->orden  ,
             'concepto'=>$this->concepto,
             'tipo'=>$this->tipo,
             'subcuenta'=>$this->subcuenta,
-            'uds'=>$this->uds,
+            'unidades'=>$this->uds,
             'importe'=>$this->importe,
             'iva'=>$this->piva,
             'base'=>$this->base,
