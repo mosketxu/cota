@@ -21,7 +21,7 @@
             <table width="90%" style="margin-top:40px; " class="mx-auto">
                 <tr>
                     <td class="" style="text-align: left"  width=50%>
-                        <img src="{{asset('img/logo.png')}}" class="mt-2 ml-4" width="120px">
+                        <img src="{{asset('img/logo.png')}}" class="mt-2 ml-8" width="120px">
                     </td>
                     <td style="text-align: right; padding-right:40px; font-size: 2em; color: red" width=50%>
                         FACTURA
@@ -37,8 +37,8 @@
                 </div>
                 <div style="margin:0 auto; width: 650px; border-top: 1px solid gray;"></div>
                 <div class="margin:0 auto; text-center " style="font-size: 0.7rem">
-                    <p>Carrer de Sant Joan de la Salle, 42, MF3.11</p>
-                    <p>Barcelona (08022), Barcelonawww.c2tecnics.com | +34 936068528 | info@c2tecnics.com</p>
+                    <p>Carrer de Sant Joan de la Salle, 42, MF3.11, Barcelona (08022)</p>
+                    <p>www.c2tecnics.com | +34 936068528 | info@c2tecnics.com</p>
                 </div>
             </div>
         </footer>
@@ -49,11 +49,11 @@
                 <div class="flex py-0 space-y-2">
                      <table width=80% class="mx-auto mt-1 text-sm " style="color:rgb(30, 27, 27);">
                         <tr>
-                            <td width=18% >
-                                <p style="border-bottom: 0.1px"> Número: {{ $factura->numfactura }} </p>
-                                <p style="border-bottom: 0.1px"> Data: {{ $factura->datefra }} </p>
+                            <td width=21% >
+                                <p style="border-bottom: 0.1px">Factura nº: {{ $factura->numfactura }} </p>
+                                <p style="border-bottom: 0.1px">Data: {{ $factura->datefra }} </p>
                             </td>
-                            <td width=82% style="text-align: right; ">
+                            <td width=79% style="text-align: right; ">
                                 <span style="font-weight: bold"> Client </span> <br>
                                 {{ $factura->entidad->entidad }} <br>
                                 {{ $factura->entidad->nif }} <br>
@@ -121,7 +121,7 @@
                                     <td width="80%" style="text-align: left; ">{{ $factura->metodopago->metodopago }}</td>
                                 </tr>
                                 <tr style="margin-top: 20px;">
-                                    <td width="20%"  style="text-align: left;">CONCEPTE:</td>
+                                    <td width="20%"  style="text-align: left;">FACTURA Nº:</td>
                                     <td width="80%" style="text-align: left; ">{{ $factura->numfactura}}</td>
                                 </tr>
                             </table>
