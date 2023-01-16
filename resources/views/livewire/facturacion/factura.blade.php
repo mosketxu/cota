@@ -1,6 +1,7 @@
 <div class="">
-    @livewire('menu',['entidad'=>$factura->entidad,'ruta'=>$ruta],key($factura->entidad->id))
-
+    @if($factura->entidad && $factura->numfactura)
+        @livewire('menu',['entidad'=>$factura->entidad,'ruta'=>$ruta],key($factura->entidad->id))
+    @endif
     <div class="flex justify-between mx-5 mt-2">
         <div class="">
             <h1 class="text-2xl font-semibold text-gray-900">Factura  {{ $nf }}</h1>
