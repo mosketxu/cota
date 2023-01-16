@@ -75,7 +75,7 @@
                                 </tr>
                                 @foreach($facturadetalles as $detalle)
                                 <tr>
-                                    <td width="70%" >{{ $detalle->tipo=='1' ? 'Suplidos:' :'' }} {{$detalle->concepto}}</td>
+                                    <td width="70%" >{{ $detalle->tipo=='1' ? 'Suplerts:' :'' }} {{$detalle->concepto}}</td>
                                     <td width="10%" style="text-align: right">{{ number_format($detalle->importe,2,',','.') }} <img src="{{asset('img/euro.png')}}" class="mt-1" width="8px"></td>
                                     <td width="10%" style="text-align: right">{{ number_format($detalle->unidades,0,',','.') }}</td>
                                     <td width="10%" style="text-align: right">{{ $detalle->tipo=='1' ? number_format($detalle->exenta,2,',','.') : number_format($detalle->base,2,',','.') }}<img src="{{asset('img/euro.png')}}" class="mt-1 ml-1 " width="8px">
@@ -91,7 +91,7 @@
                                 </tr>
                                 @if($suplidos)
                                 <tr style="border-bottom: 0.1px;">
-                                    <td width="90%"  style="text-align: right;">SUPLIDOS</td>
+                                    <td width="90%"  style="text-align: right;">SUPLERTS</td>
                                     <td width="10%" style="text-align: right; ">{{number_format($suplidos,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"> </td>
                                 </tr>
                                 @endif
@@ -107,7 +107,7 @@
                             {{-- resumeN --}}
                             <table style="font-size: 0.8em; border-collapse: separate; border-spacing: 0 12px; margin:20 auto;" width="80%">
                                 <tr style="margin-top: 20px;">
-                                    <td width="20%"  style="text-align: left;">RÈFERENCIA:</td>
+                                    <td width="20%"  style="text-align: left;">REFERÈNCIA:</td>
                                     <td width="80%" style="text-align: left; ">{{$factura->refcliente}} </td>
                                 </tr>
                                 @if($suplidos)
