@@ -96,14 +96,13 @@ class FacturaDetalleConceptos extends Component
         );
         $factura=Facturacion::find($this->detalle->facturacion_id);
 
-        $factura->pdffactura($factura);
-
-        // $fac=new FacturaImprimirAction;
-        // $fac->execute($factura);
-
-        $vista =($factura->numfactura!='' || !is_null($factura->numfactura)) ? "facturacion.edit": 'facturacion.editprefactura';
+        if(($factura->numfactura!='' || !is_null($factura->numfactura))){
+            $factura->pdffactura($factura);
+            $vista='facturacion.edit';
+        }else{
+            $vista='facturacion.editprefactura';
+        }
         return redirect()->route($vista,$this->detalle->facturacion_id);
-
     }
 
     public function delete($conceptoid)
@@ -116,10 +115,7 @@ class FacturaDetalleConceptos extends Component
 
             $factura=Facturacion::find($this->detalle->facturacion_id);
 
-            $factura->pdffactura($factura);
-            // $fac=new FacturaImprimirAction;
-            // $fac->execute($factura);
+            if(!is_null($factura->numfactura) || $factura->numfactura!='' ) $factura->pdffactura($factura);
         }
-
     }
 }

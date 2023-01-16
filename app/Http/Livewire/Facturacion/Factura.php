@@ -105,10 +105,12 @@ class Factura extends Component
 
         $i=$this->factura->id? $this->factura->id : '0';
         $detalles=FacturacionDetalle::where('facturacion_id',$i)->count();
-        if($i!='0' && $detalles>0)
-        $this->factura->facturada='1';
-        else
-        $this->factura->facturada='0';
+        if($i!='0' && $detalles>0){
+            $this->factura->facturada='1';
+        }else{
+            $this->factura->facturada='0';
+        }
+
 
         $f=Facturacion::updateOrCreate([
             'id'=>$i
