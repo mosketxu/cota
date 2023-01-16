@@ -85,7 +85,7 @@ class Prefacturas extends Component
     }
 
     public function getRowsProperty(){
-        return $this->rowsQuery->paginate(60);
+        return $this->rowsQuery->paginate(100);
     }
 
     public function generarSelected(){
@@ -108,8 +108,8 @@ class Prefacturas extends Component
             'anyoplan.integer'=>'El año debe ser numérico y tener 4 dígitos',
             'anyoplan.digits'=>'El año debe ser numérico y tener 4 dígitos',
         ]);
-
         $agrupacion=FacturacionConcepto::where('entidad_id',$this->entidad->id)->groupBy('concepto')->get();
+        // dd($agrupacion);
         $conceptos=FacturacionConcepto::where('entidad_id',$this->entidad->id)->get();
         foreach ($conceptos as $concepto) {
             $prefac=new PrefacturaCreateAction; $p=$prefac->execute($concepto,$this->entidad,$this->anyoplan);
@@ -137,7 +137,8 @@ class Prefacturas extends Component
                 'facturacion.fechafactura','facturacion.fechavencimiento',
                 'facturacion_detalles.concepto',
                 'facturacion_detalle_conceptos.concepto','facturacion_detalle_conceptos.base',
-                'facturacion_detalle_conceptos.exenta','facturacion_detalle_conceptos.iva','facturacion_detalle_conceptos.total')
+                'facturacion_detalle_conceptos.exenta','facturacion_detalle_conceptos.iva','facturacion_detalle_conceptos.total',
+                'entidades.iban1',)
             ->searchYear('fechafactura',$this->filtroanyo)
             ->searchMes('fechafactura',$this->filtromes)
             ->orderBy('facturacion.fechafactura')
