@@ -41,7 +41,7 @@
                             <x-dropdown label="Actions">
                                 @if ($entidad->id)
                                     <x-dropdown.item type="button" wire:click="$toggle('showPlanModal')" class="flex items-center py-0 my-0 space-x-2">
-                                        <x-icon.invoice class="py-0 my-0 text-yellow-400 "></x-icon.invoice> <span>Plan de Facturación </span>
+                                        <x-icon.invoice class="py-0 my-0 text-yellow-400 "></x-icon.invoice> <span>Plan de Pre-Facturación </span>
                                     </x-dropdown.item>
                                 @endif
                                 <x-dropdown.item type="button" wire:click="generarSelected" class="flex items-center py-0 my-0 space-x-2">
@@ -190,6 +190,7 @@
                     <x-slot name="footer">
                         <x-button.secondary wire:click="$set('showPlanModal', false)">Cancel</x-button.secondary>
                         <x-button.primary type="submit">Generar Plan</x-button.primary>
+                        @include('errores')
                     </x-slot>
                 </x-modal.confirmation>
         </form>
