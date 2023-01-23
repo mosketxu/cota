@@ -49,13 +49,13 @@ class Facturacion extends Model
     }
     public function getDateFraAttribute(){
         if ($this->fechafactura) {
-            return $this->fechafactura->format('d/m/Y');
+            return $this->fechafactura->format('d/m/yyyy');
         }
     }
 
     public function getDateVtoAttribute(){
         if ($this->fechavencimiento) {
-            return $this->fechavencimiento->format('d/m/Y');
+            return $this->fechavencimiento->format('d/m/yyyy');
         }
     }
 

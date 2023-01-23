@@ -70,7 +70,7 @@ class Entidad extends Model
     public function getDateForHumansAttribute()
     {
         if ($this->created_at) {
-            return $this->created_at->format('d/m/Y');
+            return $this->created_at->format('d/m/yyyy');
         }
     }
 
