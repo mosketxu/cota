@@ -104,10 +104,10 @@
                                 <tr style="border-bottom: 0.1px;">
                                     @if($totaliva>0)
                                     <td width="69%" style="padding-left: 30px">IVA 21% :</td>
-                                    <td width="29%" style="text-align: right" width="50%">{{number_format($totaliva,2,',','.')}} <span style="font-family: Arial">€</span></td>
+                                    <td width="29%" style="text-align: right" width="50%">{{number_format($totaliva,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"></td>
                                     @else
                                     <td width="69%" style="padding-left: 30px">IVA 0% :</td>
-                                    <td width="29%" style="text-align: right" width="50%">0.00 <span style="font-family: Arial">€</span></td>
+                                    <td width="29%" style="text-align: right" width="50%">0.00 <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"></td>
                                     @endif
                                 </tr>
                                 <tr style="border-bottom: 0.1px;">
