@@ -78,7 +78,9 @@
                                     <td width="70%" >{{ $detalle->tipo=='1' ? 'Suplerts:' :'' }} {{$detalle->concepto}}</td>
                                     <td width="10%" style="text-align: right">{{ number_format($detalle->importe,2,',','.') }} <img src="{{asset('img/euro.png')}}" class="mt-1" width="8px"></td>
                                     <td width="10%" style="text-align: right">{{ number_format($detalle->unidades,0,',','.') }}</td>
-                                    <td width="10%" style="text-align: right">{{ $detalle->tipo=='1' ? number_format($detalle->exenta,2,',','.') : number_format($detalle->base,2,',','.') }}<img src="{{asset('img/euro.png')}}" class="mt-1 ml-1 " width="8px">
+                                    <td width="10%" style="text-align: right">
+                                        {{ $detalle->tipo=='1' ? number_format($detalle->exenta,2,',','.') : ($detalle->iva=='0' ? number_format($detalle->exenta,2,',','.') : number_format($detalle->base,2,',','.')) }}
+                                        <img src="{{asset('img/euro.png')}}" class="mt-1 ml-1 " width="8px">
                                     </td>
                                 </tr>
                                 @endforeach
@@ -87,7 +89,9 @@
                             <table style="font-size: 0.7em; margin:20 auto;" width="80%">
                                 <tr style="border-bottom: 0.1px;">
                                     <td width="90%"  style="text-align: right;">BASE IMPOSABLE</td>
-                                    <td width="10%" style="text-align: right; ">{{number_format($base,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"> </td>
+                                    <td width="10%" style="text-align: right; ">
+                                        {{ ($detalle->tipo!='1' && $detalle->iva!='0') ? number_format($detalle->base,2,',','.') : number_format($detalle->exenta,2,',','.')  }}
+                                        <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"> </td>
                                 </tr>
                                 @if($suplidos)
                                 <tr style="border-bottom: 0.1px;">
@@ -96,8 +100,13 @@
                                 </tr>
                                 @endif
                                 <tr style="border-bottom: 0.1px;">
-                                    <td width="90%"  style="text-align: right;">IVA 21%:</td>
-                                    <td width="10%" style="text-align: right; ">{{number_format($totaliva,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"></td>
+                                    @if($totaliva>0)
+                                    <td width="69%" style="padding-left: 30px">IVA 21% :</td>
+                                    <td width="29%" style="text-align: right" width="50%">{{number_format($totaliva,2,',','.')}} <span style="font-family: Arial">€</span></td>
+                                    @else
+                                    <td width="69%" style="padding-left: 30px">IVA 0% :</td>
+                                    <td width="29%" style="text-align: right" width="50%">0.00 <span style="font-family: Arial">€</span></td>
+                                    @endif
                                 </tr>
                                 <tr style="border-bottom: 0.1px;">
                                     <td width="90%"  style="text-align: right;">Total:</td>
