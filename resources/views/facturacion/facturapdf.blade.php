@@ -89,9 +89,11 @@
                             <table style="font-size: 0.7em; margin:20 auto;" width="80%">
                                 <tr style="border-bottom: 0.1px;">
                                     <td width="90%"  style="text-align: right;">BASE IMPOSABLE</td>
-                                    <td width="10%" style="text-align: right; ">
-                                        {{ ($detalle->tipo!='1' && $detalle->iva!='0') ? number_format($detalle->base,2,',','.') : number_format($detalle->exenta,2,',','.')  }}
-                                        <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"> </td>
+                                    @if($totaliva>0)
+                                        <td width="10%" style="text-align: right; ">{{number_format($base,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"></td>
+                                    @elseif ($detalle->tipo=='0')
+                                        <td width="10%" style="text-align: right; ">{{number_format($exenta,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"></td>
+                                    @endif
                                 </tr>
                                 @if($suplidos)
                                 <tr style="border-bottom: 0.1px;">
