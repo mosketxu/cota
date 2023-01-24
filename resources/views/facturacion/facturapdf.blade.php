@@ -58,7 +58,7 @@
                                 {{ $factura->entidad->entidad }} <br>
                                 {{ $factura->entidad->nif }} <br>
                                 {{ $factura->entidad->direccion }} <br>
-                                {{ $factura->entidad->localidad }} ({{ $factura->entidad->codpostal }}) {{ $factura->entidad->provincia->provincia }}
+                                {{ $factura->entidad->localidad }} ({{ $factura->entidad->codpostal }}) {{ $factura->entidad->provincia->provincia ?? ''}}
                             </td>
                         </tr>
                      </table>
