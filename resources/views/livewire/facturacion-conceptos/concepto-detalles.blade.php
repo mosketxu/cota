@@ -8,6 +8,7 @@
             <div class="flex space-x-1" wire:loading.class.delay="opacity-50">
                 <div class="w-1/12 "><input type="number" name="orden" value="{{ $detalle->orden }}" class="w-full py-1 text-sm {{ $color }} font-thin text-gray-500 truncate border-0 rounded-md"/></div>
                 <div class="w-7/12 "><input type="text" name="concepto" value="{{ $detalle->concepto }}" class="w-full py-1 text-sm {{ $color }} font-thin text-gray-500 truncate border-0 rounded-md" /></div>
+                <div class="w-7/12 "><input type="text" name="periodo" value="{{ $detalle->periodo }}" class="w-full py-1 text-sm {{ $color }} font-thin text-gray-500 truncate border-0 rounded-md" /></div>
                 <div class="w-1/12 "><input type="number" name="unidades" step="any" value="{{ $detalle->unidades }}" class="w-full {{ $color }} py-1 text-right text-sm font-thin text-gray-500 truncate border-0 rounded-md"/></div>
                 <div class="w-1/12 "><input type="number" name="importe" step="any" value="{{ $detalle->importe }}" class="w-full py-1 {{ $color }} text-right text-sm font-thin text-gray-500 truncate border-0 rounded-md"/></div>
                 <div class="flex items-center justify-center w-2/12 ">

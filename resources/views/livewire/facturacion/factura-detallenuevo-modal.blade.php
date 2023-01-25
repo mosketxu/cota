@@ -17,9 +17,13 @@
                         <x-jet-label for="orden">{{ __('Orden') }}</x-jet-label>
                         <x-input.text type="number" class="w-full py-1" wire:model="orden" />
                     </div>
-                    <div class="w-10/12 form-item">
+                    <div class="w-8/12 form-item">
                         <x-jet-label for="concepto">{{ __('Concepto') }}</x-jet-label>
                         <x-input.text  class="w-full py-1" wire:model="concepto" />
+                    </div>
+                    <div class="w-2/12 form-item">
+                        <x-jet-label for="periodo">{{ __('Periodo') }}</x-jet-label>
+                        <x-input.text  class="w-full py-1" wire:model="periodo" />
                     </div>
                 </div>
                 <div class="mt-5 ">

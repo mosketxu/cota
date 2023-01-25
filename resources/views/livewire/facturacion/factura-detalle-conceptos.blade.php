@@ -29,7 +29,8 @@
                     <option value="759000" {{ $concepto->subcuenta=='759000' ? 'selected' : ''}} >759000</option>
                 </select>
             </div>
-            <div class="w-2/12 "><input type="text" name="concepto" value="{{ $concepto->concepto }}" class="w-full break-normal py-0.5 text-xs {{ $color }} font-thin text-gray-500  border-0 rounded-md" {{ $deshabilitado }}/></div>
+            <div class="w-2/12 "><input type="text" name="concepto" value="{{ $concepto->concepto}}" class="w-full break-normal py-0.5 text-xs {{ $color }} font-thin text-gray-500  border-0 rounded-md" {{ $deshabilitado }}/></div>
+            <div class="w-1/12 "><input type="text" name="concepto" value="{{ $concepto->periodo}}" class="w-full break-normal py-0.5 text-xs {{ $color }} font-thin text-gray-500  border-0 rounded-md" {{ $deshabilitado }}/></div>
             <div class="w-1/12 "><input type="number" name="unidades" step="any" value="{{ $concepto->unidades }}" class="w-full {{ $color }} py-0.5 text-right text-xs font-thin text-gray-500  border-0 rounded-md" {{ $deshabilitado }}/></div>
             <div class="w-1/12 "><input type="number" name="importe" step="any" value="{{ $concepto->importe }}" class="w-full py-0.5 {{ $color }} text-right text-xs font-thin text-gray-500  border-0 rounded-md" {{ $deshabilitado }}/></div>
             <div class="w-1/12 ">
@@ -82,6 +83,7 @@
                 </x-select>
             </div>
             <div class="w-2/12 "><input type="text" name="concepto"  wire:model.lazy="concepto" value="{{ old('concepto') }}" class="w-full py-0.5 text-xs font-thin text-gray-500  border-0 rounded-md" /></div>
+            <div class="w-1/12 "><input type="text" name="periodo"  wire:model.lazy="periodo" value="{{ old('periodo') }}" class="w-full py-0.5 text-xs font-thin text-gray-500  border-0 rounded-md" /></div>
             <div class="w-1/12 "><input type="number" name="Uds" step="any" wire:model.lazy='uds' value="{{ old('unidades','1') }}" class="w-full py-0.5 text-xs font-thin text-right text-gray-500  border-0 rounded-md"/></div>
             <div class="w-1/12 "><input type="number" name="importe" step="any" wire:model.lazy='importe' value="{{ old('importe','0') }}" class="w-full py-0.5 text-xs font-thin text-right text-gray-500  border-0 rounded-md"/></div>
             <div class="w-1/12 ">

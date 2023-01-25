@@ -69,6 +69,7 @@ class FacturacionDetalleConceptoController extends Controller
         $fdc->tipo=$request->tipo;
         $fdc->subcuenta=$request->subcuenta;
         $fdc->concepto=$request->concepto;
+        $fdc->periodo=$request->periodo;
         $fdc->unidades=$request->unidades;
         $fdc->importe=$request->importe;
         $fdc->iva=$fdc->tipo=='1'? '0.00' : $request->iva;

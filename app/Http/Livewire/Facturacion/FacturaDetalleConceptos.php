@@ -13,6 +13,7 @@ class FacturaDetalleConceptos extends Component
     public $color;
     public $orden='0';
     public $concepto='';
+    public $periodo='';
     public $tipo='0';
     public $subcuenta='705000';
     public $uds='1';
@@ -29,6 +30,7 @@ class FacturaDetalleConceptos extends Component
     protected function rules(){
         return [
             'concepto'=>'required',
+            'periodo'=>'nullable',
         ];
     }
 
@@ -69,6 +71,7 @@ class FacturaDetalleConceptos extends Component
             'facturaciondetalle_id'=>$this->detalleid,
             'orden'=>$this->orden=='' ? '0' : $this->orden  ,
             'concepto'=>$this->concepto,
+            'periodo'=>$this->periodo,
             'tipo'=>$this->tipo,
             'subcuenta'=>$this->subcuenta,
             'unidades'=>$this->uds,
@@ -82,6 +85,7 @@ class FacturaDetalleConceptos extends Component
 
         $this->orden='0';
         $this->concepto='';
+        $this->periodo='';
         $this->tipo='0';
         $this->subcuenta='705000';
         $this->uds='1';

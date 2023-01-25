@@ -50,7 +50,7 @@
                      <table width=80% class="mx-auto mt-1 text-sm " style="color:rgb(30, 27, 27);">
                         <tr>
                             <td width=21% >
-                                <p style="border-bottom: 0.1px">Factura nº: {{ $factura->numfactura }} </p>
+                                <p style="border-bottom: 0.1px">Factura nº: F.{{ $factura->serie }}.{{ substr($factura->numfactura,-3) }} </p>
                                 <p style="border-bottom: 0.1px">Data: {{ $factura->datefra }} </p>
                             </td>
                             <td width=79% style="text-align: right; ">
@@ -68,20 +68,25 @@
                             {{-- Detalles  --}}
                             <table style="font-size: 0.7em; margin:0 auto;" width="80%">
                                 <tr style="border-bottom: 0.1px;">
-                                    <td width="40%" style="text-align: left; font-weight: bold">CONCEPTE</td>
-                                    <td width="20%" style="text-align: right; font-weight: bold">PREU</td>
+                                    <td width="100%" style="text-align: left; font-weight: bold">CONCEPTE</td>
+                                    {{-- <td width="20%" style="text-align: right; font-weight: bold">PREU</td>
                                     <td width="20%" style="text-align: right; font-weight: bold">UNITATS</td>
-                                    <td width="20%" style="text-align: right; font-weight: bold">SUBTOTAL</td>
+                                    <td width="20%" style="text-align: right; font-weight: bold">SUBTOTAL</td> --}}
                                 </tr>
                                 @foreach($facturadetalles as $detalle)
                                 <tr>
-                                    <td width="70%" >{{ $detalle->tipo=='1' ? 'Suplerts:' :'' }} {{$detalle->concepto}}</td>
-                                    <td width="10%" style="text-align: right">{{ number_format($detalle->importe,2,',','.') }} <img src="{{asset('img/euro.png')}}" class="mt-1" width="8px"></td>
+                                    <td width="100%" >
+                                        {{ $detalle->tipo=='1' ? 'Suplerts:' :'' }} {{$detalle->concepto}}
+                                        @if($detalle->periodo!='')
+                                        <br><span style="font-weight:bold;">{{ $detalle->periodo }}</span>
+                                        @endif
+                                    </td>
+                                    {{-- <td width="10%" style="text-align: right">{{ number_format($detalle->importe,2,',','.') }} <img src="{{asset('img/euro.png')}}" class="mt-1" width="8px"></td>
                                     <td width="10%" style="text-align: right">{{ number_format($detalle->unidades,0,',','.') }}</td>
                                     <td width="10%" style="text-align: right">
                                         {{ $detalle->tipo=='1' ? number_format($detalle->exenta,2,',','.') : ($detalle->iva=='0' ? number_format($detalle->exenta,2,',','.') : number_format($detalle->base,2,',','.')) }}
                                         <img src="{{asset('img/euro.png')}}" class="mt-1 ml-1 " width="8px">
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </table>

@@ -78,6 +78,7 @@
                     <div class="w-1/12"><input type="text" value="Tipo" class="w-full py-1 text-xs font-bold text-gray-500 truncate bg-blue-100 border-0 rounded-md" disabled /></div>
                     <div class="w-1/12"><input type="text" value="subcta." class="w-full py-1 text-xs font-bold text-gray-500 truncate bg-blue-100 border-0 rounded-md" disabled /></div>
                     <div class="w-2/12"><input type="text" value="Concepto" class="w-full py-1 text-xs font-bold text-gray-500 truncate bg-blue-100 border-0 rounded-md" disabled /></div>
+                    <div class="w-1/12"><input type="text" value="Periodo" class="w-full py-1 text-xs font-bold text-gray-500 truncate bg-blue-100 border-0 rounded-md" disabled /></div>
                     <div class="w-1/12"><input type="text" value="Uds" class="w-full py-1 text-xs font-bold text-right text-gray-500 truncate bg-blue-100 border-0 rounded-md" disabled /></div>
                     <div class="w-1/12"><input type="text" value="Importe" class="w-full py-1 text-xs font-bold text-right text-gray-500 truncate bg-blue-100 border-0 rounded-md" disabled /></div>
                     <div class="w-1/12"><input type="text" value="% Iva" class="w-full py-1 text-xs font-bold text-gray-500 truncate bg-blue-100 border-0 rounded-md" disabled /></div>

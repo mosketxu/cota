@@ -29,7 +29,7 @@ class Factura extends Component
         return [
             'factura.id'=>'nullable',
             'factura.numfactura'=>'nullable',
-            'factura.serie'=>'required',
+            'factura.serie'=>'nullable|digits:4|integer|gt:2022|max:'.(date('Y')+1),
             'factura.entidad_id'=>'required',
             'factura.fechafactura'=>'date|required',
             'factura.fechavencimiento'=>'date|required',
@@ -54,7 +54,7 @@ class Factura extends Component
     {
         $this->factura=$facturacion;
         $this->showgenerar = $facturacion->facturada ? false : true;
-        $this->nf=$this->factura->serie.'-'.substr($this->factura->numfactura,-5) ;
+        $this->nf=$this->factura->serie.'-'.substr($this->factura->numfactura,-3) ;
         $this->conceptos=FacturacionConcepto::where('entidad_id',$facturacion->entidad_id)->get();
         $this->bloqueado=$this->factura->facturada==true ? 'disabled' : '';
         $this->titulo= $this->pre=='no'? 'Factura ' . $this->nf : 'Prefactura ' . $this->factura->id;

@@ -57,6 +57,7 @@ class FacturacionConceptoDetalleController extends Controller
         $detalle = FacturacionConceptodetalle::create([
             'facturacionconcepto_id'=>$request->facturacionconcepto_id,
             'concepto'=>$request->concepto,
+            'periodo'=>$request->periodo,
             'unidades'=>$request->unidades,
             'orden'=>$request->orden=='' ? '0' : $request->orden  ,
             'importe'=>$request->importe,

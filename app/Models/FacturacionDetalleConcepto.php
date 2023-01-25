@@ -10,7 +10,7 @@ class FacturacionDetalleConcepto extends Model
     use HasFactory;
 
 
-    protected $fillable=['facturaciondetalle_id','orden','tipo','concepto','unidades','importe','iva','totaliva','base','exenta','total','subcuenta','bloqueado'];
+    protected $fillable=['facturaciondetalle_id','orden','tipo','concepto','periodo','unidades','importe','iva','totaliva','base','exenta','total','subcuenta','bloqueado'];
 
     const TIPOS =[
         '0'=>'General',

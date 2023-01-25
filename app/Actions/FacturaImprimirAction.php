@@ -29,7 +29,7 @@ class FacturaImprimirAction
         $total=$factura->totales['t'][1];
 
         $pdf = new Dompdf();
-        $pdf = \PDF::loadView('facturacion.facturapdf', compact('factura','facturadetalles','base','suplidos','totaliva','total'));
+        $pdf = \PDF::loadView('facturacion.facturapdf', compact('factura','facturadetalles','base','exenta','suplidos','totaliva','total'));
 
 
         Storage::put('public/'.$factura->ruta.'/'.$factura->fichero, $pdf->output());

@@ -11,7 +11,7 @@ class FacturacionConceptodetalle extends Model
 
     protected $table = 'facturacion_conceptodetalles';
 
-    protected $fillable = ['concepto','facturacionconcepto_id','orden','unidades','importe'];
+    protected $fillable = ['concepto','periodo','facturacionconcepto_id','orden','unidades','importe'];
 
     public function concepto()
     {

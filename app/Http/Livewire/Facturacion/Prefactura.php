@@ -21,7 +21,7 @@ class Prefactura extends Component
         return [
             'factura.id'=>'nullable',
             'factura.numfactura'=>'nullable',
-            'factura.serie'=>'nullable',
+            'factura.serie'=>'nullable|digits:4|integer|gt:2022|max:'.(date('Y')+1),
             'factura.entidad_id'=>'required',
             'factura.fechafactura'=>'date|required',
             'factura.fechavencimiento'=>'date|nullable',
@@ -50,7 +50,7 @@ class Prefactura extends Component
         }else{
             $this->ent= $facturacion->entidad;
         }
-        if(!$this->factura->serie) $this->factura->serie=substr(date('Y'),-2);
+        if(!$this->factura->serie) $this->factura->serie=date('Y');
         $this->factura->enviar=1;
         $this->factura->enviada=0;
         $this->factura->pagada=0;

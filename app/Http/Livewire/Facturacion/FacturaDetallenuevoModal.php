@@ -13,11 +13,13 @@ class FacturaDetallenuevoModal extends Component
     public $factura=false;
     public $detalleid;
     public $concepto;
+    public $periodo;
     public $orden='0';
 
     protected function rules(){
         return [
             'concepto'=>'required',
+            'periodo'=>'nullable',
             'orden'=>'nullable',
         ];}
 
@@ -37,6 +39,7 @@ class FacturaDetallenuevoModal extends Component
     public function cancelarnuevomodal(){
         $this->orden='';
         $this->concepto='';
+        $this->periodo='';
         $this->muestranuevomodal= false ;
     }
 
@@ -51,6 +54,7 @@ class FacturaDetallenuevoModal extends Component
             'facturacion_id'=>$this->facturaid,
             'orden'=>$this->orden,
             'concepto'=>$this->concepto,
+            'periodo'=>$this->periodo,
             ]
         );
 

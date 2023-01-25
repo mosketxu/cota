@@ -112,7 +112,7 @@ class Facturacion extends Model
     }
 
     public function getRutaficheroAttribute(){return $this->ruta.'/'.$this->fichero;}
-    public function getFactura5Attribute(){return $this->serie.'_'.substr($this->numfactura,-5);}
+    public function getFactura5Attribute(){return substr($this->numfactura,-3).'.'.$this->serie;}
 
     public function scopeFacturas(Builder $query, $filtroenviada, $filtropagada, $filtrofacturado,$filtroanyo,$filtromes ,$search) : Builder{
         return $query->join('entidades','facturacion.entidad_id','=','entidades.id')

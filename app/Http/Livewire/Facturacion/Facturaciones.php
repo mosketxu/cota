@@ -116,7 +116,9 @@ class Facturaciones extends Component
         $this->validate();
         $zip = new ZipArchive;
         $fileName = 'myNewFile.zip';
-        $ruta='storage/facturas/'.substr($this->filtroanyo, -2).'/'.substr($this->filtromes+100, -2).'/';
+        $ruta='storage/facturas/'.$this->filtroanyo.'/'.substr($this->filtromes+100, -2).'/';
+
+        // dd($ruta);
 
         if (!file_exists($ruta)) {
             $message="La ruta no existe";
