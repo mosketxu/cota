@@ -29,7 +29,7 @@ class CreateEntidadesTable extends Migration
             $table->string('emailgral', 100)->nullable();
             $table->string('emailadm', 100)->nullable();
             $table->string('web', 100)->nullable();
-            $table->string('idioma', 2)->nullable()->default('ES');
+            $table->string('idioma', 2)->nullable()->default('CT');
             $table->string('banco1')->nullable();
             $table->string('iban1')->nullable();
             $table->string('banco2')->nullable();

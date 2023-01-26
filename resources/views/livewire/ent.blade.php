@@ -193,7 +193,7 @@
                     <x-select wire:model.defer="entidad.idioma" class="w-full" selectname="idioma">
                         <option value="">-- choose --</option>
                         <option value="ES">Español</option>
-                        <option value="CA">Catalán</option>
+                        <option value="CT">Catalán</option>
                         <option value="EN">Inglés</option>
                     </x-select>
                 </div>

@@ -64,6 +64,7 @@ class FacturacionDetalleConceptoController extends Controller
     }
 
     public function update( Request $request, $id){
+
         $fdc=FacturacionDetalleConcepto::find($id);
         $fdc->orden=$request->orden;
         $fdc->tipo=$request->tipo;

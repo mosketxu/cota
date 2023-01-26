@@ -8,43 +8,43 @@ if(!function_exists('mes')){
         $mes=date("m", strtotime($fecha))-$ciclo;
         switch ($mes) {
             case '0':
-                return $idioma=='ES' ? 'Diciembre' : 'December';
+                return $idioma=='ES' ? 'Diciembre' : ($idioma=='CT' ? 'Decembre': 'December');
                 break;
             case '01':
-                return $idioma=='ES' ? 'Enero' : 'January';
+                return $idioma=='ES' ? 'Enero' : ($idioma=='CT' ? 'Gener': 'January');
                 break;
             case '02':
-                return $idioma=='ES' ? 'Febrero' : 'February';
+                return $idioma=='ES' ? 'Febrero' : ($idioma=='CT' ? 'Febrer':'February');
                 break;
             case '03':
-                return $idioma=='ES' ? 'Marzo' : 'March';
+                return $idioma=='ES' ? 'Marzo' : ($idioma=='CT' ? 'Març': 'March');
                 break;
             case '04':
-                return $idioma=='ES' ? 'Abril' : 'April';
+                return $idioma=='ES' ? 'Abril' : ($idioma=='CT' ? 'Abril': 'April');
                 break;
             case '05':
-                return $idioma=='ES' ? 'Mayo' : 'May';
+                return $idioma=='ES' ? 'Mayo' : ($idioma=='CT'? 'Maig' : 'May');
                 break;
             case '06':
-                return $idioma=='ES' ? 'Junio' : 'June';
+                return $idioma=='ES' ? 'Junio' :  ($idioma=='CT' ? 'Juny' : 'June') ;
                 break;
             case '07':
-                return $idioma=='ES' ? 'Julio' : 'July';
+                return $idioma=='ES' ? 'Julio' :  ($idioma=='CT' ? 'Juliol' :'July');
                 break;
             case '08':
-                return $idioma=='ES' ? 'Agosto' : 'August';
+                return $idioma=='ES' ? 'Agosto' :  ($idioma=='CT' ? 'Agost' :'August');
                 break;
             case '09':
-                return $idioma=='ES' ? 'Septiembre' : 'September';
+                return $idioma=='ES' ? 'Septiembre' : ($idioma=='CT' ? 'Setembre' : 'September');
                 break;
             case '10':
-                return $idioma=='ES' ? 'October' : 'Octubre';
+                return $idioma=='ES' ? 'Octubre' : ($idioma=='CT' ? 'Octobre' : 'October');
                 break;
             case '11':
-                return $idioma=='ES' ? 'Noviembre' : 'November';
+                return $idioma=='ES' ? 'Noviembre' : ($idioma=='CT' ? 'Novembre' : 'November');
                 break;
             case '12':
-                return $idioma=='ES' ? 'Diciembre' : 'December';
+                return $idioma=='ES' ? 'Diciembre' : ($idioma=='CT' ? 'Decembre' : 'December');
                 break;
             default:
                 return '';
