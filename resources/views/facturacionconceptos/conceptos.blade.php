@@ -24,9 +24,9 @@
                 </div>
                 <div class="flex w-8/12 space-x-1">
                     <div class="w-1/12" ><input type="text" value="Orden" class="w-full py-1 text-sm font-bold text-gray-500 truncate bg-blue-100 border-0 rounded-md" disabled /></div>
-                    <div class="w-7/12"><input type="text" value="Concepto" class="w-full py-1 text-sm font-bold text-gray-500 truncate bg-blue-100 border-0 rounded-md" disabled /></div>
+                    <div class="w-6/12"><input type="text" value="Concepto" class="w-full py-1 text-sm font-bold text-gray-500 truncate bg-blue-100 border-0 rounded-md" disabled /></div>
                     <div class="w-1/12"><input type="text" value="Uds" class="w-full py-1 text-sm font-bold text-gray-500 truncate bg-blue-100 border-0 rounded-md" disabled /></div>
-                    <div class="w-1/12"><input type="text" value="Importe" class="w-full py-1 text-sm font-bold text-gray-500 truncate bg-blue-100 border-0 rounded-md" disabled /></div>
+                    <div class="w-2/12"><input type="text" value="Importe" class="w-full py-1 text-sm font-bold text-gray-500 truncate bg-blue-100 border-0 rounded-md" disabled /></div>
                     <div class="w-2/12"></div>
                 </div>
             </div>
