@@ -18,7 +18,7 @@ class CreateFacturacionDetalleConceptosTable extends Migration
             $table->foreignId('facturaciondetalle_id')->constrained('facturacion_detalles')->onDelete('cascade');
             $table->integer('orden')->default(0);
             $table->string('concepto');
-            $table->integer('unidades')->default(1);
+            $table->double('unidades',15,2)->default(1);
             $table->double('importe', 15, 2)->default(0.00);
             $table->double('iva', 15, 2)->default(0.00);
             $table->double('totaliva', 15, 2)->default(0.00);

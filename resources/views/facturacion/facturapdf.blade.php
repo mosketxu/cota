@@ -82,7 +82,7 @@
                                         @endif
                                     </td>
                                     <td width="10%" style="text-align: right">{{ number_format($detalle->importe,2,',','.') }} <img src="{{asset('img/euro.png')}}" class="mt-1" width="8px"></td>
-                                    <td width="10%" style="text-align: right">{{ number_format($detalle->unidades,0,',','.') }}</td>
+                                    <td width="10%" style="text-align: right">{{ number_format($detalle->unidades,2,',','.') }}</td>
                                     <td width="10%" style="text-align: right">
                                         {{ $detalle->tipo=='1' ? number_format($detalle->exenta,2,',','.') : ($detalle->iva=='0' ? number_format($detalle->exenta,2,',','.') : number_format($detalle->base,2,',','.')) }}
                                         <img src="{{asset('img/euro.png')}}" class="mt-1 ml-1 " width="8px">

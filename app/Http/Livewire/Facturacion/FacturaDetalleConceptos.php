@@ -66,7 +66,7 @@ class FacturaDetalleConceptos extends Component
 
     public function save(){
         $this->calculo();
-        // dd($this->uds);
+
         $fdc=FacturacionDetalleConcepto::create([
             'facturaciondetalle_id'=>$this->detalleid,
             'orden'=>$this->orden=='' ? '0' : $this->orden  ,
@@ -109,10 +109,8 @@ class FacturaDetalleConceptos extends Component
         return redirect()->route($vista,$this->detalle->facturacion_id);
     }
 
-    public function delete($conceptoid)
-    {
+    public function delete($conceptoid){
         $borrar = FacturacionDetalleConcepto::find($conceptoid);
-
         if ($borrar) {
             $borrar->delete();
             $this->dispatchBrowserEvent('notify', 'Concepto eliminado!');

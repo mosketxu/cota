@@ -2,6 +2,7 @@
     <div class="">
         {{-- @include('errores') --}}
     </div>
+
     @forelse($dconceptos as $concepto)
         <form method="POST" action="{{ route('facturaciondetalleconcepto.update',$concepto->id) }}">
         <input name="_method" type="hidden" value="PATCH">
