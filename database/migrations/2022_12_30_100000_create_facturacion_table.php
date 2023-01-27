@@ -26,7 +26,7 @@ class CreateFacturacionTable extends Migration
             $table->double('exenta', 15, 2)->default(0.00);
             $table->double('total', 15, 2)->default(0.00);
             $table->integer('metodopago_id')->nullable();
-            $table->string('refcliente', 50)->nullable();
+            $table->string('refcliente', 80)->nullable();
             $table->string('mail')->nullable();
             $table->boolean('enviar')->default(1);
             $table->boolean('enviada')->default(0);
@@ -38,7 +38,7 @@ class CreateFacturacionTable extends Migration
             $table->longText('observaciones')->nullable();
             $table->longText('notas')->nullable();
             $table->string('ruta', 100)->nullable();
-            $table->string('fichero', 50)->nullable();
+            $table->string('fichero', 100)->nullable();
             // $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });

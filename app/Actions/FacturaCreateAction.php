@@ -28,7 +28,7 @@ class FacturaCreateAction
 
         $fichero=(trim('F.'.substr ( $fac ,-3 ).'.'.$serie.' '.'_'.$ent,' ').'.pdf');
 
-        $factura->fichero=substr($fichero, 0, 70);
+        $factura->fichero=substr($fichero, 0, 90);
         $factura->serie=$serie;
         $factura->numfactura=$fac;
         $factura->facturada= (FacturacionDetalle::where('facturacion_id',$factura->id)->count() > 0) ? 1 : 0;

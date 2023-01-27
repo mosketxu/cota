@@ -33,7 +33,7 @@ class CreateFacturacionTable extends Migration
             $table->longText('observaciones')->nullable();
             $table->longText('notas')->nullable();
             $table->string('ruta', 100)->nullable();
-            $table->string('fichero', 50)->nullable();
+            $table->string('fichero', 90)->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
             $table->foreign('entidad_id', 'facturacion_entidad_id_foreign')->references('id')->on('entidades');

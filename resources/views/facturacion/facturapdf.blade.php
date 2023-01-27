@@ -38,7 +38,7 @@
                 <div style="margin:0 auto; width: 650px; border-top: 1px solid gray;"></div>
                 <div class="margin:0 auto; text-center " style="font-size: 0.7rem">
                     <p>Carrer de Sant Joan de la Salle, 42, MF3.11, Barcelona (08022)</p>
-                    <p>www.c2tecnics.com | +34 936068528 | info@c2tecnics.com</p>
+                    <p>: www.mixturaa.com / www.c2tecnics.com / 671770677 / info@c2tecnics.com</p>
                 </div>
             </div>
         </footer>
@@ -78,7 +78,7 @@
                                     <td width="40%" >
                                         {{ $detalle->tipo=='1' ? 'Suplerts:' :'' }} {{$detalle->concepto}}
                                         @if($detalle->periodo!='')
-                                        <br><span style="font-weight:bold;">{{ $detalle->periodo }}</span>
+                                        <br>{{ $detalle->periodo }}
                                         @endif
                                     </td>
                                     <td width="10%" style="text-align: right">{{ number_format($detalle->importe,2,',','.') }} <img src="{{asset('img/euro.png')}}" class="mt-1" width="8px"></td>
@@ -137,8 +137,8 @@
                                     <td width="80%" style="text-align: left; ">{{ $factura->metodopago->metodopago }}</td>
                                 </tr>
                                 <tr style="margin-top: 20px;">
-                                    <td width="20%"  style="text-align: left;">FACTURA Nº:</td>
-                                    <td width="80%" style="text-align: left; ">{{ $factura->numfactura}}</td>
+                                    <td width="20%"  style="text-align: left;">CONCEPTE:</td>
+                                    <td width="80%" style="text-align: left; ">Factura nº: F.{{ $factura->serie }}.{{ substr($factura->numfactura,-3) }}</td>
                                 </tr>
                             </table>
 
