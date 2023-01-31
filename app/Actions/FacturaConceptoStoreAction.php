@@ -9,18 +9,19 @@ use App\Models\FacturacionDetalleConcepto;
 
 class FacturaConceptoStoreAction
 {
-    public function execute($factura,$concepto)
-    {
+    public function execute($factura,$concepto){
+
         $sumaId=!$factura->entidad->suma_id ? '1' :$factura->entidad->suma_id;
         $per='';
-        if($concepto->ciclocorrespondiente!='2')
-        {
+        if($concepto->ciclocorrespondiente!='2'){
+            $anyo = date("Y", strtotime($factura->fechafactura));
+            if($concepto->ciclocorrespondiente=='1' && (date("m", strtotime($factura->fechafactura))=='1')) $anyo=$anyo-1;
             if ($concepto->ciclo_id==1) {
-                $per=mes($factura->fechafactura,$concepto->ciclocorrespondiente,$factura->entidad->idioma);
+                $per=mes($factura->fechafactura,$concepto->ciclocorrespondiente,$factura->entidad->idioma) .' '.$anyo;
             }else{
-                $per=trimestre($factura->fechafactura,$concepto->ciclocorrespondiente,$factura->entidad->idioma);
+                $per=trimestre($factura->fechafactura,$concepto->ciclocorrespondiente,$factura->entidad->idioma) .' '.$anyo;
             }
-        }
+}
         $f=FacturacionDetalle::create([
             'facturacion_id'=>$factura->id,
             'orden'=>'0',

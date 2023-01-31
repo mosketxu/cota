@@ -47,7 +47,7 @@
         <main style="margin-top:10px; width:100%">
             <div class="">
                 <div class="flex py-0 space-y-2">
-                     <table width=80% class="mx-auto mt-1 text-sm " style="color:rgb(30, 27, 27);">
+                    <table width=80% class="mx-auto mt-1 text-sm " style="color:rgb(30, 27, 27);">
                         <tr>
                             <td width=21% >
                                 <p style="border-bottom: 0.1px">Factura nº: F.{{ $factura->serie }}.{{ substr($factura->numfactura,-3) }} </p>
@@ -58,25 +58,25 @@
                                 {{ $factura->entidad->entidad }} <br>
                                 {{ $factura->entidad->nif }} <br>
                                 {{ $factura->entidad->direccion }} <br>
-                                {{ $factura->entidad->localidad }} ({{ $factura->entidad->codpostal }}) {{ $factura->entidad->provincia->provincia ?? ''}}
+                                {{ $factura->entidad->localidad }} ({{ $factura->entidad->codpostal }}) {{ ucfirst(strtolower($factura->entidad->provincia->provincia)) ?? ''}}
                             </td>
                         </tr>
-                     </table>
+                    </table>
 
-                     <div style="margin-top:60px;  ">
+                    <div style="margin-top:60px;  ">
                         @if(count($facturadetalles)>0)
                             {{-- Detalles  --}}
                             <table style="font-size: 0.7em; margin:0 auto;" width="80%">
                                 <tr style="border-bottom: 0.1px;">
-                                    <td width="40%" style="text-align: left; font-weight: bold">CONCEPTE</td>
-                                    <td width="20%" style="text-align: right; font-weight: bold">PREU</td>
-                                    <td width="20%" style="text-align: right; font-weight: bold">UNITATS</td>
-                                    <td width="20%" style="text-align: right; font-weight: bold">SUBTOTAL</td>
+                                    <td width="40%" style="text-align: left; font-weight: bold;">CONCEPTE</td>
+                                    <td width="20%" style="text-align: right; font-weight: bold;">PREU</td>
+                                    <td width="20%" style="text-align: right; font-weight: bold;">UNITATS</td>
+                                    <td width="20%" style="text-align: right; font-weight: bold;">SUBTOTAL</td>
                                 </tr>
                                 @foreach($facturadetalles as $detalle)
                                 <tr>
                                     <td width="40%" >
-                                        {{ $detalle->tipo=='1' ? 'Suplerts:' :'' }} {{$detalle->concepto}}
+                                        <span style="font-weight: bold;">{{ $detalle->tipo=='1' ? 'Suplerts:' :'' }} {{$detalle->concepto}}</span>
                                         @if($detalle->periodo!='')
                                         <br>{{ $detalle->periodo }}
                                         @endif
@@ -138,7 +138,7 @@
                                 </tr>
                                 <tr style="margin-top: 20px;">
                                     <td width="20%"  style="text-align: left;">CONCEPTE:</td>
-                                    <td width="80%" style="text-align: left; ">Factura nº: F.{{ $factura->serie }}.{{ substr($factura->numfactura,-3) }}</td>
+                                    <td width="80%" style="text-align: left; ">F.{{ $factura->serie }}.{{ substr($factura->numfactura,-3) }}</td>
                                 </tr>
                             </table>
 

@@ -9,8 +9,6 @@ use App\Models\FacturacionDetalle;
 class FacturaCreateAction
 {
     public function execute(Facturacion $factura){
-
-
         $serie= !$factura->serie ? $factura->fechafactura->format('Y') : $factura->serie;
         $factura->metodopago_id= !$factura->metodopago_id ? '1' : $factura->metodopago_id;
 

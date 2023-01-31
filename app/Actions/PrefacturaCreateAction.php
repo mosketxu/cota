@@ -6,9 +6,9 @@ use App\Models\{Entidad, Facturacion,FacturacionConcepto, FacturacionConceptodet
 
 class PrefacturaCreateAction
 {
-    public function execute(FacturacionConcepto $concepto, Entidad $entidad, $anyoplan)
-    {
-        $ciclos=$concepto->ciclo->ciclos;
+    public function execute(FacturacionConcepto $concepto, Entidad $entidad, $anyoplan){
+
+$ciclos=$concepto->ciclo->ciclos;
 
         for ($i=0; $i < $ciclos ; $i++) {
 
