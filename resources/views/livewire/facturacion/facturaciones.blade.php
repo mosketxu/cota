@@ -70,8 +70,11 @@
                             <x-dropdown.item type="button" wire:click="mailSelected" class="flex items-center space-x-2">
                                 <x-icon.arroba class="text-gray-400"></x-icon.arroba> <span>Enviar Mail </span>
                             </x-dropdown.item>
-                            <x-dropdown.item type="button" wire:click="exportSelected" class="flex items-center space-x-2">
+                            {{-- <x-dropdown.item type="button" wire:click="exportSelected" class="flex items-center space-x-2">
                                 <x-icon.csv class="text-green-400"></x-icon.csv><span>Export </span>
+                            </x-dropdown.item> --}}
+                            <x-dropdown.item type="button" wire:click="exportfacturasXLS" class="flex items-center space-x-2">
+                                <x-icon.xls class="text-green-400"></x-icon.xls><span>Lista facturas XLS</span>
                             </x-dropdown.item>
                             <x-dropdown.item type="button" wire:click="exportRemesa" class="flex items-center space-x-2">
                                 <x-icon.xls class="text-yellow-400"></x-icon.xls> <span>Remesa XLS</span>
@@ -143,7 +146,7 @@
                                 </td>
                                 <td class="text-right">
                                     @if($facturacion->numfactura)
-                                        <input type="text" value="{{ $facturacion->numfactura }}" class="w-full text-xs font-thin text-left text-gray-500 truncate border-0 rounded-md"  readonly/>
+                                        <input type="text" value="{{ $facturacion->fra }}" class="w-full text-xs font-thin text-left text-gray-500 truncate border-0 rounded-md"  readonly/>
                                     @endif
                                 </td>
                                 <td>

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Facturacion;
 
 use App\Actions\FacturaReplicarAction;
+use App\Exports\FacturasListaExport;
 use App\Exports\RemesaExport;
 use App\Models\{Facturacion,Entidad};
 use Livewire\Component;
@@ -172,6 +173,41 @@ class Facturaciones extends Component
             echo $this->selectedRowsQuery->toCsv();
         },'prefacturas.csv');
         $this->dispatchBrowserEvent('notify', 'CSV Facturas descargado!');
+    }
+
+    public function exportfacturasXLS(){
+        $listafacturas= Facturacion::query()
+        ->with('metodopago')
+        ->join('entidades','facturacion.entidad_id','=','entidades.id')
+        ->leftJoin('facturacion_detalles','facturacion_detalles.facturacion_id','=','facturacion.id')
+        ->leftJoin('facturacion_detalle_conceptos','facturacion_detalle_conceptos.facturaciondetalle_id','=','facturacion_detalles.id')
+        // ->select('facturacion.*', 'entidades.entidad', 'entidades.nif','entidades.emailadm')
+        ->select('facturacion.fechafactura','facturacion.numfactura','entidades.entidad','facturacion.refcliente',
+                DB::raw('sum(facturacion_detalle_conceptos.base) as totalesbase'),
+                DB::raw('sum(facturacion_detalle_conceptos.exenta) as totalesexenta'),
+                DB::raw('sum(facturacion_detalle_conceptos.totaliva) as totalesiva'),
+                DB::raw('sum(facturacion_detalle_conceptos.total) as totalestotal')
+                )
+        ->groupBy('facturacion.id')
+        ->where('numfactura','<>','')
+        ->when($this->filtropagada!='', function ($query){
+            $query->where('pagada',$this->filtropagada);
+            })
+        ->when($this->entidad->id!='', function ($query){
+            $query->where('entidad_id',$this->entidad->id);
+            })
+        ->searchYear('fechafactura',$this->filtroanyo)
+        ->searchMes('fechafactura',$this->filtromes)
+        ->search('entidades.entidad',$this->search)
+        ->orSearch('facturacion.numfactura',$this->search)
+        ->orderBy('facturacion.numfactura','desc')
+        ->orderBy('facturacion.id','desc')
+        ->get();
+
+
+        return Excel::download(new FacturasListaExport (
+            $listafacturas,
+        ), 'listafacturas.xlsx');
     }
 
     public function exportRemesa(){
