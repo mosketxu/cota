@@ -20,11 +20,13 @@ class FacturaCreateAction
         }
         $ruta='facturas/'.$serie.'/'.$factura->fechafactura->format('m');
         $factura->ruta=$ruta;
-        $caracteresmalos=[' ','.',',',"'"];
+        // $caracteresmalos=[' ','.',',',"'"];
+        // $enti=Entidad::find($factura->entidad_id)->entidad;
+        $caracteresmalos=[','];
         $enti=Entidad::find($factura->entidad_id)->entidad;
         $ent=str_replace($caracteresmalos,"",$enti);
 
-        $fichero=(trim('F.'.substr ( $fac ,-3 ).'.'.$serie.' '.'_'.$ent,' ').'.pdf');
+        $fichero=(trim('F.'.$serie.'.'.substr ( $fac ,-3 ).' '.$ent,' ').'.pdf');
 
         $factura->fichero=substr($fichero, 0, 90);
         $factura->serie=$serie;

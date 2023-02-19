@@ -38,7 +38,7 @@
                 <div style="margin:0 auto; width: 650px; border-top: 1px solid gray;"></div>
                 <div class="margin:0 auto; text-center " style="font-size: 0.7rem">
                     <p>Carrer de Sant Joan de la Salle, 42, MF3.11, Barcelona (08022)</p>
-                    <p>www.mixturaa.com / www.c2tecnics.com / 671770677 / info@c2tecnics.com</p>
+                    <p>www.c2tecnics.com / www.mixturaa.com / 671770677 / info@c2tecnics.com</p>
                 </div>
             </div>
         </footer>
