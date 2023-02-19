@@ -22,7 +22,6 @@ class FacturaCreateAction
         $factura->ruta=$ruta;
         // $caracteresmalos=[' ','.',',',"'"];
         // $enti=Entidad::find($factura->entidad_id)->entidad;
-        $caracteresmalos=[','];
         $enti=Entidad::find($factura->entidad_id)->entidad;
         $ent=str_replace($caracteresmalos,"",$enti);
 
