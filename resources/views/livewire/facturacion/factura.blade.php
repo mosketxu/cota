@@ -37,16 +37,16 @@
                     <div class="flex flex-col mx-2 space-y-2 md:space-y-0 md:flex-row md:space-x-1">
                         <div class="w-3/12 form-item">
                             <x-jet-label for="entidad_id">{{ __('Entidad') }} </x-jet-label>
-                            @if($factura->entidad_id)
+                            {{-- @if($factura->entidad_id)
                                 <x-input.text class="w-full py-1.5 text-sm" value="{{ $factura->entidad->entidad }}" disabled/>
-                            @else
+                            @else --}}
                                 <x-select wire:model.lazy="factura.entidad_id" selectname="entidad_id" class="w-full" disabled="{{ $bloqueado }}">
                                     <option value="">--Selecciona--</option>
                                     @foreach ($entidades as $entidad)
                                         <option value="{{ $entidad->id }}">{{ $entidad->entidad }}</option>
                                     @endforeach
                                 </x-select>
-                            @endif
+                            {{-- @endif --}}
                         </div>
                         <div class="w-1/12 form-item">
                             <x-jet-label for="serie">{{ __('Serie') }}</x-jet-label>

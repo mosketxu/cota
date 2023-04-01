@@ -83,14 +83,13 @@ class Factura extends Component
 
     }
 
-    public function updatedFacturaEntidadId()
-    {
+    public function updatedFacturaEntidadId(){
         $entidad=Entidad::find($this->factura->entidad_id);
         $this->conceptos=FacturacionConcepto::where('entidad_id',$entidad->id)->get();
-        $this->factura->serie=$entidad->metodopago_id;
-        $this->factura->metodopago_id=$entidad->metodopago_id;
-        $this->factura->refcliente=$entidad->refcliente;
-        $this->factura->enviar=$entidad->enviar;
+        if(!$this->factura->serie) $this->factura->serie=$entidad->metodopago_id;
+        if(!$this->factura->metodopago_id) $this->factura->metodopago_id=$entidad->metodopago_id;
+        if(!$this->factura->refcliente) $this->factura->refcliente=$entidad->refcliente;
+        if(!$this->factura->enviar) $this->factura->enviar=$entidad->enviar;
     }
 
     public function updatedFacturaFacturada(){
