@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Facturacion;
 
 use App\Actions\FacturaReplicarAction;
+use App\Exports\FacturacionExport;
 use App\Exports\FacturasListaExport;
 use App\Exports\RemesaExport;
 use App\Models\{Facturacion,Entidad};
