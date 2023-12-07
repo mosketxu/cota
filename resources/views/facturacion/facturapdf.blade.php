@@ -140,10 +140,12 @@
                                     <td width="20%"  style="text-align: left;">CONCEPTE:</td>
                                     <td width="80%" style="text-align: left; ">F.{{ $factura->serie }}.{{ substr($factura->numfactura,-3) }}</td>
                                 </tr>
+                                @if($factura->observaciones!='')
                                 <tr style="margin-top: 20px;">
                                     <td width="20%"  style="text-align: left;">OBSERVACIONS:</td>
                                     <td width="80%" style="text-align: left; ">{{ $factura->observaciones }}</td>
                                 </tr>
+                                @endif
                             </table>
 
                         @endif
