@@ -120,7 +120,16 @@
                                     <td width="15%" style="text-align: right; ">{{number_format($total,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"></td>
                                 </tr>
                             </table>
-                            {{-- resumeN --}}
+
+                            {{-- obs --}}
+                            @if($factura->observaciones!='')
+                            <table style="font-size: 0.7em; font-style: italic; font-weight: bold;  border-collapse: separate; border-spacing: 0 12px; margin:20 auto;" width="80%">
+                                <tr style="margin-top: 20px;">
+                                    <td width="100%" style="text-align: left; ">{{ $factura->observaciones }} </td>
+                                </tr>
+                            </table>
+                            @endif
+                                {{-- resumeN --}}
                             <table style="font-size: 0.8em; border-collapse: separate; border-spacing: 0 12px; margin:20 auto;" width="80%">
                                 <tr style="margin-top: 20px;">
                                     <td width="20%"  style="text-align: left;">REFERÈNCIA:</td>
@@ -140,12 +149,6 @@
                                     <td width="20%"  style="text-align: left;">CONCEPTE:</td>
                                     <td width="80%" style="text-align: left; ">F.{{ $factura->serie }}.{{ substr($factura->numfactura,-3) }}</td>
                                 </tr>
-                                @if($factura->observaciones!='')
-                                <tr style="margin-top: 20px;">
-                                    <td width="20%"  style="text-align: left;">OBSERVACIONS:</td>
-                                    <td width="80%" style="text-align: left; ">{{ $factura->observaciones }}</td>
-                                </tr>
-                                @endif
                             </table>
 
                         @endif
