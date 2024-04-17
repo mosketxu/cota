@@ -33,7 +33,7 @@
         <footer style="position:fixed;left:0px;bottom:0px;height:80px;width:100%">
             <div>
                 <div style="margin:0 auto;font-size: 0.7rem;text-align: center;">
-                        <p>Cota 2 Mixtura, S.L.P // B67358606</p>
+                        <p>CLAUDA ARQUITECTURA I TECNICA, S.L.P. // B67358606</p>
                 </div>
                 <div style="margin:0 auto; width: 650px; border-top: 1px solid gray;"></div>
                 <div class="margin:0 auto; text-center " style="font-size: 0.7rem">
