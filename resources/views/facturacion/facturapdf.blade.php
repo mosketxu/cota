@@ -18,162 +18,160 @@
     <body>
         <!-- Define header and footer blocks before your content -->
         <header >
-            <table width="90%" style="margin-top:40px; " class="mx-auto">
-                <tr>
-                    <td class="" style="text-align: left"  width=50%>
-                        <img src="{{asset('img/logo.png')}}" class="mt-2 ml-8" width="120px">
-                    </td>
-                    <td style="text-align: right; padding-right:40px; font-size: 2em; color: red" width=50%>
-                        FACTURA
-                    </td>
-                </tr>
-            </table>
-            <div style="margin:0 auto; width: 650px; border-top: 1px solid gray;"></div>
-        </header>
-        <footer style="position:fixed;left:0px;bottom:0px;height:80px;width:100%">
-            <div>
-                <div style="margin:0 auto;font-size: 0.7rem;text-align: center;">
-                        <p>CLAUDA ARQUITECTURA I TECNICA, S.L.P. // B67358606</p>
+            {{-- <div style="margin:0 auto; width: 650px; border-top: 1px solid gray;"></div> --}}
+            <div class="mt-16 ml-10 text-3xl">
+                <div class="">Factura nº: F.{{ $factura->serie }}.{{ substr($factura->numfactura,-3) }}</div>
+                <div class="">Data: {{ $factura->datefra }}</div>
+            </div>
+
+            <div class="ml-10 text-xs mt-14">
+                <div class="" style="float:left;width: 60%;">
+                    <div class="font-bold">CLIENT</div>
+                    <div class="">&nbsp;</div>
+                    <div class="">{{ $factura->entidad->entidad }} </div>
+                    <div class="">{{ $factura->entidad->nif }} </div>
+                    <div class="">{{ $factura->entidad->direccion }} </div>
+                    <div class="">{{ $factura->entidad->localidad }} ({{ $factura->entidad->codpostal }}) {{ ucfirst(strtolower($factura->entidad->provincia->provincia)) ?? ''}}</div>
                 </div>
-                <div style="margin:0 auto; width: 650px; border-top: 1px solid gray;"></div>
-                <div class="margin:0 auto; text-center " style="font-size: 0.7rem">
-                    <p>Carrer de Sant Joan de la Salle, 42, MF3.11, Barcelona (08022)</p>
-                    <p>www.c2tecnics.com / www.mixturaa.com / 671770677 / info@c2tecnics.com</p>
+                <div class="mr-10 text-right" style="float:left;width: 28%;">
+                    <div class="">&nbsp;</div>
+                    <div class="">&nbsp;</div>
+                    <div class="">CLAUDA Arquitectura i Tècnica, S.L.P</div>
+                    <div class="">B6735860</div>
+                    <div class="">C/ Sant Joan de la Salle 42, MF3.1</div>
+                    <div class="">(08022) Barcelona</div>
                 </div>
             </div>
+            <div style="clear:both"></div>
+        </header>
+        <footer style="position:fixed;left:0px;bottom:0px;height:110px;width:100%">
+            <div class="">
+                <div class="py-0 my-0" style="float:left;width: 50%;">
+                    <img src="{{asset('img/logo.png')}}" class="ml-8" width="120px">
+                </div>
+                <div class="py-0 my-0 " style="float:right;width: 30%; font-size: 0.65em">
+                    <div class="py-0 my-0">C/ Sant Joan de la Salle 42,</div>
+                    <div class="py-0 my-0">MF3. 11, 08022, BCN</div>
+                    <div class="py-0 my-0">
+                        <div class="py-0 my-0" style="float:left;width: 10%;">
+                            <div class="py-0 my-0">T ¬</div>
+                            <div class="py-0 -my-1">E ¬</div>
+                            <div class="py-0 -my-1">W ¬</div>
+                        </div>
+                        <div class="py-0 my-0 text-right" style="float:left;width: 55%;">
+                            <div class="py-0 ">+34 93 609 74 30</div>
+                            <div class="py-0 -my-1 ">info@clauda.eu</div>
+                            <div class="py-0 -my-1 "><a href="https://www.clauda.eu/">www.clauda.eu</a></div>
+                        </div>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+
+            {{-- <div style="margin:0 auto; width: 650px; border-top: 1px solid gray;"></div> --}}
+            <div class="ml-10 text-xs mt-14">
+                <div class="" style="float:left;width: 60%;">
+                    <div class="font-bold">CLIENT</div>
+                    <div class="">&nbsp;</div>
+                    <div class="">{{ $factura->entidad->entidad }} </div>
+                    <div class="">{{ $factura->entidad->nif }} </div>
+                    <div class="">{{ $factura->entidad->direccion }} </div>
+                    <div class="">{{ $factura->entidad->localidad }} ({{ $factura->entidad->codpostal }}) {{ ucfirst(strtolower($factura->entidad->provincia->provincia)) ?? ''}}</div>
+                </div>
+                <div class="mr-10 text-right" style="float:left;width: 28%;">
+                    <div class="">&nbsp;</div>
+                    <div class="">&nbsp;</div>
+                    <div class="">CLAUDA Arquitectura i Tècnica, S.L.P</div>
+                    <div class="">B6735860</div>
+                    <div class="">C/ Sant Joan de la Salle 42, MF3.1</div>
+                    <div class="">(08022) Barcelona</div>
+                </div>
+            </div>
+            <div style="clear:both"></div>
         </footer>
 
     <!-- Wrap the content of your PDF inside a main tag -->
         <main style="margin-top:10px; width:100%">
-            <div class="">
-                <div class="flex py-0 space-y-2">
-                    <table width=80% class="mx-auto mt-1 text-sm " style="color:rgb(30, 27, 27);">
+            <div class="mt-20 ml-10">
+                @if(count($facturadetalles)>0)
+                    {{-- Detalles  --}}
+                    <table style="font-size: 0.7em; " width="88%">
+                        <tr style="border-bottom: 0.1px;border-top: 0.1px;">
+                            <td class="py-1" width="45%" style="text-align: left; font-weight: bold;">CONCEPTE</td>
+                            <td width="18%" style="text-align: right; font-weight: bold;">PREU</td>
+                            <td width="18%" style="text-align: right; font-weight: bold;">UNITATS</td>
+                            <td width="19%" style="text-align: right; font-weight: bold;">SUBTOTAL</td>
+                        </tr>
+                        @foreach($facturadetalles as $detalle)
                         <tr>
-                            <td width=21% >
-                                <p style="border-bottom: 0.1px">Factura nº: F.{{ $factura->serie }}.{{ substr($factura->numfactura,-3) }} </p>
-                                <p style="border-bottom: 0.1px">Data: {{ $factura->datefra }} </p>
+                            <td width="45%" >
+                                <span style="font-weight: bold;">{{ $detalle->tipo=='1' ? 'Suplerts:' :'' }} {{$detalle->concepto}}</span>
+                                @if($detalle->periodo!='')
+                                <br>{{ $detalle->periodo }}
+                                @endif
                             </td>
-                            <td width=79% style="text-align: right; ">
-                                <span style="font-weight: bold"> Client </span> <br>
-                                {{ $factura->entidad->entidad }} <br>
-                                {{ $factura->entidad->nif }} <br>
-                                {{ $factura->entidad->direccion }} <br>
-                                {{ $factura->entidad->localidad }} ({{ $factura->entidad->codpostal }}) {{ ucfirst(strtolower($factura->entidad->provincia->provincia)) ?? ''}}
+                            <td width="18%" style="text-align: right">{{ number_format($detalle->importe,2,',','.') }} <img src="{{asset('img/euro.png')}}" class="mt-1" width="8px"></td>
+                            <td width="18%" style="text-align: right">{{ number_format($detalle->unidades,2,',','.') }}</td>
+                            <td width="19%" style="text-align: right">
+                                {{ $detalle->tipo=='1' ? number_format($detalle->exenta,2,',','.') : ($detalle->iva=='0' ? number_format($detalle->exenta,2,',','.') : number_format($detalle->base,2,',','.')) }}
+                                <img src="{{asset('img/euro.png')}}" class="mt-1 ml-1 " width="8px">
                             </td>
+                        </tr>
+                        @endforeach
+                    </table>
+                    {{-- totales --}}
+                    <table style="font-size: 0.7em; margin:20 0 0 0;" width="88%">
+                        <tr style="border-bottom: 0.1px;">
+                            <td width="85%"  style="text-align: right;">BASE IMPOSABLE</td>
+                            @if($totaliva!=0)
+                                <td width="15%" style="text-align: right; ">{{number_format($base,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"></td>
+                            @elseif ($detalle->tipo=='0')
+                                <td width="15%" style="text-align: right; ">{{number_format($exenta,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"></td>
+                            @endif
+                        </tr>
+                        @if($suplidos)
+                        <tr style="border-bottom: 0.1px;">
+                            <td width="85%"  style="text-align: right;">SUPLERTS</td>
+                            <td width="15%" style="text-align: right; ">{{number_format($suplidos,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"> </td>
+                        </tr>
+                        @endif
+                        <tr style="border-bottom: 0.1px;">
+                            @if($totaliva!=0)
+                            <td width="85%" style="text-align: right;">IVA 21%</td>
+                            <td width="15%" style="text-align: right" width="50%">{{number_format($totaliva,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"></td>
+                            @else
+                            <td width="69%" style="text-align: right;">IVA 0%</td>
+                            <td width="29%" style="text-align: right" width="50%">0.00 <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"></td>
+                            @endif
+                        </tr>
+                        <tr style="border-bottom: 0.1px;">
+                            <td width="85%"  style="text-align: right;color: green ;font-weight: bold">TOTAL</td>
+                            <td width="15%" style="text-align: right;color: green ;font-weight: bold ">{{number_format($total,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"></td>
                         </tr>
                     </table>
 
-                    <div style="margin-top:60px;  ">
-                        @if(count($facturadetalles)>0)
-                            {{-- Detalles  --}}
-                            <table style="font-size: 0.7em; margin:0 auto;" width="80%">
-                                <tr style="border-bottom: 0.1px;">
-                                    <td width="40%" style="text-align: left; font-weight: bold;">CONCEPTE</td>
-                                    <td width="20%" style="text-align: right; font-weight: bold;">PREU</td>
-                                    <td width="20%" style="text-align: right; font-weight: bold;">UNITATS</td>
-                                    <td width="20%" style="text-align: right; font-weight: bold;">SUBTOTAL</td>
-                                </tr>
-                                @foreach($facturadetalles as $detalle)
-                                <tr>
-                                    <td width="40%" >
-                                        <span style="font-weight: bold;">{{ $detalle->tipo=='1' ? 'Suplerts:' :'' }} {{$detalle->concepto}}</span>
-                                        @if($detalle->periodo!='')
-                                        <br>{{ $detalle->periodo }}
-                                        @endif
-                                    </td>
-                                    <td width="10%" style="text-align: right">{{ number_format($detalle->importe,2,',','.') }} <img src="{{asset('img/euro.png')}}" class="mt-1" width="8px"></td>
-                                    <td width="10%" style="text-align: right">{{ number_format($detalle->unidades,2,',','.') }}</td>
-                                    <td width="10%" style="text-align: right">
-                                        {{ $detalle->tipo=='1' ? number_format($detalle->exenta,2,',','.') : ($detalle->iva=='0' ? number_format($detalle->exenta,2,',','.') : number_format($detalle->base,2,',','.')) }}
-                                        <img src="{{asset('img/euro.png')}}" class="mt-1 ml-1 " width="8px">
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </table>
-                            {{-- totales --}}
-                            <table style="font-size: 0.7em; margin:20 auto;" width="80%">
-                                <tr style="border-bottom: 0.1px;">
-                                    <td width="85%"  style="text-align: right;">BASE IMPOSABLE</td>
-                                    @if($totaliva!=0)
-                                        <td width="15%" style="text-align: right; ">{{number_format($base,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"></td>
-                                    @elseif ($detalle->tipo=='0')
-                                        <td width="15%" style="text-align: right; ">{{number_format($exenta,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"></td>
-                                    @endif
-                                </tr>
-                                @if($suplidos)
-                                <tr style="border-bottom: 0.1px;">
-                                    <td width="85%"  style="text-align: right;">SUPLERTS</td>
-                                    <td width="15%" style="text-align: right; ">{{number_format($suplidos,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"> </td>
-                                </tr>
-                                @endif
-                                <tr style="border-bottom: 0.1px;">
-                                    @if($totaliva!=0)
-                                    <td width="85%" style="text-align: right;">IVA 21%</td>
-                                    <td width="15%" style="text-align: right" width="50%">{{number_format($totaliva,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"></td>
-                                    @else
-                                    <td width="69%" style="text-align: right;">IVA 0%</td>
-                                    <td width="29%" style="text-align: right" width="50%">0.00 <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"></td>
-                                    @endif
-                                </tr>
-                                <tr style="border-bottom: 0.1px;">
-                                    <td width="85%"  style="text-align: right;">TOTAL</td>
-                                    <td width="15%" style="text-align: right; ">{{number_format($total,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"></td>
-                                </tr>
-                            </table>
-
-                            {{-- obs --}}
-                            @if($factura->observaciones!='')
-                            <table style="font-size: 0.7em; font-style: italic; font-weight: bold;  border-collapse: separate; border-spacing: 0 12px; margin:20 auto;" width="80%">
-                                <tr style="margin-top: 20px;">
-                                    <td width="100%" style="text-align: left; ">{{ $factura->observaciones }} </td>
-                                </tr>
-                            </table>
-                            @endif
-                                {{-- resumeN --}}
-                            <table style="font-size: 0.8em; border-collapse: separate; border-spacing: 0 12px; margin:20 auto;" width="80%">
-                                <tr style="margin-top: 20px;">
-                                    <td width="20%"  style="text-align: left;">REFERÈNCIA:</td>
-                                    <td width="80%" style="text-align: left; ">{{$factura->refcliente}} </td>
-                                </tr>
-                                @if($suplidos)
-                                <tr style="margin-top: 20px;">
-                                    <td width="20%"  style="text-align: left;">IMPORT:</td>
-                                    <td width="80%" style="text-align: left; ">{{number_format($total,2,',','.')}} <img src="{{asset('img/euro.png')}}" class="mt-2 " width="8px"></td>
-                                </tr>
-                                @endif
-                                <tr style="margin-top: 20px;">
-                                    <td width="20%"  style="text-align: left;">PAGAMENT:</td>
-                                    <td width="80%" style="text-align: left; ">{{ $factura->metodopago->metodopago }}</td>
-                                </tr>
-                                <tr style="margin-top: 20px;">
-                                    <td width="20%"  style="text-align: left;">CONCEPTE:</td>
-                                    <td width="80%" style="text-align: left; ">F.{{ $factura->serie }}.{{ substr($factura->numfactura,-3) }}</td>
-                                </tr>
-                            </table>
-
-                        @endif
+                    {{-- obs --}}
+                    @if($factura->observaciones!='')
+                    <div class="mt-10 text-xs italic font-bold">
+                        {{ $factura->observaciones }}
                     </div>
-
-
-                    {{-- <div class="py-0 space-y-2">
-                        <table width="90%" style="margin-top:30px; " cellspacing="0" cellpadding="0" class="mx-auto text-sm">
-                            <tr>
-                                <td width=51% class="pl-2 font-bold " style="border-style: solid;border-width: .6;border-color: gray" colspan="2">Opciones</td>
-                                <td width=17% class="pr-2 font-bold text-right " style="border-style: solid;border-width: .6;border-color: gray">Cantidad</td>
-                                <td width=17% class="pr-2 font-bold text-right" style="border-style: solid;border-width: .6;border-color: gray">Precio unitario</td>
-                                <td width=17% class="pr-2 font-bold text-right" style="border-style: solid;border-width: .6;border-color: gray">Precio total</td>
-                            </tr>
-                            @foreach($oferta->ofertadetalles as $odetalle)
-                            <tr>
-                                <td width=51% class="pl-2" style="border-style: solid;border-width: .6;border-color: gray" colspan="2"><span class="font-bold">{{ $odetalle->titulo }}</span> {{ $odetalle->concepto }}</td>
-                                <td width=17% class="pr-2 text-right" style="border-style: solid;border-width: .6;border-color: gray">{{ $odetalle->cantidad }}</td>
-                                <td width=17% class="pr-2 text-right" style="border-style: solid;border-width: .6;border-color: gray">{{ $odetalle->importe }}</td>
-                                <td width=17% class="pr-2 text-right" style="border-style: solid;border-width: .6;border-color: gray">{{ $odetalle->total }}</td>
-                            </tr>
-                            @endforeach
-                        </table>
-                    </div> --}}
-                </div>
+                    @endif
+                    {{-- resumen --}}
+                    <div class="mt-10 text-xs">
+                        <div class="" style="float:left;width: 10%;">
+                            <div class="">[Referència]</div>
+                            <div class="mt-2">[Pagament]</div>
+                            <div class="mt-2">[Concepte]</div>
+                        </div>
+                        <div style="float:left;width: 80%;">
+                            <div class="">{{$factura->refcliente}}</div>
+                            <div class="mt-2">{{ $factura->metodopago->metodopago }}</div>
+                            <div class="mt-2">F.{{ $factura->serie }}.{{ substr($factura->numfactura,-3) }} </div>
+                        </div>
+                    </div>
+                    <div style="clear:both"></div>
+                @endif
             </div>
         </main>
     </body>
