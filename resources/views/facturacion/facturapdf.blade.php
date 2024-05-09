@@ -25,7 +25,7 @@
             </div>
 
             <div class="ml-10 text-xs mt-14">
-                <div class="" style="float:left;width: 60%;">
+                <div class="" style="float:left;width: 55%;">
                     <div class="font-bold">CLIENT</div>
                     <div class="">&nbsp;</div>
                     <div class="">{{ $factura->entidad->entidad }} </div>
@@ -33,7 +33,7 @@
                     <div class="">{{ $factura->entidad->direccion }} </div>
                     <div class="">{{ $factura->entidad->localidad }} ({{ $factura->entidad->codpostal }}) {{ ucfirst(strtolower($factura->entidad->provincia->provincia)) ?? ''}}</div>
                 </div>
-                <div class="mr-10 text-right" style="float:left;width: 28%;">
+                <div class="mr-10 text-right" style="float:left;width: 33%;">
                     <div class="">&nbsp;</div>
                     <div class="">&nbsp;</div>
                     <div class="">CLAUDA ARQUITECTURA I TÈCNICA S.L.P.</div>
