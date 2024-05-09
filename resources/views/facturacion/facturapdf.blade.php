@@ -36,7 +36,7 @@
                 <div class="mr-10 text-right" style="float:left;width: 28%;">
                     <div class="">&nbsp;</div>
                     <div class="">&nbsp;</div>
-                    <div class="">CLAUDA Arquitectura i Tècnica, S.L.P</div>
+                    <div class="">CLAUDA ARQUITECTURA I TÈCNICA S.L.P.</div>
                     <div class="">B67358606</div>
                     <div class="">C/ Sant Joan de la Salle 42, MF3.1</div>
                     <div class="">(08022) Barcelona</div>
@@ -82,7 +82,7 @@
                 <div class="mr-10 text-right" style="float:left;width: 28%;">
                     <div class="">&nbsp;</div>
                     <div class="">&nbsp;</div>
-                    <div class="">CLAUDA Arquitectura i Tècnica, S.L.P</div>
+                    <div class="">CLAUDA ARQUITECTURA I TÈCNICA S.L.P.</div>
                     <div class="">B67358606</div>
                     <div class="">C/ Sant Joan de la Salle 42, MF3.1</div>
                     <div class="">(08022) Barcelona</div>
