@@ -51,7 +51,7 @@
                 </div>
                 <div class="py-0 my-0 " style="float:right;width: 30%; font-size: 0.65em">
                     <div class="py-0 my-0">C/ Sant Joan de la Salle 42,</div>
-                    <div class="py-0 my-0">MF3. 11, 08022, BCN</div>
+                    <div class="py-0 my-0">MF 3º 11ª, 08022, BCN</div>
                     <div class="py-0 my-0">
                         <div class="py-0 my-0" style="float:left;width: 10%;">
                             <div class="py-0 my-0">T ¬</div>
