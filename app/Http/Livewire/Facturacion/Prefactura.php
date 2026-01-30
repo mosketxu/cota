@@ -43,7 +43,7 @@ class Prefactura extends Component
     }
 
     public function mount(Facturacion $facturacion, Entidad $entidad){
-        $this->factura=$facturacion;
+                $this->factura=$facturacion;
         if ($entidad->id) {
             $this->inicializaPrefactura($entidad);
             $this->ent=$entidad;
@@ -51,6 +51,7 @@ class Prefactura extends Component
             $this->ent= $facturacion->entidad;
         }
         if(!$this->factura->serie) $this->factura->serie=date('Y');
+        // dd($this->factura->serie);
         $this->factura->enviar=1;
         $this->factura->enviada=0;
         $this->factura->pagada=0;

@@ -44,12 +44,14 @@
                         </div>
                         <div class="w-1/12 form-item">
                             <x-jet-label for="serie">{{ __('Serie') }}</x-jet-label>
+                            {{-- {{$factura->serie}} --}}
                             <x-select wire:model.defer="factura.serie" selectname="serie" class="w-full">
                                 <option value="">--Serie--</option>
                                 <option value="2023">2023</option>
                                 <option value="2024">2024</option>
                                 <option value="2025">2025</option>
-                                <option value="2025">2026</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
                             </x-select>
                         </div>
                         <div class="w-2/12 form-item">
